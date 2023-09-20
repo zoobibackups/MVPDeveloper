@@ -1,0 +1,891 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00E356F31AD99517003FC87E /* MVPDeveloperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* MVPDeveloperTests.m */; };
+		00F600043C2A43E584919DAB /* AnekBangla-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 761AC0EFB6054481BB65DF41 /* AnekBangla-Light.ttf */; };
+		0410DFF315924F069BAC5466 /* DMSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 169029A362BA427E92B7CF49 /* DMSans-Light.ttf */; };
+		0C80B921A6F3F58F76C31292 /* libPods-MVPDeveloper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-MVPDeveloper.a */; };
+		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
+		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		147EF4B0F9BF4FA1ACBC5D9E /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C36E1D063A174F82BE25EAA1 /* Poppins-Regular.ttf */; };
+		1908CFE14C134B51B1589807 /* AnekBangla-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0067088759AC47EBA189817A /* AnekBangla-Bold.ttf */; };
+		1C928B4055BA433098BA6F10 /* DMSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FD7313E54794AFC8536B3BE /* DMSans-SemiBold.ttf */; };
+		20CC345357214C01BD309790 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 069123F382CF46968A38E726 /* Montserrat-Regular.ttf */; };
+		2F259BA0204549CF8A6AD481 /* Modak-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 503C4F4A3F2B4185A49E30E7 /* Modak-Regular.ttf */; };
+		32976B2EB8B3428B84D9C60A /* Montserrat-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C16244B066184C72874FD961 /* Montserrat-Italic.ttf */; };
+		45A10A885C2D43FCA91FB87D /* DMSans-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0EEFC80CEC1E4BAE91A0E349 /* DMSans-Black.ttf */; };
+		46AAD1A3C3F44CCF8886C90F /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AED93526E94446CC892C7871 /* Poppins-Bold.ttf */; };
+		664E61DA6D1A49D7B9BAED06 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 26B5E08C88C842C19511E1E6 /* Poppins-Thin.ttf */; };
+		675F314B589F4BCA84AEABF7 /* AnekBangla-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D67536E4E4C408DB0E5722B /* AnekBangla-Regular.ttf */; };
+		6B3420A11C1D491BBAB1ABE5 /* AnekBangla-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57C4926743E94CE7829DF1AC /* AnekBangla-Medium.ttf */; };
+		7699B88040F8A987B510C191 /* libPods-MVPDeveloper-MVPDeveloperTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-MVPDeveloper-MVPDeveloperTests.a */; };
+		7CEFF6224C6E4FA890CDB6F0 /* DMSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F78F8B03AB6146069B6EA747 /* DMSans-Regular.ttf */; };
+		7FF7F34F24B148AFAC5BF4CB /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79FAAB329AC340A08B7CAA3B /* Montserrat-SemiBold.ttf */; };
+		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		88690BD00EBA42D09CE97624 /* DMSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F4E6D7C5B1CF41C5867A9CEE /* DMSans-ExtraBold.ttf */; };
+		8A6D0D0B611A40DCA3659BE0 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1AC917B03C44DF692CFDC92 /* Poppins-SemiBold.ttf */; };
+		90B7A735251B4547B12FDF4F /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5580F277329B4F8BA9F4B343 /* Montserrat-Bold.ttf */; };
+		A0D49927FF634417A48A8440 /* AnekBangla-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38CC8AEADFAC4EAC8C070385 /* AnekBangla-SemiBold.ttf */; };
+		A920991AABAF4DD6B53A5586 /* Montserrat-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C465284A4E94C0198E0C751 /* Montserrat-Thin.ttf */; };
+		BE25E4CDABBC45AE9EE04283 /* DMSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E96BD5A56D14C5F9DCDE843 /* DMSans-Medium.ttf */; };
+		BE83D8622AB0C1DE0039D9C9 /* Anek_Bangla_semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE83D8562AB0C1DD0039D9C9 /* Anek_Bangla_semibold.ttf */; };
+		BE83D8632AB0C1DE0039D9C9 /* DM_Sans_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE83D8572AB0C1DD0039D9C9 /* DM_Sans_regular.ttf */; };
+		BE83D8642AB0C1DE0039D9C9 /* Anek_Bangla_light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE83D8582AB0C1DD0039D9C9 /* Anek_Bangla_light.ttf */; };
+		BE83D8652AB0C1DE0039D9C9 /* DM_Sans_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE83D8592AB0C1DD0039D9C9 /* DM_Sans_bold.ttf */; };
+		BE83D8662AB0C1DE0039D9C9 /* Anek_Bangla_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE83D85A2AB0C1DE0039D9C9 /* Anek_Bangla_bold.ttf */; };
+		BE83D8672AB0C1DE0039D9C9 /* Montserrat_semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE83D85B2AB0C1DE0039D9C9 /* Montserrat_semibold.ttf */; };
+		BE83D8682AB0C1DE0039D9C9 /* DM_Sans_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE83D85C2AB0C1DE0039D9C9 /* DM_Sans_medium.ttf */; };
+		BE83D8692AB0C1DE0039D9C9 /* Anek_Bangla_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE83D85D2AB0C1DE0039D9C9 /* Anek_Bangla_medium.ttf */; };
+		BE83D86A2AB0C1DE0039D9C9 /* Modak_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE83D85E2AB0C1DE0039D9C9 /* Modak_regular.ttf */; };
+		BE83D86B2AB0C1DE0039D9C9 /* Montserrat_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE83D85F2AB0C1DE0039D9C9 /* Montserrat_medium.ttf */; };
+		BE83D86C2AB0C1DE0039D9C9 /* Anek_Bangla_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE83D8602AB0C1DE0039D9C9 /* Anek_Bangla_regular.ttf */; };
+		C0370F987D784DD499F3FEF0 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A29F42E1D104761902E4A0E /* Poppins-Light.ttf */; };
+		CF3D53637F874D1EA16C45B9 /* DMSans-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02462F63636B46F299BAE5E0 /* DMSans-Thin.ttf */; };
+		DDE383F515544F238555473B /* DMSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEA601F9A63745CCBC3752BD /* DMSans-Bold.ttf */; };
+		E24586985D6F4CDAAD3B7293 /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9DCB06DE0B0042EBA2EEDE82 /* Poppins-Black.ttf */; };
+		EF526F32689B460DBF888C92 /* Montserrat-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBDA8FA796EE48428A84E739 /* Montserrat-Black.ttf */; };
+		F1D71D07448E4AF9A2652BD0 /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 264302B4DCA74D7BA56306B4 /* Montserrat-Light.ttf */; };
+		F91FA34E823948B28940543B /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1729F2A53D442DC9FF26986 /* Poppins-Medium.ttf */; };
+		F97F28B61BC84D7184DA0E3E /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A74DC727F50A419DAB347EFD /* Montserrat-Medium.ttf */; };
+		FB7DE29BC0714A78AE5690CB /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 72AF61F1783A4800B6F2E87D /* Poppins-Italic.ttf */; };
+		FFBB47550050439996CD7D0C /* AnekBangla-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB4CB8BE23DE4AFF83AF2618 /* AnekBangla-Thin.ttf */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		00E356F41AD99517003FC87E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
+			remoteInfo = MVPDeveloper;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0067088759AC47EBA189817A /* AnekBangla-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "AnekBangla-Bold.ttf"; path = "../assets/fonts/AnekBangla-Bold.ttf"; sourceTree = "<group>"; };
+		00E356EE1AD99517003FC87E /* MVPDeveloperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MVPDeveloperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* MVPDeveloperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MVPDeveloperTests.m; sourceTree = "<group>"; };
+		02462F63636B46F299BAE5E0 /* DMSans-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-Thin.ttf"; path = "../assets/fonts/DMSans-Thin.ttf"; sourceTree = "<group>"; };
+		069123F382CF46968A38E726 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Regular.ttf"; path = "../assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		0C465284A4E94C0198E0C751 /* Montserrat-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Thin.ttf"; path = "../assets/fonts/Montserrat-Thin.ttf"; sourceTree = "<group>"; };
+		0EEFC80CEC1E4BAE91A0E349 /* DMSans-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-Black.ttf"; path = "../assets/fonts/DMSans-Black.ttf"; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* MVPDeveloper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MVPDeveloper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = MVPDeveloper/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = MVPDeveloper/AppDelegate.mm; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = MVPDeveloper/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = MVPDeveloper/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = MVPDeveloper/main.m; sourceTree = "<group>"; };
+		169029A362BA427E92B7CF49 /* DMSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-Light.ttf"; path = "../assets/fonts/DMSans-Light.ttf"; sourceTree = "<group>"; };
+		19F6CBCC0A4E27FBF8BF4A61 /* libPods-MVPDeveloper-MVPDeveloperTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MVPDeveloper-MVPDeveloperTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		264302B4DCA74D7BA56306B4 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Light.ttf"; path = "../assets/fonts/Montserrat-Light.ttf"; sourceTree = "<group>"; };
+		26B5E08C88C842C19511E1E6 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Thin.ttf"; path = "../assets/fonts/Poppins-Thin.ttf"; sourceTree = "<group>"; };
+		2A29F42E1D104761902E4A0E /* Poppins-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Light.ttf"; path = "../assets/fonts/Poppins-Light.ttf"; sourceTree = "<group>"; };
+		38CC8AEADFAC4EAC8C070385 /* AnekBangla-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "AnekBangla-SemiBold.ttf"; path = "../assets/fonts/AnekBangla-SemiBold.ttf"; sourceTree = "<group>"; };
+		3B4392A12AC88292D35C810B /* Pods-MVPDeveloper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVPDeveloper.debug.xcconfig"; path = "Target Support Files/Pods-MVPDeveloper/Pods-MVPDeveloper.debug.xcconfig"; sourceTree = "<group>"; };
+		4D67536E4E4C408DB0E5722B /* AnekBangla-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "AnekBangla-Regular.ttf"; path = "../assets/fonts/AnekBangla-Regular.ttf"; sourceTree = "<group>"; };
+		4E96BD5A56D14C5F9DCDE843 /* DMSans-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-Medium.ttf"; path = "../assets/fonts/DMSans-Medium.ttf"; sourceTree = "<group>"; };
+		503C4F4A3F2B4185A49E30E7 /* Modak-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Modak-Regular.ttf"; path = "../assets/fonts/Modak-Regular.ttf"; sourceTree = "<group>"; };
+		5580F277329B4F8BA9F4B343 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Bold.ttf"; path = "../assets/fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		5709B34CF0A7D63546082F79 /* Pods-MVPDeveloper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVPDeveloper.release.xcconfig"; path = "Target Support Files/Pods-MVPDeveloper/Pods-MVPDeveloper.release.xcconfig"; sourceTree = "<group>"; };
+		57C4926743E94CE7829DF1AC /* AnekBangla-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "AnekBangla-Medium.ttf"; path = "../assets/fonts/AnekBangla-Medium.ttf"; sourceTree = "<group>"; };
+		5B7EB9410499542E8C5724F5 /* Pods-MVPDeveloper-MVPDeveloperTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVPDeveloper-MVPDeveloperTests.debug.xcconfig"; path = "Target Support Files/Pods-MVPDeveloper-MVPDeveloperTests/Pods-MVPDeveloper-MVPDeveloperTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5DCACB8F33CDC322A6C60F78 /* libPods-MVPDeveloper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MVPDeveloper.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FD7313E54794AFC8536B3BE /* DMSans-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-SemiBold.ttf"; path = "../assets/fonts/DMSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		72AF61F1783A4800B6F2E87D /* Poppins-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Italic.ttf"; path = "../assets/fonts/Poppins-Italic.ttf"; sourceTree = "<group>"; };
+		761AC0EFB6054481BB65DF41 /* AnekBangla-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "AnekBangla-Light.ttf"; path = "../assets/fonts/AnekBangla-Light.ttf"; sourceTree = "<group>"; };
+		79FAAB329AC340A08B7CAA3B /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-SemiBold.ttf"; path = "../assets/fonts/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = MVPDeveloper/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		89C6BE57DB24E9ADA2F236DE /* Pods-MVPDeveloper-MVPDeveloperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVPDeveloper-MVPDeveloperTests.release.xcconfig"; path = "Target Support Files/Pods-MVPDeveloper-MVPDeveloperTests/Pods-MVPDeveloper-MVPDeveloperTests.release.xcconfig"; sourceTree = "<group>"; };
+		9DCB06DE0B0042EBA2EEDE82 /* Poppins-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Black.ttf"; path = "../assets/fonts/Poppins-Black.ttf"; sourceTree = "<group>"; };
+		A1AC917B03C44DF692CFDC92 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBold.ttf"; path = "../assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		A74DC727F50A419DAB347EFD /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
+		AED93526E94446CC892C7871 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		BB4CB8BE23DE4AFF83AF2618 /* AnekBangla-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "AnekBangla-Thin.ttf"; path = "../assets/fonts/AnekBangla-Thin.ttf"; sourceTree = "<group>"; };
+		BE83D8562AB0C1DD0039D9C9 /* Anek_Bangla_semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Anek_Bangla_semibold.ttf; path = ../assets/fonts/Anek_Bangla_semibold.ttf; sourceTree = "<group>"; };
+		BE83D8572AB0C1DD0039D9C9 /* DM_Sans_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = DM_Sans_regular.ttf; path = ../assets/fonts/DM_Sans_regular.ttf; sourceTree = "<group>"; };
+		BE83D8582AB0C1DD0039D9C9 /* Anek_Bangla_light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Anek_Bangla_light.ttf; path = ../assets/fonts/Anek_Bangla_light.ttf; sourceTree = "<group>"; };
+		BE83D8592AB0C1DD0039D9C9 /* DM_Sans_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = DM_Sans_bold.ttf; path = ../assets/fonts/DM_Sans_bold.ttf; sourceTree = "<group>"; };
+		BE83D85A2AB0C1DE0039D9C9 /* Anek_Bangla_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Anek_Bangla_bold.ttf; path = ../assets/fonts/Anek_Bangla_bold.ttf; sourceTree = "<group>"; };
+		BE83D85B2AB0C1DE0039D9C9 /* Montserrat_semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Montserrat_semibold.ttf; path = ../assets/fonts/Montserrat_semibold.ttf; sourceTree = "<group>"; };
+		BE83D85C2AB0C1DE0039D9C9 /* DM_Sans_medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = DM_Sans_medium.ttf; path = ../assets/fonts/DM_Sans_medium.ttf; sourceTree = "<group>"; };
+		BE83D85D2AB0C1DE0039D9C9 /* Anek_Bangla_medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Anek_Bangla_medium.ttf; path = ../assets/fonts/Anek_Bangla_medium.ttf; sourceTree = "<group>"; };
+		BE83D85E2AB0C1DE0039D9C9 /* Modak_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Modak_regular.ttf; path = ../assets/fonts/Modak_regular.ttf; sourceTree = "<group>"; };
+		BE83D85F2AB0C1DE0039D9C9 /* Montserrat_medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Montserrat_medium.ttf; path = ../assets/fonts/Montserrat_medium.ttf; sourceTree = "<group>"; };
+		BE83D8602AB0C1DE0039D9C9 /* Anek_Bangla_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Anek_Bangla_regular.ttf; path = ../assets/fonts/Anek_Bangla_regular.ttf; sourceTree = "<group>"; };
+		C16244B066184C72874FD961 /* Montserrat-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Italic.ttf"; path = "../assets/fonts/Montserrat-Italic.ttf"; sourceTree = "<group>"; };
+		C1729F2A53D442DC9FF26986 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		C36E1D063A174F82BE25EAA1 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		DBDA8FA796EE48428A84E739 /* Montserrat-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Black.ttf"; path = "../assets/fonts/Montserrat-Black.ttf"; sourceTree = "<group>"; };
+		DEA601F9A63745CCBC3752BD /* DMSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-Bold.ttf"; path = "../assets/fonts/DMSans-Bold.ttf"; sourceTree = "<group>"; };
+		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F4E6D7C5B1CF41C5867A9CEE /* DMSans-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-ExtraBold.ttf"; path = "../assets/fonts/DMSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		F78F8B03AB6146069B6EA747 /* DMSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "DMSans-Regular.ttf"; path = "../assets/fonts/DMSans-Regular.ttf"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		00E356EB1AD99517003FC87E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7699B88040F8A987B510C191 /* libPods-MVPDeveloper-MVPDeveloperTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		13B07F8C1A680F5B00A75B9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C80B921A6F3F58F76C31292 /* libPods-MVPDeveloper.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00E356EF1AD99517003FC87E /* MVPDeveloperTests */ = {
+			isa = PBXGroup;
+			children = (
+				00E356F21AD99517003FC87E /* MVPDeveloperTests.m */,
+				00E356F01AD99517003FC87E /* Supporting Files */,
+			);
+			path = MVPDeveloperTests;
+			sourceTree = "<group>";
+		};
+		00E356F01AD99517003FC87E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				00E356F11AD99517003FC87E /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0A483C6622B541F3AC34889E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0067088759AC47EBA189817A /* AnekBangla-Bold.ttf */,
+				761AC0EFB6054481BB65DF41 /* AnekBangla-Light.ttf */,
+				57C4926743E94CE7829DF1AC /* AnekBangla-Medium.ttf */,
+				4D67536E4E4C408DB0E5722B /* AnekBangla-Regular.ttf */,
+				38CC8AEADFAC4EAC8C070385 /* AnekBangla-SemiBold.ttf */,
+				0EEFC80CEC1E4BAE91A0E349 /* DMSans-Black.ttf */,
+				DEA601F9A63745CCBC3752BD /* DMSans-Bold.ttf */,
+				F4E6D7C5B1CF41C5867A9CEE /* DMSans-ExtraBold.ttf */,
+				169029A362BA427E92B7CF49 /* DMSans-Light.ttf */,
+				4E96BD5A56D14C5F9DCDE843 /* DMSans-Medium.ttf */,
+				F78F8B03AB6146069B6EA747 /* DMSans-Regular.ttf */,
+				6FD7313E54794AFC8536B3BE /* DMSans-SemiBold.ttf */,
+				503C4F4A3F2B4185A49E30E7 /* Modak-Regular.ttf */,
+				264302B4DCA74D7BA56306B4 /* Montserrat-Light.ttf */,
+				A74DC727F50A419DAB347EFD /* Montserrat-Medium.ttf */,
+				069123F382CF46968A38E726 /* Montserrat-Regular.ttf */,
+				79FAAB329AC340A08B7CAA3B /* Montserrat-SemiBold.ttf */,
+				0C465284A4E94C0198E0C751 /* Montserrat-Thin.ttf */,
+				AED93526E94446CC892C7871 /* Poppins-Bold.ttf */,
+				72AF61F1783A4800B6F2E87D /* Poppins-Italic.ttf */,
+				2A29F42E1D104761902E4A0E /* Poppins-Light.ttf */,
+				C1729F2A53D442DC9FF26986 /* Poppins-Medium.ttf */,
+				C36E1D063A174F82BE25EAA1 /* Poppins-Regular.ttf */,
+				A1AC917B03C44DF692CFDC92 /* Poppins-SemiBold.ttf */,
+				26B5E08C88C842C19511E1E6 /* Poppins-Thin.ttf */,
+				BB4CB8BE23DE4AFF83AF2618 /* AnekBangla-Thin.ttf */,
+				02462F63636B46F299BAE5E0 /* DMSans-Thin.ttf */,
+				DBDA8FA796EE48428A84E739 /* Montserrat-Black.ttf */,
+				5580F277329B4F8BA9F4B343 /* Montserrat-Bold.ttf */,
+				C16244B066184C72874FD961 /* Montserrat-Italic.ttf */,
+				9DCB06DE0B0042EBA2EEDE82 /* Poppins-Black.ttf */,
+			);
+			name = Resources;
+			path = "";
+			sourceTree = "<group>";
+		};
+		13B07FAE1A68108700A75B9A /* MVPDeveloper */ = {
+			isa = PBXGroup;
+			children = (
+				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
+				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
+				13B07FB51A68108700A75B9A /* Images.xcassets */,
+				13B07FB61A68108700A75B9A /* Info.plist */,
+				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
+				13B07FB71A68108700A75B9A /* main.m */,
+			);
+			name = MVPDeveloper;
+			sourceTree = "<group>";
+		};
+		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
+				5DCACB8F33CDC322A6C60F78 /* libPods-MVPDeveloper.a */,
+				19F6CBCC0A4E27FBF8BF4A61 /* libPods-MVPDeveloper-MVPDeveloperTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		83CBB9F61A601CBA00E9B192 = {
+			isa = PBXGroup;
+			children = (
+				BE83D85A2AB0C1DE0039D9C9 /* Anek_Bangla_bold.ttf */,
+				BE83D8582AB0C1DD0039D9C9 /* Anek_Bangla_light.ttf */,
+				BE83D85D2AB0C1DE0039D9C9 /* Anek_Bangla_medium.ttf */,
+				BE83D8602AB0C1DE0039D9C9 /* Anek_Bangla_regular.ttf */,
+				BE83D8562AB0C1DD0039D9C9 /* Anek_Bangla_semibold.ttf */,
+				BE83D8592AB0C1DD0039D9C9 /* DM_Sans_bold.ttf */,
+				BE83D85C2AB0C1DE0039D9C9 /* DM_Sans_medium.ttf */,
+				BE83D8572AB0C1DD0039D9C9 /* DM_Sans_regular.ttf */,
+				BE83D85E2AB0C1DE0039D9C9 /* Modak_regular.ttf */,
+				BE83D85F2AB0C1DE0039D9C9 /* Montserrat_medium.ttf */,
+				BE83D85B2AB0C1DE0039D9C9 /* Montserrat_semibold.ttf */,
+				13B07FAE1A68108700A75B9A /* MVPDeveloper */,
+				832341AE1AAA6A7D00B99B32 /* Libraries */,
+				00E356EF1AD99517003FC87E /* MVPDeveloperTests */,
+				83CBBA001A601CBA00E9B192 /* Products */,
+				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				0A483C6622B541F3AC34889E /* Resources */,
+			);
+			indentWidth = 2;
+			sourceTree = "<group>";
+			tabWidth = 2;
+			usesTabs = 0;
+		};
+		83CBBA001A601CBA00E9B192 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				13B07F961A680F5B00A75B9A /* MVPDeveloper.app */,
+				00E356EE1AD99517003FC87E /* MVPDeveloperTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3B4392A12AC88292D35C810B /* Pods-MVPDeveloper.debug.xcconfig */,
+				5709B34CF0A7D63546082F79 /* Pods-MVPDeveloper.release.xcconfig */,
+				5B7EB9410499542E8C5724F5 /* Pods-MVPDeveloper-MVPDeveloperTests.debug.xcconfig */,
+				89C6BE57DB24E9ADA2F236DE /* Pods-MVPDeveloper-MVPDeveloperTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		00E356ED1AD99517003FC87E /* MVPDeveloperTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "MVPDeveloperTests" */;
+			buildPhases = (
+				A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */,
+				00E356EA1AD99517003FC87E /* Sources */,
+				00E356EB1AD99517003FC87E /* Frameworks */,
+				00E356EC1AD99517003FC87E /* Resources */,
+				C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */,
+				F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				00E356F51AD99517003FC87E /* PBXTargetDependency */,
+			);
+			name = MVPDeveloperTests;
+			productName = MVPDeveloperTests;
+			productReference = 00E356EE1AD99517003FC87E /* MVPDeveloperTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		13B07F861A680F5B00A75B9A /* MVPDeveloper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "MVPDeveloper" */;
+			buildPhases = (
+				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
+				FD10A7F022414F080027D42C /* Start Packager */,
+				13B07F871A680F5B00A75B9A /* Sources */,
+				13B07F8C1A680F5B00A75B9A /* Frameworks */,
+				13B07F8E1A680F5B00A75B9A /* Resources */,
+				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
+				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MVPDeveloper;
+			productName = MVPDeveloper;
+			productReference = 13B07F961A680F5B00A75B9A /* MVPDeveloper.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		83CBB9F71A601CBA00E9B192 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1210;
+				TargetAttributes = {
+					00E356ED1AD99517003FC87E = {
+						CreatedOnToolsVersion = 6.2;
+						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						LastSwiftMigration = 1120;
+					};
+				};
+			};
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "MVPDeveloper" */;
+			compatibilityVersion = "Xcode 12.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 83CBB9F61A601CBA00E9B192;
+			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				13B07F861A680F5B00A75B9A /* MVPDeveloper */,
+				00E356ED1AD99517003FC87E /* MVPDeveloperTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		00E356EC1AD99517003FC87E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		13B07F8E1A680F5B00A75B9A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE83D8622AB0C1DE0039D9C9 /* Anek_Bangla_semibold.ttf in Resources */,
+				BE83D8632AB0C1DE0039D9C9 /* DM_Sans_regular.ttf in Resources */,
+				BE83D8642AB0C1DE0039D9C9 /* Anek_Bangla_light.ttf in Resources */,
+				BE83D8652AB0C1DE0039D9C9 /* DM_Sans_bold.ttf in Resources */,
+				BE83D8662AB0C1DE0039D9C9 /* Anek_Bangla_bold.ttf in Resources */,
+				BE83D8672AB0C1DE0039D9C9 /* Montserrat_semibold.ttf in Resources */,
+				BE83D8682AB0C1DE0039D9C9 /* DM_Sans_medium.ttf in Resources */,
+				BE83D8692AB0C1DE0039D9C9 /* Anek_Bangla_medium.ttf in Resources */,
+				BE83D86A2AB0C1DE0039D9C9 /* Modak_regular.ttf in Resources */,
+				BE83D86B2AB0C1DE0039D9C9 /* Montserrat_medium.ttf in Resources */,
+				BE83D86C2AB0C1DE0039D9C9 /* Anek_Bangla_regular.ttf in Resources */,
+				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				1908CFE14C134B51B1589807 /* AnekBangla-Bold.ttf in Resources */,
+				00F600043C2A43E584919DAB /* AnekBangla-Light.ttf in Resources */,
+				6B3420A11C1D491BBAB1ABE5 /* AnekBangla-Medium.ttf in Resources */,
+				675F314B589F4BCA84AEABF7 /* AnekBangla-Regular.ttf in Resources */,
+				A0D49927FF634417A48A8440 /* AnekBangla-SemiBold.ttf in Resources */,
+				45A10A885C2D43FCA91FB87D /* DMSans-Black.ttf in Resources */,
+				DDE383F515544F238555473B /* DMSans-Bold.ttf in Resources */,
+				88690BD00EBA42D09CE97624 /* DMSans-ExtraBold.ttf in Resources */,
+				0410DFF315924F069BAC5466 /* DMSans-Light.ttf in Resources */,
+				BE25E4CDABBC45AE9EE04283 /* DMSans-Medium.ttf in Resources */,
+				7CEFF6224C6E4FA890CDB6F0 /* DMSans-Regular.ttf in Resources */,
+				1C928B4055BA433098BA6F10 /* DMSans-SemiBold.ttf in Resources */,
+				2F259BA0204549CF8A6AD481 /* Modak-Regular.ttf in Resources */,
+				F1D71D07448E4AF9A2652BD0 /* Montserrat-Light.ttf in Resources */,
+				F97F28B61BC84D7184DA0E3E /* Montserrat-Medium.ttf in Resources */,
+				20CC345357214C01BD309790 /* Montserrat-Regular.ttf in Resources */,
+				7FF7F34F24B148AFAC5BF4CB /* Montserrat-SemiBold.ttf in Resources */,
+				A920991AABAF4DD6B53A5586 /* Montserrat-Thin.ttf in Resources */,
+				46AAD1A3C3F44CCF8886C90F /* Poppins-Bold.ttf in Resources */,
+				FB7DE29BC0714A78AE5690CB /* Poppins-Italic.ttf in Resources */,
+				C0370F987D784DD499F3FEF0 /* Poppins-Light.ttf in Resources */,
+				F91FA34E823948B28940543B /* Poppins-Medium.ttf in Resources */,
+				147EF4B0F9BF4FA1ACBC5D9E /* Poppins-Regular.ttf in Resources */,
+				8A6D0D0B611A40DCA3659BE0 /* Poppins-SemiBold.ttf in Resources */,
+				664E61DA6D1A49D7B9BAED06 /* Poppins-Thin.ttf in Resources */,
+				FFBB47550050439996CD7D0C /* AnekBangla-Thin.ttf in Resources */,
+				CF3D53637F874D1EA16C45B9 /* DMSans-Thin.ttf in Resources */,
+				EF526F32689B460DBF888C92 /* Montserrat-Black.ttf in Resources */,
+				90B7A735251B4547B12FDF4F /* Montserrat-Bold.ttf in Resources */,
+				32976B2EB8B3428B84D9C60A /* Montserrat-Italic.ttf in Resources */,
+				E24586985D6F4CDAAD3B7293 /* Poppins-Black.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/.xcode.env.local",
+				"$(SRCROOT)/.xcode.env",
+			);
+			name = "Bundle React Native code and images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
+		};
+		00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MVPDeveloper/Pods-MVPDeveloper-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MVPDeveloper/Pods-MVPDeveloper-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MVPDeveloper/Pods-MVPDeveloper-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MVPDeveloper-MVPDeveloperTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MVPDeveloper-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MVPDeveloper-MVPDeveloperTests/Pods-MVPDeveloper-MVPDeveloperTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MVPDeveloper-MVPDeveloperTests/Pods-MVPDeveloper-MVPDeveloperTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MVPDeveloper-MVPDeveloperTests/Pods-MVPDeveloper-MVPDeveloperTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MVPDeveloper/Pods-MVPDeveloper-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MVPDeveloper/Pods-MVPDeveloper-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MVPDeveloper/Pods-MVPDeveloper-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MVPDeveloper-MVPDeveloperTests/Pods-MVPDeveloper-MVPDeveloperTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MVPDeveloper-MVPDeveloperTests/Pods-MVPDeveloper-MVPDeveloperTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MVPDeveloper-MVPDeveloperTests/Pods-MVPDeveloper-MVPDeveloperTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FD10A7F022414F080027D42C /* Start Packager */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Start Packager";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		00E356EA1AD99517003FC87E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00E356F31AD99517003FC87E /* MVPDeveloperTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		13B07F871A680F5B00A75B9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
+				13B07FC11A68108700A75B9A /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 13B07F861A680F5B00A75B9A /* MVPDeveloper */;
+			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		00E356F61AD99517003FC87E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-MVPDeveloper-MVPDeveloperTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 7TDPD8YU2G;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MVPDeveloperTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+					"$(inherited)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = zedk;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MVPDeveloper.app/MVPDeveloper";
+			};
+			name = Debug;
+		};
+		00E356F71AD99517003FC87E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-MVPDeveloper-MVPDeveloperTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 7TDPD8YU2G;
+				INFOPLIST_FILE = MVPDeveloperTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+					"$(inherited)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = zedk;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MVPDeveloper.app/MVPDeveloper";
+			};
+			name = Release;
+		};
+		13B07F941A680F5B00A75B9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-MVPDeveloper.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7TDPD8YU2G;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = MVPDeveloper/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PerformlyMVP;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = zedk;
+				PRODUCT_NAME = MVPDeveloper;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		13B07F951A680F5B00A75B9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-MVPDeveloper.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7TDPD8YU2G;
+				INFOPLIST_FILE = MVPDeveloper/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PerformlyMVP;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = zedk;
+				PRODUCT_NAME = MVPDeveloper;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		83CBBA201A601CBA00E9B192 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SDKROOT)/usr/lib/swift\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+				);
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-DFOLLY_NO_CONFIG",
+					"-DFOLLY_MOBILE=1",
+					"-DFOLLY_USE_LIBCPP=1",
+				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		83CBBA211A601CBA00E9B192 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SDKROOT)/usr/lib/swift\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-DFOLLY_NO_CONFIG",
+					"-DFOLLY_MOBILE=1",
+					"-DFOLLY_USE_LIBCPP=1",
+				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "MVPDeveloperTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00E356F61AD99517003FC87E /* Debug */,
+				00E356F71AD99517003FC87E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "MVPDeveloper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				13B07F941A680F5B00A75B9A /* Debug */,
+				13B07F951A680F5B00A75B9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "MVPDeveloper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83CBBA201A601CBA00E9B192 /* Debug */,
+				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 83CBB9F71A601CBA00E9B192 /* Project object */;
+}
