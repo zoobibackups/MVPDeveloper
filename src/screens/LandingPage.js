@@ -1,13 +1,14 @@
-import React from 'react';
-import {useState} from 'react';
-import {Image, Platform, Text, View} from 'react-native';
-import {getWidth, getHeight} from '../functions/CommonFunctions';
-import {StyleSheet} from 'react-native';
-import {TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {SvgXml} from 'react-native-svg';
-import {apple, preformly, training} from '../../assets/svg';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { verticalScale } from 'react-native-size-matters';
+import { SvgXml } from 'react-native-svg';
+import { apple, preformly, training } from '../../assets/svg';
+import fonts from '../Constants/fonts';
+import theme from '../Constants/theme';
+import { getHeight, getWidth } from '../functions/CommonFunctions';
 
 const LandingPage = () => {
   const [focus, setFocus] = useState(true);
@@ -27,57 +28,35 @@ const LandingPage = () => {
         // borderWidth:10
       }}
       colors={['#FDFFF4', '#BBC1AD']}
-      start={{x: 0, y: 0}}
-      end={{x: 0.8, y: 0}}
-      // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-      // locations={{x:0,y:0.5,z:0.6}}
-      // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 0.8, y: 0 }}
+    // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
+    // locations={{x:0,y:0.5,z:0.6}}
+    // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
     >
       {/* <View> */}
-      <View style={{alignItems: 'center'}}>
-      <SvgXml
-        width={getWidth(45)}
-        height={getHeight(5)}
-        xml={preformly}
-        style={{marginTop: Platform.OS === 'ios' ? 20 : 0}}
-      />
-        {/* <Text
-          style={{
-            fontFamily: 'Modak-Regular',
-            color: '#1B1561',
-            fontWeight: '400',
-            fontSize: 30,
-          }}>
-          Preformly
-        </Text> */}
+      <View style={{ alignItems: 'center' }}>
+        <SvgXml
+          width={getWidth(45)}
+          height={getHeight(15)}
+          xml={preformly}
+          style={{ marginTop: Platform.OS === 'ios' ? 20 : 0 }}
+        />
+
         <Text
-          style={{
-            fontFamily: 'AnekBangla-Medium',
-            color: 'black',
-            fontWeight: '500',
-            fontSize: 20,
-          }}>
-          Welcome
+          style={styles.welcomeText}>
+          WELCOME
         </Text>
       </View>
-      <View style={{alignItems: 'center', paddingVertical: 20}}>
+      <View style={{ alignItems: 'center', paddingVertical: verticalScale(30) }}>
         <Text
-          style={{
-            fontFamily: 'AnekBangla-Medium',
-            color: '#1B1561',
-            fontWeight: '600',
-            fontSize: 22,
-            textAlign: 'center',
-          }}>
-          How would you like to proceed?
+          style={styles.subText}>
+          HOW WOULD YOU LIKE TO PROCEED?
         </Text>
       </View>
       <View
         style={{
           alignItems: 'center',
-          // paddingVertical: 5,
-          // borderWidth: 1,
-          borderColor: 'red',
           height: '50%',
           justifyContent: 'space-between',
           backgroundColor: 'transparent',
@@ -86,29 +65,17 @@ const LandingPage = () => {
           onPress={() => {
             setFocus2(false), setFocus(true), navigation.navigate('Home');
           }}
-          // onBlur={() => setFocus(false)}
+
           style={customstyle}>
           <SvgXml width={getWidth(15)} height={getHeight(12)} xml={apple} />
-          {/* <Image
-            style={{
-              resizeMode: 'contain',
-              width: getWidth(15),
-              height: getHeight(12),
-            }}
-            source={require('../../assets/images/apple.png')}
-          /> */}
+
           <Text
-            style={{
-              fontFamily: 'AnekBangla-SemiBold',
-              color: 'black',
-              fontWeight: '700',
-              fontSize: 25,
-            }}>
+            style={styles.buttonText
+            }>
             Food
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          // onPress={() => { setFocus2(true), setFocus(false),navigation.navigate("ChangePreference2") }}
           onPress={() => {
             setFocus2(true),
               setFocus(false),
@@ -117,21 +84,9 @@ const LandingPage = () => {
           // onBlur={() => setFocus(false)}
           style={customstyle2}>
           <SvgXml width={getWidth(15)} height={getHeight(12)} xml={training} />
-          {/* <Image
-            style={{
-              resizeMode: 'contain',
-              width: getWidth(15),
-              height: getHeight(12),
-            }}
-            source={require('../../assets/images/training.png')}
-          /> */}
+
           <Text
-            style={{
-              fontFamily: 'AnekBangla-Light',
-              color: 'black',
-              fontWeight: '500',
-              fontSize: 25,
-            }}>
+            style={styles.buttonText}>
             Training
           </Text>
         </TouchableOpacity>
@@ -142,22 +97,40 @@ const LandingPage = () => {
 };
 
 const styles = StyleSheet.create({
+  welcomeText: {
+    fontFamily: fonts.AnekBanglaMedium,
+    color: theme.blackColor,
+    fontWeight: '500',
+    fontSize: RFValue(15),
+    letterSpacing: RFValue(3)
+  },
+  subText: {
+    fontFamily: 'AnekBangla-Medium',
+    color: theme.blueColor,
+    fontWeight: '600',
+    fontSize: RFValue(13),
+    textAlign: 'center',
+    letterSpacing: RFValue(1.4)
+  },
+  buttonText:{
+    fontFamily: fonts.AnekBanglaMedium,
+    color: theme.blackColor,
+    fontWeight: '400',
+    fontSize: RFValue(20),
+    letterSpacing: RFValue(1.4),
+    includeFontPadding:false,
+  },
   change: {
     width: getWidth(58),
     borderWidth: 2,
     borderColor: '#1B1561',
     height: getHeight(20),
     borderRadius: 20,
-    backgroundColor: 'transparent',
-    // shadowColor: 'rgba(103, 128, 159)',
-    // shadowOpacity: 0.26,
-    // shadowOffset: {width: 0, height: 2},
-    // shadowRadius: 10,
-    // elevation: 10,
+    backgroundColor: '#0000',
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: 'rgba(103, 128, 159, 0.5)', // Adjust the shadow color as needed
-    shadowOffset: {width: 0, height: 5}, // Adjust the shadow offset as needed
+    shadowOffset: { width: 0, height: 5 }, // Adjust the shadow offset as needed
     shadowOpacity: 1, // Adjust the shadow opacity as needed
     shadowRadius: 10, // Adjust the shadow radius as needed
     elevation: Platform.OS === 'android' ? 0 : 5,
@@ -165,20 +138,16 @@ const styles = StyleSheet.create({
   },
   noChange: {
     width: getWidth(58),
-    borderWidth: 2,
-    borderColor: 'rgba(103, 128, 159,0.1)',
+    borderWidth: 1,
+    borderColor: 'rgba(0,0,0,.1)',
     height: getHeight(20),
-    borderRadius: 20,
-    backgroundColor: 'transparent',
-    // shadowColor: 'rgba(103, 128, 159)',
-    // shadowOpacity: 0.26,
-    // shadowOffset: {width: 0, height: 2},
-    // shadowRadius: 10,
-    // elevation: 10,
+    borderRadius: RFValue(20),
+    backgroundColor: '#0000',
+    elevation: 10,
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: 'rgba(103, 128, 159, 0.5)', // Adjust the shadow color as needed
-    shadowOffset: {width: 0, height: 5}, // Adjust the shadow offset as needed
+    shadowOffset: { width: 0, height: 5 }, // Adjust the shadow offset as needed
     shadowOpacity: 1, // Adjust the shadow opacity as needed
     shadowRadius: 10, // Adjust the shadow radius as needed
     elevation: Platform.OS === 'android' ? 0 : 5,

@@ -1,17 +1,16 @@
+import { useNavigation } from '@react-navigation/core';
 import React from 'react';
 import {
-  View,
-  Text,
   Image,
-  ImageBackground,
-  TouchableOpacity,
-  StyleSheet,
   Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
-import {getHeight, getWidth} from '../functions/CommonFunctions';
-import {useNavigation} from '@react-navigation/core';
 import { SvgXml } from 'react-native-svg';
 import { preformly } from '../../assets/svg';
+import { getHeight, getWidth } from '../functions/CommonFunctions';
 
 const TrainingLogin = () => {
   const navigation = useNavigation();
@@ -43,15 +42,7 @@ const TrainingLogin = () => {
             xml={preformly}
             style={{marginTop: Platform.OS === 'ios' ? 20 : 0}}
           />
-          {/* <Text
-            style={{
-              fontFamily: 'Modak-Regular',
-              color: '#1B1561',
-              fontWeight: '400',
-              fontSize: 30,
-            }}>
-            Preformly
-          </Text> */}
+        
           <Text
             style={{
               fontFamily: 'AnekBangla-Medium',
@@ -60,7 +51,7 @@ const TrainingLogin = () => {
               fontSize: 20,
               letterSpacing: 2,
             }}>
-            Home
+            HOME
           </Text>
         </View>
         {/* <View
