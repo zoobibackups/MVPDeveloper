@@ -1,290 +1,124 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation } from "@react-navigation/core";
 import {
   Platform,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  View
-} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-import { SvgXml } from 'react-native-svg';
-import { appleLogo, facebook, google, hideEye, preformly } from '../../assets/svg';
-import KeyBoardHandle from '../Components/KeyboardHandle';
-import { getHeight, getWidth } from '../functions/CommonFunctions';
-
+  View,
+} from "react-native";
+import LinearGradient from "react-native-linear-gradient";
+import { SvgXml } from "react-native-svg";
+import {
+  appleLogo,
+  facebook,
+  google,
+  hideEye,
+  preformly,
+} from "../../assets/svg";
+import KeyBoardHandle from "../Components/KeyboardHandle";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
+import CustomHeader from "../Components/CustomHeader";
+import fonts from "../Constants/fonts";
+import { RFValue } from "react-native-responsive-fontsize";
+import { globalstyles } from "../styles/globalestyles";
 const SignUp18 = () => {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
-  const [passowrd, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [number, setNumber] = useState("");
+  const [passowrd, setPassword] = useState("");
   const [show, setShow] = useState(true);
   const [show1, setShow1] = useState(true);
-  const [confirmPassword, setConfirmPassowrd] = useState('');
+  const [confirmPassword, setConfirmPassowrd] = useState("");
 
   const navigation = useNavigation();
   return (
     <KeyBoardHandle>
       <LinearGradient
         style={{
-          alignItems: 'center',
+          alignItems: "center",
           paddingVertical: 30,
-          borderColor: 'red',
-          height: '100%',
-          // backgroundColor: 'white',
-          // borderWidth:10
+          borderColor: "red",
+          height: "100%",
         }}
-        colors={['#FDFFF4', '#BBC1AD']}
-        start={{x: 0, y: 0}}
-        end={{x: 0.8, y: 0}}
-        // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-        // locations={{x:0,y:0.5,z:0.6}}
-        // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
+        colors={["#FDFFF4", "#BBC1AD"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0.8, y: 0 }}
       >
-        <SvgXml
-          width={getWidth(45)}
-          height={getHeight(5)}
-          xml={preformly}
-          style={{marginTop: Platform.OS === 'ios' ? 20 : 0}}
+        <CustomHeader
+          onPress={() => navigation.goBack()}
+          title={"CREATE PROFILE"}
+          subTitle={"REGISTER INFORMATION"}
         />
-        {/* <Text
-          style={{
-            fontFamily: 'Modak-Regular',
-            color: '#1B1561',
-            fontWeight: '400',
-            fontSize: 30,
-            marginTop: Platform.OS === 'ios' ? 20 : 0,
-          }}>
-          Preformly
-        </Text> */}
-        <Text
-          style={{
-            fontFamily: 'AnekBangla-Medium',
-            color: 'black',
-            fontWeight: '500',
-            fontSize: 18,
-            letterSpacing: 2,
-          }}>
-          CREATE PROFILE
-        </Text>
-        <View
-          style={{
-            paddingVertical: 10,
-            height: getHeight(6),
-            borderColor: 'red',
-            // borderWidth: 1,
-          }}>
-          <Text
-            style={{
-              fontFamily: 'AnekBangla-Medium',
-              color: 'black',
-              fontWeight: '500',
-              fontSize: 18,
-              letterSpacing: 2,
-            }}>
-            REGISTER INFORMATION
-          </Text>
-        </View>
 
-        <View
-          style={{
-            paddingVertical: 10,
-            height: getHeight(69),
-            width: getWidth(90),
-            borderColor: 'red',
-            // borderWidth: 1,
-          }}>
+        <View style={styles.innerContainer}>
           <TextInput
             style={styles.input}
-            onChangeText={text => setEmail(text)}
+            onChangeText={(text) => setEmail(text)}
             value={email}
-            placeholder="Email Address"
+            placeholder="Email address"
             placeholderTextColor="grey"
-            // keyboardType="numeric"
           />
           <TextInput
             style={styles.input}
-            onChangeText={text => setName(text)}
+            onChangeText={(text) => setName(text)}
             value={name}
-            placeholder="Full Name"
+            placeholder="Full name"
             placeholderTextColor="grey"
-            // keyboardType="numeric"
           />
 
-          <View
-            style={{
-              height: 55,
-              margin: 8,
-              borderWidth: 1,
-              // padding: 10,
-              borderRadius: 20,
-              borderColor: '#1B1561',
-              justifyContent: 'center',
-              alignItems: 'center',
-              flexDirection: 'row',
-            }}>
+          <View style={globalstyles.inputContainer}>
             <TextInput
-              style={{
-                height: 53,
-                //   margin: 8,
-                //   borderWidth: 1,
-                // padding: 10,
-                //   justifyContent:'flex-start',
-                borderRadius: 20,
-                width: getWidth(70),
-                borderColor: '#1B1561',
-                color: 'grey',
-              }}
-              onChangeText={text => setPassword(text)}
+              style={globalstyles.textInputStyle}
+              onChangeText={(text) => setPassword(text)}
               placeholderTextColor="grey"
               value={passowrd}
               placeholder="Password"
               secureTextEntry={show}
-              // keyboardType="numeric"
             />
             <TouchableOpacity onPress={() => setShow(!show)}>
               <SvgXml xml={hideEye} />
-              {/* <Image
-                source={require('../../assets/images/hide-eye.png')}
-                style={{resizeMode: 'contain'}}
-              /> */}
             </TouchableOpacity>
           </View>
-          <View
-            style={{
-              height: 55,
-              margin: 8,
-              borderWidth: 1,
-              // padding: 10,
-              borderRadius: 20,
-              borderColor: '#1B1561',
-              justifyContent: 'center',
-              alignItems: 'center',
-              flexDirection: 'row',
-            }}>
+          <View style={globalstyles.inputContainer}>
             <TextInput
-              style={{
-                height: 53,
-                // margin: 12,
-                //   borderWidth: 1,
-                // padding: 10,
-                //   justifyContent:'flex-start',
-                borderRadius: 20,
-                width: getWidth(70),
-                borderColor: '#1B1561',
-                color: 'grey',
-              }}
-              onChangeText={text => setConfirmPassowrd(text)}
+              style={globalstyles.textInputStyle}
+              onChangeText={(text) => setConfirmPassowrd(text)}
               value={confirmPassword}
               placeholder="Confirm Password"
               secureTextEntry={show1}
-              // keyboardType="numeric"
               placeholderTextColor="grey"
             />
             <TouchableOpacity onPress={() => setShow1(!show1)}>
               <SvgXml xml={hideEye} />
-              {/* <Image
-                source={require('../../assets/images/hide-eye.png')}
-                style={{resizeMode: 'contain'}}
-              /> */}
             </TouchableOpacity>
           </View>
           <TextInput
             style={styles.input}
-            onChangeText={num => setNumber(num)}
+            onChangeText={(num) => setNumber(num)}
             value={number}
             placeholder="User Name"
             placeholderTextColor="grey"
-
-            // keyboardType="numeric"
           />
-          <View
-            style={{
-              height: getHeight(10),
-              margin: 8,
-              //   borderWidth: 1,
-              // padding: 10,
-              borderRadius: 20,
-              borderColor: '#1B1561',
-              justifyContent: 'space-evenly',
-              alignItems: 'center',
-              flexDirection: 'row',
-            }}>
-            <View
-              style={{
-                width: getWidth(18),
-                height: getHeight(9),
-                borderWidth: 1,
-                borderRadius: 20,
-                borderColor: 'grey',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+          <View style={styles.LoginButton}>
+            <TouchableOpacity style={styles.buttonBox}>
               <SvgXml xml={facebook} />
-              {/* <Image
-                source={require('../../assets/images/fb.png')}
-                style={{resizeMode: 'contain'}}
-              /> */}
-            </View>
-            <View
-              style={{
-                width: getWidth(18),
-                height: getHeight(9),
-                borderWidth: 1,
-                borderRadius: 20,
-                borderColor: 'grey',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonBox}>
               <SvgXml xml={google} />
-              {/* <Image
-                source={require('../../assets/images/google.png')}
-                style={{resizeMode: 'contain'}}
-              /> */}
-            </View>
-            <View
-              style={{
-                width: getWidth(18),
-                height: getHeight(9),
-                borderWidth: 1,
-                borderRadius: 20,
-                borderColor: 'grey',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonBox}>
               <SvgXml xml={appleLogo} />
-              {/* <Image
-                source={require('../../assets/images/Iphone.png')}
-                style={{resizeMode: 'contain'}}
-              /> */}
-            </View>
+            </TouchableOpacity>
           </View>
-          <View style={{alignItems: 'center'}}>
+          <View style={{ marginTop: getHeight(2), alignItems: "center" }}>
             <TouchableOpacity
-              onPress={() => navigation.navigate('Connectwatch')}
-              style={{
-                height: 55,
-                // margin: 12,
-                borderWidth: 1,
-                padding: 14,
-                borderRadius: 20,
-                borderColor: '#1B1561',
-                backgroundColor: '#1B1561',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: getWidth(65),
-              }}>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'white',
-                  fontWeight: '500',
-                  fontSize: 18,
-                }}>
-                N E X T
-              </Text>
+              onPress={() => navigation.navigate("Connectwatch")}
+              style={globalstyles.buttonStyle}
+            >
+              <Text style={globalstyles.buttonText}>NEXT</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -297,11 +131,34 @@ const styles = StyleSheet.create({
     height: 55,
     margin: 8,
     borderWidth: 1,
-    // padding: 14,
     paddingLeft: 25,
     borderRadius: 20,
-    borderColor: '#1B1561',
-    color: 'grey',
+    borderColor: "#1B1561",
+    color: "grey",
+    fontFamily: fonts.AnekBanglaLight,
+    fontWeight: "400",
+    fontSize: RFValue(14),
+  },
+  innerContainer: {
+    paddingVertical: 10,
+    height: getHeight(69),
+    width: getWidth(90),
+  },
+  LoginButton: {
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    height: getHeight(12),
+    width: getWidth(90),
+    flexDirection: "row",
+  },
+  buttonBox: {
+    width: getWidth(15),
+    height: getWidth(15),
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: "grey",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 export default SignUp18;

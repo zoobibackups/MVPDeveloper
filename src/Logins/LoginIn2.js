@@ -1,159 +1,85 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import {
-  View,
-  Text,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
-  StyleSheet,
-  TextInput,
   Platform,
-} from 'react-native';
-import {getHeight, getWidth} from '../functions/CommonFunctions';
-import KeyBoardHandle from '../Components/KeyboardHandle';
-import LinearGradient from 'react-native-linear-gradient';
-import { SvgXml } from 'react-native-svg';
-import { preformly } from '../../assets/svg';
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
+import { SvgXml } from "react-native-svg";
+import { Email, hideEye, lock, preformly } from "../../assets/svg";
+import KeyBoardHandle from "../Components/KeyboardHandle";
+import theme from "../Constants/theme";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
+import textStyles, { globalstyles } from "../styles/globalestyles";
 
-const LogIn2 = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const LogIn1 = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [show, setShow] = useState(true);
   const [show1, setShow1] = useState(true);
   return (
-    <LinearGradient
-      style={{
-        alignItems: 'center',
-        paddingVertical: 30,
-        borderColor: 'red',
-        height: '100%',
-        // backgroundColor: 'white',
-        // borderWidth:10
-      }}
-      colors={['#FDFFF4', '#BBC1AD']}
-      start={{x: 0, y: 0}}
-      end={{x: 0.8, y: 0}}
-      // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-      // locations={{x:0,y:0.5,z:0.6}}
-      // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
-    >
-      <View
-        style={{
-          alignItems: 'center',
-          //   borderWidth: 1,
-          borderColor: 'red',
-          justifyContent: 'space-between',
-          width: getWidth(90),
-          height: getHeight(15),
-        }}>
-        <SvgXml
-          width={getWidth(45)}
-          height={getHeight(5)}
-          xml={preformly}
-          style={{marginTop: Platform.OS === 'ios' ? 20 : 0}}
-        />
-        {/* <Text
+    <KeyBoardHandle>
+      <View>
+        <View
           style={{
-            fontFamily: 'Modak-Regular',
-            color: '#1B1561',
-            fontWeight: '400',
-            fontSize: 30,
-            marginTop: Platform.OS === 'ios' ? 20 : 0,
-          }}>
-          Preformly
-        </Text> */}
-        <Text
-          style={{
-            fontFamily: 'AnekBangla-Medium',
-            color: 'black',
-            fontWeight: '400',
-            fontSize: 18,
-            letterSpacing: 2,
-          }}>
-          LOG IN
-        </Text>
-      </View>
-      <KeyBoardHandle>
+            alignItems: "center",
+            alignSelf: "center",
+            width: getWidth(90),
+            marginTop: getHeight(4),
+            height: getHeight(15),
+          }}
+        >
+          <SvgXml
+            width={getWidth(45)}
+            height={getHeight(8)}
+            xml={preformly}
+            style={{ marginTop: Platform.OS === "ios" ? 20 : 0 }}
+          />
+
+          <Text
+            style={{
+              ...textStyles.lightText,
+              fontWeight: "400",
+              fontSize: RFValue(12),
+            }}
+          >
+            LOG IN
+          </Text>
+        </View>
+
         <View
           style={{
             paddingVertical: 10,
             height: getHeight(70),
             width: getWidth(90),
-            borderColor: 'red',
+            borderColor: "red",
             // borderWidth: 1,
             //   justifyContent:'center'
             paddingTop: 90,
-          }}>
-          <View
-            style={{
-              height: 55,
-              margin: 8,
-              borderWidth: 1,
-              // padding: 10,
-              borderRadius: 20,
-              borderColor: '#1B1561',
-              justifyContent: 'center',
-              alignItems: 'center',
-              flexDirection: 'row',
-              // paddingLeft:5
-            }}>
-            <Image
-              source={require('../../assets/images/mail.png')}
-              style={{resizeMode: 'contain'}}
-            />
-            <TextInput
-              style={{
-                height: 53,
-                //   margin: 8,
-                // borderWidth: 1,
-                // padding: 10,
-                //   justifyContent:'flex-start',
-                borderRadius: 20,
-                width: getWidth(70),
-                borderColor: '#1B1561',
-                color: 'grey',
+          }}
+        >
+          <View style={globalstyles.inputContainer}>
+            <SvgXml xml={Email} />
 
-                paddingLeft: 10,
-              }}
-              onChangeText={text => setEmail(text)}
+            <TextInput
+              style={globalstyles.textInputStyle}
+              onChangeText={(text) => setEmail(text)}
               placeholderTextColor="grey"
               value={email}
-              placeholder="Email"
+              placeholder="Email  address"
+
               // secureTextEntry={show}
               // keyboardType="numeric"
             />
           </View>
-          <View
-            style={{
-              height: 55,
-              margin: 8,
-              borderWidth: 1,
-              // padding: 10,
-              borderRadius: 20,
-              borderColor: '#1B1561',
-              justifyContent: 'center',
-              alignItems: 'center',
-              flexDirection: 'row',
-              paddingLeft: 5,
-            }}>
-            <Image
-              source={require('../../assets/images/lock.png')}
-              style={{resizeMode: 'contain'}}
-            />
+          <View style={globalstyles.inputContainer}>
+            <SvgXml xml={lock} />
             <TextInput
-              style={{
-                height: 53,
-                // margin: 12,
-                //   borderWidth: 1,
-                // padding: 10,
-                //   justifyContent:'flex-start',
-                borderRadius: 20,
-                width: getWidth(65),
-                borderColor: '#1B1561',
-                color: 'grey',
-                paddingLeft: 8,
-              }}
-              onChangeText={text => setPassword(text)}
+              style={globalstyles.textInputStyle}
+              onChangeText={(text) => setPassword(text)}
               placeholderTextColor="grey"
               value={password}
               placeholder="Password"
@@ -163,93 +89,74 @@ const LogIn2 = () => {
             <TouchableOpacity
               onPress={() => setShow1(!show1)}
               style={{
-                borderColor: 'red',
+                borderColor: "red",
                 height: getHeight(7),
-                justifyContent: 'center',
-              }}>
-              <Image
-                source={require('../../assets/images/hide-eye.png')}
-                style={{resizeMode: 'contain'}}
-              />
+                justifyContent: "center",
+              }}
+            >
+              <SvgXml xml={hideEye} />
             </TouchableOpacity>
           </View>
-          <View
+          <TouchableOpacity
             style={{
-              flexDirection: 'row',
-              justifyContent: 'flex-end',
+              flexDirection: "row",
+              justifyContent: "flex-end",
               paddingRight: 10,
-            }}>
-            <Text style={{color: '#1B1561', textDecorationLine: 'underline'}}>
+            }}
+          >
+            <Text
+              style={{
+                ...textStyles.lightText,
+                fontSize: RFValue(11),
+                color: "#1B1561",
+                textDecorationLine: "underline",
+              }}
+            >
               Forgot Password?
             </Text>
-          </View>
+          </TouchableOpacity>
           <View
             style={{
-              borderColor: 'red',
+              borderColor: "red",
               height: getHeight(30),
-              justifyContent: 'center',
-            }}>
-            <TouchableOpacity
-              style={{
-                height: 55,
-                margin: 12,
-                borderWidth: 1,
-                padding: 14,
-                borderRadius: 20,
-                borderColor: '#1B1561',
-                backgroundColor: '#1B1561',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
+              justifyContent: "center",
+            }}
+          >
+            <TouchableOpacity style={globalstyles.buttonStyle}>
               <Text
                 style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'white',
-                  fontWeight: '500',
-                  fontSize: 18,
-                  letterSpacing: 2,
-                }}>
+                  ...textStyles.lightText,
+                  color: theme.whiteColor,
+                }}
+              >
                 LOG IN
               </Text>
             </TouchableOpacity>
           </View>
         </View>
-      </KeyBoardHandle>
-      <View
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          paddingVertical: 2,
-          // borderWidth: 1,
-          borderColor: 'red',
-          height: getHeight(7),
 
-          width: getWidth(90),
-        }}>
-        <Text
+        <View
           style={{
-            color: '#1B1561',
-            fontSize: 14,
-            fontFamily: 'AnekBangla-Light',
-            fontWeight: '400',
-            textAlign: 'center',
-            letterSpacing: 2,
-          }}>
-          TERMS AND CONDITIONS
-        </Text>
+            justifyContent: "center",
+            alignItems: "center",
+            paddingVertical: 2,
+            height: getHeight(4),
+          }}
+        >
+          <Text
+            style={{
+              ...textStyles.lightText,
+              color: theme.blueColor,
+              fontSize: RFValue(12),
+            }}
+          >
+            TERM AND CONDITIONS
+          </Text>
+        </View>
       </View>
-    </LinearGradient>
+    </KeyBoardHandle>
   );
 };
-const styles = StyleSheet.create({
-  input: {
-    height: 55,
-    margin: 8,
-    borderWidth: 1,
-    padding: 14,
-    borderRadius: 20,
-    borderColor: '#1B1561',
-  },
-});
+const styles = StyleSheet.create({});
 
-export default LogIn2;
+export default LogIn1;

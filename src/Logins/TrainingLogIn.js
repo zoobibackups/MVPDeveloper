@@ -1,213 +1,115 @@
-import { useNavigation } from '@react-navigation/core';
-import React from 'react';
+import React from "react";
 import {
-  Image,
-  Platform,
-  StyleSheet,
+  View,
   Text,
+  Image,
+  ImageBackground,
   TouchableOpacity,
-  View
-} from 'react-native';
-import { SvgXml } from 'react-native-svg';
-import { preformly } from '../../assets/svg';
-import { getHeight, getWidth } from '../functions/CommonFunctions';
+  StyleSheet,
+  Platform,
+} from "react-native";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
+import { useNavigation } from "@react-navigation/core";
+import { SvgXml } from "react-native-svg";
+import { preformly } from "../../assets/svg";
+import { RFValue } from "react-native-responsive-fontsize";
+import fonts from "../Constants/fonts";
+import textStyles from "../styles/globalestyles";
+import { moderateScale } from "react-native-size-matters";
+import theme from "../Constants/theme";
 
-const TrainingLogin = () => {
+const Home = () => {
   const navigation = useNavigation();
   return (
     <>
       <View
         style={{
-          alignItems: 'center',
+          alignItems: "center",
           paddingVertical: 30,
-          borderColor: 'green',
-          // borderWidth: 4,
+          borderColor: "green",
           height: getHeight(85),
-        }}>
+        }}
+      >
         <Image
-          source={require('../../assets/images/fruitBG.png')}
+          source={require("../../assets/images/fruitBG2.png")}
           style={styles.backgroundImage}
         />
         <View
           style={{
-            alignItems: 'center',
-            borderColor: 'red',
-            // borderWidth: 1,
+            alignItems: "center",
             width: getWidth(90),
-            height: getHeight(33),
-          }}>
+            height: getHeight(28),
+          }}
+        >
           <SvgXml
             width={getWidth(45)}
-            height={getHeight(5)}
+            height={getHeight(8)}
             xml={preformly}
-            style={{marginTop: Platform.OS === 'ios' ? 20 : 0}}
+            style={{ marginTop: Platform.OS === "ios" ? RFValue(20) : 0 }}
           />
-        
-          <Text
-            style={{
-              fontFamily: 'AnekBangla-Medium',
-              color: 'black',
-              fontWeight: '500',
-              fontSize: 20,
-              letterSpacing: 2,
-            }}>
-            HOME
-          </Text>
+
+          <Text style={textStyles.mediumText}>HOME</Text>
         </View>
-        {/* <View
-          style={{
-              borderWidth: 1,
-            borderColor: 'red',
-            height: getHeight(30),
-            width: '90%',
-            marginTop: 70,
-            justifyContent: 'space-evenly',
-            alignItems: 'center',
-          }}> */}
         <View
           style={{
-            // borderWidth: 1,
-            borderColor: 'red',
-            // height: getHeight(40),
             width: getWidth(90),
-            // marginTop: 90,
-            // justifyContent: "center",
-            alignItems: 'center',
-            paddingTop: 20,
+            paddingVertical: moderateScale(40),
+            alignItems: "center",
             height: getHeight(40),
-          }}>
-          <View
-            style={{
-              // borderWidth: 1,
-              borderRadius: 20,
-              width: getWidth(63),
-              height: getHeight(7),
-              // backgroundColor: '#1B1561',
-              justifyContent: 'center',
-              paddingTop: 10,
-              alignItems: 'center',
-              // marginTop:60
-            }}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('LogIn3')}
-              style={{
-                borderWidth: 1,
-                borderRadius: 20,
-                width: getWidth(63),
-                height: getHeight(7),
-                backgroundColor: '#1B1561',
-                justifyContent: 'center',
-                // paddingTop:10,
-                alignItems: 'center',
-                // marginTop:60
-              }}>
-              <Text
-                style={{
-                  color: 'white',
-                  fontSize: 17,
-                  fontFamily: 'AnekBangla-Light',
-                  fontWeight: '600',
-                  letterSpacing: 2,
-                }}>
-                LOGIN NOW
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <View
-            style={{
-              // borderWidth: 1,
-              borderRadius: 20,
-              width: getWidth(63),
-              height: getHeight(7),
-              // backgroundColor: '#1B1561',
-              justifyContent: 'center',
-              paddingTop: 30,
-              alignItems: 'center',
-              // marginTop:60
-            }}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Error1')}
-              style={{
-                borderWidth: 1,
-                borderRadius: 20,
-                width: getWidth(63),
-                height: getHeight(7),
-                backgroundColor: '#1B1561',
-                justifyContent: 'center',
-                // paddingTop:10,
-                alignItems: 'center',
-                // marginTop:60
-              }}>
-              <Text
-                style={{
-                  color: 'white',
-                  fontSize: 17,
-                  fontFamily: 'AnekBangla-Light',
-                  fontWeight: '600',
-                  letterSpacing: 2,
-                }}>
-                BUSINESS
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <View
-            style={{
-              // borderWidth: 1,
-              borderRadius: 20,
-              width: getWidth(63),
-              height: getHeight(7),
-              // backgroundColor: '#1B1561',
-              justifyContent: 'center',
-              paddingTop: 50,
-              alignItems: 'center',
-              // marginTop:60
-            }}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('SignUp18')}
-              style={{
-                borderWidth: 1,
-                borderRadius: 20,
-                borderColor: '#1B1561',
-                width: getWidth(63),
-                height: getHeight(7),
-                // backgroundColor: '',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text
-                style={{
-                  color: '#1B1561',
-                  fontSize: 17,
-                  fontFamily: 'AnekBangla-Light',
-                  fontWeight: '700',
-                  letterSpacing: 2,
-                }}>
-                REGISTER NOW
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => navigation.navigate("LogIn1")}
+            style={styles.buttonStyle}
+          >
+            <Text style={{ ...textStyles.lightText, color: theme.whiteColor }}>
+              LOGIN NOW
+            </Text>
+          </TouchableOpacity>
 
-        {/* </View> */}
+          <TouchableOpacity
+            onPress={() => navigation.navigate("BusinessSignUp")}
+            style={styles.buttonStyle}
+          >
+            <Text style={{ ...textStyles.lightText, color: theme.whiteColor }}>
+              BUSINESS
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate("SignUp1")}
+            style={{
+              ...styles.buttonStyle,
+              backgroundColor: theme.transparentColor,
+            }}
+          >
+            <Text
+              style={{
+                color: "#1B1561",
+                fontSize: 17,
+                fontFamily: "AnekBangla-Light",
+                fontWeight: "500",
+              }}
+            >
+              REGISTER NOW
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
       <View
         style={{
-          justifyContent: 'center',
-          alignItems: 'center',
+          justifyContent: "center",
+          alignItems: "center",
           paddingVertical: 2,
           // borderWidth: 1,
-          borderColor: 'red',
+          borderColor: "red",
           height: getHeight(7),
-        }}>
+        }}
+      >
         <Text
-          style={{
-            color: '#1B1561',
-            fontSize: 14,
-            fontFamily: 'AnekBangla-Light',
-            fontWeight: '400',
-            letterSpacing: 2,
-          }}>
-          TERMS AND CONDITIONS
+          style={{...textStyles.lightText,fontWeight:"400", fontSize:RFValue(10), color:theme.blueColor}}
+        >
+          TERMS AND CONDIDTIONS
         </Text>
       </View>
     </>
@@ -217,12 +119,23 @@ const TrainingLogin = () => {
 const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
-    resizeMode: 'cover',
-    position: 'absolute',
-    width: '100%',
+    resizeMode: "cover",
+    position: "absolute",
+    width: "160%",
     marginTop: 0,
     height: getHeight(100),
   },
+  buttonStyle: {
+    borderWidth: 1,
+    borderColor: theme.blueColor,
+    borderRadius: 20,
+    width: getWidth(60),
+    height: getHeight(7),
+    backgroundColor: theme.blueColor,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: RFValue(8),
+  },
 });
 
-export default TrainingLogin;
+export default Home;

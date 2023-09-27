@@ -21,7 +21,7 @@ const KeyBoardHandle = ({ children }) => {
       end={{ x: 0.8, y: 0 }}
     >
       <KeyboardAvoidingView style={{ flex: 1}}>
-        <ScrollView>
+        <ScrollView bounces={false} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false} >
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             {children}
           </TouchableWithoutFeedback>

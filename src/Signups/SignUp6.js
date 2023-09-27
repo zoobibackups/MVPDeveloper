@@ -1,35 +1,26 @@
-import React, { useState } from 'react';
-
+import React, { useState } from "react";
 import {
   Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
-} from 'react-native';
-import { getHeight, getWidth } from '../functions/CommonFunctions';
-// import { CheckBox } from '@rneui/themed';
-
-// import CheckBox from '@react-native-community/checkbox';
-import { useNavigation } from '@react-navigation/core';
-
-import LinearGradient from 'react-native-linear-gradient';
-import { SvgXml } from 'react-native-svg';
-import { backward, preformly } from '../../assets/svg';
-import Checkbox from '../Components/CheckBox';
-import CheckboxSquare from '../Components/CheckBoxSquare';
-// import Icon from 'react-native-dynamic-vector-icons';
+  View,
+} from "react-native";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
+import { useNavigation } from "@react-navigation/core";
+import LinearGradient from "react-native-linear-gradient";
+import { RFValue } from "react-native-responsive-fontsize";
+import Checkbox from "../Components/CheckBox";
+import CheckboxSquare from "../Components/CheckBoxSquare";
+import CustomHeader from "../Components/CustomHeader";
+import textStyles, { globalstyles } from "../styles/globalestyles";
 
 const SignUp6 = () => {
-  const [height, setHeight] = useState('');
-  const [age, setAge] = useState('');
-  const [weight, setWeight] = useState('');
+  const [height, setHeight] = useState("");
+  const [age, setAge] = useState("");
+  const [weight, setWeight] = useState("");
   const [selectedIndex, setIndex] = useState(0);
-
-  //   const [passowrd, setPassword] = useState('');
-  //   const [show,setShow]=useState(true)
-  //    const [show1,setShow1]=useState(true)
-  const [confirmPassword, setConfirmPassowrd] = useState('');
+  const [confirmPassword, setConfirmPassowrd] = useState("");
   const [checked, setChecked] = useState(false);
   const [checked1, setChecked1] = useState(false);
   const [checked2, setChecked2] = useState(false);
@@ -38,161 +29,36 @@ const SignUp6 = () => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [check1, setCheck1] = useState(false);
   const navigation = useNavigation();
-  // var radio_props = [
-  //   {value: 0},
-  //   //   {label: 'female', value: 1},
-  //   //   {label: 'other', value: 2},
-  // ];
   return (
     <LinearGradient
       style={{
-        alignItems: 'center',
+        alignItems: "center",
         paddingVertical: 30,
-        borderColor: 'red',
-        height: '100%',
-        // backgroundColor: 'white',
-        // borderWidth:10
+        borderColor: "red",
+        height: "100%",
       }}
-      colors={['#FDFFF4', '#BBC1AD']}
-      start={{x: 0, y: 0}}
-      end={{x: 0.8, y: 0}}
-      // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-      // locations={{x:0,y:0.5,z:0.6}}
-      // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
+      colors={["#FDFFF4", "#BBC1AD"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 0.8, y: 0 }}
     >
-      <SvgXml
-        width={getWidth(45)}
-        height={getHeight(5)}
-        xml={preformly}
-        style={{marginTop: Platform.OS === 'ios' ? 20 : 0}}
+      <CustomHeader
+        onPress={() => navigation.goBack()}
+        title={"CREATE PROFILE"}
+        subTitle={"DIETRY PREFERENCES"}
       />
-      {/* <Text
-        style={{
-          fontFamily: 'Modak-Regular',
-          color: '#1B1561',
-          fontWeight: '400',
-          fontSize: 30,
-          marginTop: Platform.OS === 'ios' ? 20 : 0,
-        }}>
-        Preformly
-      </Text> */}
-      <View
-        style={{
-          flexDirection: 'row',
-          // borderWidth: 1,
-          borderColor: 'red',
-          width: getWidth(90),
-          height: getHeight(5),
-          // justifyContent: 'center',
-        }}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={{
-            borderWidth: 0.5,
-            borderColor: 'grey',
-            borderRadius: 40,
-            justifyContent: 'center',
-            width: getWidth(11),
-          }}>
-          <SvgXml xml={backward} width={getWidth(10)} height={getHeight(2)} />
-          {/* <Image
-            style={{
-              resizeMode: 'contain',
-              width: getWidth(10),
-              // borderWidth: 1,
-              borderColor: 'red',
-              height: getHeight(2),
-            }}
-            source={require('../../assets/images/back.png')}
-          /> */}
-        </TouchableOpacity>
-        <View
-          style={{
-            // borderWidth: 1,
-            borderColor: 'green',
-            width: getWidth(70),
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <Text
-            style={{
-              fontFamily: 'AnekBangla-Medium',
-              color: 'black',
-              fontWeight: '500',
-              fontSize: 18,
-              letterSpacing: 2,
-            }}>
-            CREATE PROFILE
-          </Text>
-        </View>
-      </View>
-      <View
-        style={{
-          paddingVertical: 10,
-          height: getHeight(10),
-          borderColor: 'red',
-          //   borderWidth: 1,
-        }}>
-        <Text
-          style={{
-            fontFamily: 'AnekBangla-Medium',
-            color: 'black',
-            fontWeight: '500',
-            fontSize: 18,
-            letterSpacing: 2,
-          }}>
-          DIETRY PREFERENCES
-        </Text>
-      </View>
 
       <View
-        style={{
-          paddingVertical: 10,
-          height: getHeight(50),
-          width: getWidth(97),
-          borderColor: 'red',
-          // borderWidth: 1,
-          alignItems: 'center',
-          justifyContent: 'space-evenly',
-          shadowColor: 'rgba(103, 128, 159, 0.5)', // Adjust the shadow color as needed
-          shadowOffset: {width: 0, height: 5}, // Adjust the shadow offset as needed
-          shadowOpacity: 1, // Adjust the shadow opacity as needed
-          shadowRadius: 10, // Adjust the shadow radius as needed
-          elevation: Platform.OS === 'android' ? 0 : 5,
-        }}>
+        style={styles.optionsContainer}
+      >
         <TouchableOpacity onPress={() => setChecked(!checked)}>
           <LinearGradient
-            colors={['#FDFFF4', '#BBC1AD']}
-            start={{x: 0, y: 0}}
-            end={{x: 0.8, y: 0}}
-            style={{
-              width: getWidth(90),
-              borderRadius: 20,
-
-              height: getHeight(7),
-              borderColor: '#F5F5F5',
-              // backgroundColor: 'white',
-              // borderWidth: 1,
-              shadowColor: 'rgba(103, 128, 159)',
-
-              elevation: 37,
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              alignItems: 'center',
-              paddingHorizontal: 5,
-            }}>
-            <Text
-              style={{
-                paddingLeft: 10,
-                fontFamily: 'AnekBangla-Medium',
-                color: 'black',
-                fontWeight: '400',
-                fontSize: 17,
-              }}>
-              Lazy Keto
-            </Text>
+            colors={["#FDFFF4", "#BBC1AD"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0.8, y: 0 }}
+            style={styles.selectItem}
+          >
+            <Text style={styles.selectItemText}>Lazy Keto</Text>
             <Checkbox
-              // text="Blue"
               isChecked={checked}
               onPress={() => {
                 setChecked(!checked);
@@ -202,37 +68,13 @@ const SignUp6 = () => {
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setChecked1(!checked1)}>
           <LinearGradient
-            colors={['#FDFFF4', '#BBC1AD']}
-            start={{x: 0, y: 0}}
-            end={{x: 0.8, y: 0}}
-            style={{
-              width: getWidth(90),
-              borderRadius: 20,
-
-              height: getHeight(7),
-              borderColor: '#F5F5F5',
-              // backgroundColor: 'white',
-              // borderWidth: 1,
-              shadowColor: 'rgba(103, 128, 159)',
-
-              elevation: 32,
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              alignItems: 'center',
-              paddingHorizontal: 5,
-            }}>
-            <Text
-              style={{
-                paddingLeft: 10,
-                fontFamily: 'AnekBangla-Medium',
-                color: 'black',
-                fontWeight: '400',
-                fontSize: 17,
-              }}>
-              Gluten Free
-            </Text>
+            colors={["#FDFFF4", "#BBC1AD"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0.8, y: 0 }}
+            style={styles.selectItem}
+          >
+            <Text style={styles.selectItemText}>Gluten Free</Text>
             <Checkbox
-              // text="Blue"
               isChecked={checked1}
               onPress={() => {
                 setChecked1(!checked1);
@@ -243,37 +85,13 @@ const SignUp6 = () => {
 
         <TouchableOpacity onPress={() => setChecked2(!checked2)}>
           <LinearGradient
-            colors={['#FDFFF4', '#BBC1AD']}
-            start={{x: 0, y: 0}}
-            end={{x: 0.8, y: 0}}
-            style={{
-              width: getWidth(90),
-              borderRadius: 20,
-
-              height: getHeight(7),
-              borderColor: '#F5F5F5',
-              // backgroundColor: 'white',
-              // borderWidth: 1,
-              shadowColor: 'rgba(103, 128, 159)',
-
-              elevation: 32,
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              alignItems: 'center',
-              paddingHorizontal: 5,
-            }}>
-            <Text
-              style={{
-                paddingLeft: 10,
-                fontFamily: 'AnekBangla-Medium',
-                color: 'black',
-                fontWeight: '400',
-                fontSize: 17,
-              }}>
-              Pescatarian
-            </Text>
+            colors={["#FDFFF4", "#BBC1AD"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0.8, y: 0 }}
+            style={styles.selectItem}
+          >
+            <Text style={styles.selectItemText}>Pescatarian</Text>
             <Checkbox
-              // text="Blue"
               isChecked={checked2}
               onPress={() => {
                 setChecked2(!checked2);
@@ -284,37 +102,13 @@ const SignUp6 = () => {
 
         <TouchableOpacity onPress={() => setChecked3(!checked3)}>
           <LinearGradient
-            colors={['#FDFFF4', '#BBC1AD']}
-            start={{x: 0, y: 0}}
-            end={{x: 0.8, y: 0}}
-            style={{
-              width: getWidth(90),
-              borderRadius: 20,
-
-              height: getHeight(7),
-              borderColor: '#F5F5F5',
-              // backgroundColor: 'white',
-              // borderWidth: 1,
-              shadowColor: 'rgba(103, 128, 159)',
-
-              elevation: 32,
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              alignItems: 'center',
-              paddingHorizontal: 5,
-            }}>
-            <Text
-              style={{
-                paddingLeft: 10,
-                fontFamily: 'AnekBangla-Medium',
-                color: 'black',
-                fontWeight: '400',
-                fontSize: 17,
-              }}>
-              Vegan
-            </Text>
+            colors={["#FDFFF4", "#BBC1AD"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0.8, y: 0 }}
+            style={styles.selectItem}
+          >
+            <Text style={styles.selectItemText}>Vegan</Text>
             <Checkbox
-              // text="Blue"
               isChecked={checked3}
               onPress={() => {
                 setChecked3(!checked3);
@@ -326,71 +120,34 @@ const SignUp6 = () => {
           style={{
             width: getWidth(90),
             borderRadius: 20,
-
             height: getHeight(5),
-            borderColor: 'red',
-            // backgroundColor: 'white',
-            // borderWidth: 1,
-
-            // justifyContent: 'space-around',
-            flexDirection: 'row',
+            flexDirection: "row",
             paddingLeft: 10,
-            alignItems: 'center',
-          }}>
+            alignItems: "center",
+          }}
+        >
           <CheckboxSquare
-            // text="Blue"
             isChecked={checked4}
             onPress={() => {
               setChecked4(!checked4);
             }}
           />
           <Text
-            style={{
-              paddingLeft: 10,
-              fontFamily: 'AnekBangla-Light',
-              color: 'black',
-              fontWeight: '400',
-              fontSize: 17,
-            }}>
+            style={styles.selectItemText}
+          >
             I don’t want follow a diet.
           </Text>
         </View>
       </View>
 
       <View
-        style={{
-          alignItems: 'center',
-          borderColor: 'red',
-          height: getHeight(15),
-          // justifyContent: 'flex-end',
-          paddingTop: 42,
-          // flex:1,
-          backgroundColor: 'transparent',
-          width: getWidth(99),
-          // borderWidth:1
-        }}>
+        style={styles.buttonContianer}
+      >
         <TouchableOpacity
-          onPress={() => navigation.navigate('SignUp7')}
-          style={{
-            height: 55,
-            margin: 12,
-            borderWidth: 1,
-            padding: 14,
-            borderRadius: 20,
-            borderColor: '#1B1561',
-            backgroundColor: '#1B1561',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: getWidth(65),
-          }}>
-          <Text
-            style={{
-              fontFamily: 'AnekBangla-Medium',
-              color: 'white',
-              fontWeight: '500',
-              fontSize: 18,
-              letterSpacing: 2,
-            }}>
+          onPress={() => navigation.navigate("SignUp7")}
+          style={globalstyles.buttonStyle}
+        >
+          <Text style={globalstyles.buttonText}>
             Next
           </Text>
         </TouchableOpacity>
@@ -399,13 +156,44 @@ const SignUp6 = () => {
   );
 };
 const styles = StyleSheet.create({
-  input: {
-    height: 55,
-    margin: 8,
-    borderWidth: 1,
-    padding: 14,
-    borderRadius: 20,
-    borderColor: '#1B1561',
+  optionsContainer:{
+    paddingVertical: 10,
+    height: getHeight(50),
+    width: getWidth(97),
+    borderColor: "red",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    shadowColor: "rgba(103, 128, 159, 0.5)", // Adjust the shadow color as needed
+    shadowOffset: { width: 0, height: 5 }, // Adjust the shadow offset as needed
+    shadowOpacity: 1, // Adjust the shadow opacity as needed
+    shadowRadius: 10, // Adjust the shadow radius as needed
+    elevation: Platform.OS === "android" ? 0 : 5,
   },
+  selectItem: {
+    width: getWidth(90),
+    borderRadius: 20,
+    height: getHeight(7),
+    borderColor: "#F5F5F5",
+    shadowColor: "rgba(103, 128, 159)",
+    elevation: 32,
+    justifyContent: "space-between",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 5,
+  },
+  selectItemText: {
+    ...textStyles.lightText,
+    fontWeight: "400",
+    fontSize: RFValue(12),
+    paddingLeft: RFValue(10),
+  },
+  buttonContianer:{
+    alignItems: "center",
+    borderColor: "red",
+    height: getHeight(10),
+    justifyContent: "flex-end",
+    backgroundColor: "transparent",
+    width: getWidth(99),
+  }
 });
 export default SignUp6;

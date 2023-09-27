@@ -1,180 +1,105 @@
-import React from 'react';
-import {
-  Image,
-  Platform,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import {getWidth, getHeight} from '../functions/CommonFunctions';
-import {useNavigation} from '@react-navigation/core';
-import LinearGradient from 'react-native-linear-gradient';
-import { SvgXml } from 'react-native-svg';
-import { preformly } from '../../assets/svg';
+import { useNavigation } from "@react-navigation/core";
+import React from "react";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import LinearGradient from "react-native-linear-gradient";
+import { RFValue } from "react-native-responsive-fontsize";
+import CustomHeader from "../Components/CustomHeader";
+import { getWidth } from "../functions/CommonFunctions";
+import textStyles from "../styles/globalestyles";
 
 const WhySchedule2 = () => {
   const navigation = useNavigation();
   return (
     <LinearGradient
       style={{
-        alignItems: 'center',
+        alignItems: "center",
         paddingVertical: 30,
-        borderColor: 'red',
-        height: '100%',
-        // backgroundColor: 'white',
-        // borderWidth:10
+        borderColor: "red",
+        height: "100%",
       }}
-      colors={['#FDFFF4', '#BBC1AD']}
-      start={{x: 0, y: 0}}
-      end={{x: 0.8, y: 0}}
-      // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-      // locations={{x:0,y:0.5,z:0.6}}
-      // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
+      colors={["#FDFFF4", "#BBC1AD"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 0.8, y: 0 }}
     >
-      <SvgXml
-        width={getWidth(45)}
-        height={getHeight(5)}
-        xml={preformly}
-        style={{marginTop: Platform.OS === 'ios' ? 20 : 0}}
+      <CustomHeader
+        onPress={() => navigation.goBack()}
+        title={"CREATE PROFILE"}
+        subTitle={"WHY IT IS IMPORTANT TO HAVE A SCHEDULE?"}
       />
-      {/* <Text
-        style={{
-          fontFamily: 'Modak-Regular',
-          color: '#1B1561',
-          fontWeight: '400',
-          fontSize: 30,
-          marginTop: Platform.OS === 'ios' ? 20 : 0,
-        }}>
-        Preformly
-      </Text> */}
+
       <View
         style={{
-          flexDirection: 'row',
-          // borderWidth: 1,
-          borderColor: 'red',
           width: getWidth(90),
-          height: getHeight(5),
-          // justifyContent: 'center',
-        }}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={{
-            borderWidth: 0.5,
-            borderColor: 'grey',
-            borderRadius: 40,
-            justifyContent: 'center',
-            width: getWidth(11),
-          }}>
-          <Image
-            style={{
-              resizeMode: 'contain',
-              width: getWidth(10),
-              // borderWidth: 1,
-              borderColor: 'red',
-              height: getHeight(2),
-            }}
-            source={require('../../assets/images/back.png')}
-          />
-        </TouchableOpacity>
-        <View
-          style={{
-            // borderWidth: 1,
-            borderColor: 'green',
-            width: getWidth(70),
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <Text
-            style={{
-              fontFamily: 'AnekBangla-Medium',
-              color: 'black',
-              fontWeight: '500',
-              fontSize: 18,
-              letterSpacing: 2,
-            }}>
-            CREATE PROFILE
-          </Text>
-        </View>
-      </View>
-      <View
-        style={{
-          paddingVertical: 10,
-          height: getHeight(11),
-          width: getWidth(70),
-          borderColor: 'red',
-          //   borderWidth: 1,
-        }}>
-        <Text
-          style={{
-            fontFamily: 'AnekBangla-Medium',
-            color: 'black',
-            fontWeight: '400',
-            fontSize: 18,
-            textAlign: 'center',
-          }}>
-          WHY IT IS IMPORTANT TO HAVE A SCHEDULE?
-        </Text>
-      </View>
-      <ScrollView style={{width: getWidth(90)}}>
-        <Text
-          style={{
-            fontFamily: 'AnekBangla-Light',
-            color: 'grey',
-            fontWeight: '400',
-            fontSize: 16,
-            textAlign: 'left',
-          }}>
+          borderColor: "red",
+          marginTop: 10,
+        }}
+      >
+        <Text style={{ ...textStyles.simpleText, letterSpacing: 1 }}>
           Having an exercise schedule is beneficial because it helps you
           establish a regular routine, promotes consistency and accountability,
           improves physical and mental health, and increases the likelihood of
           achieving fitness goals.
         </Text>
-        <Text
-          style={{
-            fontFamily: 'AnekBangla-Light',
-            color: 'grey',
-            fontWeight: '400',
-            fontSize: 16,
-            textAlign: 'left',
-            paddingLeft: 10,
-            paddingTop: 20,
-          }}>
-          1. Exercise schedule promotes consistency and accountability: When you
-          have a set schedule for exercising, you are more likely to stick to it
-          and make it a habit. It provides structure and routine to your day,
-          which can help you stay on track and avoid skipping workouts.
-          Additionally, having a schedule can make you feel more accountable for
-          your fitness goals, as you have a plan to follow and a sense of
-          responsibility to stick to it.
-        </Text>
-        <Text
-          style={{
-            fontFamily: 'AnekBangla-Light',
-            color: 'grey',
-            fontWeight: '400',
-            fontSize: 16,
-            textAlign: 'left',
-            paddingLeft: 10,
-            paddingTop: 20,
-          }}>
-          2. It improves physical and mental health: Regular exercise has
-          numerous benefits for both physical and mental health. It can improve
-          cardiovascular health, increase muscle strength and endurance, reduce
-          the risk of chronic diseases, and even enhance cognitive function.
-          Exercise has also been shown to reduce symptoms of depression and
-          anxiety and improve overall mood and self-esteem. It increases the
-          likelihood of achieving fitness goals: When you have a specific
-          exercise schedule, you are more likely to achieve your fitness goals.
-          This is because you have a plan in place to reach your goals and can
-          track your progress over time. Additionally, a schedule can help you
-          stay motivated and focused on your goals, as you have a clear plan for
-          how to get there. By following a consistent exercise schedule, you can
-          increase your chances of reaching your desired level of fitness.
-        </Text>
+      </View>
+      <ScrollView
+        style={{ width: getWidth(90) }}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.parapraphRow}>
+          <Text style={{ ...textStyles.simpleText, fontWeight: "600" }}>
+            1.
+          </Text>
+          <Text style={{ ...textStyles.simpleText, letterSpacing: 1 }}>
+            Exercise schedule promotes consistency and accountability: When you
+            have a set schedule for exercising, you are more likely to stick to
+            it and make it a habit. It provides structure and routine to your
+            day, which can help you stay on track and avoid skipping workouts.
+            Additionally, having a schedule can make you feel more accountable
+            for your fitness goals, as you have a plan to follow and a sense of
+            responsibility to stick to it.
+          </Text>
+        </View>
+        <View style={styles.parapraphRow}>
+          <Text style={{ ...textStyles.simpleText, fontWeight: "600" }}>
+            2.
+          </Text>
+          <Text style={{ ...textStyles.simpleText, letterSpacing: 1 }}>
+            It improves physical and mental health: Regular exercise has
+            numerous benefits for both physical and mental health. It can
+            improve cardiovascular health, increase muscle strength and
+            endurance, reduce the risk of chronic diseases, and even enhance
+            cognitive function. Exercise has also been shown to reduce symptoms
+            of depression and anxiety and improve overall mood and self-esteem.
+          </Text>
+        </View>
+        <View style={styles.parapraphRow}>
+          <Text style={{ ...textStyles.simpleText, fontWeight: "600" }}>
+            3.
+          </Text>
+          <Text style={{ ...textStyles.simpleText, letterSpacing: 1 }}>
+            It increases the likelihood of achieving fitness goals: When you
+            have a specific exercise schedule, you are more likely to achieve
+            your fitness goals. This is because you have a plan in place to
+            reach your goals and can track your progress over time.
+            Additionally, a schedule can help you stay motivated and focused on
+            your goals, as you have a clear plan for how to get there. By
+            following a consistent exercise schedule, you can increase your
+            chances of reaching your desired level of fitness.
+          </Text>
+        </View>
       </ScrollView>
     </LinearGradient>
   );
 };
 
 export default WhySchedule2;
+
+const styles = StyleSheet.create({
+  parapraphRow: {
+    flexDirection: "row",
+    width: getWidth(90),
+    marginTop: RFValue(10),
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+  },
+});

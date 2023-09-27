@@ -16,6 +16,9 @@ import { SvgXml } from 'react-native-svg';
 import { hideEye, preformly } from '../../assets/svg';
 import KeyBoardHandle from '../Components/KeyboardHandle';
 import { getHeight, getWidth } from '../functions/CommonFunctions';
+import textStyles, { globalstyles } from '../styles/globalestyles';
+import theme from '../Constants/theme';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 const BusinessSignUp = () => {
   const navigation = useNavigation();
@@ -41,20 +44,9 @@ const BusinessSignUp = () => {
           colors={['#FDFFF4', '#BBC1AD']}
           start={{x: 0, y: 0}}
           end={{x: 0.8, y: 0}}
-          // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-          // locations={{x:0,y:0.5,z:0.6}}
-          // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
+         
         >
-          {/* <Text
-            style={{
-              fontFamily: 'Modak-Regular',
-              color: '#1B1561',
-              fontWeight: '400',
-              fontSize: 30,
-              marginTop: Platform.OS === 'ios' ? 20 : 0,
-            }}>
-            Preformly
-          </Text> */}
+        
           <SvgXml
             width={getWidth(45)}
             height={getHeight(8)}
@@ -102,7 +94,7 @@ const BusinessSignUp = () => {
               style={styles.input}
               onChangeText={text => setEmail(text)}
               value={email}
-              placeholder="Email Address"
+              placeholder="Email address"
               // keyboardType="numeric"
               placeholderTextColor="grey"
             />
@@ -110,7 +102,7 @@ const BusinessSignUp = () => {
               style={styles.input}
               onChangeText={text => setName(text)}
               value={name}
-              placeholder="Full Name"
+              placeholder="Full name"
               // keyboardType="numeric"
               placeholderTextColor="grey"
             />
@@ -118,34 +110,14 @@ const BusinessSignUp = () => {
               style={styles.input}
               onChangeText={num => setNumber(num)}
               value={number}
-              placeholder="Number of Active Client"
+              placeholder="Number of active client"
               // keyboardType="numeric"
               placeholderTextColor="grey"
             />
             <View
-              style={{
-                height: 55,
-                margin: 8,
-                borderWidth: 1,
-                // padding: 10,
-                borderRadius: 20,
-                borderColor: '#1B1561',
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: 'row',
-              }}>
+              style={globalstyles.inputContainer}>
               <TextInput
-                style={{
-                  height: 53,
-                  //   margin: 8,
-                  //   borderWidth: 1,
-                  // padding: 10,
-                  //   justifyContent:'flex-start',
-                  borderRadius: 20,
-                  width: getWidth(70),
-                  borderColor: '#1B1561',
-                  color: 'grey',
-                }}
+                style={globalstyles.textInputStyle}
                 onChangeText={text => setPassword(text)}
                 value={passowrd}
                 placeholder="Password"
@@ -165,40 +137,17 @@ const BusinessSignUp = () => {
                   />
                 ) : (
                   <SvgXml xml={hideEye} />
-                  // <Image
-                  //   source={require('../../assets/images/hide-eye.png')}
-                  //   style={{resizeMode: 'contain'}}
-                  // />
+                
                 )}
               </TouchableOpacity>
             </View>
             <View
-              style={{
-                height: 55,
-                margin: 8,
-                borderWidth: 1,
-                // padding: 10,
-                borderRadius: 20,
-                borderColor: '#1B1561',
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: 'row',
-              }}>
+               style={globalstyles.inputContainer}>
               <TextInput
-                style={{
-                  height: 53,
-                  // margin: 12,
-                  //   borderWidth: 1,
-                  // padding: 10,
-                  //   justifyContent:'flex-start',
-                  borderRadius: 20,
-                  width: getWidth(70),
-                  borderColor: '#1B1561',
-                  color: 'grey',
-                }}
+                style={globalstyles.textInputStyle}
                 onChangeText={text => setConfirmPassowrd(text)}
                 value={confirmPassword}
-                placeholder="Confirm Password"
+                placeholder="Confirm password"
                 secureTextEntry={show1}
                 // keyboardType="numeric"
                 placeholderTextColor="grey"
@@ -215,35 +164,17 @@ const BusinessSignUp = () => {
                   />
                 ) : (
                   <SvgXml xml={hideEye} />
-                  // <Image
-                  //   source={require('../../assets/images/hide-eye.png')}
-                  //   style={{resizeMode: 'contain'}}
-                  // />
+                  
                 )}
               </TouchableOpacity>
             </View>
             <View style={{paddingTop: 50}}>
               <TouchableOpacity
                 onPress={() => navigation.navigate('LogIn2')}
-                style={{
-                  height: 55,
-                  margin: 12,
-                  borderWidth: 1,
-                  padding: 14,
-                  borderRadius: 20,
-                  borderColor: '#1B1561',
-                  backgroundColor: '#1B1561',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
+                style={globalstyles.buttonStyle}>
                 <Text
-                  style={{
-                    fontFamily: 'AnekBangla-Medium',
-                    color: 'white',
-                    fontWeight: '500',
-                    fontSize: 18,
-                  }}>
-                  C r e a t e P r o f i l e
+                  style={{...textStyles.lightText, color:theme.whiteColor}}>
+                  Create profile
                 </Text>
               </TouchableOpacity>
             </View>
@@ -255,10 +186,14 @@ const BusinessSignUp = () => {
 };
 const styles = StyleSheet.create({
   input: {
+    ...globalstyles.textInputStyle,
     height: 55,
     margin: 8,
     borderWidth: 1,
     padding: 14,
+    paddingLeft:RFValue(26),
+    width:getWidth(85),
+    alignSelf:"center",
     borderRadius: 20,
     borderColor: '#1B1561',
     color: 'grey',

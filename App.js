@@ -2,6 +2,10 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React, { useEffect } from 'react'
 import SplashScreen from 'react-native-splash-screen'
+import LogIn1 from './src/Logins/LogIn1'
+import LogIn3 from './src/Logins/LogIn3'
+import LogIn2 from './src/Logins/LoginIn2'
+import TrainingLogIn from './src/Logins/TrainingLogIn'
 import ChangeGoal from './src/InfoChaging/ChangeGoal'
 import ChangePreference2 from './src/InfoChaging/ChangePreference2'
 import UpdateWeight from './src/InfoChaging/UpdateWeight'
@@ -9,10 +13,7 @@ import WeightProgress from './src/InfoChaging/WeightProgress'
 import ChangeGoalTraining from './src/InfoChangeTraining/ChangeGoalTraining'
 import ChangePreferenceTraining from './src/InfoChangeTraining/ChangePreferenceTraining'
 import UpdateWeightTraining from './src/InfoChangeTraining/UpdateWeightTraining'
-import LogIn1 from './src/Logins/LogIn1'
-import LogIn3 from './src/Logins/LogIn3'
-import LogIn2 from './src/Logins/LoginIn2'
-import TrainingLogIn from './src/Logins/TrainingLogIn'
+
 import SignUp1 from './src/Signups/SignUp1'
 import SignUp10 from './src/Signups/SignUp10'
 import SignUp11 from './src/Signups/SignUp11'
@@ -98,7 +99,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="LandingPage" screenOptions={{headerShown:false}}>
+      <Stack.Navigator initialRouteName={"SignUp18"} screenOptions={{headerShown:false}}>
         <Stack.Screen
           name="LandingPage"
           component={LandingPage}

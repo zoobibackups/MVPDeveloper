@@ -7,15 +7,13 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import LinearGradient from "react-native-linear-gradient";
+import { RFValue } from "react-native-responsive-fontsize";
 import { SvgXml } from "react-native-svg";
 import { Email, hideEye, lock, preformly } from "../../assets/svg";
 import KeyBoardHandle from "../Components/KeyboardHandle";
+import theme from "../Constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
-import { RFValue } from "react-native-responsive-fontsize";
-import theme from "../Constants/theme";
-import fonts from "../Constants/fonts";
 
 const LogIn1 = () => {
   const [email, setEmail] = useState("");
@@ -24,25 +22,13 @@ const LogIn1 = () => {
   const [show1, setShow1] = useState(true);
   return (
     <KeyBoardHandle>
-      <LinearGradient
-        style={{
-          alignItems: "center",
-          paddingVertical: 30,
-          borderColor: "red",
-          height: "100%",
-          // backgroundColor: 'white',
-          // borderWidth:10
-        }}
-        colors={["#FDFFF4", "#BBC1AD"]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 0.8, y: 0 }}
-      >
+      <View>
         <View
           style={{
             alignItems: "center",
-            //   borderWidth: 1,
-            borderColor: "red",
+            alignSelf: "center",
             width: getWidth(90),
+            marginTop: getHeight(4),
             height: getHeight(15),
           }}
         >
@@ -75,14 +61,9 @@ const LogIn1 = () => {
             paddingTop: 90,
           }}
         >
-          <View
-            style={globalstyles.inputContainer}
-          >
+          <View style={globalstyles.inputContainer}>
             <SvgXml xml={Email} />
-            {/* <Image
-              source={require('../../assets/images/mail.png')}
-              style={{resizeMode: 'contain'}}
-            /> */}
+
             <TextInput
               style={globalstyles.textInputStyle}
               onChangeText={(text) => setEmail(text)}
@@ -94,9 +75,7 @@ const LogIn1 = () => {
               // keyboardType="numeric"
             />
           </View>
-          <View
-            style={globalstyles.inputContainer}
-          >
+          <View style={globalstyles.inputContainer}>
             <SvgXml xml={lock} />
             <TextInput
               style={globalstyles.textInputStyle}
@@ -143,16 +122,14 @@ const LogIn1 = () => {
               justifyContent: "center",
             }}
           >
-            <TouchableOpacity
-              style={globalstyles.buttonStyle}
-            >
+            <TouchableOpacity style={globalstyles.buttonStyle}>
               <Text
                 style={{
-                    ...textStyles.lightText,
-                    color:theme.whiteColor
+                  ...textStyles.lightText,
+                  color: theme.whiteColor,
                 }}
               >
-               LOG IN
+                LOG IN
               </Text>
             </TouchableOpacity>
           </View>
@@ -167,17 +144,19 @@ const LogIn1 = () => {
           }}
         >
           <Text
-            style={{...textStyles.lightText, color:theme.blueColor, fontSize:RFValue(12)}}
+            style={{
+              ...textStyles.lightText,
+              color: theme.blueColor,
+              fontSize: RFValue(12),
+            }}
           >
             TERM AND CONDITIONS
           </Text>
         </View>
-      </LinearGradient>
+      </View>
     </KeyBoardHandle>
   );
 };
-const styles = StyleSheet.create({
- 
-});
+const styles = StyleSheet.create({});
 
 export default LogIn1;

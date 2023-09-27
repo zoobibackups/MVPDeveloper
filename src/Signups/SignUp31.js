@@ -1,341 +1,117 @@
-import React, { useState } from 'react';
-
+import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/core";
 import {
-  Platform,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  View
-} from 'react-native';
-import KeyBoardHandle from '../Components/KeyboardHandle';
-import { getHeight, getWidth } from '../functions/CommonFunctions';
-
-import { useNavigation } from '@react-navigation/core';
-import LinearGradient from 'react-native-linear-gradient';
-import { SvgXml } from 'react-native-svg';
-import { backward, preformly } from '../../assets/svg';
+  View,
+} from "react-native";
+import LinearGradient from "react-native-linear-gradient";
+import CheckboxSquare from "../Components/CheckBoxSquare";
+import CustomHeader from "../Components/CustomHeader";
+import KeyBoardHandle from "../Components/KeyboardHandle";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
+import textStyles, { globalstyles } from "../styles/globalestyles";
+import theme from "../Constants/theme";
 
 const SignUp31 = () => {
   const navigation = useNavigation();
-  var radio_props = [
-    {label: 'male', value: 0},
-    {label: 'female', value: 1},
-    {label: 'other', value: 2},
-  ];
 
-  const [ingredients, setIngredients] = useState('');
+  const [ingredients, setIngredients] = useState("");
   const [checked, setChecked] = useState(false);
-  const [age, setAge] = useState('');
-  const [meal, setMeal] = useState('');
-  //   const [selectedIndex, setIndex] = useState(0);
-  //   const [state, setState] = useState(false);
-  //   //   const [passowrd, setPassword] = useState('');
-  //   //   const [show,setShow]=useState(true)
-  //   //    const [show1,setShow1]=useState(true)
-  //   const [confirmPassword, setConfirmPassowrd] = useState('');
+  const [age, setAge] = useState("");
+  const [meal, setMeal] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <>
       <KeyBoardHandle>
         <LinearGradient
           style={{
-            alignItems: 'center',
+            alignItems: "center",
             paddingVertical: 30,
-            borderColor: 'red',
-            height: '100%',
-            // backgroundColor: 'white',
-            // borderWidth:10
+            height: "100%",
           }}
-          colors={['#FDFFF4', '#BBC1AD']}
-          start={{x: 0, y: 0}}
-          end={{x: 0.8, y: 0}}
-          // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-          // locations={{x:0,y:0.5,z:0.6}}
-          // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
+          colors={["#FDFFF4", "#BBC1AD"]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 0.8, y: 0 }}
         >
-          <SvgXml
-            width={getWidth(45)}
-            height={getHeight(5)}
-            xml={preformly}
-            style={{marginTop: Platform.OS === 'ios' ? 20 : 0}}
+          <CustomHeader
+            onPress={() => navigation.goBack()}
+            title={"CREATE PROFILE"}
+            subTitle={"GREAT JOB, YOU ARE ALL DONE!"}
+            subTitleStyle={{
+              color: theme.blueColor,
+              fontWeight: "800",
+            }}
           />
-          {/* <Text
-            style={{
-              fontFamily: 'Modak-Regular',
-              color: '#1B1561',
-              fontWeight: '400',
-              fontSize: 30,
-              marginTop: Platform.OS === 'ios' ? 20 : 0,
-            }}>
-            Preformly
-          </Text> */}
-          <View
-            style={{
-              flexDirection: 'row',
-              // borderWidth: 1,
-              borderColor: 'red',
-              width: getWidth(90),
-              height: getHeight(5),
-              // justifyContent: 'center',
-            }}>
-            <TouchableOpacity
-              onPress={() => navigation.goBack()}
-              style={{
-                borderWidth: 0.5,
-                borderColor: 'grey',
-                borderRadius: 40,
-                justifyContent: 'center',
-                width: getWidth(11),
-              }}>
-              <SvgXml
-                xml={backward}
-                width={getWidth(10)}
-                height={getHeight(2)}
-              />
-              {/* <Image
-                style={{
-                  resizeMode: 'contain',
-                  width: getWidth(10),
-                  // borderWidth: 1,
-                  borderColor: 'red',
-                  height: getHeight(2),
-                }}
-                source={require('../../assets/images/back.png')}
-              /> */}
-            </TouchableOpacity>
-            <View
-              style={{
-                // borderWidth: 1,
-                borderColor: 'green',
-                width: getWidth(70),
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'black',
-                  fontWeight: '500',
-                  fontSize: 18,
-                  letterSpacing: 2,
-                }}>
-                CREATE PROFILE
-              </Text>
-            </View>
-          </View>
-          <View
-            style={{
-              paddingVertical: 10,
-              height: getHeight(6),
-              borderColor: 'red',
-              // borderWidth: 1,
-            }}>
-            <Text
-              style={{
-                fontFamily: 'AnekBangla-Medium',
-                color: '#1B1561',
-                fontWeight: '700',
-                fontSize: 18,
-              }}>
-              GREAT JOB, YOU ARE ALL DONE!
-            </Text>
-          </View>
-          <View
-            style={{
-              paddingVertical: 10,
-              height: getHeight(6),
-              borderColor: 'red',
-              // borderWidth: 1,
-            }}>
-            <Text
-              style={{
-                fontFamily: 'AnekBangla-Medium',
-                color: '#000000',
-                fontWeight: '400',
-                fontSize: 18,
-                letterSpacing: 2,
-              }}>
-              THIS IS YOUR PROFILE
-            </Text>
-          </View>
 
           <View
             style={{
               paddingVertical: 10,
-              height: getHeight(65),
-              width: getWidth(90),
-              borderColor: 'red',
-              //   borderWidth: 1,
-            }}>
-            <Text
-              style={{
-                paddingLeft: 10,
-                fontFamily: 'AnekBangla-Medium',
-                color: 'black',
-                fontWeight: '400',
-                letterSpacing: 2,
-              }}>
-              Goal/ Mission:
-            </Text>
+              height: getHeight(6),
+            }}
+          >
+            <Text style={textStyles.lightText}>THIS IS YOUR PROFILE</Text>
+          </View>
+
+          <View style={globalstyles.innerContainer}>
+            <View style={globalstyles.inputVerticalContainer}>
+              <Text style={globalstyles.inputLabel}>Goal/ Mission:</Text>
+              <TextInput
+                style={globalstyles.textInputWithOutIcon}
+                onChangeText={(text) => setIngredients(text)}
+                value={ingredients}
+                placeholder="Goal/ Mission:"
+                placeholderTextColor="black"
+              />
+            </View>
+            <View style={globalstyles.inputVerticalContainer}>
+            <Text style={globalstyles.inputLabel}>Equipment:</Text>
             <TextInput
-              style={styles.input}
-              onChangeText={text => setIngredients(text)}
-              value={ingredients}
-              placeholder="Goal/ Mission:"
-              placeholderTextColor="black"
-              // keyboardType="numeric"
-            />
-            <Text
-              style={{
-                paddingLeft: 10,
-                fontFamily: 'AnekBangla-Medium',
-                color: 'black',
-                fontWeight: '400',
-                letterSpacing: 2,
-              }}>
-              Equipment:
-            </Text>
-            <TextInput
-              style={styles.input}
-              onChangeText={text => setMeal(text)}
+              style={globalstyles.textInputWithOutIcon}
+              onChangeText={(text) => setMeal(text)}
               value={meal}
               placeholder="Benchpress, Dumbells"
               placeholderTextColor="black"
-              // keyboardType="numeric"
             />
-            <Text
-              style={{
-                paddingLeft: 10,
-                fontFamily: 'AnekBangla-Medium',
-                color: 'black',
-                fontWeight: '400',
-                letterSpacing: 2,
-              }}>
-              Location:
-            </Text>
+            </View>
+            <View style={globalstyles.inputVerticalContainer}>
+            <Text style={globalstyles.inputLabel}>Location:</Text>
             <TextInput
-              style={styles.input}
-              onChangeText={text => setMeal(text)}
+              style={globalstyles.textInputWithOutIcon}
+              onChangeText={(text) => setMeal(text)}
               value={meal}
               placeholder="Gym"
               placeholderTextColor="black"
-              // keyboardType="numeric"
             />
-            <Text
-              style={{
-                paddingLeft: 10,
-                fontFamily: 'AnekBangla-Medium',
-                color: 'black',
-                fontWeight: '400',
-                letterSpacing: 2,
-              }}>
-              Days:
-            </Text>
+            </View>
+            <View style={globalstyles.inputVerticalContainer}>
+            <Text style={globalstyles.inputLabel}>Days:</Text>
             <TextInput
-              style={styles.input}
-              onChangeText={text => setMeal(text)}
+              style={globalstyles.textInputWithOutIcon}
+              onChangeText={(text) => setMeal(text)}
               value={meal}
               placeholder="Monday, Wednesday, Saturday"
               placeholderTextColor="black"
-              // keyboardType="numeric"
             />
+            </View>
 
-            {/* <View
-              style={{
-                paddingTop: 5,
-                borderColor: 'red',
-                // borderWidth: 1,
-                width: getWidth(90),
-                height:getHeight(10)
-              }}>
-              <Text
-                style={{
-                  fontSize: 13,
-                  fontWeight: '400',
-                  fontFamily: 'AnekBangla-Light',
-                  textAlign: 'left',
-                  color: 'black',
-                }}>
-                OBS: When writing foods to avoid (due to allergies or such),
-                make sure to put a comma after every one. Like the example
-                above.
-              </Text>
-            </View> */}
-            {/* <View
-              style={{
-                width: getWidth(90),
-                borderRadius: 20,
-
-                height: getHeight(10),
-                borderColor: 'red',
-                // backgroundColor: 'white',
-                // borderWidth: 1,
-                // justifyContent: 'space-around',
-                flexDirection: 'row',
-                alignItems: 'center',
-              }}>
-              <PureRoundedCheckbox
-                // text=""
-                isChecked={checked}
-                // checkedColor={checkedColor}
-                // uncheckedColor={uncheckedColor}
-                checkedColor="#1B1561"
-                // outerStyle={{borderColor: 'white'}}
-                onPress={() => setChecked(!checked)}>
-                <Image
-                  style={{
-                    resizeMode: 'contain',
-                    width: getWidth(5),
-                    // borderWidth: 1,
-                    borderColor: 'red',
-                    height: getHeight(2),
-                  }}
-                  source={require('../../assets/images/tick.png')}
-                />
-              </PureRoundedCheckbox>
-              <Text
-                style={{
-                  paddingLeft: 10,
-                  fontFamily: 'AnekBangla-Light',
-                  color: 'black',
-                  fontWeight: '400',
-                  fontSize: 17,
-                }}>
-                I don’t have anything to avoid
-              </Text>
-            </View> */}
+            
+           
+           
 
             <View
-              style={{
-                alignItems: 'center',
-                borderColor: 'red',
-                height: getHeight(16),
-                justifyContent: 'flex-end',
-                // borderWidth: 1,
-              }}>
+              style={globalstyles.buttonContianer}
+            >
               <TouchableOpacity
-                onPress={() => navigation.navigate('TrainingHome1')}
-                style={{
-                  height: 55,
-                  margin: 12,
-                  //   borderWidth: 1,
-                  padding: 14,
-                  borderRadius: 20,
-                  borderColor: '#1B1561',
-                  backgroundColor: '#1B1561',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: getWidth(65),
-                }}>
+                onPress={() => navigation.navigate("TrainingHome1")}
+                style={globalstyles.buttonStyle}
+              >
                 <Text
-                  style={{
-                    fontFamily: 'AnekBangla-Medium',
-                    color: 'white',
-                    fontWeight: '500',
-                    fontSize: 18,
-                  }}>
-                  N e x t
+                  style={globalstyles.buttonText}
+                >
+                  Next
                 </Text>
               </TouchableOpacity>
             </View>
@@ -348,24 +124,24 @@ const SignUp31 = () => {
 const styles = StyleSheet.create({
   centeredView: {
     // flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    justifyContent: "flex-end",
+    alignItems: "center",
     // marginTop: 110,
     // borderWidth: 3,
-    borderColor: 'green',
+    borderColor: "green",
     height: getHeight(91),
   },
   modalView: {
     // margin: 20,
-    backgroundColor: 'white',
-    borderColor: 'blue',
+    backgroundColor: "white",
+    borderColor: "blue",
     // borderWidth: 1,
     // borderRadius: 20,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     // padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
+    alignItems: "center",
+    shadowColor: "#000",
     // justifyContent: 'flex-end',
     height: getHeight(53),
     width: getWidth(100),
@@ -387,20 +163,20 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   buttonOpen: {
-    backgroundColor: '#F194FF',
+    backgroundColor: "#F194FF",
   },
   buttonClose: {
-    backgroundColor: '#2196F3',
+    backgroundColor: "#2196F3",
   },
   textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
   },
   modalText: {
     marginBottom: 15,
-    textAlign: 'center',
-    fontWeight: '900',
+    textAlign: "center",
+    fontWeight: "900",
   },
   input: {
     height: 55,
@@ -408,26 +184,26 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 14,
     borderRadius: 20,
-    borderColor: '#1B1561',
-    color: 'grey',
+    borderColor: "#1B1561",
+    color: "grey",
   },
   modal: {
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
 
     marginLeft: 0,
     bottom: 0,
     top: 10,
   },
   topBar: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 30,
     borderRadius: 65,
     // borderWidth: 2,
-    borderColor: '#D3D3D3',
+    borderColor: "#D3D3D3",
 
     width: getWidth(15),
     height: getHeight(0.7),
-    backgroundColor: '#D3D3D3',
+    backgroundColor: "#D3D3D3",
   },
   //   modalView: {
   //     borderWidth: 1,
