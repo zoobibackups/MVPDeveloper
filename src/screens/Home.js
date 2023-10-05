@@ -1,22 +1,20 @@
+import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import {
-  View,
-  Text,
   Image,
-  ImageBackground,
-  TouchableOpacity,
-  StyleSheet,
   Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
-import { getHeight, getWidth } from "../functions/CommonFunctions";
-import { useNavigation } from "@react-navigation/core";
+import { RFValue } from "react-native-responsive-fontsize";
+import { moderateScale } from "react-native-size-matters";
 import { SvgXml } from "react-native-svg";
 import { preformly } from "../../assets/svg";
-import { RFValue } from "react-native-responsive-fontsize";
-import fonts from "../Constants/fonts";
-import textStyles from "../styles/globalestyles";
-import { moderateScale } from "react-native-size-matters";
 import theme from "../Constants/theme";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
+import textStyles from "../styles/globalestyles";
 
 const Home = () => {
   const navigation = useNavigation();
@@ -107,7 +105,12 @@ const Home = () => {
         }}
       >
         <Text
-          style={{...textStyles.lightText,fontWeight:"400", fontSize:RFValue(10), color:theme.blueColor}}
+          style={{
+            ...textStyles.lightText,
+            fontWeight: "400",
+            fontSize: RFValue(10),
+            color: theme.blueColor,
+          }}
         >
           TERMS AND CONDIDTIONS
         </Text>

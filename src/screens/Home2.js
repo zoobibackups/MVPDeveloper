@@ -1,390 +1,124 @@
-import React, {useState} from 'react';
+import { useNavigation } from "@react-navigation/core";
+import React, { useState } from "react";
 import {
-  View,
-  Text,
   Image,
-  ImageBackground,
-  TouchableOpacity,
+  Modal,
   StyleSheet,
+  Text,
   TextInput,
-  Platform,
-} from 'react-native';
-import {getHeight, getWidth} from '../functions/CommonFunctions';
-import {useNavigation} from '@react-navigation/core';
-import {TouchableWithoutFeedback} from 'react-native';
-import {Modal} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-import {SvgXml} from 'react-native-svg';
-import {preformly, tickGroup} from '../../assets/svg';
-
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
+import LinearGradient from "react-native-linear-gradient";
+import { RFValue } from "react-native-responsive-fontsize";
+import { moderateScale } from "react-native-size-matters";
+import { SvgXml } from "react-native-svg";
+import { tickGroup } from "../../assets/svg";
+import MainCustomHeader from "../Components/MainCustomHeader";
+import fonts from "../Constants/fonts";
+import theme from "../Constants/theme";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
+import { globalstyles } from "../styles/globalestyles";
 const Home2 = () => {
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const [focused, setfocused] = useState(false);
   return (
     <>
-      <View
-        style={{
-          alignItems: 'center',
-          //   paddingVertical: 10,
-          // paddingVertical: Platform.OS==='ios' ?55:14,
-          borderColor: 'green',
-          //   justifyContent:'center',
-          // paddingLeft:5,
-          //   borderWidth: 4,
-          height: getHeight(85),
-        }}>
+      <View style={styles.mainInput}>
         <Image
-          source={require('../../assets/images/fruitBG2.png')}
+          source={require("../../assets/images/fruitBG2.png")}
           style={styles.backgroundImage}
         />
-        <View
-          style={{
-            alignItems: 'center',
-            borderColor: 'red',
-            // borderWidth: 1,a
-            width: getWidth(99),
-            height: getHeight(37),
-            paddingVertical: Platform.OS === 'ios' ? 20 : 6,
-            // justifyContent:'center'
-            // paddingVertical: 5,
-          }}>
-          <SvgXml
-            width={getWidth(45)}
-            height={getHeight(5)}
-            xml={preformly}
-            style={{marginTop: Platform.OS === 'ios' ? 20 : 0}}
-          />
-          {/* <Text
-            style={{
-              fontFamily: 'Modak-Regular',
-              color: '#1B1561',
-              fontWeight: '400',
-              fontSize: 30,
-              marginTop: Platform.OS === 'ios' ? 20 : 0,
-            }}>
-            Preformly
-          </Text> */}
-          <Text
-            style={{
-              fontFamily: 'AnekBangla-SemiBold',
-              color: 'black',
-              fontWeight: '500',
-              fontSize: 18,
-              letterSpacing: 2,
-            }}>
-            Diet and exercise schedules
-          </Text>
-          <View
-            style={{
-              alignItems: 'center',
-              borderColor: 'red',
-              // borderWidth: 1,
-              width: getWidth(75),
-              height: getHeight(13),
-              // justifyContent:'center'
-            }}>
-            <Text
-              style={{
-                fontFamily: 'AnekBangla-Regular',
-                color: 'black',
-                fontWeight: '300',
-                fontSize: 14,
-                textAlign: 'center',
-                paddingVertical: 10,
-              }}>
-              Get a individual and customized diet and training scheduels based
-              on your unique profile in a matter of seconds.
-            </Text>
-          </View>
-        </View>
-        {/* <View
-          style={{
-              borderWidth: 1,
-            borderColor: 'red',
-            height: getHeight(30),
-            width: '90%',
-            marginTop: 70,
-            justifyContent: 'space-evenly',
-            alignItems: 'center',
-          }}> */}
-        <View
-          style={{
-            // borderWidth: 1,
-            borderColor: 'black',
-            // height: getHeight(40),
-            width: getWidth(90),
-            // marginTop: 90,
-            // justifyContent: "center",
-            alignItems: 'center',
-            justifyContent: 'center',
-            paddingTop: 20,
-            paddingRight: 27,
-            height: getHeight(37),
-          }}>
-          <View
-            style={{
-              borderWidth: 1,
-              borderRadius: 30,
-              width: getWidth(76),
-              height: getHeight(7),
-              borderColor: '#1B1561',
-              //   borderRadius: 20,
-              // backgroundColor: '#1B1561',
-              justifyContent: 'space-between',
-              paddingHorizontal: 13,
-              flexDirection: 'row',
-              //   paddingTop: 10,
-              //   alignItems: 'center',
-              // marginTop:60
-            }}>
-            <TextInput
-              // onPressIn={()=>setfocused(true)}
-              // onPressOut={()}
-              style={{
-                height: getHeight(7),
-                // margin: 12,
-                //   borderWidth: 1,
-                // padding: 10,
-                //   justifyContent:'flex-start',
-                borderRadius: 30,
-                width: getWidth(45),
-                borderColor: '#1B1561',
-                color: 'grey',
+        <MainCustomHeader
+          title={"Diet and exercise schedules"}
+          titleStyle={styles.headerTitle}
+          subTitle={
+            "Get a individual and customized diet and training scheduels based on your unique profile in a matter of seconds."
+          }
+          subTitleStyle={styles.headerSubTitle}
+        />
 
-                paddingLeft: 8,
-              }}
+        <View style={styles.centerViewheading}>
+          <View style={styles.textInputView}>
+            <TextInput
+              style={styles.textinput}
               onChangeText={() => setfocused(true)}
               placeholderTextColor="grey"
-              //   value={password}
               placeholder="Type Prompt..."
-              //   secureTextEntry={show1}
-              // keyboardType="numeric"
             />
-            <View
-              style={{
-                alignItems: 'center',
-                borderColor: 'red',
-                // borderWidth:1,
-                height: getHeight(8),
-                width: getWidth(25),
-                borderRadius: 30,
-                // justifyContent: 'center',
-                // marginRight:13
-              }}>
+            <View style={styles.buttonView}>
               <TouchableOpacity
                 onPress={() => {
-                  setfocused(false), navigation.navigate('Home4');
+                  setfocused(false), setModalVisible(true);
                 }}
                 style={
                   focused ? styles.generateButton : styles.generateButtonDull
-                }>
+                }
+              >
                 <Text
-                  style={{
-                    fontFamily: 'AnekBangla-Medium',
-                    color: 'white',
-                    fontWeight: '400',
-                    fontSize: 14,
-                    letterSpacing: 2,
-                  }}>
+                  style={{ ...globalstyles.buttonText, fontSize: RFValue(12) }}
+                >
                   Generate
                 </Text>
               </TouchableOpacity>
             </View>
           </View>
-          <View
-            style={{
-              //   borderWidth: 1,
-              borderRadius: 20,
-              width: getWidth(70),
-              height: getHeight(11),
-              // backgroundColor: '#1B1561',
-              justifyContent: 'center',
-              paddingTop: 10,
-              alignItems: 'center',
-              // marginTop:60
-            }}>
-            <Text
-              style={{
-                fontFamily: 'AnekBangla-Regular',
-                color: 'black',
-                fontWeight: '400',
-                fontSize: 13,
-                textAlign: 'center',
-                //   paddingVertical:15
-              }}>
+          <View style={styles.textView}>
+            <Text style={styles.textparagraph}>
               Would you like to get a customized meal plan for the entire week?
               Just click the button below.
             </Text>
           </View>
-          <View
-            style={{
-              // borderWidth: 1,
-              borderRadius: 20,
-              width: getWidth(63),
-              height: getHeight(15),
-              // backgroundColor: '#1B1561',
-              //   justifyContent: 'center',
-              paddingTop: 10,
-              paddingLeft: 10,
-              alignItems: 'center',
-              // marginTop:60
-            }}>
+          <View style={globalstyles.buttonContianer}>
             <TouchableOpacity
               onPress={() => setModalVisible(true)}
-              style={{
-                borderWidth: 1,
-                borderRadius: 10,
-                borderColor: '#1B1561',
-                width: getWidth(45),
-                height: getHeight(6),
-                backgroundColor: '#1B1561',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+              style={styles.button}
+            >
               <Text
-                style={{
-                  color: 'white',
-                  fontSize: 14,
-                  fontFamily: 'AnekBangla-Medium',
-                  fontWeight: '400',
-                  letterSpacing: 2,
-                }}>
+                style={{ ...globalstyles.buttonText, fontSize: RFValue(12) }}
+              >
                 Create schedule
               </Text>
             </TouchableOpacity>
-            <Text
-              style={{
-                fontFamily: 'AnekBangla-Regular',
-                color: 'black',
-                fontWeight: '400',
-                fontSize: 13,
-                textDecorationLine: 'underline',
-                textAlign: 'center',
-                paddingVertical: 25,
-              }}>
-              How it works
-            </Text>
+            <Text style={styles.howItWorkText}>How it works</Text>
           </View>
         </View>
-
-        {/* </View> */}
       </View>
-      <View
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          paddingVertical: 2,
-          // borderWidth: 1,
-          borderColor: 'red',
-          height: getHeight(7),
-        }}>
-        <Text
-          style={{
-            color: '#1B1561',
-            fontSize: 14,
-            fontFamily: 'AnekBangla-Light',
-            fontWeight: '400',
-            letterSpacing: 2,
-          }}>
-          TERMS AND CONDITIONS
-        </Text>
+      <View>
+        <Text style={styles.termAndCOnditionText}>TERMS AND CONDITIONS</Text>
         <Modal
           animationType="slide"
+          style={{ justifyContent: "flex-end" }}
           transparent={true}
           visible={modalVisible}
-          // onRequestClose={() => {
-          //   Alert.alert('Modal has been closed.');
-          //   setModalVisible(!modalVisible);
-          // }}
         >
           <TouchableWithoutFeedback
-            onPress={() => setModalVisible(!modalVisible)}>
+            onPress={() => setModalVisible(!modalVisible)}
+          >
             <View style={styles.centeredView}>
               <LinearGradient
-                style={{
-                  // margin: 20,
-                  backgroundColor: 'white',
-                  borderColor: 'blue',
-                  // borderWidth: 1,
-                  // borderRadius: 20,
-                  borderTopRightRadius: 20,
-                  borderTopLeftRadius: 20,
-                  // padding: 35,
-                  alignItems: 'center',
-                  shadowColor: '#000',
-                  // justifyContent: 'flex-end',
-                  height: getHeight(45),
-                  width: getWidth(100),
-                  // marginLeft: 0,
-                  // bottom: 0,
-                  // top: 0,
-                }}
-                colors={['#FDFFF4', '#BBC1AD']}
-                start={{x: 0, y: 0}}
-                end={{x: 0.8, y: 0}}
-                // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-                // locations={{x:0,y:0.5,z:0.6}}
-                // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
+                style={styles.lineargradientModal}
+                colors={["#FDFFF4", "#BBC1AD"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0.8, y: 0 }}
               >
-                <View style={{borderColor: 'red', paddingTop: 5}}>
-                  <Text style={styles.topBar} />
+                <View style={{ paddingTop: 5 }}>
+                  <View style={styles.topBar} />
                 </View>
-                <View
-                  style={{
-                    borderColor: 'grey',
-                    paddingTop: 13,
-                    // borderWidth: 1,
-                    width: getWidth(81),
-                    height: getHeight(42),
-                    justifyContent: 'space-between',
-                    // paddingHorizontal:8,
-
-                    // borderBottomWidth: 1,
-                    // flexDirection: 'row',
-                    alignItems: 'center',
-                  }}>
+                <View style={styles.checkSvgView}>
                   <SvgXml width={getWidth(35)} xml={tickGroup} />
-                  {/* <Image
-                    source={require('../../assets/images/tickGroup.png')}
-                    style={{resizeMode: 'contain', width: getWidth(35)}}
-                  /> */}
-                  <Text
-                    style={{
-                      fontFamily: 'AnekBangla-Regular',
-                      color: 'black',
-                      fontWeight: '400',
-                      fontSize: 18,
-                      textAlign: 'center',
-                      // paddingVertical: 15,
-                    }}>
+
+                  <Text style={styles.modalText}>
                     Great! We have successfully created a customized meal plan
                     to fit your needs.
                   </Text>
                   <TouchableOpacity
-                    onPress={() => setModalVisible(false)}
-                    style={{
-                      height: 55,
-                      margin: 12,
-                      //   borderWidth: 1,
-                      padding: 14,
-                      borderRadius: 15,
-                      borderColor: '#1B1561',
-                      backgroundColor: '#1B1561',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      width: getWidth(45),
-                    }}>
-                    <Text
-                      style={{
-                        fontFamily: 'AnekBangla-Medium',
-                        color: 'white',
-                        fontWeight: '400',
-                        fontSize: 20,
-                        letterSpacing: 2,
-                      }}>
-                      Check it out
-                    </Text>
+                    onPress={() => {setModalVisible(false), navigation.navigate("Home4")}}
+                    style={styles.button}
+                  >
+                    <Text style={globalstyles.buttonText}>Check it out</Text>
                   </TouchableOpacity>
                 </View>
               </LinearGradient>
@@ -397,83 +131,186 @@ const Home2 = () => {
 };
 
 const styles = StyleSheet.create({
+  mainInput: {
+    alignItems: "center",
+    borderColor: "green",
+    height: getHeight(85),
+  },
   backgroundImage: {
     flex: 1,
-    resizeMode: 'cover',
-    position: 'absolute',
-    width: '170%',
+    resizeMode: "cover",
+    position: "absolute",
+    width: "170%",
     marginTop: 0,
     height: getHeight(110),
   },
+  headerTitle: {
+    fontFamily: fonts.AnekBanglaSemiBold,
+    color: "black",
+    fontWeight: "500",
+    fontSize: 18,
+    letterSpacing: 2,
+    includeFontPadding: false,
+    textAlign: "center",
+  },
+  headerSubTitle: {
+    fontFamily: fonts.AnekBanglaRegular,
+    color: "black",
+    fontWeight: "300",
+    fontSize: 14,
+    paddingHorizontal: getWidth(8),
+    textAlign: "center",
+    paddingVertical: 10,
+    includeFontPadding: false,
+  },
+  centerViewheading: {
+    width: getWidth(90),
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: 20,
+    paddingRight: 27,
+    height: getHeight(37),
+  },
+  textInputView: {
+    borderWidth: 1,
+    borderRadius: 30,
+    width: getWidth(76),
+    height: getHeight(6),
+    borderColor: theme.blueColor,
+    justifyContent: "space-between",
+    paddingHorizontal: 13,
+    flexDirection: "row",
+  },
+  textinput: {
+    height: getHeight(6),
+    fontFamily: fonts.AnekBanglaMedium,
+    borderRadius: 30,
+    width: getWidth(45),
+    borderColor: "#1B1561",
+    color: "grey",
+    paddingLeft: 8,
+  },
+  buttonView: {
+    alignItems: "center",
+    borderColor: "red",
+    height: getHeight(6),
+    width: getWidth(25),
+    borderRadius: 30,
+  },
+  textView: {
+    borderRadius: 20,
+    width: getWidth(70),
+    height: getHeight(11),
+    justifyContent: "center",
+    paddingTop: 10,
+    alignItems: "center",
+  },
+  textparagraph: {
+    fontFamily: fonts.AnekBanglaRegular,
+    color: "grey",
+    fontWeight: "400",
+    fontSize: 12,
+    textAlign: "center",
+    letterSpacing: 1,
+  },
+  button: {
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: "#1B1561",
+    width: getWidth(45),
+    height: getHeight(6),
+    backgroundColor: "#1B1561",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  howItWorkText: {
+    fontFamily: fonts.AnekBanglaRegular,
+    color: "black",
+    fontWeight: "400",
+    fontSize: 13,
+    textDecorationLine: "underline",
+    textAlign: "center",
+    paddingVertical: 25,
+  },
+  termAndCOnditionText: {
+    color: theme.blueColor,
+    fontSize: 14,
+    fontFamily: fonts.AnekBanglaRegular,
+    fontWeight: "400",
+    letterSpacing: 2,
+    textAlign: "center",
+    includeFontPadding: false,
+    height: getHeight(7),
+  },
   topBar: {
-    fontWeight: 'bold',
-    fontSize: 30,
-    borderRadius: 65,
-    // borderWidth: 2,
-    borderColor: '#D3D3D3',
-
+    borderRadius: 35,
     width: getWidth(15),
     height: getHeight(0.7),
-    backgroundColor: 'rgba(0,0,0,0.2)',
+    backgroundColor: "rgba(0,0,0,0.2)",
   },
-  centeredView: {
-    // flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    // marginTop: 110,
-    // borderWidth: 3,
-    borderColor: 'green',
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    height: getHeight(91),
-  },
-  modalView: {
-    // margin: 20,
-    backgroundColor: 'white',
-    borderColor: 'blue',
-    // borderWidth: 1,
-    // borderRadius: 20,
+  lineargradientModal: {
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
-    // padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
-    // justifyContent: 'flex-end',
+    alignItems: "center",
+    shadowColor: "#000",
     height: getHeight(45),
     width: getWidth(100),
-    // marginLeft: 0,
-    // bottom: 0,
-    // top: 0,
-
+  },
+  centeredView: {
+    justifyContent: "flex-end",
+    alignItems: "center",
+    borderColor: "green",
+    backgroundColor: "rgba(0,0,0,0)",
+    height: getHeight(100),
+  },
+  modalView: {
+    marginBottom: moderateScale(100),
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+    alignItems: "center",
+    shadowColor: "#000",
+    height: getHeight(55),
+    width: getWidth(100),
     shadowOffset: {
       width: 0,
       height: 2,
     },
   },
   generateButton: {
-    height: getHeight(6.9),
-    // margin: 12,
+    height: getHeight(6) - 2,
     borderWidth: 1.5,
-    // padding: 14,
     borderRadius: 30,
-    borderColor: '#1B1561',
-    // opacity:0.1,
-    backgroundColor: '#1B1561',
-    alignItems: 'center',
-    justifyContent: 'center',
+    borderColor: theme.blueColor,
+    backgroundColor: theme.blueColor,
+    alignItems: "center",
+    justifyContent: "center",
     width: getWidth(29),
   },
   generateButtonDull: {
-    height: getHeight(6.9),
-    // margin: 12,
-    // borderWidth: 1,
-    // padding: 14,
+    height: getHeight(6) - 2,
     borderRadius: 30,
-    borderColor: '#1B1561',
-    opacity: 0.5,
-    backgroundColor: '#1B1561',
-    alignItems: 'center',
-    justifyContent: 'center',
+    borderColor: theme.blueColor,
+    opacity: 1,
+    backgroundColor: theme.blueColor,
+    alignItems: "center",
+    justifyContent: "center",
     width: getWidth(29),
+  },
+  checkSvgView: {
+    borderColor: "grey",
+    paddingTop: 13,
+    width: getWidth(81),
+    height: getHeight(42),
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingBottom: moderateScale(30),
+  },
+  modalText: {
+    fontFamily: fonts.AnekBanglaRegular,
+    color: "rgba(0,0,0,.8)",
+    fontWeight: "400",
+    fontSize: 18,
+    textAlign: "center",
   },
 });
 

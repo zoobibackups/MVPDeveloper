@@ -1,25 +1,27 @@
-import React, {useState} from 'react';
+import { useNavigation } from "@react-navigation/core";
+import React, { useState } from "react";
 import {
-  View,
+  FlatList,
+  Image,
+  ImageBackground,
+  Modal,
+  ScrollView,
+  StyleSheet,
   Text,
   TouchableOpacity,
-  Image,
-  ScrollView,
-  FlatList,
-  Modal,
-  StyleSheet,
-  ImageBackground,
-  Platform,
-} from 'react-native';
-import {useNavigation} from '@react-navigation/core';
-import {getHeight, getWidth} from '../functions/CommonFunctions';
-import {TouchableWithoutFeedback} from 'react-native';
-import {BackgroundImage} from '@rneui/themed/dist/config';
-import LinearGradient from 'react-native-linear-gradient';
-import {AirbnbRating, Rating} from 'react-native-ratings';
-import {AlignJustify} from 'react-native-feather';
-import {SvgXml} from 'react-native-svg';
-import {backwardBlack, forwardBlack, backward, preformly} from '../../assets/svg';
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
+import LinearGradient from "react-native-linear-gradient";
+import { AirbnbRating } from "react-native-ratings";
+import { RFValue } from "react-native-responsive-fontsize";
+import { moderateScale } from "react-native-size-matters";
+import { SvgXml } from "react-native-svg";
+import { backwardBlack, forwardBlack } from "../../assets/svg";
+import RowHeader from "../Components/RowHeader";
+import fonts from "../Constants/fonts";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
+import textStyles, { globalstyles } from "../styles/globalestyles";
 
 const Reciepe1 = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -31,66 +33,66 @@ const Reciepe1 = () => {
   const [focused4, setfocused4] = useState(false);
   const DATA = [
     {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      title: '4 tablespoons (60ml) extra-virgin olive oil, divided ',
+      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+      title: "4 tablespoons (60ml) extra-virgin olive oil, divided ",
     },
     {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-      title: '1 teaspoon coarsely ground black pepper, to taste ',
+      id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+      title: "1 teaspoon coarsely ground black pepper, to taste ",
     },
     {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      title: 'Kosher salt, to taste',
+      id: "58694a0f-3da1-471f-bd96-145571e29d72",
+      title: "Kosher salt, to taste",
     },
     {
-      id: '4',
-      title: '1/2 pound (225g) spaghetti',
+      id: "4",
+      title: "1/2 pound (225g) spaghetti",
     },
     {
-      id: '5',
-      title: '2 tablespoons (30g) unsalted butter',
+      id: "5",
+      title: "2 tablespoons (30g) unsalted butter",
     },
     {
-      id: '6',
-      title: '2 ounces Pecorino Romano cheese',
+      id: "6",
+      title: "2 ounces Pecorino Romano cheese",
     },
   ];
   const DATA2 = [
     {
-      id: '31.29 g',
-      title: 'Kolhydrater',
+      id: "31.29 g",
+      title: "Kolhydrater",
     },
     {
-      id: '19 g',
-      title: 'Kostfiber ',
+      id: "19 g",
+      title: "Kostfiber ",
     },
     {
-      id: '1.14 g',
-      title: 'Socker',
+      id: "1.14 g",
+      title: "Socker",
     },
     {
-      id: '6.81 g',
-      title: 'Fett',
+      id: "6.81 g",
+      title: "Fett",
     },
     {
-      id: '2.71 g',
-      title: 'Mättat',
+      id: "2.71 g",
+      title: "Mättat",
     },
     {
-      id: '6.3 g',
-      title: 'Fleromättat',
+      id: "6.3 g",
+      title: "Fleromättat",
     },
     {
-      id: '3.01 g',
-      title: 'Enkelomättat',
+      id: "3.01 g",
+      title: "Enkelomättat",
     },
     {
-      id: '9.47 g',
-      title: 'Protein',
+      id: "9.47 g",
+      title: "Protein",
     },
     {
-      id: '326 g',
-      title: 'Natrium ',
+      id: "326 g",
+      title: "Natrium ",
     },
   ];
   const navigation = useNavigation();
@@ -99,41 +101,44 @@ const Reciepe1 = () => {
     return (
       <TouchableOpacity>
         <ImageBackground
-          source={require('../../assets/images/noodles.png')}
+          source={require("../../assets/images/noodles.png")}
           style={{
             // resizeMode: 'contain',
             width: getWidth(50),
             height: getHeight(24),
-            justifyContent: 'center',
-            alignItems: 'center',
+            justifyContent: "center",
+            alignItems: "center",
             // borderWidth: 1,
             // backgroundColor: 'rgba(0,0,0,0.1)',
             opacity: 0.9,
             // marginTop:10
-          }}>
+          }}
+        >
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate('Instruction'), setInstruction(false);
+              navigation.navigate("Instruction"), setInstruction(false);
             }}
             style={{
               borderWidth: 1,
               borderRadius: 10,
-              borderColor: '#1B1561',
+              borderColor: "#1B1561",
               width: getWidth(40),
               height: getHeight(6),
-              backgroundColor: '#1B1561',
-              justifyContent: 'center',
-              alignItems: 'center',
+              backgroundColor: "#1B1561",
+              justifyContent: "center",
+              alignItems: "center",
               // opacity:10
               // paddingBottom:10
-            }}>
+            }}
+          >
             <Text
               style={{
-                color: 'white',
+                color: "white",
                 fontSize: 16,
-                fontFamily: 'AnekBangla-Medium',
-                fontWeight: '400',
-              }}>
+                fontFamily: "AnekBangla-Medium",
+                fontWeight: "400",
+              }}
+            >
               Instruction
             </Text>
           </TouchableOpacity>
@@ -143,164 +148,71 @@ const Reciepe1 = () => {
   };
   return (
     <>
-      <ScrollView>
-        <LinearGradient
-          style={{
-            alignItems: 'center',
-            paddingVertical: 30,
-            borderColor: 'red',
-            height: '100%',
-            // backgroundColor: 'white',
-            // borderWidth:10
-          }}
-          colors={['#FDFFF4', '#BBC1AD']}
-          start={{x: 0, y: 0}}
-          end={{x: 0.8, y: 0}}
-          // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-          // locations={{x:0,y:0.5,z:0.6}}
-          // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
-        >
-          <SvgXml
-            width={getWidth(45)}
-            height={getHeight(5)}
-            xml={preformly}
-            style={{marginTop: Platform.OS === 'ios' ? 20 : 0}}
+      <LinearGradient
+        style={{
+          alignItems: "center",
+          paddingVertical: 30,
+          borderColor: "red",
+          height: "100%",
+        }}
+        colors={["#FDFFF4", "#BBC1AD"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0.8, y: 0 }}
+      >
+        <ScrollView>
+          <RowHeader
+            onPress={() => navigation.goBack()}
+            title={"RECIPE OVERVIEW"}
+           
           />
-          {/* <Text
+
+          <Text
             style={{
-              fontFamily: 'Modak-Regular',
-              color: '#1B1561',
-              fontWeight: '400',
-              fontSize: 30,
-            }}>
-            Preformly
-          </Text> */}
+              ...textStyles.mediumText,
+              fontSize: 18,
+              textAlign: "center",
+              letterSpacing: 2.0,
+            }}
+          >
+            Tuesday
+          </Text>
           <View
             style={{
-              flexDirection: 'row',
-              // borderWidth: 1,
-              borderColor: 'red',
-              width: getWidth(90),
-              height: getHeight(5),
-              // justifyContent: 'center',
-            }}>
-            <TouchableOpacity
-              onPress={() => navigation.goBack()}
-              style={{
-                borderWidth: 0.5,
-                borderColor: 'grey',
-                borderRadius: 45,
-                justifyContent: 'center',
-                width: getWidth(11),
-              }}>
-              <SvgXml
-                height={getHeight(2)}
-                width={getWidth(10)}
-                xml={backward}
-              />
-              {/* <Image
-                style={{
-                  resizeMode: 'contain',
-                  width: getWidth(10),
-                  // borderWidth: 1,
-                  borderColor: 'red',
-                  height: getHeight(2),
-                }}
-                source={require('../../assets/images/back.png')}
-              /> */}
-            </TouchableOpacity>
-            <View
-              style={{
-                // borderWidth: 1,
-                borderColor: 'green',
-                width: getWidth(70),
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'black',
-                  fontWeight: '500',
-                  fontSize: 18,
-                  textTransform: 'uppercase',
-                  letterSpacing: 2,
-                }}>
-                RECIPE OVERVIEW
-              </Text>
-            </View>
-          </View>
-          <View
-            style={{
-              // borderWidth: 1,
-              borderColor: 'green',
-              width: getWidth(70),
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Text
-              style={{
-                fontFamily: 'AnekBangla-Medium',
-                color: 'black',
-                fontWeight: '500',
-                fontSize: 18,
-              }}>
-              T u e s d a y
-            </Text>
-          </View>
-          <View
-            style={{
-              // borderWidth: 1,
               borderRadius: 20,
               width: getWidth(95),
-              height: getHeight(35),
-              // backgroundColor: '#1B1561',
-              justifyContent: 'center',
-              //   paddingTop: 10,
-              //   paddingLeft: 10,
-              alignItems: 'center',
-              // marginTop:60
-              //   flexDirection:'row'
-            }}>
+              alignSelf: "center",
+              height: getHeight(32),
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <View
               style={{
-                // borderWidth: 1,
                 borderRadius: 20,
                 width: getWidth(90),
-                height: getHeight(25),
-                // backgroundColor: '#1B1561',
-                justifyContent: 'space-evenly',
-                //   paddingTop: 10,
-                //   paddingLeft: 10,
-                alignItems: 'center',
-                // marginTop:60
-                flexDirection: 'row',
-              }}>
+                height: getHeight(22),
+                justifyContent: "space-evenly",
+                alignItems: "center",
+                flexDirection: "row",
+              }}
+            >
               <TouchableOpacity>
                 <SvgXml
                   width={getWidth(7)}
                   height={getHeight(5)}
                   xml={backwardBlack}
                 />
-                {/* <Image
-                  source={require('../../assets/images/backBlack.png')}
-                  style={{
-                    resizeMode: 'contain',
-                    width: getWidth(7),
-                    height: getHeight(5),
-                  }}
-                /> */}
               </TouchableOpacity>
               {instruction ? (
                 renderInstruction()
               ) : (
                 <TouchableOpacity onPress={() => setInstruction(true)}>
                   <Image
-                    source={require('../../assets/images/noodles.png')}
+                    source={require("../../assets/images/noodles.png")}
                     style={{
-                      resizeMode: 'contain',
-                      width: getWidth(50),
-                      height: getHeight(30),
+                      resizeMode: "contain",
+                      width: getHeight(20),
+                      height: getHeight(20),
                     }}
                   />
                 </TouchableOpacity>
@@ -312,117 +224,77 @@ const Reciepe1 = () => {
                   height={getHeight(5)}
                   xml={forwardBlack}
                 />
-                {/* <Image
-                  source={require('../../assets/images/forwardBlack.png')}
-                  style={{
-                    resizeMode: 'contain',
-                    width: getWidth(7),
-                    height: getHeight(5),
-                  }}
-                /> */}
               </TouchableOpacity>
             </View>
+            <Text style={styles.missionText}>CACIO E PEPE</Text>
             <Text
               style={{
-                fontFamily: 'AnekBangla-Bold',
-                color: 'black',
-                fontWeight: '500',
-                fontSize: 18,
-                textAlign: 'center',
-                // paddingVertical: 5,
-                letterSpacing: 2,
-              }}>
-              CACIO E PEPE
-            </Text>
-            <Text
-              style={{
-                fontFamily: 'AnekBangla-Regular',
-                color: 'black',
-                fontWeight: '300',
+                fontFamily: fonts.AnekBanglaRegular,
+                color: "black",
+                fontWeight: "300",
                 fontSize: 15,
-                textAlign: 'center',
-                // paddingVertical: 5,
-              }}>
+                lineHeight: 15 * 1.3,
+                includeFontPadding: false,
+                textAlign: "center",
+              }}
+            >
               370 calories
             </Text>
           </View>
           <View
             style={{
               width: getWidth(95),
-              flexDirection: 'row',
-              justifyContent: 'space-between',
+              flexDirection: "row",
+              justifyContent: "space-between",
               paddingHorizontal: 10,
-            }}>
+            }}
+          >
             <TouchableOpacity
-              onPress={() => navigation.navigate('List1')}
-              style={{
-                borderWidth: 1,
-                borderRadius: 10,
-                borderColor: '#1B1561',
-                width: getWidth(40),
-                height: getHeight(6),
-                backgroundColor: '#1B1561',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+              onPress={() => navigation.navigate("List1")}
+              style={styles.button}
+            >
               <Text
-                style={{
-                  color: 'white',
-                  fontSize: 17,
-                  fontFamily: 'AnekBangla-Medium',
-                  fontWeight: '400',
-                  letterSpacing: 2,
-                }}>
+                style={{ ...globalstyles.buttonText, fontSize: RFValue(13) }}
+              >
                 Grocery list
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => setModalVisible(true)}
-              style={{
-                borderWidth: 1,
-                borderRadius: 10,
-                borderColor: '#1B1561',
-                width: getWidth(40),
-                height: getHeight(6),
-                backgroundColor: '#1B1561',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+              style={styles.button}
+            >
               <Text
-                style={{
-                  color: 'white',
-                  fontSize: 17,
-                  fontFamily: 'AnekBangla-Medium',
-                  fontWeight: '400',
-                  letterSpacing: 2,
-                }}>
+                style={{ ...globalstyles.buttonText, fontSize: RFValue(13) }}
+              >
                 Give Rating
               </Text>
             </TouchableOpacity>
           </View>
 
-          <ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <View
               style={{
-                flexDirection: 'row',
+                flexDirection: "row",
                 width: getWidth(95),
                 // borderWidth: 1,
-                borderColor: 'red',
+                borderColor: "red",
                 height: getHeight(8),
-                justifyContent: 'flex-start',
-                alignItems: 'flex-start',
+                justifyContent: "flex-start",
+                alignItems: "flex-start",
                 paddingTop: 12,
                 paddingLeft: 10,
-              }}>
+              }}
+            >
               <Text
                 style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'black',
-                  fontWeight: '500',
+                  fontFamily: "AnekBangla-Medium",
+                  color: "black",
+                  fontWeight: "500",
                   fontSize: 30,
-                  textAlign: 'center',
+                  textAlign: "center",
                   // paddingVertical: 5,
-                }}>
+                }}
+              >
                 Recipe:
               </Text>
               <View
@@ -432,32 +304,23 @@ const Reciepe1 = () => {
                   width: getWidth(40),
                   height: getHeight(6),
                   // backgroundColor: '#1B1561',
-                  justifyContent: 'flex-end',
+                  justifyContent: "flex-end",
                   //   paddingTop: 25,
                   paddingLeft: 20,
-                  alignItems: 'center',
+                  alignItems: "center",
                   // marginTop:60
-                }}>
+                }}
+              >
                 <TouchableOpacity
-                  onPress={() => navigation.navigate('ChangeIngredients')}
-                  style={{
-                    // borderWidth: 1,
-                    borderRadius: 10,
-                    borderColor: '#1B1561',
-                    width: getWidth(40),
-                    height: getHeight(4.5),
-                    backgroundColor: '#1B1561',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
+                  onPress={() => navigation.navigate("ChangeIngredients")}
+                  style={styles.button}
+                >
                   <Text
                     style={{
-                      color: 'white',
-                      fontSize: 12,
-                      fontFamily: 'AnekBangla-Medium',
-                      fontWeight: '400',
-                      letterSpacing: 2,
-                    }}>
+                      ...globalstyles.buttonText,
+                      fontSize: RFValue(11),
+                    }}
+                  >
                     Change ingredients
                   </Text>
                 </TouchableOpacity>
@@ -466,206 +329,118 @@ const Reciepe1 = () => {
             <FlatList
               data={DATA}
               style={{
-                // borderWidth:1,
-                width: getWidth(85),
+                width: getWidth(80),
                 marginTop: 10,
               }}
-              renderItem={({item}) => (
+              renderItem={({ item }) => (
                 <Text
                   style={{
-                    color: 'black',
+                    color: "black",
                     fontSize: 15,
-                    fontFamily: 'AnekBangla-Medium',
+                    fontFamily: fonts.AnekBanglaMedium,
                     paddingLeft: 12,
-                    fontWeight: '400',
-                    letterSpacing: 2,
-                    // textAlign:'justify'
-                  }}>
-                  {`\u2022${item.title}`}
+                    fontWeight: "400",
+                    letterSpacing: 1.4,
+                  }}
+                >
+                  {`\u2022  ${item.title}`}
                 </Text>
               )}
             />
-            <View
+
+            <Text
               style={{
-                flexDirection: 'row',
-                width: getWidth(95),
-                // borderWidth: 1,
-                borderColor: 'red',
-                height: getHeight(10),
-                justifyContent: 'flex-start',
-                alignItems: 'flex-start',
-                paddingTop: 12,
-                paddingLeft: 10,
-              }}>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'black',
-                  fontWeight: '500',
-                  fontSize: 30,
-                  textAlign: 'center',
-                  // paddingVertical: 5,
-                }}>
-                Nutrition:
-              </Text>
-            </View>
+                fontFamily: "AnekBangla-Medium",
+                color: "black",
+                fontWeight: "500",
+                fontSize: 30,
+                marginLeft: moderateScale(10),
+                textAlign: "left",
+              }}
+            >
+              Nutrition:
+            </Text>
+
             <FlatList
               data={DATA2}
-              renderItem={({item}) => (
-                <View style={{flexDirection: 'row'}}>
-                  <Text
-                    style={{
-                      color: 'black',
-                      fontSize: 15,
-                      fontFamily: 'AnekBangla-Light',
-                      fontWeight: '400',
-                      paddingLeft: 12,
-                      letterSpacing: 2,
-                    }}>
-                    {`\u2022 ${item.title}`}
-                  </Text>
-                  <Text
-                    style={{
-                      color: 'black',
-                      fontSize: 15,
-                      fontFamily: 'AnekBangla-Bold',
-                      fontWeight: '700',
-                      paddingLeft: 12,
-                    }}>
-                    {item.id}
-                  </Text>
-                </View>
+              renderItem={({ item }) => (
+                <Text
+                  style={{
+                    color: "black",
+                    fontSize: 15,
+                    fontFamily: "AnekBangla-Light",
+                    fontWeight: "400",
+                    paddingLeft: 12,
+                    letterSpacing: 2,
+                  }}
+                >
+                  {`\u2022 ${item.title}`}
+                </Text>
               )}
             />
           </ScrollView>
-        </LinearGradient>
-      </ScrollView>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        // onRequestClose={() => {
-        //   Alert.alert('Modal has been closed.');
-        //   setModalVisible(!modalVisible);
-        // }}
-      >
+        </ScrollView>
+      </LinearGradient>
+
+      <Modal animationType="slide" transparent={true} visible={modalVisible}>
         <TouchableWithoutFeedback
-          onPress={() => setModalVisible(!modalVisible)}>
+          onPress={() => setModalVisible(!modalVisible)}
+        >
           <View style={styles.centeredView}>
             <LinearGradient
               style={styles.modalView}
-              colors={['#FDFFF4', '#BBC1AD']}
-              start={{x: 0, y: 0}}
-              end={{x: 0.8, y: 0}}
-              // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-              // locations={{x:0,y:0.5,z:0.6}}
-              // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
+              colors={["#FDFFF4", "#BBC1AD"]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 0.8, y: 0 }}
             >
-              <View style={{borderColor: 'red', paddingTop: 5}}>
-                <Text style={styles.topBar} />
+              <View style={{ borderColor: "red", paddingTop: 5 }}>
+                <View style={styles.topBar} />
               </View>
-              <View
-                style={{
-                  borderColor: 'red',
-                  paddingTop: 5,
-                  // borderWidth: 1,
-                  width: getWidth(60),
-                  height: getHeight(5),
-                  justifyContent: 'space-between',
-                  // paddingHorizontal:8,
 
-                  // borderBottomWidth: 1,
-                  // flexDirection: 'row',
-                  alignItems: 'center',
-                }}>
-                {/* <Image
-                source={require('../../assets/images/tickGroup.png')}
-                style={{resizeMode: 'contain', width: getWidth(35)}}
-              /> */}
-                <Text
-                  style={{
-                    fontFamily: 'AnekBangla-Medium',
-                    color: 'black',
-                    fontWeight: '400',
-                    fontSize: 20,
-                    textAlign: 'center',
-                    // paddingVertical: 10,
-                  }}>
-                  Rate this Recipe
-                </Text>
-              </View>
-              {/* <View
-                style={{
-                  borderColor: 'red',
-                  // paddingTop: 7,
-                  borderWidth: 1,
-                  width: getWidth(70),
-                  height: getHeight(6),
-                  // justifyContent: 'space-between',
-                  // paddingHorizontal:8,
+              <Text
+                style={styles.rateThisRecipe}
+              >
+                Rate this Recipe
+              </Text>
 
-                  // borderBottomWidth: 1,
-                  // flexDirection: 'row',
-                  // alignItems: 'center',
-                }}> */}
               <AirbnbRating
                 reviews={false}
                 reviewColor="black"
                 selectedColor="#FF8A00"
                 unSelectedColor="#D3D3D3"
-                ratingContainerStyle={{height: 10, marginTop: 10}}
+                ratingContainerStyle={{ height: 10, marginTop: 10 }}
                 defaultRating={0}
                 starContainerStyle={{
-                  justifyContent: 'space-between',
-                  // borderWidth: 2,
-                  width: getWidth(75),
-                  backgroundColor: 'transparent',
+                  justifyContent: "space-between",
+                  width: getWidth(65),
+                  backgroundColor: "transparent",
                 }}
-                size={35}
+                size={RFValue(30)}
               />
+
+              <Text
+                style={{
+                  fontFamily: fonts.AnekBanglaMedium,
+                  color: "rgba(0,0,0,.8)",
+                  fontWeight: "400",
+                  fontSize: 17,
+                  lineHeight: 17 * 1.3,
+                  textAlign: "center",
+                  paddingTop: moderateScale(40),
+                  paddingHorizontal: moderateScale(30),
+                }}
+              >
+                HOW OFTEN WOULD YOU LIKE TO HAVE THIS MEAL?
+              </Text>
+
               <View
                 style={{
-                  borderColor: 'red',
-                  paddingTop: 10,
-
-                  marginTop: 25,
-                  // borderWidth: 1,
-                  width: getWidth(86),
-                  height: getHeight(11),
-                  justifyContent: 'space-between',
-                  // paddingHorizontal:8,
-
-                  // borderBottomWidth: 1,
-                  // flexDirection: 'row',
-                  alignItems: 'center',
-                }}>
-                <Text
-                  style={{
-                    fontFamily: 'AnekBangla-Medium',
-                    color: 'black',
-                    fontWeight: '400',
-                    fontSize: 17,
-                    textAlign: 'left',
-                    paddingVertical: 6,
-                  }}>
-                  HOW OFTEN WOULD YOU LIKE TO HAVE THIS MEAL?
-                </Text>
-              </View>
-              <View
-                style={{
-                  borderColor: 'red',
-                  // paddingLeft: 7,
-                  // borderWidth: 1,
                   marginTop: 10,
                   width: getWidth(86),
                   height: getHeight(6),
-                  // justifyContent: 'center',
-                  // paddingHorizontal:8,
-
-                  // borderBottomWidth: 1,
-                  flexDirection: 'row',
-                  // alignItems: 'center',
-                }}>
+                  flexDirection: "row",
+                }}
+              >
                 <View style={focused ? styles.bgColor : styles.bgTransparent}>
                   <TouchableOpacity
                     onPress={() => {
@@ -674,16 +449,19 @@ const Reciepe1 = () => {
                         setfocused2(false),
                         setfocused3(false),
                         setfocused4(false);
-                    }}>
+                    }}
+                  >
                     <Text
-                      style={focused ? styles.whiteText : styles.coloredText}>
+                      style={focused ? styles.whiteText : styles.coloredText}
+                    >
                       Daily
                     </Text>
                   </TouchableOpacity>
                 </View>
-                <View style={{paddingLeft: 12}}>
+                <View style={{ paddingLeft: 12 }}>
                   <View
-                    style={focused1 ? styles.bgColor : styles.bgTransparent}>
+                    style={focused1 ? styles.bgColor : styles.bgTransparent}
+                  >
                     <TouchableOpacity
                       onPress={() => {
                         setfocused1(!focused1),
@@ -691,19 +469,20 @@ const Reciepe1 = () => {
                           setfocused3(false),
                           setfocused4(false),
                           setfocused(false);
-                      }}>
+                      }}
+                    >
                       <Text
-                        style={
-                          focused1 ? styles.whiteText : styles.coloredText
-                        }>
+                        style={focused1 ? styles.whiteText : styles.coloredText}
+                      >
                         Weekly
                       </Text>
                     </TouchableOpacity>
                   </View>
                 </View>
-                <View style={{paddingLeft: 12}}>
+                <View style={{ paddingLeft: 12 }}>
                   <View
-                    style={focused2 ? styles.bgColor : styles.bgTransparent}>
+                    style={focused2 ? styles.bgColor : styles.bgTransparent}
+                  >
                     <TouchableOpacity
                       onPress={() => {
                         setfocused1(false),
@@ -711,11 +490,11 @@ const Reciepe1 = () => {
                           setfocused3(false),
                           setfocused4(false),
                           setfocused(false);
-                      }}>
+                      }}
+                    >
                       <Text
-                        style={
-                          focused2 ? styles.whiteText : styles.coloredText
-                        }>
+                        style={focused2 ? styles.whiteText : styles.coloredText}
+                      >
                         Monthly
                       </Text>
                     </TouchableOpacity>
@@ -724,18 +503,11 @@ const Reciepe1 = () => {
               </View>
               <View
                 style={{
-                  borderColor: 'red',
-                  // paddingLeft: 7,
-                  // borderWidth: 1,
                   width: getWidth(86),
                   height: getHeight(6),
-                  // justifyContent: 'center',
-                  // paddingHorizontal:8,
-
-                  // borderBottomWidth: 1,
-                  flexDirection: 'row',
-                  // alignItems: 'center',
-                }}>
+                  flexDirection: "row",
+                }}
+              >
                 <View style={focused3 ? styles.bgColor : styles.bgTransparent}>
                   <TouchableOpacity
                     onPress={() => {
@@ -744,17 +516,20 @@ const Reciepe1 = () => {
                         setfocused3(!focused3),
                         setfocused4(false),
                         setfocused(false);
-                    }}>
+                    }}
+                  >
                     <Text
-                      style={focused3 ? styles.whiteText : styles.coloredText}>
+                      style={focused3 ? styles.whiteText : styles.coloredText}
+                    >
                       Quaterly
                     </Text>
                   </TouchableOpacity>
                 </View>
 
-                <View style={{paddingLeft: 12}}>
+                <View style={{ paddingLeft: 12 }}>
                   <View
-                    style={focused4 ? styles.bgColor : styles.bgTransparent}>
+                    style={focused4 ? styles.bgColor : styles.bgTransparent}
+                  >
                     <TouchableOpacity
                       onPress={() => {
                         setfocused1(false),
@@ -762,11 +537,11 @@ const Reciepe1 = () => {
                           setfocused3(false),
                           setfocused4(!focused),
                           setfocused(false);
-                      }}>
+                      }}
+                    >
                       <Text
-                        style={
-                          focused4 ? styles.whiteText : styles.coloredText
-                        }>
+                        style={focused4 ? styles.whiteText : styles.coloredText}
+                      >
                         Never
                       </Text>
                     </TouchableOpacity>
@@ -776,27 +551,12 @@ const Reciepe1 = () => {
               <TouchableOpacity
                 onPress={() => setModalVisible(false)}
                 style={{
-                  height: 55,
-                  margin: 5,
-                  // borderWidth: 1,
-                  padding: 14,
-                  borderRadius: 20,
-                  borderColor: '#1B1561',
-                  backgroundColor: '#1B1561',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  // marginTop:10,
-                  width: getWidth(35),
-                }}>
-                <Text
-                  style={{
-                    fontFamily: 'AnekBangla-Medium',
-                    color: 'white',
-                    fontWeight: '400',
-                    fontSize: 20,
-                  }}>
-                  Ok
-                </Text>
+                  ...globalstyles.buttonStyle,
+                  marginTop: getHeight(3),
+                  width: getWidth(40),
+                }}
+              >
+                <Text style={globalstyles.buttonText}>Ok</Text>
               </TouchableOpacity>
             </LinearGradient>
           </View>
@@ -809,37 +569,60 @@ const Reciepe1 = () => {
 const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
-    resizeMode: 'cover',
-    position: 'absolute',
-    width: '100%',
+    resizeMode: "cover",
+    position: "absolute",
+    width: "100%",
     marginTop: 0,
     height: getHeight(100),
   },
+  button: {
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: "#1B1561",
+    width: getWidth(40),
+    height: getHeight(5),
+    backgroundColor: "#1B1561",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  missionText: {
+    fontFamily: fonts.AnekBanglaMedium,
+    color: "black",
+    fontWeight: "500",
+    fontSize: 20,
+    marginTop: moderateScale(10),
+    textAlign: "center",
+    letterSpacing: 2,
+  },
   topBar: {
-    fontWeight: 'bold',
-    fontSize: 30,
-    borderRadius: 65,
-    // borderWidth: 2,
-    // borderColor: '#D3D3D3',
-
+    borderRadius: 20,
     width: getWidth(15),
     height: getHeight(0.7),
-    backgroundColor: 'rgba(0,0,0,0.2)',
+    backgroundColor: "rgba(0,0,0,.2)",
+  },
+  rateThisRecipe:{
+    fontFamily: fonts.AnekBanglaMedium,
+    color: "#000",
+    fontWeight: "400",
+    fontSize: 17,
+    textAlign: "center",
+    includeFontPadding: false,
+    paddingVertical: 5,
   },
   centeredView: {
     // flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    justifyContent: "flex-end",
+    alignItems: "center",
     // marginTop: 110,
     // borderWidth: 3,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    borderColor: 'green',
-    height: '100%',
+    backgroundColor: "rgba(0,0,0,0.5)",
+    borderColor: "green",
+    height: "100%",
   },
   modalView: {
     // margin: 20,
     // backgroundColor: 'white',
-    borderColor: 'grey',
+    borderColor: "grey",
     borderWidth: 1,
     borderBottomWidth: 0,
 
@@ -847,8 +630,8 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     // padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
+    alignItems: "center",
+    shadowColor: "#000",
     // justifyContent: 'flex-end',
     height: getHeight(47),
     width: getWidth(100),
@@ -862,40 +645,40 @@ const styles = StyleSheet.create({
     },
   },
   bgColor: {
-    borderColor: '#1B1561',
-    backgroundColor: '#1B1561',
+    borderColor: "#1B1561",
+    backgroundColor: "#1B1561",
     borderWidth: 1,
     width: getWidth(22),
     height: getHeight(5),
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: 10,
   },
   coloredText: {
-    fontFamily: 'AnekBangla-Medium',
-    color: '#1B1561',
-    fontWeight: '400',
+    fontFamily: "AnekBangla-Medium",
+    color: "#1B1561",
+    fontWeight: "400",
     fontSize: 16,
 
     // textAlign: 'left',
     // paddingVertical: 6,
   },
   whiteText: {
-    fontFamily: 'AnekBangla-Medium',
-    color: 'white',
-    fontWeight: '400',
+    fontFamily: "AnekBangla-Medium",
+    color: "white",
+    fontWeight: "400",
     fontSize: 16,
 
     // textAlign: 'left',
     // paddingVertical: 6,
   },
   bgTransparent: {
-    borderColor: '#1B1561',
+    borderColor: "#1B1561",
     borderWidth: 1,
     width: getWidth(22),
     height: getHeight(5),
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: 10,
   },
 });

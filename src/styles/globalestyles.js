@@ -109,7 +109,7 @@ const globalstyles = {
   buttonStyle: {
     height: RFValue(45),
     borderWidth: 1,
-    width: getWidth(55),
+    width: getWidth(65),
     borderRadius: RFValue(18),
     borderColor: theme.blueColor,
     backgroundColor: theme.blueColor,

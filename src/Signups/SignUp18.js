@@ -2,27 +2,25 @@ import React, { useState } from "react";
 
 import { useNavigation } from "@react-navigation/core";
 import {
-  Platform,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
+import { RFValue } from "react-native-responsive-fontsize";
 import { SvgXml } from "react-native-svg";
 import {
   appleLogo,
   facebook,
   google,
-  hideEye,
-  preformly,
+  hideEye
 } from "../../assets/svg";
-import KeyBoardHandle from "../Components/KeyboardHandle";
-import { getHeight, getWidth } from "../functions/CommonFunctions";
 import CustomHeader from "../Components/CustomHeader";
+import KeyBoardHandle from "../Components/KeyboardHandle";
 import fonts from "../Constants/fonts";
-import { RFValue } from "react-native-responsive-fontsize";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { globalstyles } from "../styles/globalestyles";
 const SignUp18 = () => {
   const [email, setEmail] = useState("");

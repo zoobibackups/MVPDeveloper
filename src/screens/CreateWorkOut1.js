@@ -1,258 +1,100 @@
-import React from 'react';
+import { useNavigation } from "@react-navigation/core";
+import React from "react";
 import {
-  View,
   Text,
-  Platform,
-  TouchableOpacity,
-  Image,
   TextInput,
-} from 'react-native';
-import {getWidth, getHeight} from '../functions/CommonFunctions';
-import {useNavigation} from '@react-navigation/core';
-import {Search} from 'react-native-feather';
-import LinearGradient from 'react-native-linear-gradient';
-import {SvgXml} from 'react-native-svg';
-import {preformly} from '../../assets/svg';
-
+  TouchableOpacity,
+  View
+} from "react-native";
+import { Search } from "react-native-feather";
+import LinearGradient from "react-native-linear-gradient";
+import { RFValue } from "react-native-responsive-fontsize";
+import HeaderMainScreen from "../Components/HeaderMainScreen";
+import theme from "../Constants/theme";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
+import { globalstyles } from "../styles/globalestyles";
 const CreateWorkOut1 = () => {
   const navigation = useNavigation();
   return (
     <LinearGradient
       style={{
-        alignItems: 'center',
+        alignItems: "center",
         paddingVertical: 30,
-        borderColor: 'red',
-        height: '100%',
-        // backgroundColor: 'white',
-        // borderWidth:10
+        borderColor: "red",
+        height: "100%",
       }}
-      colors={['#FDFFF4', '#BBC1AD']}
-      start={{x: 0, y: 0}}
-      end={{x: 0.8, y: 0}}
-      // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-      // locations={{x:0,y:0.5,z:0.6}}
-      // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
+      colors={["#FDFFF4", "#BBC1AD"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 0.8, y: 0 }}
     >
-      <SvgXml
-        width={getWidth(45)}
-        height={getHeight(5)}
-        xml={preformly}
-        style={{marginTop: Platform.OS === 'ios' ? 20 : 0}}
+      <HeaderMainScreen
+        onPress={() => navigation.goBack()}
+        title={"BUILD YOUR OWN SCHEDULE"}
+        subTitle={""}
+        titleStyle={{
+          alignSelf: "center",
+          fontSize: RFValue(12),
+        }}
       />
-      {/* <Text
-        style={{
-          fontFamily: 'Modak-Regular',
-          color: '#1B1561',
-          fontWeight: '400',
-          fontSize: 30,
-          marginTop: Platform.OS === 'ios' ? 20 : 0,
-        }}>
-        Preformly
-      </Text> */}
+
       <View
         style={{
-          flexDirection: 'row',
-          // borderWidth: 1,
-          borderColor: 'red',
-          width: getWidth(90),
-          height: getHeight(5),
-          // justifyContent: 'center',
-        }}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={{
-            borderWidth: 0.5,
-            borderColor: 'grey',
-            borderRadius: 40,
-            justifyContent: 'center',
-            width: getWidth(11),
-          }}>
-          <Image
-            style={{
-              resizeMode: 'contain',
-              width: getWidth(10),
-              // borderWidth: 1,
-              borderColor: 'red',
-              height: getHeight(2),
-            }}
-            source={require('../../assets/images/back.png')}
+          ...globalstyles.inputVerticalContainer,
+          marginTop: getHeight(2),
+        }}
+      >
+        <Text style={globalstyles.inputLabel}>Exercise name:</Text>
+
+        <View style={globalstyles.inputContainer}>
+          <Search size={RFValue(30)} color={theme.blueColor} />
+          <TextInput
+            placeholder="Search muscle group"
+            placeholderTextColor="#0004"
+            style={globalstyles.textInputStyle}
           />
-        </TouchableOpacity>
-        <View
-          style={{
-            // borderWidth: 1,
-            borderColor: 'green',
-            width: getWidth(80),
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <Text
-            style={{
-              fontFamily: 'AnekBangla-Medium',
-              color: 'black',
-              fontWeight: '500',
-              fontSize: 18,
-              letterSpacing: 2,
-            }}>
-            BUILD YOUR OWN SCHEDULE
-          </Text>
         </View>
       </View>
       <View
         style={{
-          // borderWidth: 1,
-          marginTop: 20,
-          borderColor: 'green',
-          width: getWidth(90),
-          justifyContent: 'center',
-          // alignItems: 'center',
-        }}>
-        <Text
-          style={{
-            fontFamily: 'AnekBangla-Medium',
-            color: 'grey',
-            fontWeight: '400',
-            fontSize: 16,
-            letterSpacing: 2,
-          }}>
-          Exercise name:
-        </Text>
-      </View>
-      <View
-        style={{
-          borderWidth: 1,
-          marginTop: 20,
-          borderColor: 'grey',
-          borderRadius: 20,
-          width: getWidth(90),
-          paddingLeft: 20,
-          height: getHeight(8),
-          justifyContent: 'flex-start',
-          flexDirection: 'row',
-          alignItems: 'center',
-        }}>
-        <Search size={30} color="#808080" />
+          ...globalstyles.inputVerticalContainer,
+          marginTop: getHeight(2),
+        }}
+      >
+        <Text style={globalstyles.inputLabel}>Repetitions</Text>
         <TextInput
-          placeholder="Search muscle group"
-          placeholderTextColor="black"
-          // value={search}
-          // onChangeText={query => setSearch(query)}
-          // style={{borderWidth:1}}
+          style={globalstyles.textInputWithOutIcon}
+          onChangeText={(text) => setPassword(text)}
+          placeholderTextColor="grey"
+          value={""}
+          placeholder="Repetitions"
         />
       </View>
+
       <View
         style={{
-          // borderWidth: 1,
           marginTop: 20,
-          borderColor: 'green',
-          width: getWidth(90),
-          justifyContent: 'center',
-          // alignItems: 'center',
-        }}>
-        <Text
-          style={{
-            fontFamily: 'AnekBangla-Medium',
-            color: 'grey',
-            fontWeight: '400',
-            fontSize: 16,
-            letterSpacing: 2,
-          }}>
-          Repetitions
-        </Text>
-      </View>
-      <View
-        style={{
-          borderWidth: 1,
-          marginTop: 20,
-          borderColor: 'grey',
-          borderRadius: 20,
-          width: getWidth(90),
-          paddingLeft: 20,
-          height: getHeight(8),
-          justifyContent: 'flex-start',
-          flexDirection: 'row',
-          alignItems: 'center',
-        }}>
-        <Text
-          style={{
-            fontFamily: 'AnekBangla-Medium',
-            color: 'black',
-            fontWeight: '400',
-            fontSize: 16,
-            letterSpacing: 2,
-          }}>
-          Repetitions
-        </Text>
-      </View>
-      <View
-        style={{
-          //   borderWidth: 1,
-          marginTop: 20,
-          borderColor: 'green',
+          borderColor: "green",
           width: getWidth(90),
 
-          justifyContent: 'flex-end',
-          flexDirection: 'row',
-          // alignItems: 'center',
-        }}>
+          justifyContent: "flex-end",
+          flexDirection: "row",
+        }}
+      >
         <TouchableOpacity
-          onPress={() => navigation.navigate('ActiveWorkOut1')}
-          style={{
-            height: 50,
-            // margin: 12,
-            //   borderWidth: 1,
-            // padding: 14,
-            borderRadius: 20,
-            borderColor: '#1B1561',
-            backgroundColor: '#1B1561',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: getWidth(25),
-          }}>
-          <Text
-            style={{
-              fontFamily: 'AnekBangla-Medium',
-              color: 'white',
-              fontWeight: '400',
-              fontSize: 20,
-              letterSpacing: 2,
-            }}>
-            Add
-          </Text>
+          onPress={() => navigation.navigate("CreateWorkOut2")}
+          style={{ ...globalstyles.buttonStyle, width: getWidth(28) }}
+        >
+          <Text style={globalstyles.buttonText}>Add</Text>
         </TouchableOpacity>
       </View>
       <View
-        style={{
-          alignItems: 'center',
-          borderColor: 'red',
-          height: getHeight(30),
-          justifyContent: 'flex-end',
-          // borderWidth: 1,
-        }}>
+        style={{ ...globalstyles.buttonContianer, marginTop: getHeight(30) }}
+      >
         <TouchableOpacity
-          onPress={() => navigation.navigate('ActiveWorkOut1')}
-          style={{
-            height: 55,
-            // margin: 12,
-            //   borderWidth: 1,
-            // padding: 14,
-            borderRadius: 20,
-            borderColor: '#1B1561',
-            backgroundColor: '#1B1561',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: getWidth(70),
-          }}>
-          <Text
-            style={{
-              fontFamily: 'AnekBangla-Medium',
-              color: 'white',
-              fontWeight: '400',
-              fontSize: 20,
-              letterSpacing: 2,
-            }}>
-            Start your workout
-          </Text>
+          onPress={() => navigation.navigate("ActiveWorkOut1")}
+          style={{ ...globalstyles.buttonStyle, width: getWidth(70) }}
+        >
+          <Text style={globalstyles.buttonText}>Start your workout</Text>
         </TouchableOpacity>
       </View>
     </LinearGradient>
@@ -260,3 +102,4 @@ const CreateWorkOut1 = () => {
 };
 
 export default CreateWorkOut1;
+

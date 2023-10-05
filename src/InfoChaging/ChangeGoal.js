@@ -1,42 +1,20 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 
+import { useNavigation } from "@react-navigation/core";
 import {
-  View,
-  Text,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
-  StyleSheet,
-  TextInput,
-  KeyboardAvoidingView,
-  ScrollView,
   Platform,
-} from 'react-native';
-import {getHeight, getWidth} from '../functions/CommonFunctions';
-import KeyBoardHandle from '../Components/KeyboardHandle';
-// import { CheckBox } from '@rneui/themed';
-
-import BouncyCheckbox from 'react-native-bouncy-checkbox';
-import CircleCheckBox, {LABEL_POSITION} from 'react-native-circle-checkbox';
-// import CheckBox from '@react-native-community/checkbox';
-import {useNavigation} from '@react-navigation/core';
-
-import RadioForm, {
-  RadioButton,
-  RadioButtonInput,
-  RadioButtonLabel,
-} from 'react-native-simple-radio-button';
-import {
-  RoundedCheckbox,
-  PureRoundedCheckbox,
-} from 'react-native-rounded-checkbox';
-import Checkbox from '../Components/CheckBox';
-import { SvgXml } from 'react-native-svg';
-import { preformly } from '../../assets/svg';
-// import Icon from 'react-native-dynamic-vector-icons';
-
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from "react-native";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
+import LinearGradient from "react-native-linear-gradient";
+import Checkbox from "../Components/CheckBox";
+import HeaderMainScreen from "../Components/HeaderMainScreen";
+import { globalstyles } from "../styles/globalestyles";
 const ChangeGoal = () => {
-  const [confirmPassword, setConfirmPassowrd] = useState('');
+  const [confirmPassword, setConfirmPassowrd] = useState("");
   const [checked, setChecked] = useState(false);
   const [checked1, setChecked1] = useState(false);
   const [checked2, setChecked2] = useState(false);
@@ -46,326 +24,131 @@ const ChangeGoal = () => {
   const navigation = useNavigation();
 
   return (
-    <View
+    <LinearGradient
       style={{
-        alignItems: 'center',
+        alignItems: "center",
         paddingVertical: 30,
-        borderColor: 'red',
-        height: '100%',
-        backgroundColor: 'white',
-      }}>
-      <SvgXml
-        width={getWidth(45)}
-        height={getHeight(5)}
-        xml={preformly}
-        style={{marginTop: Platform.OS === 'ios' ? 20 : 0}}
+        borderColor: "red",
+        height: "100%",
+      }}
+      colors={["#FDFFF4", "#BBC1AD"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 0.8, y: 0 }}
+    >
+      <HeaderMainScreen
+        onPress={() => navigation.goBack()}
+        title={"CHANGE  PROFILE"}
+        subTitle={"TELL US ABOUT YOUR GOALS"}
+        subTitleStyle={{
+          textAlign: "center",
+          alignSelf: "center",
+        }}
       />
-     
-      <View
-        style={{
-          flexDirection: 'row',
-          // borderWidth: 1,
-          borderColor: 'red',
-          width: getWidth(90),
-          height: getHeight(5),
-          // justifyContent: 'center',
-        }}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={{
-            borderWidth: 0.5,
-            borderColor: 'grey',
-            borderRadius: 40,
-            justifyContent: 'center',
-            width: getWidth(10),
-          }}>
-          <Image
-            style={{
-              resizeMode: 'contain',
-              width: getWidth(9),
-              // borderWidth: 1,
-              borderColor: 'red',
-              height: getHeight(2),
-            }}
-            source={require('../../assets/images/back.png')}
-          />
+
+      <View style={styles.itemContainer}>
+        <TouchableOpacity onPress={() => setChecked4(!checked4)}>
+          <LinearGradient
+            style={globalstyles.selectItem}
+            colors={["#FDFFF4", "#BBC1AD"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0.8, y: 0 }}
+          >
+            <Text style={globalstyles.selectItemText}>Lose Weight</Text>
+            <Checkbox
+              isChecked={checked}
+              onPress={() => {
+                setChecked(!checked);
+              }}
+            />
+          </LinearGradient>
         </TouchableOpacity>
-        <View
-          style={{
-            // borderWidth: 1,
-            borderColor: 'green',
-            width: getWidth(70),
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <Text
-            style={{
-              fontFamily: 'AnekBangla-Medium',
-              color: 'black',
-              fontWeight: '500',
-              fontSize: 18,
-            }}>
-            C R E A T E P R O F I L E
-          </Text>
-        </View>
+
+        <TouchableOpacity onPress={() => setChecked4(!checked4)}>
+          <LinearGradient
+            style={globalstyles.selectItem}
+            colors={["#FDFFF4", "#BBC1AD"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0.8, y: 0 }}
+          >
+            <Text style={globalstyles.selectItemText}>Gain Weight</Text>
+            <Checkbox
+              isChecked={checked}
+              onPress={() => {
+                setChecked(!checked);
+              }}
+            />
+          </LinearGradient>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => setChecked4(!checked4)}>
+          <LinearGradient
+            style={globalstyles.selectItem}
+            colors={["#FDFFF4", "#BBC1AD"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0.8, y: 0 }}
+          >
+            <Text style={globalstyles.selectItemText}>Live healthier</Text>
+            <Checkbox
+              isChecked={checked}
+              onPress={() => {
+                setChecked(!checked);
+              }}
+            />
+          </LinearGradient>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => setChecked4(!checked4)}>
+          <LinearGradient
+            style={globalstyles.selectItem}
+            colors={["#FDFFF4", "#BBC1AD"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0.8, y: 0 }}
+          >
+            <Text style={globalstyles.selectItemText}>
+              Use the app without a goal
+            </Text>
+            <Checkbox
+              isChecked={checked}
+              onPress={() => {
+                setChecked(!checked);
+              }}
+            />
+          </LinearGradient>
+        </TouchableOpacity>
       </View>
       <View
         style={{
-          paddingVertical: 10,
-          height: getHeight(10),
-          borderColor: 'red',
-          //   borderWidth: 1,
-        }}>
-        <Text
-          style={{
-            fontFamily: 'AnekBangla-Medium',
-            color: 'black',
-            fontWeight: '500',
-            fontSize: 18,
-            letterSpacing: 2,
-          }}>
-          TELL US ABOUT YOUR GOALS
-        </Text>
-      </View>
-
-      <View
-        style={{
-          paddingVertical: 10,
-          height: getHeight(50),
-          width: getWidth(97),
-          borderColor: 'red',
-          // borderWidth: 1,
-          alignItems: 'center',
-          justifyContent: 'space-evenly',
-        }}>
-        <View
-          style={{
-            width: getWidth(90),
-            borderRadius: 20,
-
-            height: getHeight(7),
-            borderColor: '#F5F5F5',
-            backgroundColor: 'white',
-            // borderWidth: 1,
-            shadowColor: 'rgba(103, 128, 159)',
-
-            elevation: 10,
-            justifyContent: 'space-between',
-            flexDirection: 'row',
-            alignItems: 'center',
-            paddingHorizontal: 5,
-          }}>
-          <Text
-            style={{
-              paddingLeft: 10,
-              fontFamily: 'AnekBangla-Medium',
-              color: 'black',
-              fontWeight: '400',
-              fontSize: 17,
-              letterSpacing: 2,
-            }}>
-            Lose Weight
-          </Text>
-          <Checkbox
-            // text="Blue"
-            isChecked={checked}
-            onPress={() => {
-              setChecked(!checked);
-            }}
-          />
-        </View>
-        <View
-          style={{
-            width: getWidth(90),
-            borderRadius: 20,
-
-            height: getHeight(7),
-            borderColor: '#F5F5F5',
-            backgroundColor: 'white',
-            // borderWidth: 1,
-            shadowColor: 'rgba(103, 128, 159)',
-
-            elevation: 10,
-            justifyContent: 'space-between',
-            flexDirection: 'row',
-            alignItems: 'center',
-            paddingHorizontal: 5,
-          }}>
-          <Text
-            style={{
-              paddingLeft: 10,
-              fontFamily: 'AnekBangla-Medium',
-              color: 'black',
-              fontWeight: '400',
-              fontSize: 17,
-              letterSpacing: 2,
-            }}>
-            Gain Weight
-          </Text>
-          <PureRoundedCheckbox
-            // text=""
-            isChecked={checked}
-            // checkedColor={checkedColor}
-            // uncheckedColor={uncheckedColor}
-            outerStyle={{borderColor: 'white'}}
-            checkedColor="#1B1561"
-            onPress={() => setChecked(!checked1)}>
-            <Image
-              style={{
-                resizeMode: 'contain',
-                width: getWidth(5),
-                // borderWidth: 1,
-                borderColor: 'red',
-                height: getHeight(2),
-              }}
-              source={require('../../assets/images/tick.png')}
-            />
-          </PureRoundedCheckbox>
-        </View>
-        <View
-          style={{
-            width: getWidth(90),
-            borderRadius: 20,
-
-            height: getHeight(7),
-            borderColor: '#F5F5F5',
-            backgroundColor: 'white',
-            // borderWidth: 1,
-            shadowColor: 'rgba(103, 128, 159)',
-
-            elevation: 10,
-            justifyContent: 'space-between',
-            flexDirection: 'row',
-            alignItems: 'center',
-            paddingHorizontal: 5,
-          }}>
-          <Text
-            style={{
-              paddingLeft: 10,
-              fontFamily: 'AnekBangla-Medium',
-              color: 'black',
-              fontWeight: '400',
-              fontSize: 17,
-              letterSpacing: 2,
-            }}>
-            Live healthier
-          </Text>
-          <PureRoundedCheckbox
-            // text=""
-            isChecked={checked}
-            // checkedColor={checkedColor}
-            // uncheckedColor={uncheckedColor}
-            outerStyle={{borderColor: 'white'}}
-            checkedColor="#1B1561"
-            onPress={() => setChecked(!checked)}>
-            <Image
-              style={{
-                resizeMode: 'contain',
-                width: getWidth(5),
-                // borderWidth: 1,
-                borderColor: 'red',
-                height: getHeight(2),
-              }}
-              source={require('../../assets/images/tick.png')}
-            />
-          </PureRoundedCheckbox>
-        </View>
-
-        <View
-          style={{
-            width: getWidth(90),
-            borderRadius: 20,
-
-            height: getHeight(7),
-            borderColor: '#F5F5F5',
-            backgroundColor: 'white',
-            // borderWidth: 1,
-            shadowColor: 'rgba(103, 128, 159)',
-
-            elevation: 10,
-            justifyContent: 'space-between',
-            flexDirection: 'row',
-            alignItems: 'center',
-            paddingHorizontal: 5,
-          }}>
-          <Text
-            style={{
-              paddingLeft: 10,
-              fontFamily: 'AnekBangla-Medium',
-              color: 'black',
-              fontWeight: '400',
-              fontSize: 17,
-              letterSpacing: 2,
-            }}>
-            Use the app without a goal
-          </Text>
-          <PureRoundedCheckbox
-            // text=""
-            isChecked={checked}
-            // checkedColor={checkedColor}
-            // uncheckedColor={uncheckedColor}
-            checkedColor="#1B1561"
-            outerStyle={{borderColor: 'white'}}
-            onPress={() => setChecked(!checked)}>
-            <Image
-              style={{
-                resizeMode: 'contain',
-                width: getWidth(5),
-                // borderWidth: 1,
-                borderColor: 'red',
-                height: getHeight(2),
-              }}
-              source={require('../../assets/images/tick.png')}
-            />
-          </PureRoundedCheckbox>
-        </View>
-      </View>
-      <View
-        style={{
-          alignItems: 'center',
-          borderColor: 'red',
+          alignItems: "center",
+          borderColor: "red",
           height: getHeight(15),
-          justifyContent: 'flex-end',
-          backgroundColor: 'white',
+          justifyContent: "flex-end",
+
           width: getWidth(99),
-        }}>
+        }}
+      >
         <TouchableOpacity
-          onPress={() => navigation.navigate('UpdateWeight')}
-          style={{
-            height: 55,
-            margin: 12,
-            borderWidth: 1,
-            padding: 14,
-            borderRadius: 20,
-            borderColor: '#1B1561',
-            backgroundColor: '#1B1561',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: getWidth(65),
-          }}>
-          <Text
-            style={{
-              fontFamily: 'AnekBangla-Medium',
-              color: 'white',
-              fontWeight: '500',
-              fontSize: 18,
-              letterSpacing: 2,
-            }}>
-            Update
-          </Text>
+          onPress={() => navigation.navigate("UpdateWeight")}
+          style={globalstyles.buttonStyle}
+        >
+          <Text style={globalstyles.buttonText}>Update</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </LinearGradient>
   );
 };
 const styles = StyleSheet.create({
-  input: {
-    height: 55,
-    margin: 8,
-    borderWidth: 1,
-    padding: 14,
-    borderRadius: 20,
-    borderColor: '#1B1561',
+  itemContainer: {
+    paddingVertical: 10,
+    height: getHeight(50),
+    width: getWidth(97),
+    borderColor: "red",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    shadowColor: "rgba(103, 128, 159, 0.5)", // Adjust the shadow color as needed
+    shadowOffset: { width: 0, height: 5 }, // Adjust the shadow offset as needed
+    shadowOpacity: 1, // Adjust the shadow opacity as needed
+    shadowRadius: 10, // Adjust the shadow radius as needed
+    elevation: Platform.OS === "android" ? 0 : 5,
   },
 });
 export default ChangeGoal;

@@ -1,34 +1,21 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import {
-  View,
-  Text,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
-  StyleSheet,
-  TextInput,
-  KeyboardAvoidingView,
-  ScrollView,
-  Modal,
-  TouchableWithoutFeedback,
-  Pressable,
   Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
 } from 'react-native';
-import {getHeight, getWidth} from '../functions/CommonFunctions';
 import KeyBoardHandle from '../Components/KeyboardHandle';
-import {Button, CheckBox} from '@rneui/themed';
+import { getHeight, getWidth } from '../functions/CommonFunctions';
 
-import RadioForm, {
-  RadioButton,
-  RadioButtonInput,
-  RadioButtonLabel,
-} from 'react-native-simple-radio-button';
 
-import {useNavigation} from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/core';
 import LinearGradient from 'react-native-linear-gradient';
-import {SvgXml} from 'react-native-svg';
-import {backward, preformly} from '../../assets/svg';
+import { SvgXml } from 'react-native-svg';
+import { backward, preformly } from '../../assets/svg';
 
 const UpdateWeightTraining = () => {
   const navigation = useNavigation();

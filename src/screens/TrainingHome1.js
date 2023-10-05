@@ -1,19 +1,17 @@
-import React, {useState} from 'react';
+import { useNavigation } from "@react-navigation/core";
+import React, { useState } from "react";
 import {
-  View,
+  Modal,
+  Platform,
+  ScrollView,
+  StyleSheet,
   Text,
   TouchableOpacity,
-  Image,
-  ScrollView,
   TouchableWithoutFeedback,
-  StyleSheet,
-  Platform,
-} from 'react-native';
-import {getWidth, getHeight} from '../functions/CommonFunctions';
-import {Modal} from 'react-native';
-import {Navigation} from 'react-native-feather';
-import {useNavigation} from '@react-navigation/core';
-import LinearGradient from 'react-native-linear-gradient';
+  View,
+} from "react-native";
+import LinearGradient from "react-native-linear-gradient";
+import { SvgXml } from "react-native-svg";
 import {
   bicep,
   chart,
@@ -29,1319 +27,649 @@ import {
   runningMan,
   sleep,
   spark,
-} from '../../assets/svg';
-import {SvgXml} from 'react-native-svg';
+} from "../../assets/svg";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
+import { RFValue } from "react-native-responsive-fontsize";
+import fonts from "../Constants/fonts";
+import { globalstyles } from "../styles/globalestyles";
+import { moderateScale } from "react-native-size-matters";
 
 const TrainingHome1 = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation();
   return (
     <>
-      <ScrollView>
-        <LinearGradient
-          style={{
-            alignItems: 'center',
-            paddingVertical: 30,
-            borderColor: 'red',
-            height: '100%',
-            // backgroundColor: 'white',
-            // borderWidth:10
-          }}
-          colors={['#FDFFF4', '#BBC1AD']}
-          start={{x: 0, y: 0}}
-          end={{x: 0.8, y: 0}}
-          // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-          // locations={{x:0,y:0.5,z:0.6}}
-          // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
+      <LinearGradient
+        style={{
+          alignItems: "center",
+          paddingVertical: 30,
+          borderColor: "red",
+          height: "100%",
+        }}
+        colors={["#FDFFF4", "#BBC1AD"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0.8, y: 0 }}
+      >
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          bounces={false}
+          contentContainerStyle={{ alignItems: "center" }}
         >
           <SvgXml
             width={getWidth(45)}
             height={getHeight(5)}
             xml={preformly}
-            style={{marginTop: Platform.OS === 'ios' ? 20 : 0}}
+            style={{ marginTop: Platform.OS === "ios" ? 20 : 0 }}
           />
-          {/* <Text
-            style={{
-              fontFamily: 'Modak-Regular',
-              color: '#1B1561',
-              fontWeight: '400',
-              fontSize: 30,
-            }}>
-            Preformly
-          </Text> */}
-          <View
-            style={{
-              flexDirection: 'row',
-              //   borderWidth: 1,
-              borderColor: 'red',
-              width: getWidth(90),
-              height: getHeight(10),
-              justifyContent: 'space-between',
-            }}>
+
+          <View style={styles.topRow}>
             <View
               style={{
-                // borderWidth: 1,
-                borderColor: 'green',
                 width: getWidth(70),
-                justifyContent: 'center',
-                // alignItems: 'center',
-              }}>
+                justifyContent: "center",
+              }}
+            >
+              <Text style={styles.morningmsgText}>Good Morning,</Text>
               <Text
                 style={{
-                  fontFamily: 'AnekBangla-Light',
-                  color: 'black',
-                  fontWeight: '400',
-                  fontSize: 16,
-                  letterSpacing: 2,
-                }}>
-                Good Morning,
-              </Text>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'black',
-                  fontWeight: '500',
+                  fontFamily: "AnekBangla-Medium",
+                  color: "black",
+                  fontWeight: "500",
                   fontSize: 26,
                   letterSpacing: 2,
-                }}>
+                  includeFontPadding: false,
+                }}
+              >
                 Alex
               </Text>
             </View>
             <TouchableOpacity
-              onPress={() => navigation.navigate('ProfileTrainingScreen')}
+              onPress={() => navigation.navigate("ProfileTrainingScreen")}
               style={{
-                // borderWidth: 0.5,
-                borderColor: 'grey',
-                // borderRadius: 40,
-                justifyContent: 'center',
-                width: getWidth(20),
-              }}>
-              <SvgXml width={getWidth(20)} xml={man} />
-              {/* <Image
-                style={{
-                  resizeMode: 'contain',
-                  width: getWidth(20),
-                  // borderWidth: 1,
-                  borderColor: 'red',
-                  //   height: getHeight(20),
-                }}
-                source={require('../../assets/images/man.png')}
-              /> */}
+                borderColor: "grey",
+                justifyContent: "center",
+                width: getWidth(15),
+              }}
+            >
+              <SvgXml width={getWidth(15)} xml={man} />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate('StepCounter')}>
-            <View
-              style={{
-                borderWidth: 1,
-                borderColor: 'grey',
-                marginTop: 20,
-                width: getWidth(90),
-                height: getHeight(25),
-                borderRadius: 20,
-                justifyContent: 'center',
-
-                flexDirection: 'row',
-                // alignItems: 'center',
-              }}>
+          <TouchableOpacity onPress={() => navigation.navigate("StepCounter")}>
+            <View style={styles.stepsRow}>
               <View
                 style={{
-                  // borderWidth: 1,
-                  borderColor: 'grey',
-                  // marginTop: 20,
                   width: getWidth(40),
-                  height: getHeight(25),
-                  borderRadius: 20,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
+                  height: getHeight(20),
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
                 <SvgXml
                   width={getWidth(30)}
                   height={getHeight(20)}
                   xml={chart}
                 />
-                {/* <Image
+                <Text
                   style={{
-                    resizeMode: 'contain',
-                    width: getWidth(30),
-                    // borderWidth: 1,
-                    borderColor: 'red',
-                    //   height: getHeight(20),
+                    position: "absolute",
+                    fontSize: RFValue(25),
+                    fontFamily: fonts.AnekBanglaMedium,
                   }}
-                  source={require('../../assets/images/Chart.png')}
-                /> */}
+                >
+                  85%
+                </Text>
               </View>
               <View
                 style={{
-                  // borderWidth: 1,
-                  borderColor: 'grey',
-                  paddingTop: 20,
-                  // marginTop: 20,
+                  paddingTop: 10,
                   width: getWidth(50),
                   height: getHeight(20),
                   borderRadius: 20,
-                  //   justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
+                  alignItems: "center",
+                }}
+              >
                 <SvgXml width={getWidth(30)} xml={runningMan} />
-                {/* <Image
-                  style={{
-                    resizeMode: 'contain',
-                    width: getWidth(30),
-                    // borderWidth: 1,
-                    borderColor: 'red',
-                    //   height: getHeight(20),
-                  }}
-                  source={require('../../assets/images/userRun.png')}
-                /> */}
+
                 <Text
                   style={{
-                    fontFamily: 'AnekBangla-Medium',
-                    color: 'black',
-                    fontWeight: '200',
+                    fontFamily: fonts.AnekBanglaSemiBold,
+                    color: "black",
+                    fontWeight: "500",
                     fontSize: 15,
                     letterSpacing: 2,
-                  }}>
+                  }}
+                >
                   Steps
                 </Text>
                 <View
                   style={{
-                    // borderWidth: 1,
-                    borderColor: 'grey',
+                    borderColor: "grey",
                     paddingLeft: 20,
-                    // marginTop: 20,
                     width: getWidth(50),
                     height: getHeight(7),
                     borderRadius: 20,
-                    flexDirection: 'row',
-                    //   justifyContent: 'center',
-                    // alignItems: 'center',
-                  }}>
+                    flexDirection: "row",
+                  }}
+                >
                   <View
                     style={{
-                      // borderWidth: 1,
-                      borderColor: 'grey',
-                      // marginTop: 20,
+                      borderColor: "grey",
                       width: getWidth(30),
                       height: getHeight(7),
                       borderRadius: 20,
-                      //   justifyContent: 'center',
-                      // alignItems: 'center',
-                    }}>
+                    }}
+                  >
                     <Text
                       style={{
-                        fontFamily: 'AnekBangla-Medium',
-                        color: '#282B2A',
-                        fontWeight: '600',
+                        fontFamily: "AnekBangla-Medium",
+                        color: "#282B2A",
+                        fontWeight: "600",
                         fontSize: 40,
                         letterSpacing: 2,
-                      }}>
+                      }}
+                    >
                       6,566
                     </Text>
                   </View>
                   <View
                     style={{
-                      // borderWidth: 1,
-                      borderColor: 'grey',
-                      // marginTop: 20,
+                      borderColor: "grey",
                       width: getWidth(20),
                       height: getHeight(7),
                       borderRadius: 20,
-                      justifyContent: 'center',
-                      // alignItems: 'center',
-                    }}>
-                    <Text
-                      style={{
-                        fontFamily: 'AnekBangla-Medium',
-                        color: '#282B2A',
-                        fontWeight: '500',
-                        fontSize: 12,
-                        letterSpacing: 2,
-                      }}>
-                      Steps
-                    </Text>
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Text style={styles.stepsText}>Steps</Text>
                   </View>
                 </View>
                 <View
                   style={{
-                    // borderWidth: 1,
-                    borderColor: 'grey',
+                    borderColor: "grey",
                     paddingLeft: 10,
                     marginTop: 6,
                     width: getWidth(50),
                     height: getHeight(3),
                     borderRadius: 20,
-                    // flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
                   <Text
                     style={{
-                      fontFamily: 'AnekBangla-Medium',
-                      color: '#9EA6A4',
-                      fontWeight: '400',
+                      fontFamily: "AnekBangla-Medium",
+                      color: "#9EA6A4",
+                      fontWeight: "400",
                       fontSize: 12,
                       letterSpacing: 2,
-                    }}>
+                    }}
+                  >
                     of 10,000 steps
                   </Text>
                 </View>
               </View>
             </View>
           </TouchableOpacity>
-          <View
+
+          <TouchableOpacity
             style={{
-              alignItems: 'center',
-              borderColor: 'red',
-              height: getHeight(10),
-              // justifyContent: 'flex-end',
-              // borderWidth: 1,
-            }}>
-            <TouchableOpacity
-              // onPress={() => navigation.navigate('TrainingHome1')}
-              style={{
-                height: 55,
-                margin: 12,
-                //   borderWidth: 1,
-                padding: 14,
-                borderRadius: 20,
-                borderColor: '#1B1561',
-                backgroundColor: '#1B1561',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: getWidth(80),
-              }}>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'white',
-                  fontWeight: '400',
-                  fontSize: 20,
-                  letterSpacing: 2,
-                }}>
-                TO SCHEDULE
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <View
-            style={{
-              alignItems: 'center',
-              borderColor: 'red',
-              height: getHeight(40),
+              ...globalstyles.buttonStyle,
               width: getWidth(90),
-              marginTop: 10,
-              // justifyContent: 'flex-end',
-              // borderWidth: 1,
-            }}>
-            <View
-              style={{
-                // alignItems: 'center',
-                borderColor: 'green',
-                height: getHeight(20),
-                width: getWidth(90),
-                justifyContent: 'space-between',
-                //   borderWidth: 1,
-                flexDirection: 'row',
-              }}>
-              <View
-                style={{
-                  alignItems: 'center',
-                  borderColor: 'blue',
-                  borderRadius: 20,
-                  height: getHeight(17),
-                  backgroundColor: '#ebdfd7',
-                  // opacity: 0.1,
-                  width: getWidth(40),
-                  // justifyContent: 'flex-end',
-                  // borderWidth: 1,
-                }}>
-                <View
-                  style={{
-                    alignItems: 'center',
-                    borderColor: 'blue',
-                    borderRadius: 20,
-                    height: getHeight(8),
-                    // backgroundColor:'#D2416E',
-                    //   opacity:0.1,
-                    width: getWidth(40),
-                    //   justifyContent: 'flex-start',
-                    paddingLeft: 5,
-                    // borderWidth: 2,
-                    flexDirection: 'row',
-                  }}>
+              marginVertical: moderateScale(10),
+            }}
+          >
+            <Text style={globalstyles.buttonText}>TO SCHEDULE</Text>
+          </TouchableOpacity>
+
+          <View style={styles.boxesContainer}>
+            <View style={styles.boxesRow}>
+              <View style={styles.boxStyle}>
+                <View style={styles.iconTextRow}>
                   <SvgXml
                     width={getWidth(10)}
                     height={getHeight(3)}
                     xml={fire}
                   />
-                  {/* <Image
-                    style={{
-                      resizeMode: 'contain',
-                      width: getWidth(10),
-                      // borderWidth: 1,
-                      borderColor: 'red',
-                      height: getHeight(3),
-                    }}
-                    source={require('../../assets/images/fire.png')}
-                  /> */}
-                  <Text
-                    style={{
-                      fontFamily: 'AnekBangla-Bold',
-                      color: '#D2416E',
-                      fontWeight: '500',
-                      fontSize: 20,
-                      letterSpacing: 2,
-                    }}>
-                    Calories
-                  </Text>
+                  <Text style={styles.iconText}>Calories</Text>
                 </View>
-                <View
-                  style={{
-                    alignItems: 'center',
-                    borderColor: 'blue',
-                    borderRadius: 20,
-                    height: getHeight(8),
-                    // backgroundColor:'#D2416E',
-                    //   opacity:0.1,
-                    width: getWidth(40),
-                    //   justifyContent: 'flex-start',
-                    paddingLeft: 5,
-                    //   borderWidth: 2,
-                    //   flexDirection: 'row',
-                  }}>
-                  <Text
-                    style={{
-                      fontFamily: 'AnekBangla-Bold',
-                      color: '#D2416E',
-                      fontWeight: '700',
-                      fontSize: 40,
-                      letterSpacing: 2,
-                    }}>
-                    618
-                    <Text
-                      style={{
-                        fontFamily: 'AnekBangla-Medium',
-                        color: '#D2416E',
-                        fontWeight: '400',
-                        fontSize: 16,
-                        letterSpacing: 2,
-                      }}>
-                      kcal
-                    </Text>
-                  </Text>
-                </View>
+                <Text style={styles.numberText}>
+                  618
+                  <Text style={styles.unitText}>kcal</Text>
+                </Text>
               </View>
-              <View
-                style={{
-                  alignItems: 'center',
-                  borderColor: 'blue',
-                  borderRadius: 20,
-                  height: getHeight(17),
-                  backgroundColor: '#bfbfbc',
-                  // opacity: 0.1,
-                  width: getWidth(40),
-                  // justifyContent: 'flex-end',
-                  // borderWidth: 1,
-                }}>
-                <View
-                  style={{
-                    alignItems: 'center',
-                    borderColor: 'blue',
-                    borderRadius: 20,
-                    height: getHeight(8),
-                    // backgroundColor:'#D2416E',
-                    //   opacity:0.1,
-                    width: getWidth(40),
-                    //   justifyContent: 'flex-start',
-                    paddingLeft: 5,
-                    // borderWidth: 2,
-                    flexDirection: 'row',
-                  }}>
+              <View style={{ ...styles.boxStyle, backgroundColor: "#bfbfbc" }}>
+                <View style={styles.iconTextRow}>
                   <SvgXml
                     width={getWidth(10)}
                     height={getHeight(3)}
                     xml={spark}
                   />
-                  {/* <Image
-                    style={{
-                      resizeMode: 'contain',
-                      width: getWidth(10),
-                      // borderWidth: 1,
-                      borderColor: 'red',
-                      height: getHeight(3),
-                    }}
-                    source={require('../../assets/images/bolt.png')}
-                  /> */}
-                  <Text
-                    style={{
-                      fontFamily: 'AnekBangla-Bold',
-                      color: '#7042C9',
-                      fontWeight: '500',
-                      fontSize: 20,
-                      letterSpacing: 2,
-                    }}>
+                  <Text style={{ ...styles.iconText, color: "#7042C9" }}>
                     Exercise
                   </Text>
                 </View>
-                <View
-                  style={{
-                    alignItems: 'center',
-                    borderColor: 'blue',
-                    borderRadius: 20,
-                    height: getHeight(8),
-                    // backgroundColor:'#D2416E',
-                    //   opacity:0.1,
-                    width: getWidth(40),
-                    //   justifyContent: 'flex-start',
-                    paddingLeft: 5,
-                    //   borderWidth: 2,
-                    //   flexDirection: 'row',
-                  }}>
-                  <Text
-                    style={{
-                      fontFamily: 'AnekBangla-Bold',
-                      color: '#7042C9',
-                      fontWeight: '700',
-                      fontSize: 40,
-                      letterSpacing: 2,
-                    }}>
-                    24
-                    <Text
-                      style={{
-                        fontFamily: 'AnekBangla-Medium',
-                        color: '#7042C9',
-                        fontWeight: '400',
-                        fontSize: 16,
-                        letterSpacing: 2,
-                      }}>
-                      min
-                    </Text>
+                <Text style={{ ...styles.numberText, color: "#7042C9" }}>
+                  24
+                  <Text style={{ ...styles.unitText, color: "#7042C9" }}>
+                    min
                   </Text>
-                </View>
+                </Text>
               </View>
             </View>
-            <View
-              style={{
-                // alignItems: 'center',
-                borderColor: 'black',
-                height: getHeight(20),
-                width: getWidth(90),
-                justifyContent: 'space-between',
-                //   borderWidth: 1,
-                flexDirection: 'row',
-              }}>
-              <View
-                style={{
-                  alignItems: 'center',
-                  borderColor: 'blue',
-                  borderRadius: 20,
-                  height: getHeight(17),
-                  backgroundColor: '#d6e9dd',
-                  // opacity: 0.1,
-                  width: getWidth(40),
-                  // justifyContent: 'flex-end',
-                  // borderWidth: 1,
-                }}>
-                <View
-                  style={{
-                    alignItems: 'center',
-                    borderColor: 'blue',
-                    borderRadius: 20,
-                    height: getHeight(8),
-                    // backgroundColor:'#D2416E',
-                    //   opacity:0.1,
-                    width: getWidth(40),
-                    //   justifyContent: 'flex-start',
-                    paddingLeft: 5,
-                    //   borderWidth: 2,
-                    flexDirection: 'row',
-                  }}>
+            <View style={styles.boxesRow}>
+              <View style={{ ...styles.boxStyle, backgroundColor: "#d6e9dd" }}>
+                <View style={styles.iconTextRow}>
                   <SvgXml
                     width={getWidth(10)}
                     height={getHeight(3)}
                     xml={flag}
                   />
-                  {/* <Image
-                    style={{
-                      resizeMode: 'contain',
-                      width: getWidth(10),
-                      // borderWidth: 1,
-                      borderColor: 'red',
-                      height: getHeight(3),
-                    }}
-                    source={require('../../assets/images/flag.png')}
-                  /> */}
-                  <Text
-                    style={{
-                      fontFamily: 'AnekBangla-Bold',
-                      color: '#0DB1AD',
-                      fontWeight: '500',
-                      fontSize: 20,
-                      letterSpacing: 2,
-                    }}>
+                  <Text style={{ ...styles.iconText, color: "#0DB1AD" }}>
                     Walking
                   </Text>
                 </View>
-                <View
-                  style={{
-                    alignItems: 'center',
-                    borderColor: 'blue',
-                    borderRadius: 20,
-                    height: getHeight(8),
-                    // backgroundColor:'#D2416E',
-                    //   opacity:0.1,
-                    width: getWidth(40),
-                    //   justifyContent: 'flex-start',
-                    paddingLeft: 5,
-                    //   borderWidth: 2,
-                    //   flexDirection: 'row',
-                  }}>
-                  <Text
-                    style={{
-                      fontFamily: 'AnekBangla-Bold',
-                      color: '#0DB1AD',
-                      fontWeight: '700',
-                      fontSize: 40,
-                      letterSpacing: 2,
-                    }}>
-                    10
-                    <Text
-                      style={{
-                        fontFamily: 'AnekBangla-Medium',
-                        color: '#0DB1AD',
-                        fontWeight: '400',
-                        fontSize: 16,
-                        letterSpacing: 2,
-                      }}>
-                      km
-                    </Text>
+                <Text style={{ ...styles.numberText, color: "#0DB1AD" }}>
+                  10
+                  <Text style={{ ...styles.unitText, color: "#0DB1AD" }}>
+                    km
                   </Text>
-                </View>
+                </Text>
               </View>
-              <View
-                style={{
-                  alignItems: 'center',
-                  borderColor: 'blue',
-                  borderRadius: 20,
-                  height: getHeight(17),
-                  backgroundColor: '#b5c4bc',
-                  // opacity: 0.1,
-                  width: getWidth(40),
-                  // justifyContent: 'flex-end',
-                  // borderWidth: 1,
-                }}>
-                <View
-                  style={{
-                    alignItems: 'center',
-                    borderColor: 'blue',
-                    borderRadius: 20,
-                    height: getHeight(8),
-                    // backgroundColor:'#D2416E',
-                    //   opacity:0.1,
-                    width: getWidth(40),
-                    //   justifyContent: 'flex-start',
-                    paddingLeft: 5,
-                    // borderWidth: 2,
-                    flexDirection: 'row',
-                  }}>
+
+              <View style={{ ...styles.boxStyle, backgroundColor: "#b5c4bc" }}>
+                <View style={styles.iconTextRow}>
                   <SvgXml
                     width={getWidth(10)}
                     height={getHeight(3)}
                     xml={sleep}
                   />
-                  {/* <Image
-                    style={{
-                      resizeMode: 'contain',
-                      width: getWidth(10),
-                      // borderWidth: 1,
-                      borderColor: 'red',
-                      height: getHeight(3),
-                    }}
-                    source={require('../../assets/images/sleep.png')}
-                  /> */}
-                  <Text
-                    style={{
-                      fontFamily: 'AnekBangla-Bold',
-                      color: '#197BD2',
-                      fontWeight: '500',
-                      fontSize: 20,
-                      letterSpacing: 2,
-                    }}>
+                  <Text style={{ ...styles.iconText, color: "#197BD2" }}>
                     Sleep
                   </Text>
                 </View>
-                <View
-                  style={{
-                    alignItems: 'center',
-                    borderColor: 'blue',
-                    borderRadius: 20,
-                    height: getHeight(8),
-                    // backgroundColor:'#D2416E',
-                    //   opacity:0.1,
-                    width: getWidth(40),
-                    //   justifyContent: 'flex-start',
-                    paddingLeft: 5,
-                    //   borderWidth: 2,
-                    //   flexDirection: 'row',
-                  }}>
-                  <Text
-                    style={{
-                      fontFamily: 'AnekBangla-Bold',
-                      color: '#197BD2',
-                      fontWeight: '700',
-                      fontSize: 40,
-                      letterSpacing: 2,
-                    }}>
-                    8
-                    <Text
-                      style={{
-                        fontFamily: 'AnekBangla-Medium',
-                        color: '#197BD2',
-                        fontWeight: '400',
-                        fontSize: 16,
-                        letterSpacing: 2,
-                      }}>
-                      hrs
-                    </Text>
+                <Text style={{ ...styles.numberText, color: "#197BD2" }}>
+                  8
+                  <Text style={{ ...styles.unitText, color: "#197BD2" }}>
+                    hrs
                   </Text>
-                </View>
+                </Text>
               </View>
             </View>
           </View>
 
           <View
             style={{
-              alignItems: 'center',
-              borderColor: 'red',
+              alignItems: "center",
+              borderColor: "red",
               height: getHeight(45),
               width: getWidth(90),
               marginTop: 10,
-              // justifyContent: 'flex-end',
-              // borderWidth: 1,
-            }}>
-            <View
+            }}
+          >
+            <Text
               style={{
-                //   alignItems: 'center',
-                borderColor: 'red',
-                height: getHeight(5),
-                width: getWidth(90),
-                // marginTop: 10,
-                // justifyContent: 'flex-end',
-                //   borderWidth: 1,
-              }}>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'black',
-                  fontWeight: '500',
-                  fontSize: 18,
-                  letterSpacing: 2,
-                }}>
-                How would you like to proceed:
-              </Text>
-            </View>
-            <View
-              style={{
-                // alignItems: 'center',
-                borderColor: 'green',
-                height: getHeight(20),
-                width: getWidth(90),
-                justifyContent: 'space-between',
-                // borderWidth: 1,
-                flexDirection: 'row',
-              }}>
-              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-                <LinearGradient
-                  style={{
-                    alignItems: 'center',
-                    // borderColor: 'blue',
-                    borderRadius: 20,
-                    height: getHeight(17),
-                    borderColor: 'grey',
-                    backgroundColor: 'white',
-                    // borderWidth: 0.5,
-                    shadowColor: 'rgba(103, 128, 159)',
+                fontFamily: "AnekBangla-Medium",
+                color: "black",
+                fontWeight: "500",
+                alignSelf: "flex-start",
+                fontSize: 18,
+                letterSpacing: 2,
+              }}
+            >
+              How would you like to proceed:
+            </Text>
 
-                    // elevation: 5,
-                    // opacity: 0.1,
-                    width: getWidth(40),
-                    justifyContent: 'space-between',
-                    paddingVertical: 10,
-                    // borderWidth: 1,
-                  }}
-                  colors={['#FDFFF4', '#BBC1AD']}
-                  start={{x: 0, y: 0}}
-                  end={{x: 0.8, y: 0}}
-                  // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-                  // locations={{x:0,y:0.5,z:0.6}}
-                  // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
+            <View style={styles.boxesContainer}>
+              <View style={styles.boxesRow}>
+                <TouchableOpacity
+                  onPress={() => setModalVisible(!modalVisible)}
                 >
-                  <SvgXml
-                    width={getWidth(30)}
-                    // height={getHeight(3)}
-                    xml={dumble}
-                  />
-                  {/* <Image
+                  <LinearGradient
                     style={{
-                      resizeMode: 'contain',
-                      width: getWidth(30),
-                      //   borderWidth: 1,
-                      borderColor: 'red',
-                      //   height: getHeight(20),
+                      ...styles.boxStyle,
+                      borderWidth: 1,
+                      borderColor: "rgba(0,0,0,.3)",
+                      alignItems: "center",
                     }}
-                    source={require('../../assets/images/dumbell.png')}
-                  /> */}
-                  <Text
-                    style={{
-                      fontFamily: 'AnekBangla-Medium',
-                      color: 'black',
-                      fontWeight: '500',
-                      fontSize: 14,
-                      letterSpacing: 2,
-                    }}>
-                    Workout
-                  </Text>
-                </LinearGradient>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => navigation.navigate('History1')}>
-                <LinearGradient
-                  style={{
-                    alignItems: 'center',
-                    // borderColor: 'blue',
-                    borderRadius: 20,
-                    height: getHeight(17),
-                    borderColor: '#F5F5F5',
-                    backgroundColor: 'white',
-                    // borderWidth: 1,
-                    shadowColor: 'rgba(103, 128, 159)',
+                    colors={["#FDFFF4", "#BBC1AD"]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 0.8, y: 0 }}
+                  >
+                    <SvgXml
+                      width={getWidth(30)}
+                      xml={dumble}
+                      style={{
+                        marginTop: getHeight(3),
+                      }}
+                    />
 
-                    // elevation: 5,
-                    // opacity: 0.1,
-                    width: getWidth(40),
-                    justifyContent: 'space-between',
-                    paddingVertical: 10,
-                    // borderWidth: 1,
-                  }}
-                  colors={['#FDFFF4', '#BBC1AD']}
-                  start={{x: 0, y: 0}}
-                  end={{x: 0.8, y: 0}}
-                  // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-                  // locations={{x:0,y:0.5,z:0.6}}
-                  // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
+                    <Text style={styles.iconBoxText}>Workout</Text>
+                  </LinearGradient>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("History1")}
                 >
-                  <SvgXml
-                    width={getWidth(30)}
-                    // height={getHeight(3)}
-                    xml={history}
-                  />
-                  {/* <Image
+                  <LinearGradient
                     style={{
-                      resizeMode: 'contain',
-                      width: getWidth(20),
-                      //   borderWidth: 1,
-                      borderColor: 'red',
-                      //   height: getHeight(20),
+                      ...styles.boxStyle,
+                      borderWidth: 1,
+                      borderColor: "rgba(0,0,0,.3)",
+                      alignItems: "center",
                     }}
-                    source={require('../../assets/images/time.png')}
-                  /> */}
-                  <Text
-                    style={{
-                      fontFamily: 'AnekBangla-Medium',
-                      color: 'black',
-                      fontWeight: '500',
-                      fontSize: 14,
-                      letterSpacing: 2,
-                    }}>
-                    Training history
-                  </Text>
-                </LinearGradient>
-              </TouchableOpacity>
-            </View>
-            <View
-              style={{
-                // alignItems: 'center',
-                borderColor: 'green',
-                height: getHeight(20),
-                width: getWidth(90),
-                justifyContent: 'space-between',
-                //   borderWidth: 1,
-                flexDirection: 'row',
-              }}>
-              <TouchableOpacity>
-                <LinearGradient
-                  style={{
-                    alignItems: 'center',
-                    // borderColor: 'blue',
-                    borderRadius: 20,
-                    height: getHeight(17),
-                    borderColor: '#F5F5F5',
-                    backgroundColor: 'white',
-                    // borderWidth: 1,
-                    shadowColor: 'rgba(103, 128, 159)',
+                    colors={["#FDFFF4", "#BBC1AD"]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 0.8, y: 0 }}
+                  >
+                    <SvgXml
+                      width={getWidth(30)}
+                      style={{
+                        marginTop: getHeight(3),
+                      }}
+                      xml={history}
+                    />
 
-                    // elevation: 5,
-                    // opacity: 0.1,
-                    width: getWidth(40),
-                    justifyContent: 'space-between',
-                    paddingVertical: 10,
-                    // borderWidth: 1,
-                  }}
-                  colors={['#FDFFF4', '#BBC1AD']}
-                  start={{x: 0, y: 0}}
-                  end={{x: 0.8, y: 0}}
-                  // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-                  // locations={{x:0,y:0.5,z:0.6}}
-                  // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
-                >
-                  <SvgXml
-                    width={getWidth(30)}
-                    // height={getHeight(3)}
-                    xml={community}
-                  />
-                  {/* <Image
+                    <Text
+                      style={{ ...styles.iconBoxText, marginTop: getHeight(1) }}
+                    >
+                      Training history
+                    </Text>
+                  </LinearGradient>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.boxesRow}>
+                <TouchableOpacity>
+                  <LinearGradient
                     style={{
-                      resizeMode: 'contain',
-                      width: getWidth(30),
-                      //   borderWidth: 1,
-                      borderColor: 'red',
-                      //   height: getHeight(20),
+                      ...styles.boxStyle,
+                      borderWidth: 1,
+                      borderColor: "rgba(0,0,0,.3)",
+                      alignItems: "center",
                     }}
-                    source={require('../../assets/images/community.png')}
-                  /> */}
-                  <Text
-                    style={{
-                      fontFamily: 'AnekBangla-Medium',
-                      color: 'black',
-                      fontWeight: '500',
-                      fontSize: 14,
-                      letterSpacing: 2,
-                    }}>
-                    Community
-                  </Text>
-                </LinearGradient>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => navigation.navigate('TrainingDiary2')}>
-                <LinearGradient
-                  style={{
-                    alignItems: 'center',
-                    // borderColor: 'blue',
-                    borderRadius: 20,
-                    height: getHeight(17),
-                    borderColor: '#F5F5F5',
-                    backgroundColor: 'white',
-                    // borderWidth: 1,
-                    shadowColor: 'rgba(103, 128, 159)',
+                    colors={["#FDFFF4", "#BBC1AD"]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 0.8, y: 0 }}
+                  >
+                    <SvgXml
+                      width={getWidth(30)}
+                      xml={community}
+                      style={{
+                        marginTop: getHeight(3),
+                      }}
+                    />
 
-                    // elevation: 5,
-                    // opacity: 0.1,
-                    width: getWidth(40),
-                    justifyContent: 'space-between',
-                    paddingVertical: 10,
-                    // borderWidth: 1,
-                  }}
-                  colors={['#FDFFF4', '#BBC1AD']}
-                  start={{x: 0, y: 0}}
-                  end={{x: 0.8, y: 0}}
-                  // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-                  // locations={{x:0,y:0.5,z:0.6}}
-                  // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
+                    <Text
+                      style={{ ...styles.iconBoxText, marginTop: getHeight(2) }}
+                    >
+                      Community
+                    </Text>
+                  </LinearGradient>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("TrainingDiary2")}
                 >
-                  <SvgXml
-                    width={getWidth(20)}
-                    height={getHeight(9)}
-                    xml={diary}
-                  />
-                  {/* <Image
+                  <LinearGradient
                     style={{
-                      resizeMode: 'contain',
-                      width: getWidth(20),
-                      //   borderWidth: 1,
-                      borderColor: 'red',
-                      //   height: getHeight(20),
+                      ...styles.boxStyle,
+                      borderWidth: 1,
+                      borderColor: "rgba(0,0,0,.3)",
+                      alignItems: "center",
                     }}
-                    source={require('../../assets/images/diary.png')}
-                  /> */}
-                  <Text
-                    style={{
-                      fontFamily: 'AnekBangla-Medium',
-                      color: 'black',
-                      fontWeight: '500',
-                      fontSize: 14,
-                      letterSpacing: 2,
-                    }}>
-                    Training diary
-                  </Text>
-                </LinearGradient>
-              </TouchableOpacity>
+                    colors={["#FDFFF4", "#BBC1AD"]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 0.8, y: 0 }}
+                  >
+                    <SvgXml
+                      width={getWidth(30)}
+                      style={{
+                        marginTop: getHeight(3),
+                      }}
+                      xml={diary}
+                    />
+                    <Text
+                      style={{ ...styles.iconBoxText, marginTop: getHeight(2) }}
+                    >
+                      Training diary
+                    </Text>
+                  </LinearGradient>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-        </LinearGradient>
-        <Modal animationType="slide" transparent={true} visible={modalVisible}>
-          <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
-            <View style={styles.centeredView}>
-              <LinearGradient
-                style={styles.modalView}
-                colors={['#FDFFF4', '#BBC1AD']}
-                start={{x: 0, y: 0}}
-                end={{x: 0.8, y: 0}}
-                // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-                // locations={{x:0,y:0.5,z:0.6}}
-                // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
+        </ScrollView>
+      </LinearGradient>
+      <Modal animationType="slide" transparent={true} visible={modalVisible}>
+        <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+          <View style={styles.centeredView}>
+            <LinearGradient
+              style={styles.modalView}
+              colors={["#FDFFF4", "#BBC1AD"]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 0.8, y: 0 }}
+            >
+              <View style={{ borderColor: "red", paddingTop: 5 }}>
+                <View style={styles.topBar} />
+              </View>
+
+              <Text
+                style={{
+                  fontFamily: fonts.AnekBanglaMedium,
+                  color: "black",
+                  fontWeight: "400",
+                  fontSize: 17,
+                  textAlign: "center",
+                  paddingVertical: 10,
+                  letterSpacing: 2,
+                }}
               >
-                <View style={{borderColor: 'red', paddingTop: 5}}>
-                  <Text style={styles.topBar} />
-                </View>
+                Choose your workout
+              </Text>
+
+              <View style={styles.boxesRow}>
                 <View
                   style={{
-                    borderColor: 'red',
-                    paddingTop: 10,
-                    // borderWidth: 1,
-                    width: getWidth(70),
-                    height: getHeight(8),
-                    justifyContent: 'center',
-                    // paddingHorizontal:8,
-
-                    // borderBottomWidth: 1,
-                    // flexDirection: 'row',
-
-                    alignItems: 'center',
-                  }}>
-                  <Text
-                    style={{
-                      fontFamily: 'AnekBangla-Medium',
-                      color: 'black',
-                      fontWeight: '400',
-                      fontSize: 17,
-                      textAlign: 'center',
-                      // paddingVertical: 10,
-                      letterSpacing: 2,
-                    }}>
-                    Choose your workout
+                    width: getWidth(47),
+                    height: getHeight(20),
+                    justifyContent: "space-evenly",
+                    alignItems: "center",
+                  }}
+                >
+                  <TouchableOpacity>
+                    <View
+                      style={{
+                        height: getHeight(14),
+                        width: getWidth(31),
+                        borderRadius: 20,
+                        backgroundColor: "#1B1561",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <SvgXml width={getWidth(20)} xml={custom} />
+                    </View>
+                  </TouchableOpacity>
+                  <Text style={{ ...styles.iconBoxText, marginTop: 0 }}>
+                    Custom workout
                   </Text>
                 </View>
 
                 <View
                   style={{
-                    borderColor: 'red',
-                    // paddingTop: 7,
-                    // borderWidth: 1,
-                    width: getWidth(96),
+                    width: getWidth(47),
                     height: getHeight(20),
-                    justifyContent: 'space-evenly',
-                    //   paddingHorizontal: 15,
-
-                    //   borderBottomWidth: 1,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                  }}>
-                  <View
-                    style={{
-                      borderColor: 'red',
-                      // paddingTop: 7,
-                      // borderWidth: 1,
-                      width: getWidth(47),
-                      height: getHeight(20),
-                      justifyContent: 'space-evenly',
-                      //   paddingHorizontal: 15,
-
-                      //   borderBottomWidth: 1,
-                      // flexDirection: 'row',
-                      alignItems: 'center',
-                    }}>
-                    <TouchableOpacity>
-                      <View
-                        style={{
-                          // borderWidth: 1,
-                          height: getHeight(14),
-                          width: getWidth(31),
-                          borderRadius: 20,
-                          backgroundColor: '#1B1561',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                        }}>
-                        <SvgXml width={getWidth(20)} xml={custom} />
-                        {/* <Image
-                          source={require('../../assets/images/notes.png')}
-                          style={{resizeMode: 'contain', width: getWidth(20)}}
-                        /> */}
-                      </View>
-                    </TouchableOpacity>
-                    <Text
-                      style={{
-                        fontFamily: 'AnekBangla-Medium',
-                        color: 'black',
-                        fontWeight: '400',
-                        fontSize: 16,
-                        // textAlign: 'auto',
-                        // paddingVertical: 10,
-                        letterSpacing: 1,
-                      }}>
-                      Custom workout
-                    </Text>
-                  </View>
-
-                  <View
-                    style={{
-                      borderColor: 'red',
-                      // paddingTop: 7,
-                      // borderWidth: 1,
-                      width: getWidth(47),
-                      height: getHeight(20),
-                      justifyContent: 'space-evenly',
-                      //   paddingHorizontal: 15,
-
-                      //   borderBottomWidth: 1,
-                      // flexDirection: 'row',
-                      alignItems: 'center',
-                    }}>
-                    <TouchableOpacity
-                      onPress={() => navigation.navigate('TrainingBox1')}>
-                      <View
-                        style={{
-                          borderWidth: 1,
-                          height: getHeight(14),
-                          width: getWidth(31),
-                          borderRadius: 20,
-                          backgroundColor: '#1B1561',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                        }}>
-                        <SvgXml width={getWidth(20)} xml={bicep} />
-                        {/* <Image
-                          source={require('../../assets/images/bicep.png')}
-                          style={{resizeMode: 'contain', width: getWidth(20)}}
-                        /> */}
-                      </View>
-                    </TouchableOpacity>
-                    <Text
-                      style={{
-                        fontFamily: 'AnekBangla-Medium',
-                        color: 'black',
-                        fontWeight: '400',
-                        fontSize: 16,
-                        // textAlign: 'auto',
-                        // paddingVertical: 10,
-                        letterSpacing: 1,
-                      }}>
-                      Pre-made workout
-                    </Text>
-                  </View>
-                </View>
-                <View
-                  style={{
-                    alignItems: 'center',
-                    borderColor: 'red',
-                    height: getHeight(10),
-                    // justifyContent: 'flex-end',
-                    // borderWidth: 1,
-                  }}>
+                    justifyContent: "space-evenly",
+                    alignItems: "center",
+                  }}
+                >
                   <TouchableOpacity
-                    onPress={() => navigation.navigate('CreateWorkOut1')}
-                    style={{
-                      height: 55,
-                      margin: 12,
-                      //   borderWidth: 1,
-                      padding: 14,
-                      borderRadius: 20,
-                      borderColor: '#1B1561',
-                      backgroundColor: '#1B1561',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      width: getWidth(80),
-                    }}>
-                    <Text
+                    onPress={() => navigation.navigate("TrainingBox1")}
+                  >
+                    <View
                       style={{
-                        fontFamily: 'AnekBangla-Medium',
-                        color: 'white',
-                        fontWeight: '400',
-                        fontSize: 20,
-                        letterSpacing: 2,
-                      }}>
-                      Create a new workout
-                    </Text>
+                        borderWidth: 1,
+                        height: getHeight(14),
+                        width: getWidth(31),
+                        borderRadius: 20,
+                        backgroundColor: "#1B1561",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <SvgXml width={getWidth(20)} xml={bicep} />
+                    </View>
                   </TouchableOpacity>
+                  <Text style={{ ...styles.iconBoxText, marginTop: 0 }}>
+                    Pre-made workout
+                  </Text>
                 </View>
-              </LinearGradient>
-            </View>
-          </TouchableWithoutFeedback>
-        </Modal>
-      </ScrollView>
+              </View>
+              <View
+                style={{
+                  alignItems: "center",
+                  borderColor: "red",
+                  height: getHeight(10),
+                }}
+              >
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("CreateWorkOut1")}
+                  style={{
+                    ...globalstyles.buttonStyle,
+                    width: getWidth(80),
+                    marginVertical: moderateScale(10),
+                  }}
+                >
+                  <Text style={globalstyles.buttonText}>
+                    Create a new workout
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </LinearGradient>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  shadow: {
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 6},
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    elevation: 10,
+  morningmsgText: {
+    fontFamily: "AnekBangla-Light",
+    color: "black",
+    fontWeight: "400",
+    fontSize: 16,
+    letterSpacing: 2,
+    includeFontPadding: false,
   },
-  header: {
-    flexDirection: 'row',
-    //   width,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#F6F6F6',
+  topRow: {
+    flexDirection: "row",
+    borderColor: "red",
+    width: getWidth(90),
+    height: getHeight(7),
+    justifyContent: "space-between",
   },
-  headerTitle: {color: '#000', fontWeight: 'bold', fontSize: 16},
-  saveAreaViewContainer: {flex: 1, backgroundColor: '#FFF'},
-  viewContainer: {flex: 1, backgroundColor: '#FFF'},
-  scrollViewContainer: {
-    flexGrow: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: '10%',
-    paddingBottom: '20%',
-  },
-
-  dropdown1BtnStyle: {
-    width: getWidth(28),
-    height: getHeight(4),
-    backgroundColor: 'white',
-    // borderWidth: 1,
-    shadowColor: 'rgba(103, 128, 159)',
-
-    elevation: 10,
-    borderRadius: 8,
+  stepsRow: {
     borderWidth: 1,
-    borderColor: 'grey',
+    borderColor: "rgba(0,0,0,.2)",
+    marginTop: 20,
+    width: getWidth(90),
+    height: getHeight(21),
+    borderRadius: 20,
+    justifyContent: "center",
+    flexDirection: "row",
   },
-  dropdown1BtnTxtStyle: {
-    fontFamily: 'AnekBangla-Medium',
-    color: 'black',
-    fontWeight: '400',
+  boxesContainer: {
+    alignItems: "center",
+    //borderColor: "red",
+    height: getHeight(37.5),
+    width: getWidth(90),
+    marginTop: 10,
+    //  borderWidth: 1,
+  },
+  boxesRow: {
+    borderColor: "green",
+    height: getHeight(20),
+    width: getWidth(90),
+    justifyContent: "space-between",
+    flexDirection: "row",
+  },
+  boxStyle: {
+    alignItems: "center",
+    borderColor: "blue",
+    borderRadius: 20,
+    height: getHeight(17),
+    backgroundColor: "#ebdfd7",
+    width: getWidth(40),
+  },
+  iconTextRow: {
+    alignItems: "center",
+    borderColor: "blue",
+    borderRadius: 20,
+    height: getHeight(8),
+    width: getWidth(40),
+    paddingLeft: 5,
+    flexDirection: "row",
+  },
+  iconText: {
+    fontFamily: fonts.AnekBanglaMedium,
+    color: "#D2416E",
+    fontWeight: "500",
+    fontSize: 20,
+    letterSpacing: 2,
+    includeFontPadding: false,
+  },
+  numberText: {
+    fontFamily: fonts.AnekBanglaBold,
+    color: "#D2416E",
+    fontWeight: "700",
+    fontSize: 40,
+    letterSpacing: 2,
+    includeFontPadding: false,
+  },
+  unitText: {
+    fontFamily: fonts.AnekBanglaMedium,
+    color: "#D2416E",
+    fontWeight: "400",
+    fontSize: 16,
+    letterSpacing: 2,
+    includeFontPadding: false,
+  },
+  stepsText: {
+    fontFamily: "AnekBangla-Medium",
+    color: "#282B2A",
+    fontWeight: "500",
+    fontSize: 12,
+    letterSpacing: 2,
+    includeFontPadding: false,
+  },
+  iconBoxText: {
+    fontFamily: "AnekBangla-Medium",
+    color: "black",
+    fontWeight: "500",
     fontSize: 14,
-    //   paddingTop: 30,
+    letterSpacing: 2,
+    marginTop: getHeight(3),
   },
-  dropdown1DropdownStyle: {backgroundColor: '#EFEFEF', borderRadius: 20},
-  dropdown1RowStyle: {backgroundColor: '#EFEFEF', borderBottomColor: '#C5C5C5'},
-  dropdown1RowTxtStyle: {color: '#444', textAlign: 'left'},
-
-  dropdown2BtnStyle: {
-    width: '80%',
-    height: 50,
-    backgroundColor: '#444',
-    borderRadius: 8,
-  },
-  dropdown2BtnTxtStyle: {
-    color: '#FFF',
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
-  dropdown2DropdownStyle: {
-    backgroundColor: '#444',
-    borderBottomLeftRadius: 12,
-    borderBottomRightRadius: 12,
-  },
-  dropdown2RowStyle: {backgroundColor: '#444', borderBottomColor: '#C5C5C5'},
-  dropdown2RowTxtStyle: {
-    color: '#FFF',
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
-
-  dropdown3BtnStyle: {
-    width: '80%',
-    height: 50,
-    backgroundColor: '#FFF',
-    paddingHorizontal: 0,
-    borderWidth: 1,
-    borderRadius: 8,
-    borderColor: '#444',
-  },
-  dropdown3BtnChildStyle: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 18,
-  },
-  dropdown3BtnImage: {width: 45, height: 45, resizeMode: 'cover'},
-  dropdown3BtnTxt: {
-    color: '#444',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 24,
-    marginHorizontal: 12,
-  },
-  dropdown3DropdownStyle: {backgroundColor: 'slategray'},
-  dropdown3RowStyle: {
-    backgroundColor: 'slategray',
-    borderBottomColor: '#444',
-    height: 50,
-  },
-  dropdown3RowChildStyle: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    paddingHorizontal: 18,
-  },
-  dropdownRowImage: {width: 45, height: 45, resizeMode: 'cover'},
-  dropdown3RowTxt: {
-    color: '#F1F1F1',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 24,
-    marginHorizontal: 12,
-  },
-
-  dropdown4BtnStyle: {
-    width: '50%',
-    height: 50,
-    backgroundColor: '#FFF',
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#444',
-  },
-  dropdown4BtnTxtStyle: {color: '#444', textAlign: 'left'},
-  dropdown4DropdownStyle: {backgroundColor: '#EFEFEF'},
-  dropdown4RowStyle: {backgroundColor: '#EFEFEF', borderBottomColor: '#C5C5C5'},
-  dropdown4RowTxtStyle: {color: '#444', textAlign: 'left'},
   topBar: {
-    fontWeight: 'bold',
-    fontSize: 30,
-    borderRadius: 65,
-    // borderWidth: 2,
-    borderColor: '#D3D3D3',
-
+    borderRadius: 35,
     width: getWidth(15),
     height: getHeight(0.7),
-    backgroundColor: 'rgba(0,0,0,0.2)',
+    backgroundColor: "rgba(0,0,0,0.2)",
   },
   centeredView: {
-    // flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    // borderWidth:1,
-    // marginTop: 110,
-    // borderWidth: 3,
-    borderColor: 'green',
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    height: '100%',
+    justifyContent: "flex-end",
+    alignItems: "center",
+    borderColor: "green",
+    backgroundColor: "rgba(0,0,0,0.5)",
+    height: "100%",
   },
   modalView: {
-    // margin: 20,
-    backgroundColor: 'white',
-    borderColor: 'grey',
-    // borderWidth: 2,
-    // borderRadius: 20,
+    backgroundColor: "white",
+    borderColor: "grey",
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
-    // padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
-    // justifyContent: 'flex-end',
+    alignItems: "center",
+    shadowColor: "#000",
     height: getHeight(40),
     width: getWidth(100),
-    // marginLeft: 0,
-    // bottom: 0,
-    // top: 0,
-    // elevation:10,
-
     shadowOffset: {
       width: 0,
       height: 2,

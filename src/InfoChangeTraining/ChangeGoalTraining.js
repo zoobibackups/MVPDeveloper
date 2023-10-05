@@ -1,43 +1,21 @@
-import React, {useState} from 'react';
-
+import React, { useState } from "react";
 import {
-  View,
-  Text,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
-  StyleSheet,
-  TextInput,
-  KeyboardAvoidingView,
-  ScrollView,
   Platform,
-} from 'react-native';
-import {getHeight, getWidth} from '../functions/CommonFunctions';
-import KeyBoardHandle from '../Components/KeyboardHandle';
-// import { CheckBox } from '@rneui/themed';
-
-import BouncyCheckbox from 'react-native-bouncy-checkbox';
-import CircleCheckBox, {LABEL_POSITION} from 'react-native-circle-checkbox';
-// import CheckBox from '@react-native-community/checkbox';
-import {useNavigation} from '@react-navigation/core';
-
-import RadioForm, {
-  RadioButton,
-  RadioButtonInput,
-  RadioButtonLabel,
-} from 'react-native-simple-radio-button';
-import {
-  RoundedCheckbox,
-  PureRoundedCheckbox,
-} from 'react-native-rounded-checkbox';
-import LinearGradient from 'react-native-linear-gradient';
-import Checkbox from '../Components/CheckBox';
-import { SvgXml } from 'react-native-svg';
-import { backward, preformly } from '../../assets/svg';
-// import Icon from 'react-native-dynamic-vector-icons';
-
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
+import { useNavigation } from "@react-navigation/core";
+import LinearGradient from "react-native-linear-gradient";
+import { SvgXml } from "react-native-svg";
+import { backward, preformly } from "../../assets/svg";
+import Checkbox from "../Components/CheckBox";
+import HeaderMainScreen from "../Components/HeaderMainScreen";
+import { globalstyles } from "../styles/globalestyles";
 const ChangeGoalTraining = () => {
-  const [confirmPassword, setConfirmPassowrd] = useState('');
+  const [confirmPassword, setConfirmPassowrd] = useState("");
   const [checked, setChecked] = useState(false);
   const [checked1, setChecked1] = useState(false);
   const [checked2, setChecked2] = useState(false);
@@ -49,158 +27,50 @@ const ChangeGoalTraining = () => {
   return (
     <LinearGradient
       style={{
-        alignItems: 'center',
+        alignItems: "center",
         paddingVertical: 30,
-        borderColor: 'red',
-        height: '100%',
-        // backgroundColor: 'white',
-        // borderWidth:10
+        borderColor: "red",
+        height: "100%",
       }}
-      colors={['#FDFFF4', '#BBC1AD']}
-      start={{x: 0, y: 0}}
-      end={{x: 0.8, y: 0}}
-      // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-      // locations={{x:0,y:0.5,z:0.6}}
-      // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
+      colors={["#FDFFF4", "#BBC1AD"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 0.8, y: 0 }}
     >
-
-<SvgXml
-        width={getWidth(45)}
-        height={getHeight(5)}
-        xml={preformly}
-        style={{marginTop: Platform.OS === 'ios' ? 20 : 0}}
+      <HeaderMainScreen
+        onPress={() => navigation.goBack()}
+        title={"CHANGE  PROFILE"}
+        subTitle={"TELL US ABOUT YOUR GOALS"}
+        subTitleStyle={{
+          textAlign: "center",
+          alignSelf: "center",
+        }}
       />
-      {/* <Text
-        style={{
-          fontFamily: 'Modak-Regular',
-          color: '#1B1561',
-          fontWeight: '400',
-          fontSize: 30,
-        }}>
-        Preformly
-      </Text> */}
-      <View
-        style={{
-          flexDirection: 'row',
-          // borderWidth: 1,
-          borderColor: 'red',
-          width: getWidth(90),
-          height: getHeight(5),
-          // justifyContent: 'center',
-        }}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={{
-            borderWidth: 0.5,
-            borderColor: 'grey',
-            borderRadius: 40,
-            justifyContent: 'center',
-            width: getWidth(10),
-          }}>
-            <SvgXml height={getHeight(2)} width={getWidth(10)} xml={backward}/>
-          {/* <Image
-            style={{
-              resizeMode: 'contain',
-              width: getWidth(9),
-              // borderWidth: 1,
-              borderColor: 'red',
-              height: getHeight(2),
-            }}
-            source={require('../../assets/images/back.png')}
-          /> */}
-        </TouchableOpacity>
-        <View
-          style={{
-            // borderWidth: 1,
-            borderColor: 'green',
-            width: getWidth(70),
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <Text
-            style={{
-              fontFamily: 'AnekBangla-Medium',
-              color: 'black',
-              fontWeight: '500',
-              fontSize: 18,
-              letterSpacing: 2,
-            }}>
-            CREATE PROFILE
-          </Text>
-        </View>
-      </View>
-      <View
-        style={{
-          paddingVertical: 10,
-          height: getHeight(10),
-          borderColor: 'red',
-          //   borderWidth: 1,
-        }}>
-        <Text
-          style={{
-            fontFamily: 'AnekBangla-Medium',
-            color: 'black',
-            fontWeight: '500',
-            fontSize: 18,
-            letterSpacing: 2,
-          }}>
-          TELL US ABOUT YOUR GOALS
-        </Text>
-      </View>
 
       <View
         style={{
           paddingVertical: 10,
           height: getHeight(50),
           width: getWidth(97),
-          borderColor: 'red',
+          borderColor: "red",
           // borderWidth: 1,
-          alignItems: 'center',
-          justifyContent: 'space-evenly',
-          shadowColor: 'rgba(103, 128, 159, 0.5)', // Adjust the shadow color as needed
-          shadowOffset: {width: 0, height: 5}, // Adjust the shadow offset as needed
+          alignItems: "center",
+          justifyContent: "space-evenly",
+          shadowColor: "rgba(103, 128, 159, 0.5)", // Adjust the shadow color as needed
+          shadowOffset: { width: 0, height: 5 }, // Adjust the shadow offset as needed
           shadowOpacity: 1, // Adjust the shadow opacity as needed
           shadowRadius: 10, // Adjust the shadow radius as needed
-          elevation: Platform.OS === 'android' ? 0 : 5,
-        }}>
+          elevation: Platform.OS === "android" ? 0 : 5,
+        }}
+      >
         <TouchableOpacity onPress={() => setChecked(!checked)}>
           <LinearGradient
-            style={{
-              width: getWidth(90),
-              borderRadius: 20,
-
-              height: getHeight(7),
-              borderColor: '#F5F5F5',
-              backgroundColor: 'white',
-              // borderWidth: 1,
-              shadowColor: 'rgba(103, 128, 159)',
-
-              elevation: 32,
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              alignItems: 'center',
-              paddingHorizontal: 5,
-            }}
-            colors={['#FDFFF4', '#BBC1AD']}
-            start={{x: 0, y: 0}}
-            end={{x: 0.8, y: 0}}
-            // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-            // locations={{x:0,y:0.5,z:0.6}}
-            // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
+            style={globalstyles.selectItem}
+            colors={["#FDFFF4", "#BBC1AD"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0.8, y: 0 }}
           >
-            <Text
-              style={{
-                paddingLeft: 10,
-                fontFamily: 'AnekBangla-Medium',
-                color: 'black',
-                fontWeight: '400',
-                fontSize: 17,
-                letterSpacing: 2,
-              }}>
-              Lose Weight
-            </Text>
+            <Text style={globalstyles.selectItemText}>Lose Weight</Text>
             <Checkbox
-              // text="Blue"
               isChecked={checked}
               onPress={() => {
                 setChecked(!checked);
@@ -211,42 +81,13 @@ const ChangeGoalTraining = () => {
 
         <TouchableOpacity onPress={() => setChecked1(!checked1)}>
           <LinearGradient
-            style={{
-              width: getWidth(90),
-              borderRadius: 20,
-
-              height: getHeight(7),
-              borderColor: '#F5F5F5',
-              backgroundColor: 'white',
-              // borderWidth: 1,
-              shadowColor: 'rgba(103, 128, 159)',
-
-              elevation: 32,
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              alignItems: 'center',
-              paddingHorizontal: 5,
-            }}
-            colors={['#FDFFF4', '#BBC1AD']}
-            start={{x: 0, y: 0}}
-            end={{x: 0.8, y: 0}}
-            // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-            // locations={{x:0,y:0.5,z:0.6}}
-            // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
+            style={globalstyles.selectItem}
+            colors={["#FDFFF4", "#BBC1AD"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0.8, y: 0 }}
           >
-            <Text
-              style={{
-                paddingLeft: 10,
-                fontFamily: 'AnekBangla-Medium',
-                color: 'black',
-                fontWeight: '400',
-                fontSize: 17,
-                letterSpacing: 2,
-              }}>
-              Gain Weight
-            </Text>
+            <Text style={globalstyles.selectItemText}>Gain Weight</Text>
             <Checkbox
-              // text="Blue"
               isChecked={checked1}
               onPress={() => {
                 setChecked1(!checked1);
@@ -257,42 +98,13 @@ const ChangeGoalTraining = () => {
 
         <TouchableOpacity onPress={() => setChecked2(!checked2)}>
           <LinearGradient
-            style={{
-              width: getWidth(90),
-              borderRadius: 20,
-
-              height: getHeight(7),
-              borderColor: '#F5F5F5',
-              backgroundColor: 'white',
-              // borderWidth: 1,
-              shadowColor: 'rgba(103, 128, 159)',
-
-              elevation: 32,
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              alignItems: 'center',
-              paddingHorizontal: 5,
-            }}
-            colors={['#FDFFF4', '#BBC1AD']}
-            start={{x: 0, y: 0}}
-            end={{x: 0.8, y: 0}}
-            // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-            // locations={{x:0,y:0.5,z:0.6}}
-            // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
+            style={globalstyles.selectItem}
+            colors={["#FDFFF4", "#BBC1AD"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0.8, y: 0 }}
           >
-            <Text
-              style={{
-                paddingLeft: 10,
-                fontFamily: 'AnekBangla-Medium',
-                color: 'black',
-                fontWeight: '400',
-                fontSize: 17,
-                letterSpacing: 2,
-              }}>
-              Live healthier
-            </Text>
+            <Text style={globalstyles.selectItemText}>Live healthier</Text>
             <Checkbox
-              // text="Blue"
               isChecked={checked2}
               onPress={() => {
                 setChecked2(!checked2);
@@ -303,42 +115,15 @@ const ChangeGoalTraining = () => {
 
         <TouchableOpacity onPress={() => setChecked3(!checked3)}>
           <LinearGradient
-            style={{
-              width: getWidth(90),
-              borderRadius: 20,
-
-              height: getHeight(7),
-              borderColor: '#F5F5F5',
-              backgroundColor: 'white',
-              // borderWidth: 1,
-              shadowColor: 'rgba(103, 128, 159)',
-
-              elevation: 32,
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              alignItems: 'center',
-              paddingHorizontal: 5,
-            }}
-            colors={['#FDFFF4', '#BBC1AD']}
-            start={{x: 0, y: 0}}
-            end={{x: 0.8, y: 0}}
-            // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-            // locations={{x:0,y:0.5,z:0.6}}
-            // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
+            style={globalstyles.selectItem}
+            colors={["#FDFFF4", "#BBC1AD"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0.8, y: 0 }}
           >
-            <Text
-              style={{
-                paddingLeft: 10,
-                fontFamily: 'AnekBangla-Medium',
-                color: 'black',
-                fontWeight: '400',
-                fontSize: 17,
-                letterSpacing: 2,
-              }}>
+            <Text style={globalstyles.selectItemText}>
               Use the app without a goal
             </Text>
             <Checkbox
-              // text="Blue"
               isChecked={checked3}
               onPress={() => {
                 setChecked3(!checked3);
@@ -349,37 +134,19 @@ const ChangeGoalTraining = () => {
       </View>
       <View
         style={{
-          alignItems: 'center',
-          borderColor: 'red',
+          alignItems: "center",
+          borderColor: "red",
           height: getHeight(15),
-          justifyContent: 'flex-end',
+          justifyContent: "flex-end",
           // backgroundColor: 'white',
           width: getWidth(99),
-        }}>
+        }}
+      >
         <TouchableOpacity
-          // onPress={() => navigation.navigate('UpdateWeight')}
-          style={{
-            height: 55,
-            margin: 12,
-            borderWidth: 1,
-            padding: 14,
-            borderRadius: 20,
-            borderColor: '#1B1561',
-            backgroundColor: '#1B1561',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: getWidth(65),
-          }}>
-          <Text
-            style={{
-              fontFamily: 'AnekBangla-Medium',
-              color: 'white',
-              fontWeight: '500',
-              fontSize: 18,
-              letterSpacing: 2,
-            }}>
-            Update
-          </Text>
+          onPress={() => navigation.navigate('UpdateWeight')}
+          style={globalstyles.buttonStyle}
+        >
+          <Text style={globalstyles.buttonText}>Update</Text>
         </TouchableOpacity>
       </View>
     </LinearGradient>
@@ -392,7 +159,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 14,
     borderRadius: 20,
-    borderColor: '#1B1561',
+    borderColor: "#1B1561",
   },
 });
 export default ChangeGoalTraining;

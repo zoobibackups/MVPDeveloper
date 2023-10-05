@@ -1,1300 +1,545 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 import {
   Image,
   Modal,
   Platform,
   ScrollView,
+  TextInput,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View
-} from 'react-native';
-import { getHeight, getWidth } from '../functions/CommonFunctions';
-// import { CheckBox } from '@rneui/themed';
+  View,
+} from "react-native";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
+import { useNavigation } from "@react-navigation/core";
+import LinearGradient from "react-native-linear-gradient";
+import Checkbox from "../Components/CheckBox";
+import HeaderMainScreen from "../Components/HeaderMainScreen";
+import { moderateScale } from "react-native-size-matters";
+import fonts from "../Constants/fonts";
+import theme from "../Constants/theme";
+import { globalstyles } from "../styles/globalestyles";
+import { RFValue } from "react-native-responsive-fontsize";
 
-// import CheckBox from '@react-native-community/checkbox';
-import { useNavigation } from '@react-navigation/core';
-
-import LinearGradient from 'react-native-linear-gradient';
-import { SvgXml } from 'react-native-svg';
-import { preformly } from '../../assets/svg';
-import Checkbox from '../Components/CheckBox';
-// import Icon from 'react-native-dynamic-vector-icons';
+const itemStyles = StyleSheet.create({
+  itemMainView: {
+    width: getWidth(90),
+    borderRadius: 20,
+    height: getHeight(8),
+    shadowColor: "rgba(103, 128, 159)",
+    justifyContent: "space-between",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 5,
+  },
+  textContainer: {
+    paddingLeft: moderateScale(20),
+    justifyContent: "center",
+    width: getWidth(70),
+  },
+  title: {
+    fontFamily: fonts.AnekBanglaMedium,
+    color: "black",
+    fontWeight: "400",
+    fontSize: 17,
+    lineHeight: 17 * 1.8,
+    includeFontPadding: false,
+  },
+  subTitle: {
+    fontFamily: fonts.AnekBanglaMedium,
+    color: "grey",
+    fontWeight: "400",
+    lineHeight: 15 * 1.4,
+    fontSize: 15,
+    letterSpacing: 2,
+  },
+});
+const RenderItem = ({ checked, setChecked, title, subtitle }) => {
+  return (
+    <TouchableOpacity onPress={() => setChecked(!checked)}>
+      <LinearGradient
+        style={itemStyles.itemMainView}
+        colors={["#FDFFF4", "#BBC1AD"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0.8, y: 0 }}
+      >
+        <View style={itemStyles.textContainer}>
+          <Text style={itemStyles.title}>{title}</Text>
+          <Text style={itemStyles.subTitle}>{subtitle}</Text>
+        </View>
+        <Checkbox
+          isChecked={checked}
+          onPress={() => {
+            setChecked(!checked);
+          }}
+        />
+      </LinearGradient>
+    </TouchableOpacity>
+  );
+};
 
 const ActiveWorkOut3 = () => {
-  const [confirmPassword, setConfirmPassowrd] = useState('');
   const [checked, setChecked] = useState(false);
   const [checked1, setChecked1] = useState(false);
-  const [checked2, setChecked2] = useState(false);
-  const [checked3, setChecked3] = useState(false);
-  const [checked4, setChecked4] = useState(false);
-  const [checked5, setChecked5] = useState(false);
-  const [checked6, setChecked6] = useState(false);
-  const [checked7, setChecked7] = useState(false);
-  const [checked8, setChecked8] = useState(false);
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const [check1, setCheck1] = useState(false);
+ 
+ 
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(false);
   const [modalVisible3, setModalVisible3] = useState(false);
-  const [addWeight, setAddWeight] = useState('');
+  const [addWeight, setAddWeight] = useState("");
 
   return (
-    <ScrollView>
-      <LinearGradient
-        style={{
-          alignItems: 'center',
-          paddingVertical: 30,
-          borderColor: 'red',
-          height: '100%',
-          // backgroundColor: 'white',
-          // borderWidth:10
-        }}
-        colors={['#FDFFF4', '#BBC1AD']}
-        start={{x: 0, y: 0}}
-        end={{x: 0.8, y: 0}}
-        // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-        // locations={{x:0,y:0.5,z:0.6}}
-        // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
-      >
-        <SvgXml
-          width={getWidth(45)}
-          height={getHeight(5)}
-          xml={preformly}
-          style={{marginTop: Platform.OS === 'ios' ? 20 : 0}}
+    <LinearGradient
+      style={{
+        alignItems: "center",
+        paddingVertical: 30,
+        borderColor: "red",
+        height: "100%",
+      }}
+      colors={["#FDFFF4", "#BBC1AD"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 0.8, y: 0 }}
+    >
+      <ScrollView>
+        <HeaderMainScreen
+          onPress={() => navigation.goBack()}
+          title={"ACTIVE WORKOUT"}
+          subTitle={""}
+          subTitleStyle={{
+            color: "grey",
+          }}
         />
-        {/* <Text
-          style={{
-            fontFamily: 'Modak-Regular',
-            color: '#1B1561',
-            fontWeight: '400',
-            fontSize: 30,
-            marginTop: Platform.OS === 'ios' ? 20 : 0,
-          }}>
-          Preformly
-        </Text> */}
-        <View
-          style={{
-            flexDirection: 'row',
-            // borderWidth: 1,
-            borderColor: 'red',
-            width: getWidth(90),
-            height: getHeight(5),
-            // justifyContent: 'center',
-          }}>
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={{
-              borderWidth: 0.5,
-              borderColor: 'grey',
-              borderRadius: 40,
-              justifyContent: 'center',
-              width: getWidth(11),
-            }}>
+
+        <View style={styles.timeRowView}>
+          <View style={styles.watchBg}>
             <Image
               style={{
-                resizeMode: 'contain',
+                resizeMode: "contain",
                 width: getWidth(10),
-                // borderWidth: 1,
-                borderColor: 'red',
-                height: getHeight(2),
-              }}
-              source={require('../../assets/images/back.png')}
-            />
-          </TouchableOpacity>
-          <View
-            style={{
-              // borderWidth: 1,
-              borderColor: 'green',
-              width: getWidth(70),
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Text
-              style={{
-                fontFamily: 'AnekBangla-Medium',
-                color: 'black',
-                fontWeight: '500',
-                fontSize: 18,
-                letterSpacing: 2,
-              }}>
-              ACTIVE WORKOUT
-            </Text>
-          </View>
-        </View>
-        <View
-          style={{
-            paddingVertical: 10,
-            height: getHeight(10),
-            width: getWidth(90),
-            borderColor: 'red',
-            justifyContent: 'space-between',
-            // borderWidth: 1,
-            flexDirection: 'row',
-            paddingHorizontal: 95,
-          }}>
-          <View
-            style={{
-              width: getWidth(12),
-              //   borderWidth: 1,
-              //   borderColor: 'red',
-              height: getHeight(6),
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: 10,
-              backgroundColor: '#D3D3D3',
-            }}>
-            <Image
-              style={{
-                resizeMode: 'contain',
-                width: getWidth(10),
-                // borderWidth: 1,
-                borderColor: 'red',
                 height: getHeight(3),
               }}
-              source={require('../../assets/images/clock.png')}
+              source={require("../../assets/images/clock.png")}
             />
           </View>
-          <Text
-            style={{
-              fontFamily: 'AnekBangla-Medium',
-              color: '#1B1561',
-              fontWeight: '600',
-              fontSize: 30,
-              letterSpacing: 2,
-            }}>
-            00:43
-          </Text>
+          <Text style={styles.timeText}>00:43</Text>
         </View>
-        <View
-          style={{
-            // paddingVertical: 10,
-            height: getHeight(90),
-            width: getWidth(97),
-            borderColor: 'red',
-            // borderWidth: 1,
-            alignItems: 'center',
-            justifyContent: 'space-evenly',
-            shadowColor: 'rgba(103, 128, 159, 0.5)', // Adjust the shadow color as needed
-            shadowOffset: {width: 0, height: 5}, // Adjust the shadow offset as needed
-            shadowOpacity: 1, // Adjust the shadow opacity as needed
-            shadowRadius: 10, // Adjust the shadow radius as needed
-            elevation: Platform.OS === 'android' ? 0 : 5,
-          }}>
+
+        <View style={styles.innerView}>
+          <RenderItem
+            checked={checked}
+            title={"Lose Weight"}
+            subtitle={"3 x 8-12 repetitions"}
+            setChecked={() => setChecked(!checked)}
+          />
+
           <LinearGradient
             style={{
               width: getWidth(90),
               borderRadius: 20,
-              height: getHeight(10),
-              borderColor: '#F5F5F5',
-              backgroundColor: 'white',
-              // borderWidth: 1,
-              shadowColor: 'rgba(103, 128, 159)',
+
+              shadowColor: "rgba(103, 128, 159)",
               elevation: 10,
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              alignItems: 'center',
-              paddingHorizontal: 5,
+              paddingVertical: moderateScale(10),
+              paddingHorizontal: moderateScale(15),
             }}
-            colors={['#FDFFF4', '#BBC1AD']}
-            start={{x: 0, y: 0}}
-            end={{x: 0.8, y: 0}}
-            // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-            // locations={{x:0,y:0.5,z:0.6}}
-            // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
+            colors={["#FDFFF4", "#BBC1AD"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0.8, y: 0 }}
           >
-            <Text
-              style={{
-                paddingLeft: 10,
-                fontFamily: 'AnekBangla-Medium',
-                color: 'black',
-                fontWeight: '400',
-                fontSize: 17,
-                // borderWidth: 1,
-                width: getWidth(70),
-                height: getHeight(7),
-              }}>
-              Lose Weight {'\n'}
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'grey',
-                  fontWeight: '400',
-                  fontSize: 17,
-                }}>
-                3 x 8-12 repetitions
-              </Text>
-            </Text>
-            <Checkbox
-              // text="Blue"
-              isChecked={checked}
-              onPress={() => {
-                setChecked(!checked);
-              }}
-            />
-          </LinearGradient>
-          <LinearGradient
-            style={{
-              width: getWidth(90),
-              borderRadius: 20,
-              height: getHeight(32),
-              borderColor: '#F5F5F5',
-              backgroundColor: 'white',
-              //   borderWidth: 1,
-              shadowColor: 'rgba(103, 128, 159)',
-              elevation: 10,
-              justifyContent: 'center',
-              //   flexDirection: 'row',
-              alignItems: 'center',
-              paddingHorizontal: 5,
-            }}
-            colors={['#FDFFF4', '#BBC1AD']}
-            start={{x: 0, y: 0}}
-            end={{x: 0.8, y: 0}}
-            // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-            // locations={{x:0,y:0.5,z:0.6}}
-            // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
-          >
-            <View
-              style={{
-                width: getWidth(90),
-                borderRadius: 20,
-                height: getHeight(10),
-                borderColor: '#F5F5F5',
-                //   backgroundColor: 'white',
-                // borderWidth: 1,
-                //   shadowColor: 'rgba(103, 128, 159)',
-                //   elevation: 10,
-                justifyContent: 'space-between',
-                flexDirection: 'row',
-                alignItems: 'center',
-                paddingHorizontal: 5,
-              }}>
-              <Text
-                style={{
-                  paddingLeft: 10,
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'black',
-                  fontWeight: '400',
-                  fontSize: 17,
-                  // borderWidth: 1,
-                  width: getWidth(70),
-                  height: getHeight(7),
-                }}>
-                Inclined dumbbells press {'\n'}
-                <Text
-                  style={{
-                    fontFamily: 'AnekBangla-Medium',
-                    color: 'grey',
-                    fontWeight: '400',
-                    fontSize: 17,
-                  }}>
-                  3 x 8-12 repetitions
-                </Text>
-              </Text>
+            <View style={styles.row}>
+              <View style={{ ...itemStyles.textContainer, paddingLeft: 0 }}>
+                <Text style={itemStyles.title}>Inclined dumbbells press</Text>
+                <Text style={itemStyles.subTitle}>3 x 8-12 repetitions</Text>
+              </View>
               <Checkbox
-                // text="Blue"
                 isChecked={checked1}
                 onPress={() => {
                   setChecked1(!checked1);
                 }}
               />
-              {/* <PureRoundedCheckbox
-            text=""
-            isChecked={checked}
-            checkedColor='#1B1561'
-            
-            // uncheckedColor={uncheckedColor}
-            onPress={() => setChecked(!checked)}>
-            {/* <Image
-             style={{resizeMode: 'contain', width: getWidth(5),borderWidth:1,borderColor:"green",height:getHeight(2)}}
-              source={require('../../assets/images/check.png')}
-            /> */}
-              {/* </PureRoundedCheckbox> */}
-              {/* <CheckBox
-      // title="Click Here"
-      disabled={false}
-      checked={checked}
-      onPress={() => setChecked(!checked)}
-    /> */}
-              {/* <CheckBox
-    disabled={false}
-    value={toggleCheckBox}
-    onValueChange={(newValue) => setToggleCheckBox(newValue)}
-    onCheckColor={'red'}
-    onFillColor={'yellow'}
-    onTintColor={'#80F4E8'}
-  /> */}
-
-              {/* <CheckBox
-           checked={checked}
-          //  onPress={toggleCheckbox}
-           // Use ThemeProvider to make change for all checkbox
-           iconType="material-community"
-           checkedIcon="checkbox-marked"
-           uncheckedIcon="checkbox-blank-outline"
-           checkedColor="red"
-         /> */}
-              {/* <CheckBox
-        center
-        title="Click Here"
-        checked={check1}
-        onPress={() => setCheck1(!check1)}
-      /> */}
             </View>
-            <View
-              style={{
-                width: getWidth(90),
-                borderRadius: 20,
-                height: getHeight(6),
-                //   borderWidth:1,
-                borderColor: 'black',
-                justifyContent: 'space-between',
-                flexDirection: 'row',
-                alignItems: 'center',
-                paddingHorizontal: 5,
-              }}>
-              <Text
-                style={{
-                  paddingLeft: 10,
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'black',
-                  fontWeight: '400',
-                  fontSize: 15,
-                  // borderWidth: 1,
-                  width: getWidth(70),
-                  height: getHeight(3),
-                }}>
-                Set 1: 12 rep 30 kg
-              </Text>
+            <View style={styles.row}>
+              <Text style={styles.title}>Set 1: 12 rep 30 kg</Text>
               <Checkbox
-                // text="Blue"
-                isChecked={checked2}
+                isChecked={checked1}
                 onPress={() => {
-                  setChecked2(!checked2);
+                  setChecked1(!checked1);
+                }}
+                checkboxStyle={{
+                  width: 10,
+                  height: 10,
+                }}
+                imageStyle={{
+                  width: 8,
+                  height: 8,
                 }}
               />
             </View>
-            <View
-              style={{
-                width: getWidth(90),
-                borderRadius: 20,
-                height: getHeight(6),
-                //   borderWidth:1,
-                borderColor: 'black',
-                justifyContent: 'space-between',
-                flexDirection: 'row',
-                alignItems: 'center',
-                paddingHorizontal: 5,
-              }}>
-              <Text
-                style={{
-                  paddingLeft: 10,
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'black',
-                  fontWeight: '400',
-                  fontSize: 15,
-                  // borderWidth: 1,
-                  width: getWidth(70),
-                  height: getHeight(3),
-                }}>
-                Set 2: 12 rep 30 kg
-              </Text>
+            <View style={styles.row}>
+              <Text style={styles.title}>Set 2: 10 rep 35 kg</Text>
               <Checkbox
-                // text="Blue"
-                isChecked={checked2}
+                isChecked={checked1}
                 onPress={() => {
-                  setChecked2(!checked2);
+                  setChecked1(!checked1);
+                }}
+                checkboxStyle={{
+                  width: 10,
+                  height: 10,
+                }}
+                imageStyle={{
+                  width: 8,
+                  height: 8,
                 }}
               />
             </View>
-            <View
-              style={{
-                width: getWidth(90),
-                borderRadius: 20,
-                height: getHeight(6),
-                //   borderWidth:1,
-                borderColor: 'black',
-                justifyContent: 'space-between',
-                flexDirection: 'row',
-                alignItems: 'center',
-                paddingHorizontal: 5,
-              }}>
-              <Text
-                style={{
-                  paddingLeft: 10,
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'black',
-                  fontWeight: '400',
-                  fontSize: 15,
-                  // borderWidth: 1,
-                  width: getWidth(70),
-                  height: getHeight(3),
-                }}>
-                Set 3: 12 rep 30 kg
-              </Text>
+            <View style={styles.row}>
+              <Text style={styles.title}>Set 3: xx rep xx kg</Text>
               <Checkbox
-                // text="Blue"
-                isChecked={checked3}
+                isChecked={checked1}
                 onPress={() => {
-                  setChecked3(!checked3);
+                  setChecked1(!checked1);
+                }}
+                checkboxStyle={{
+                  width: 10,
+                  height: 10,
+                }}
+                imageStyle={{
+                  width: 8,
+                  height: 8,
                 }}
               />
             </View>
-            <TouchableOpacity onPress={() => setModalVisible(true)}>
-              <Text
-                style={{
-                  // paddingLeft: 10,
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'black',
-                  fontWeight: '500',
-                  fontSize: 16,
-                  // borderWidth: 1,
-                  width: getWidth(70),
-                  height: getHeight(3),
-                  textAlign: 'left',
-                  textDecorationLine: 'underline',
-                }}>
-                Add Additional Sets
-              </Text>
+            <TouchableOpacity
+              onPress={() => setModalVisible(true)}
+              style={styles.row}
+            >
+              <Text style={itemStyles.title}>Add Additional Sets</Text>
             </TouchableOpacity>
           </LinearGradient>
-          <LinearGradient
-            style={{
-              width: getWidth(90),
-              borderRadius: 20,
-              height: getHeight(10),
-              borderColor: '#F5F5F5',
-              backgroundColor: 'white',
-              // borderWidth: 1,
-              shadowColor: 'rgba(103, 128, 159)',
-              elevation: 10,
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              alignItems: 'center',
-              paddingHorizontal: 5,
-            }}
-            colors={['#FDFFF4', '#BBC1AD']}
-            start={{x: 0, y: 0}}
-            end={{x: 0.8, y: 0}}
-            // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-            // locations={{x:0,y:0.5,z:0.6}}
-            // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
-          >
-            <Text
-              style={{
-                paddingLeft: 10,
-                fontFamily: 'AnekBangla-Medium',
-                color: 'black',
-                fontWeight: '400',
-                fontSize: 17,
-                // borderWidth: 1,
-                width: getWidth(70),
-                height: getHeight(7),
-              }}>
-              Cable flyes {'\n'}
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'grey',
-                  fontWeight: '400',
-                  fontSize: 17,
-                }}>
-                3 x 8-12 repetitions
-              </Text>
-            </Text>
-            <Checkbox
-              // text="Blue"
-              isChecked={checked4}
-              onPress={() => {
-                setChecked4(!checked4);
-              }}
-            />
-          </LinearGradient>
-          <LinearGradient
-            style={{
-              width: getWidth(90),
-              borderRadius: 20,
-              height: getHeight(10),
-              borderColor: '#F5F5F5',
-              backgroundColor: 'white',
-              // borderWidth: 1,
-              shadowColor: 'rgba(103, 128, 159)',
-              elevation: 10,
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              alignItems: 'center',
-              paddingHorizontal: 5,
-            }}
-            colors={['#FDFFF4', '#BBC1AD']}
-            start={{x: 0, y: 0}}
-            end={{x: 0.8, y: 0}}
-            // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-            // locations={{x:0,y:0.5,z:0.6}}
-            // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
-          >
-            <Text
-              style={{
-                paddingLeft: 10,
-                fontFamily: 'AnekBangla-Medium',
-                color: 'black',
-                fontWeight: '400',
-                fontSize: 17,
-                // borderWidth: 1,
-                width: getWidth(70),
-                height: getHeight(7),
-              }}>
-              Rope pushdowns {'\n'}
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'grey',
-                  fontWeight: '400',
-                  fontSize: 17,
-                }}>
-                3 x 8-12 repetitions
-              </Text>
-            </Text>
-            <Checkbox
-              // text="Blue"
-              isChecked={checked6}
-              onPress={() => {
-                setChecked6(!checked6);
-              }}
-            />
-          </LinearGradient>
-          <LinearGradient
-            style={{
-              width: getWidth(90),
-              borderRadius: 20,
-              height: getHeight(10),
-              borderColor: '#F5F5F5',
-              backgroundColor: 'white',
-              // borderWidth: 1,
-              shadowColor: 'rgba(103, 128, 159)',
-              elevation: 10,
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              alignItems: 'center',
-              paddingHorizontal: 5,
-            }}
-            colors={['#FDFFF4', '#BBC1AD']}
-            start={{x: 0, y: 0}}
-            end={{x: 0.8, y: 0}}
-            // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-            // locations={{x:0,y:0.5,z:0.6}}
-            // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
-          >
-            <Text
-              style={{
-                paddingLeft: 10,
-                fontFamily: 'AnekBangla-Medium',
-                color: 'black',
-                fontWeight: '400',
-                fontSize: 17,
-                // borderWidth: 1,
-                width: getWidth(70),
-                height: getHeight(7),
-              }}>
-              Dips {'\n'}
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'grey',
-                  fontWeight: '400',
-                  fontSize: 17,
-                }}>
-                3 x 8-12 repetitions
-              </Text>
-            </Text>
-            <Checkbox
-              // text="Blue"
-              isChecked={checked7}
-              onPress={() => {
-                setChecked7(!checked7);
-              }}
-            />
-            {/* <PureRoundedCheckbox
-            text=""
-            isChecked={checked}
-            checkedColor='#1B1561'
-            
-            // uncheckedColor={uncheckedColor}
-            onPress={() => setChecked(!checked)}>
-            {/* <Image
-             style={{resizeMode: 'contain', width: getWidth(5),borderWidth:1,borderColor:"green",height:getHeight(2)}}
-              source={require('../../assets/images/check.png')}
-            /> */}
-            {/* </PureRoundedCheckbox> */}
-            {/* <CheckBox
-      // title="Click Here"
-      disabled={false}
-      checked={checked}
-      onPress={() => setChecked(!checked)}
-    /> */}
-            {/* <CheckBox
-    disabled={false}
-    value={toggleCheckBox}
-    onValueChange={(newValue) => setToggleCheckBox(newValue)}
-    onCheckColor={'red'}
-    onFillColor={'yellow'}
-    onTintColor={'#80F4E8'}
-  /> */}
-
-            {/* <CheckBox
-           checked={checked}
-          //  onPress={toggleCheckbox}
-           // Use ThemeProvider to make change for all checkbox
-           iconType="material-community"
-           checkedIcon="checkbox-marked"
-           uncheckedIcon="checkbox-blank-outline"
-           checkedColor="red"
-         /> */}
-            {/* <CheckBox
-        center
-        title="Click Here"
-        checked={check1}
-        onPress={() => setCheck1(!check1)}
-      /> */}
-          </LinearGradient>
-        </View>
-        <View
-          style={{
-            alignItems: 'center',
-            borderColor: 'red',
-            height: getHeight(15),
-            justifyContent: 'flex-end',
-            // backgroundColor: 'white',
-            width: getWidth(99),
-          }}>
+          <RenderItem
+            checked={checked}
+            title={"Rope pushdowns"}
+            subtitle={"3 x 8-12 repetitions"}
+            setChecked={() => setChecked(!checked)}
+          />
+          <RenderItem
+            checked={checked}
+            title={"Dips"}
+            subtitle={"3 x 8-12 repetitions"}
+            setChecked={() => setChecked(!checked)}
+          />
           <TouchableOpacity
             onPress={() => setModalVisible(true)}
-            style={{
-              height: 55,
-              margin: 12,
-              borderWidth: 1,
-              padding: 14,
-              borderRadius: 20,
-              borderColor: '#1B1561',
-              backgroundColor: '#1B1561',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: getWidth(65),
-            }}>
-            <Text
-              style={{
-                fontFamily: 'AnekBangla-Medium',
-                color: 'white',
-                fontWeight: '500',
-                fontSize: 18,
-              }}>
-              End Workout
-            </Text>
+            style={globalstyles.buttonStyle}
+          >
+            <Text style={globalstyles.buttonText}>Save</Text>
           </TouchableOpacity>
         </View>
-      </LinearGradient>
 
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        // onRequestClose={() => {
-        //   Alert.alert('Modal has been closed.');
-        //   setModalVisible(!modalVisible);
-        // }}
-      >
-        <TouchableWithoutFeedback
-          onPress={() => setModalVisible(!modalVisible)}>
-          <View style={styles.centeredView}>
-            <LinearGradient
-              style={styles.modalView}
-              colors={['#FDFFF4', '#BBC1AD']}
-              start={{x: 0, y: 0}}
-              end={{x: 0.8, y: 0}}
-              // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-              // locations={{x:0,y:0.5,z:0.6}}
-              // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
-            >
-              <View style={{borderColor: 'red', paddingTop: 5}}>
-                <Text style={styles.topBar} />
-              </View>
-              <View
-                style={{
-                  borderColor: 'red',
-                  //   paddingTop: 30,
-                  //   borderWidth: 1,
-                  width: getWidth(70),
-                  height: getHeight(3),
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <Text
-                  style={{
-                    fontFamily: 'AnekBangla-Medium',
-                    color: 'black',
-                    fontWeight: '500',
-                    fontSize: 16,
-                    textAlign: 'center',
-                  }}>
-                  Add additional sets
-                </Text>
-              </View>
-              <View
-                style={{
-                  borderColor: 'red',
-                  paddingTop: 9,
-                  //   borderWidth: 1,
-                  width: getWidth(90),
-                  height: getHeight(15),
-                  // justifyContent: 'space-between',
-                  // paddingHorizontal: 38,
-
-                  // borderBottomWidth: 1,
-                  flexDirection: 'row',
-                  //   alignItems: 'center',
-                }}>
-                <View
-                  style={{
-                    borderColor: 'green',
-                    // paddingTop: 7,
-                    // borderWidth: 1,
-                    width: getWidth(45),
-                    height: getHeight(15),
-                    // justifyContent: 'space-between',
-                    // paddingHorizontal: 38,
-
-                    // borderBottomWidth: 1,
-                    // flexDirection: 'row',
-                    // alignItems: 'center',
-                  }}>
-                  <Text
-                    style={{
-                      fontFamily: 'AnekBangla-Medium',
-                      color: 'grey',
-                      fontWeight: '400',
-                      fontSize: 16,
-                    }}>
-                    Rep:
-                  </Text>
-                  <TextInput
-                    style={styles.input}
-                    onChangeText={text => setAddWeight(text)}
-                    value={addWeight}
-                    placeholder="00"
-                    placeholderTextColor="grey"
-                    // keyboardType="numeric"
-                  />
+        <Modal animationType="slide" transparent={true} visible={modalVisible}>
+          <TouchableWithoutFeedback
+            onPress={() => setModalVisible(!modalVisible)}
+          >
+            <View style={styles.centeredView}>
+              <LinearGradient
+                style={styles.modalView}
+                colors={["#FDFFF4", "#BBC1AD"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0.8, y: 0 }}
+              >
+                <View style={{ borderColor: "red", paddingTop: 5 }}>
+                  <View style={styles.topBar} />
                 </View>
-                <View
-                  style={{
-                    borderColor: 'green',
-                    // paddingTop: 7,
-                    // borderWidth: 1,
-                    width: getWidth(45),
-                    height: getHeight(15),
-                    // justifyContent: 'space-between',
-                    // paddingHorizontal: 38,
 
-                    // borderBottomWidth: 1,
-                    // flexDirection: 'row',
-                    // alignItems: 'center',
-                  }}>
-                  <Text
-                    style={{
-                      fontFamily: 'AnekBangla-Medium',
-                      color: 'grey',
-                      fontWeight: '400',
-                      fontSize: 16,
-                    }}>
-                    Kg:
-                  </Text>
-                  <TextInput
-                    style={styles.input}
-                    onChangeText={text => setAddWeight(text)}
-                    value={addWeight}
-                    placeholder="00"
-                    placeholderTextColor="grey"
-                    // keyboardType="numeric"
-                  />
+                <Text style={styles.modalHeading}>Add additional sets</Text>
+
+                <View style={styles.inputRow}>
+                  <View style={styles.inputContainer}>
+                    <Text style={styles.inputLabel}>Rep:</Text>
+                    <TextInput
+                      style={styles.input}
+                      onChangeText={(text) => setAddWeight(text)}
+                      value={addWeight}
+                      placeholder="00"
+                      placeholderTextColor="grey"
+                    />
+                  </View>
+                  <View style={styles.inputContainer}>
+                    <Text style={styles.inputLabel}>Kg:</Text>
+                    <TextInput
+                      style={styles.input}
+                      onChangeText={(text) => setAddWeight(text)}
+                      value={addWeight}
+                      placeholder="00"
+                      placeholderTextColor="grey"
+                    />
+                  </View>
                 </View>
-              </View>
-              <View
-                style={{
-                  alignItems: 'center',
-                  borderColor: 'red',
-                  height: getHeight(10),
-                  justifyContent: 'center',
 
-                  flexDirection: 'row',
-                  // borderWidth: 1,
-                }}>
                 <TouchableOpacity
                   onPress={() => {
                     setModalVisible(false), setModalVisible2(true);
                   }}
                   style={{
-                    height: 55,
-                    margin: 12,
-                    padding: 14,
-                    borderRadius: 20,
-                    borderColor: '#1B1561',
-                    backgroundColor: '#1B1561',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: getWidth(60),
-                  }}>
-                  <Text
-                    style={{
-                      fontFamily: 'AnekBangla-Medium',
-                      color: 'white',
-                      fontWeight: '500',
-                      fontSize: 18,
-                      letterSpacing: 2,
-                    }}>
-                    Save
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </LinearGradient>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
-
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible2}
-        // onRequestClose={() => {
-        //   Alert.alert('Modal has been closed.');
-        //   setModalVisible(!modalVisible);
-        // }}
-      >
-        <TouchableWithoutFeedback
-          onPress={() => setModalVisible2(!modalVisible2)}>
-          <View style={styles.centeredView}>
-            <LinearGradient
-              style={styles.modalView2}
-              colors={['#FDFFF4', '#BBC1AD']}
-              start={{x: 0, y: 0}}
-              end={{x: 0.8, y: 0}}
-              // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-              // locations={{x:0,y:0.5,z:0.6}}
-              // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
-            >
-              <View style={{borderColor: 'red', paddingTop: 5}}>
-                <Text style={styles.topBar} />
-              </View>
-              <View
-                style={{
-                  borderColor: 'red',
-                  paddingTop: 30,
-                  // borderWidth: 1,
-                  width: getWidth(70),
-                  height: getHeight(18),
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <Image
-                  style={{
-                    resizeMode: 'contain',
-                    width: getWidth(50),
-                    // borderWidth: 1,
-                    borderColor: 'red',
-                    height: getHeight(16),
+                    ...globalstyles.buttonStyle,
+                    marginTop: moderateScale(30),
                   }}
-                  source={require('../../assets/images/tickGroup.png')}
-                />
-              </View>
-              <View
-                style={{
-                  borderColor: 'red',
-                  paddingTop: 7,
-                  // borderWidth: 1,
-                  width: getWidth(80),
-                  height: getHeight(9),
-                  // justifyContent: 'space-between',
-                  // paddingHorizontal: 38,
+                >
+                  <Text style={globalstyles.buttonText}>Save</Text>
+                </TouchableOpacity>
+              </LinearGradient>
+            </View>
+          </TouchableWithoutFeedback>
+        </Modal>
 
-                  // borderBottomWidth: 1,
-                  // flexDirection: 'row',
-                  alignItems: 'center',
-                }}>
+        <Modal animationType="slide" transparent={true} visible={modalVisible2}>
+          <TouchableWithoutFeedback
+            onPress={() => setModalVisible2(!modalVisible2)}
+          >
+            <View style={styles.centeredView}>
+              <LinearGradient
+                style={{ ...styles.modalView, height: getHeight(43) }}
+                colors={["#FDFFF4", "#BBC1AD"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0.8, y: 0 }}
+              >
+                <View style={{ borderColor: "red", paddingTop: 5 }}>
+                  <View style={styles.topBar} />
+                </View>
+                <View
+                  style={{
+                    borderColor: "red",
+                    paddingTop: 30,
+                    // borderWidth: 1,
+                    width: getWidth(70),
+                    height: getHeight(18),
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Image
+                    style={{
+                      resizeMode: "contain",
+                      width: getWidth(50),
+                      // borderWidth: 1,
+                      borderColor: "red",
+                      height: getHeight(16),
+                    }}
+                    source={require("../../assets/images/tickGroup.png")}
+                  />
+                </View>
+
                 <Text
                   style={{
-                    fontFamily: 'AnekBangla-Medium',
-                    color: 'black',
-                    fontWeight: '500',
-                    fontSize: 18,
-                    textAlign: 'center',
-                  }}>
+                    ...styles.modalHeading,
+                    paddingHorizontal: moderateScale(50),
+                  }}
+                >
                   Great work, you have completed your workout
                 </Text>
-              </View>
-              <View
-                style={{
-                  alignItems: 'center',
-                  borderColor: 'red',
-                  height: getHeight(10),
-                  justifyContent: 'center',
 
-                  flexDirection: 'row',
-                  // borderWidth: 1,
-                }}>
                 <TouchableOpacity
                   onPress={() => {
                     setModalVisible2(false), setModalVisible3(true);
                   }}
-                  style={{
-                    height: 55,
-                    margin: 12,
-                    padding: 14,
-                    borderRadius: 20,
-                    borderColor: '#1B1561',
-                    backgroundColor: '#1B1561',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: getWidth(50),
-                  }}>
-                  <Text
-                    style={{
-                      fontFamily: 'AnekBangla-Medium',
-                      color: 'white',
-                      fontWeight: '400',
-                      fontSize: 20,
-                      letterSpacing: 2,
-                    }}>
-                    Save Session
-                  </Text>
+                  style={globalstyles.buttonStyle}
+                >
+                  <Text style={globalstyles.buttonText}>Save Session</Text>
                 </TouchableOpacity>
-              </View>
-            </LinearGradient>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
+              </LinearGradient>
+            </View>
+          </TouchableWithoutFeedback>
+        </Modal>
 
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible3}
-        // onRequestClose={() => {
-        //   Alert.alert('Modal has been closed.');
-        //   setModalVisible(!modalVisible);
-        // }}
-      >
-        <TouchableWithoutFeedback
-          onPress={() => setModalVisible3(!modalVisible3)}>
-          <View style={styles.centeredView}>
-            <LinearGradient
-              style={styles.modalView2}
-              colors={['#FDFFF4', '#BBC1AD']}
-              start={{x: 0, y: 0}}
-              end={{x: 0.8, y: 0}}
-              // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-              // locations={{x:0,y:0.5,z:0.6}}
-              // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
-            >
-              <View style={{borderColor: 'red', paddingTop: 5}}>
-                <Text style={styles.topBar} />
-              </View>
-              <View
-                style={{
-                  borderColor: 'red',
-                  paddingTop: 30,
-                  // borderWidth: 1,
-                  width: getWidth(70),
-                  height: getHeight(18),
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <Image
+        <Modal animationType="slide" transparent={true} visible={modalVisible3}>
+          <TouchableWithoutFeedback
+            onPress={() => setModalVisible3(!modalVisible3)}
+          >
+            <View style={styles.centeredView}>
+              <LinearGradient
+                style={{ ...styles.modalView, height: getHeight(43) }}
+                colors={["#FDFFF4", "#BBC1AD"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0.8, y: 0 }}
+              >
+                <View style={{ borderColor: "red", paddingTop: 5 }}>
+                  <View style={styles.topBar} />
+                </View>
+                <View
                   style={{
-                    resizeMode: 'contain',
-                    width: getWidth(50),
+                    borderColor: "red",
+                    paddingTop: 30,
                     // borderWidth: 1,
-                    borderColor: 'red',
-                    height: getHeight(16),
+                    width: getWidth(70),
+                    height: getHeight(18),
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
-                  source={require('../../assets/images/tickGroup.png')}
-                />
-              </View>
-              <View
-                style={{
-                  borderColor: 'red',
-                  paddingTop: 7,
-                  //   borderWidth: 1,
-                  width: getWidth(80),
-                  height: getHeight(9),
-                  justifyContent: 'center',
-                  // paddingHorizontal: 38,
-
-                  // borderBottomWidth: 1,
-                  // flexDirection: 'row',
-                  alignItems: 'center',
-                }}>
-                <Text
-                  style={{
-                    fontFamily: 'AnekBangla-Medium',
-                    color: 'black',
-                    fontWeight: '500',
-                    fontSize: 18,
-                    textAlign: 'center',
-                  }}>
-                  Session saved!
-                </Text>
-              </View>
-              <View
-                style={{
-                  alignItems: 'center',
-                  borderColor: 'red',
-                  height: getHeight(10),
-                  justifyContent: 'center',
-
-                  flexDirection: 'row',
-                  // borderWidth: 1,
-                }}>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate('Combined')}
-                  style={{
-                    height: 55,
-                    margin: 12,
-                    padding: 14,
-                    borderRadius: 20,
-                    borderColor: '#1B1561',
-                    backgroundColor: '#1B1561',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: getWidth(50),
-                  }}>
-                  <Text
+                >
+                  <Image
                     style={{
-                      fontFamily: 'AnekBangla-Medium',
-                      color: 'white',
-                      fontWeight: '400',
-                      fontSize: 20,
-                      letterSpacing: 2,
-                    }}>
-                    Back to Home
-                  </Text>
+                      resizeMode: "contain",
+                      width: getWidth(50),
+                      // borderWidth: 1,
+                      borderColor: "red",
+                      height: getHeight(16),
+                    }}
+                    source={require("../../assets/images/tickGroup.png")}
+                  />
+                </View>
+
+                <Text style={styles.modalHeading}>Session saved!</Text>
+
+                <TouchableOpacity
+                  onPress={() => {
+                    setModalVisible3(false);
+                    navigation.navigate("Combined");
+                  }}
+                  style={{
+                    ...globalstyles.buttonStyle,
+                    marginTop: moderateScale(20),
+                  }}
+                >
+                  <Text style={globalstyles.buttonText}>Back to Home</Text>
                 </TouchableOpacity>
-              </View>
-            </LinearGradient>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
-    </ScrollView>
+              </LinearGradient>
+            </View>
+          </TouchableWithoutFeedback>
+        </Modal>
+      </ScrollView>
+    </LinearGradient>
   );
 };
 const styles = StyleSheet.create({
-  input: {
-    height: 50,
-    margin: 8,
-    borderWidth: 1,
-    padding: 14,
-    borderRadius: 20,
-    borderColor: 'grey',
+  innerView: {
+    height: getHeight(65),
+    width: getWidth(97),
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    shadowColor: "rgba(103, 128, 159, 0.5)", // Adjust the shadow color as needed
+    shadowOffset: { width: 0, height: 5 }, // Adjust the shadow offset as needed
+    shadowOpacity: 1, // Adjust the shadow opacity as needed
+    shadowRadius: 10, // Adjust the shadow radius as needed
+    elevation: Platform.OS === "android" ? 0 : 5,
   },
-  shadow: {
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 6},
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    elevation: 10,
+  timeRowView: {
+    paddingVertical: 10,
+    height: getHeight(10),
+    width: getWidth(90),
+    borderColor: "red",
+    justifyContent: "space-between",
+    flexDirection: "row",
+    paddingHorizontal: 95,
   },
-  header: {
-    flexDirection: 'row',
-    //   width,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#F6F6F6',
+  watchBg: {
+    width: getWidth(12),
+    height: getHeight(6),
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+    backgroundColor: "#D3D3D3",
   },
-  headerTitle: {color: '#000', fontWeight: 'bold', fontSize: 16},
-  saveAreaViewContainer: {flex: 1, backgroundColor: '#FFF'},
-  viewContainer: {flex: 1, backgroundColor: '#FFF'},
-  scrollViewContainer: {
-    flexGrow: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: '10%',
-    paddingBottom: '20%',
-  },
-
-  dropdown1BtnStyle: {
-    width: getWidth(28),
-    height: getHeight(4),
-    backgroundColor: 'white',
-    // borderWidth: 1,
-    shadowColor: 'rgba(103, 128, 159)',
-
-    elevation: 10,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: 'grey',
-  },
-  dropdown1BtnTxtStyle: {
-    fontFamily: 'AnekBangla-Medium',
-    color: 'black',
-    fontWeight: '400',
-    fontSize: 14,
-    //   paddingTop: 30,
-  },
-  dropdown1DropdownStyle: {backgroundColor: '#EFEFEF', borderRadius: 20},
-  dropdown1RowStyle: {backgroundColor: '#EFEFEF', borderBottomColor: '#C5C5C5'},
-  dropdown1RowTxtStyle: {color: '#444', textAlign: 'left'},
-
-  dropdown2BtnStyle: {
-    width: '80%',
-    height: 50,
-    backgroundColor: '#444',
-    borderRadius: 8,
-  },
-  dropdown2BtnTxtStyle: {
-    color: '#FFF',
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
-  dropdown2DropdownStyle: {
-    backgroundColor: '#444',
-    borderBottomLeftRadius: 12,
-    borderBottomRightRadius: 12,
-  },
-  dropdown2RowStyle: {backgroundColor: '#444', borderBottomColor: '#C5C5C5'},
-  dropdown2RowTxtStyle: {
-    color: '#FFF',
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
-
-  dropdown3BtnStyle: {
-    width: '80%',
-    height: 50,
-    backgroundColor: '#FFF',
-    paddingHorizontal: 0,
-    borderWidth: 1,
-    borderRadius: 8,
-    borderColor: '#444',
-  },
-  dropdown3BtnChildStyle: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 18,
-  },
-  dropdown3BtnImage: {width: 45, height: 45, resizeMode: 'cover'},
-  dropdown3BtnTxt: {
-    color: '#444',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 24,
-    marginHorizontal: 12,
-  },
-  dropdown3DropdownStyle: {backgroundColor: 'slategray'},
-  dropdown3RowStyle: {
-    backgroundColor: 'slategray',
-    borderBottomColor: '#444',
-    height: 50,
-  },
-  dropdown3RowChildStyle: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    paddingHorizontal: 18,
-  },
-  dropdownRowImage: {width: 45, height: 45, resizeMode: 'cover'},
-  dropdown3RowTxt: {
-    color: '#F1F1F1',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 24,
-    marginHorizontal: 12,
-  },
-
-  dropdown4BtnStyle: {
-    width: '50%',
-    height: 50,
-    backgroundColor: '#FFF',
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#444',
-  },
-  dropdown4BtnTxtStyle: {color: '#444', textAlign: 'left'},
-  dropdown4DropdownStyle: {backgroundColor: '#EFEFEF'},
-  dropdown4RowStyle: {backgroundColor: '#EFEFEF', borderBottomColor: '#C5C5C5'},
-  dropdown4RowTxtStyle: {color: '#444', textAlign: 'left'},
-  topBar: {
-    fontWeight: 'bold',
+  timeText: {
+    fontFamily: fonts.AnekBanglaMedium,
+    color: theme.blueColor,
+    fontWeight: "600",
     fontSize: 30,
-    borderRadius: 65,
-    // borderWidth: 2,
-    borderColor: 'black',
+    letterSpacing: 2,
+  },
+  topBar: {
+    borderRadius: 35,
     width: getWidth(15),
+    marginTop: moderateScale(10),
     height: getHeight(0.7),
-    backgroundColor: 'rgba(0,0,0,0.2)',
+    backgroundColor: "rgba(0,0,0,0.2)",
   },
   centeredView: {
-    // flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    // marginTop: 110,
-    // borderWidth: 3,
-    borderColor: 'green',
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    height: '100%',
+    justifyContent: "flex-end",
+    alignItems: "center",
+    borderColor: "green",
+    backgroundColor: "rgba(0,0,0,0.5)",
+    height: "100%",
   },
   modalView: {
-    // margin: 20,
-    backgroundColor: 'white',
-    borderColor: 'grey',
-    // borderWidth: 2,
-    // borderRadius: 20,
+    backgroundColor: "white",
+    borderColor: "grey",
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
-    // padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
-    // justifyContent: 'flex-end',
-    height: getHeight(30),
+    alignItems: "center",
+    shadowColor: "#000",
+    height: getHeight(35),
     width: getWidth(100),
-    // marginLeft: 0,
-    // bottom: 0,
-    // top: 0,
-    // elevation:10,
-
     shadowOffset: {
       width: 0,
       height: 2,
     },
   },
-  modalView2: {
-    // margin: 20,
-    backgroundColor: 'white',
-    borderColor: 'grey',
-    // borderWidth: 2,
-    borderTopWidth: 1,
-    // borderRadius: 20,
-    borderTopRightRadius: 20,
-    borderTopLeftRadius: 20,
-    // padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
-    // justifyContent: 'flex-end',
-    height: getHeight(38),
-    width: getWidth(100),
-    // marginLeft: 0,
-    // bottom: 0,
-    // top: 0,
-    // elevation:10,
-
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
+  areYouSure: {
+    fontFamily: fonts.AnekBanglaMedium,
+    color: "black",
+    fontWeight: "500",
+    fontSize: 18,
+    marginTop: moderateScale(20),
+    lineHeight: 18 * 1.5,
+    textAlign: "center",
+    paddingHorizontal: moderateScale(60),
+  },
+  row: {
+    borderRadius: 20,
+    width: "100%",
+    borderColor: "#F5F5F5",
+    justifyContent: "space-between",
+    flexDirection: "row",
+    alignItems: "center",
+    width: getWidth(85),
+  },
+  title: {
+    fontFamily: fonts.AnekBanglaMedium,
+    color: "black",
+    fontWeight: "400",
+    fontSize: 12,
+    lineHeight: 12 * 1.8,
+    includeFontPadding: false,
+  },
+  input: {
+    height: 50,
+    marginBottom: 8,
+    borderWidth: 1,
+    padding: 14,
+    borderRadius: 10,
+    fontSize: RFValue(18),
+    width: getWidth(40),
+    fontFamily: fonts.AnekBanglaMedium,
+    borderColor: "rgba(0,0,0,.2)",
+  },
+  modalHeading: {
+    fontFamily: fonts.AnekBanglaMedium,
+    color: "black",
+    fontWeight: "500",
+    fontSize: 16,
+    marginVertical: moderateScale(10),
+    textAlign: "center",
+  },
+  inputRow: {
+    paddingTop: 9,
+    width: getWidth(90),
+    height: getHeight(10),
+    flexDirection: "row",
+  },
+  inputContainer: {
+    borderColor: "green",
+    width: getWidth(45),
+    height: getHeight(10),
+  },
+  inputLabel: {
+    fontFamily: fonts.AnekBanglaMedium,
+    color: "#000000",
+    fontWeight: "400",
+    fontSize: 16,
+    includeFontPadding: false,
   },
 });
 export default ActiveWorkOut3;

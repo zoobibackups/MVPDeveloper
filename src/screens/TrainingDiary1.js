@@ -9,194 +9,76 @@ import {
   View,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
+import { moderateScale } from "react-native-size-matters";
 import { SvgXml } from "react-native-svg";
 import { man } from "../../assets/svg";
 import HeaderMainScreen from "../Components/HeaderMainScreen";
 import fonts from "../Constants/fonts";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
 import theme from "../Constants/theme";
-import { getHeight, getWidth } from "../functions/CommonFunctions";
-import { moderateScale } from "react-native-size-matters";
 import { RFValue } from "react-native-responsive-fontsize";
-const itemstyles = StyleSheet.create({
-  mainContainer: {
-    borderWidth: 1,
-    borderColor: "grey",
-    width: getWidth(94),
-    borderRadius: 20,
-    marginTop: 10,
-    padding: moderateScale(10),
-  },
-  headerRow: {
-    flexDirection: "row",
-    width: getWidth(94) - moderateScale(20),
-    height: getHeight(3),
-    paddingHorizontal: moderateScale(5),
-    borderRadius: 20,
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  leftRow: {
-    flexDirection: "row",
-    borderColor: "green",
-    width: getWidth(55),
-    height: getHeight(4),
-    borderRadius: 20,
-    alignItems: "center",
-  },
-  headerleftText: {
-    fontFamily: fonts.AnekBanglaMedium,
-    color: "black",
-    fontWeight: "500",
-    fontSize: RFValue(16),
-    lineHeight: RFValue(18) * 1.7,
-    letterSpacing: 2,
-    includeFontPadding: false,
-    marginLeft: moderateScale(10),
-  },
-  headerRightText: {
-    fontFamily: fonts.AnekBanglaMedium,
-    color: "grey",
-    fontWeight: "600",
-    fontSize: RFValue(16),
-    letterSpacing: 1,
-    includeFontPadding: false,
-  },
-  timeText: {
-    fontFamily: fonts.AnekBanglaMedium,
-    color: "grey",
-    fontWeight: "500",
-    fontSize: 18,
-    letterSpacing: 1.2,
-    includeFontPadding: false,
-  },
-  boldText: {
-    fontFamily: fonts.AnekBanglaMedium,
-    color: "black",
-    fontWeight: "500",
-    fontSize: 22,
-    letterSpacing: 2,
-  },
-  normalTxt: {
-    fontFamily: "AnekBangla-Medium",
-    color: "grey",
-    fontWeight: "400",
-    fontSize: 14,
-    letterSpacing: 1.2,
-    includeFontPadding: false,
-  },
-});
-
-let item_data = [
-  {
-    left: "Pull ups x5",
-    right: "Body Weight x 12 x 3",
-  },
-  {
-    left: "Lat pull-downs",
-    right: "70 kg  x 10 x 3",
-  },
-
-  {
-    left: "Bent-over-row",
-    right: "40 kg  x 10 x 3",
-  },
-  {
-    left: "Preachers curl",
-    right: "35 kg  x 12",
-  },
-  {
-    left: "Hammer curls",
-    right: "15kg  x 12 x 3",
-  },
-  {
-    left: "Inclined curls",
-    right: "15 kg  x 10 x 3",
-  },
-];
-
-const Renderitem = () => {
-  return (
-    <View style={styles.shadowContainer}>
-      <LinearGradient
-            style={{
-              flex: 1,
-              width: getWidth(90),
-              borderRadius: 20,
-              padding: moderateScale(7),
-            }}
-            colors={["#FDFFF4", "#BBC1AD"]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 0.8, y: 0 }}
-          >
-      <View style={itemstyles.headerRow}>
-        <View style={itemstyles.leftRow}>
-          <Image
-            style={{
-              resizeMode: "contain",
-              width: getHeight(3),
-              height: getHeight(3),
-            }}
-            source={require("../../assets/images/legs.png")}
-          />
-
-          <Text style={itemstyles.headerleftText}>Pull workout</Text>
-        </View>
-
-        <Text style={itemstyles.headerRightText}>18/5/23</Text>
-      </View>
-      <View style={itemstyles.headerRow}>
-        <Text style={itemstyles.timeText}>2h 25 min</Text>
-        <Text style={itemstyles.timeText}>25 sets</Text>
-      </View>
-      <View style={{ ...itemstyles.headerRow, height: getHeight(4.2) }}>
-        <Text style={itemstyles.boldText}>Exercise</Text>
-        <Text style={itemstyles.boldText}>Repetitions</Text>
-      </View>
-      {item_data.map((item, index) => (
-        <View style={itemstyles.headerRow} key={`${index}`}>
-          <Text style={itemstyles.normalTxt}>{item.left}</Text>
-          <Text style={itemstyles.normalTxt}>{item.right}</Text>
-        </View>
-      ))}
-      </LinearGradient>
-    </View>
-  );
-};
 
 const data = [
   {
-    challenge: "Challenge",
-    difficulty: "Difficulty",
-    status: "Status",
+    challenge: "",
+    difficulty: "KCAL",
+    status: "PROT",
   },
   {
-    challenge: "Run 10km",
-    difficulty: "Hard",
-    status: "Done",
+    challenge: "Breakfast",
+    difficulty: "235",
+    status: "10 g",
   },
   {
-    challenge: "Run 50km",
-    difficulty: "Extreme",
-    status: "Done",
+    challenge: "Lunch",
+    difficulty: "554",
+    status: "32 g",
   },
   {
-    challenge: "200 push ups/1h",
-    difficulty: "Hard",
-    status: "Not done",
+    challenge: "Snack 1",
+    difficulty: "430",
+    status: "24 g",
   },
   {
-    challenge: "100 sit ups/30 min",
-    difficulty: "Medium",
-    status: "Not done",
+    challenge: "Dinner",
+    difficulty: "642",
+    status: "36 g",
   },
   {
-    challenge: "2L water /7 days",
-    difficulty: "Easy",
-    status: "Done",
+    challenge: "Total",
+    difficulty: "1861",
+    status: "102 g",
   },
 ];
 
+const data1 = [
+  {
+    challenge: "",
+    difficulty: "REPS",
+    status: "WEIGHT",
+  },
+  {
+    challenge: "Bench press",
+    difficulty: "1x",
+    status: "95Kg",
+  },
+  {
+    challenge: "Dumbell press",
+    difficulty: "5x",
+    status: "35Kg",
+  },
+  {
+    challenge: "Deadlift",
+    difficulty: "1x",
+    status: "110kg",
+  },
+  {
+    challenge: "Squat",
+    difficulty: "1x",
+    status: "120kg",
+  },
+];
 const data2 = [
   {
     challenge: "",
@@ -253,7 +135,7 @@ const data4 = [
     status: "Male",
   },
 ];
-const TrainingDiary2 = () => {
+const TrainingDiary1 = () => {
   const navigation = useNavigation();
   return (
     <LinearGradient
@@ -299,7 +181,7 @@ const TrainingDiary2 = () => {
 
         <Text style={textStyles.mediumText}>Muhammad</Text>
 
-        <Text style={styles.titleText}>Challenges </Text>
+        <Text style={styles.titleText}>Meals consumed today</Text>
         <TouchableOpacity
           style={{ ...styles.shadowContainer }}
           onPress={() => navigation.navigate("HistoryAndProgress")}
@@ -327,6 +209,7 @@ const TrainingDiary2 = () => {
                   style={{
                     ...styles.rowText,
                     width: getWidth(40),
+
                     color: index == 0 ? "#000" : "rgba(0,0,0,.6)",
                     fontSize: index == 0 ? RFValue(11) : RFValue(9),
                   }}
@@ -358,10 +241,69 @@ const TrainingDiary2 = () => {
             ))}
           </LinearGradient>
         </TouchableOpacity>
-        <Text style={{ ...styles.titleText, marginTop: RFValue(10) }}>
-          Challenges{" "}
+        <Text style={{ ...styles.titleText, marginTop: moderateScale(20) }}>
+          Latest workout
         </Text>
-        <Renderitem />
+        <TouchableOpacity
+          style={{ ...styles.shadowContainer }}
+          onPress={() => navigation.navigate("HistoryAndProgress")}
+        >
+          <LinearGradient
+            style={{
+              flex: 1,
+              width: getWidth(90),
+              borderRadius: 20,
+              paddingTop: moderateScale(7),
+            }}
+            colors={["#FDFFF4", "#BBC1AD"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0.8, y: 0 }}
+          >
+            {data1.map((item, index) => (
+              <View
+                style={{
+                  ...styles.rowStyle,
+                  borderBottomWidth: index == data1.length - 1 ? 0 : 1,
+                }}
+                key={`${index}`}
+              >
+                <Text
+                  style={{
+                    ...styles.rowText,
+                    width: getWidth(40),
+
+                    color: index == 0 ? "#000" : "rgba(0,0,0,.6)",
+                    fontSize: index == 0 ? RFValue(11) : RFValue(9),
+                  }}
+                >
+                  {item.challenge}
+                </Text>
+                <Text
+                  style={{
+                    ...styles.rowText,
+                    width: getWidth(20),
+
+                    color: index == 0 ? "#000" : "rgba(0,0,0,.6)",
+                    fontSize: index == 0 ? RFValue(11) : RFValue(10),
+                  }}
+                >
+                  {item.difficulty}
+                </Text>
+                <Text
+                  style={{
+                    ...styles.rowText,
+                    width: getWidth(20),
+                    color: index == 0 ? "#000" : "rgba(0,0,0,.6)",
+                    fontSize: index == 0 ? RFValue(11) : RFValue(10),
+                  }}
+                >
+                  {item.status}
+                </Text>
+              </View>
+            ))}
+          </LinearGradient>
+        </TouchableOpacity>
+
         <Text style={{ ...styles.titleText, marginTop: moderateScale(20) }}>
           Personal bests
         </Text>
@@ -529,7 +471,7 @@ const TrainingDiary2 = () => {
   );
 };
 
-export default TrainingDiary2;
+export default TrainingDiary1;
 
 const styles = StyleSheet.create({
   titleText: {
@@ -563,8 +505,8 @@ const styles = StyleSheet.create({
     width: getWidth(80),
     justifyContent: "space-between",
     paddingHorizontal: 5,
+    alignSelf: "center",
     flexDirection: "row",
-    alignSelf:"center",
     paddingVertical: moderateScale(7),
   },
   rowText: {
@@ -572,7 +514,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.AnekBanglaMedium,
     color: "grey",
     fontWeight: "500",
-    fontSize: 16,
+    fontSize:  RFValue(9),
     letterSpacing: 1.5,
   },
   buttonStyle: {

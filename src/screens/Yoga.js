@@ -1,598 +1,222 @@
-import React from 'react';
-import {View, Text, Platform, TouchableOpacity, Image} from 'react-native';
-import {getWidth, getHeight} from '../functions/CommonFunctions';
-import {useNavigation} from '@react-navigation/core';
-import LinearGradient from 'react-native-linear-gradient';
-import { SvgXml } from 'react-native-svg';
-import { preformly } from '../../assets/svg';
+import { useNavigation } from "@react-navigation/core";
+import React from "react";
+import {
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  View,
+} from "react-native";
+import LinearGradient from "react-native-linear-gradient";
+import HeaderMainScreen from "../Components/HeaderMainScreen";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
+import { moderateScale } from "react-native-size-matters";
+import fonts from "../Constants/fonts";
+import { RFValue } from "react-native-responsive-fontsize";
+import { globalstyles } from "../styles/globalestyles";
+const styles = StyleSheet.create({
+  mainContainer: {
+    borderWidth: 1,
+    borderColor: "grey",
+    width: getWidth(94),
+    borderRadius: 20,
+    marginTop: 10,
+    padding: moderateScale(10),
+  },
+  headerRow: {
+    flexDirection: "row",
+    width: getWidth(94) - moderateScale(20),
+    height: getHeight(3),
+    paddingHorizontal: moderateScale(5),
+    borderRadius: 20,
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  leftRow: {
+    flexDirection: "row",
+    borderColor: "green",
+    width: getWidth(55),
+    height: getHeight(4),
+    borderRadius: 20,
+    alignItems: "center",
+  },
+  headerleftText: {
+    fontFamily: fonts.AnekBanglaMedium,
+    color: "black",
+    fontWeight: "500",
+    fontSize: RFValue(16),
+    lineHeight: RFValue(18) * 1.7,
+    letterSpacing: 2,
+    includeFontPadding: false,
+    marginLeft: moderateScale(10),
+  },
+  headerRightText: {
+    fontFamily: fonts.AnekBanglaMedium,
+    color: "grey",
+    fontWeight: "600",
+    fontSize: RFValue(16),
+    letterSpacing: 1,
+    includeFontPadding: false,
+  },
+  timeText: {
+    fontFamily: fonts.AnekBanglaMedium,
+    color: "grey",
+    fontWeight: "500",
+    fontSize: 18,
+    letterSpacing: 1.2,
+    includeFontPadding: false,
+  },
+  boldText: {
+    fontFamily: fonts.AnekBanglaMedium,
+    color: "black",
+    fontWeight: "500",
+    fontSize: 22,
+    letterSpacing: 2,
+  },
+  normalTxt: {
+    fontFamily: "AnekBangla-Medium",
+    color: "grey",
+    fontWeight: "400",
+    fontSize: 14,
+    letterSpacing: 1.2,
+    includeFontPadding: false,
+  },
+});
 
-const Yoga = () => {
+let data = [
+  {
+    left: "Mountain Pose ",
+    right: "2 min",
+  },
+  {
+    left: "Upward Salute",
+    right: "2 min",
+  },
+  {
+    left: "Forward Fold",
+    right: "2 min",
+  },
+  {
+    left: "Halfway Lift",
+    right: "2 min",
+  },
+  {
+    left: "Plank Pose",
+    right: "2 min",
+  },
+  {
+    left: "Chaturanga Dandasana",
+    right: "2 min",
+  },
+  {
+    left: "Upward Facing Dog",
+    right: "2 min",
+  },
+  {
+    left: "Downward Facing Dog ",
+    right: "2 min",
+  },
+  {
+    left: "Halfway Lift",
+    right: "2 min",
+  },
+  {
+    left: "Forward Fold ",
+    right: "2 min",
+  },
+];
+
+const renderitem = () => {
+  return (
+    <View style={styles.mainContainer}>
+      <View style={styles.headerRow}>
+        <View style={styles.leftRow}>
+          <Image
+            style={{
+              resizeMode: "contain",
+              width: getHeight(3),
+              height: getHeight(3),
+            }}
+            source={require("../../assets/images/legs.png")}
+          />
+
+          <Text style={styles.headerleftText}>Pull workout</Text>
+        </View>
+
+        <Text style={styles.headerRightText}>18/5/23</Text>
+      </View>
+      <View style={styles.headerRow}>
+        <Text style={styles.timeText}>2h 25 min</Text>
+        <Text style={styles.timeText}>25 sets</Text>
+      </View>
+      <View style={{ ...styles.headerRow, height: getHeight(4.2) }}>
+        <Text style={styles.boldText}>Exercise</Text>
+        <Text style={styles.boldText}>Time</Text>
+      </View>
+      {data.map((item, index) => (
+        <View style={styles.headerRow} key={`${index}`}>
+          <Text style={styles.normalTxt}>{item.left}</Text>
+          <Text style={styles.normalTxt}>{item.right}</Text>
+        </View>
+      ))}
+    </View>
+  );
+};
+const StartWorkOut = () => {
   const navigation = useNavigation();
   return (
     <LinearGradient
       style={{
-        alignItems: 'center',
+        alignItems: "center",
         paddingVertical: 30,
-        borderColor: 'red',
-        height: '100%',
-        // backgroundColor: 'white',
-        // borderWidth:10
+        height: "100%",
       }}
-      colors={['#FDFFF4', '#BBC1AD']}
-      start={{x: 0, y: 0}}
-      end={{x: 0.8, y: 0}}
-      // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-      // locations={{x:0,y:0.5,z:0.6}}
-      // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
+      colors={["#FDFFF4", "#BBC1AD"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 0.8, y: 0 }}
     >
-      <SvgXml
-        width={getWidth(45)}
-        height={getHeight(5)}
-        xml={preformly}
-        style={{marginTop: Platform.OS === 'ios' ? 20 : 0}}
+      <HeaderMainScreen
+        onPress={() => navigation.goBack()}
+        title={"Workouts"}
+        subTitle={"Start Pull Workout"}
+        subTitleStyle={{
+          color: "grey",
+        }}
       />
-      {/* <Text
-        style={{
-          fontFamily: 'Modak-Regular',
-          color: '#1B1561',
-          fontWeight: '400',
-          fontSize: 30,
-          marginTop: Platform.OS === 'ios' ? 20 : 0,
-        }}>
-        Preformly
-      </Text> */}
-      <View
-        style={{
-          flexDirection: 'row',
-          // borderWidth: 1,
-          borderColor: 'red',
-          width: getWidth(90),
-          height: getHeight(5),
-          // justifyContent: 'center',
-        }}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={{
-            borderWidth: 0.5,
-            borderColor: 'grey',
-            borderRadius: 40,
-            justifyContent: 'center',
-            width: getWidth(11),
-          }}>
-          <Image
-            style={{
-              resizeMode: 'contain',
-              width: getWidth(10),
-              // borderWidth: 1,
-              borderColor: 'red',
-              height: getHeight(2),
-            }}
-            source={require('../../assets/images/back.png')}
-          />
-        </TouchableOpacity>
-        <View
-          style={{
-            // borderWidth: 1,
-            borderColor: 'green',
-            width: getWidth(70),
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <Text
-            style={{
-              fontFamily: 'AnekBangla-Medium',
-              color: 'black',
-              fontWeight: '500',
-              fontSize: 18,
-              letterSpacing: 2,
-            }}>
-            START WORKOUT
-          </Text>
-        </View>
-      </View>
-      <View
-        style={{
-          //   flexDirection: 'row',
-          //   borderWidth: 1,
-          borderColor: 'red',
-          width: getWidth(90),
-          height: getHeight(9),
-          // justifyContent: 'center',
-        }}>
-        <Text
-          style={{
-            fontFamily: 'AnekBangla-Medium',
-            color: 'grey',
-            fontWeight: '500',
-            fontSize: 18,
-            letterSpacing: 2,
-            paddingTop: 20,
-            paddingBottom: 20,
-          }}>
-          Start Yoga
-        </Text>
-      </View>
-      <View
-        style={{
-          //   flexDirection: 'row',
-          // borderWidth: 1,
-          borderColor: 'red',
-          width: getWidth(95),
-          height: getHeight(65),
-          //   justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Text
-          style={{
-            fontFamily: 'AnekBangla-Medium',
-            color: 'black',
-            fontWeight: '500',
-            fontSize: 18,
-            letterSpacing: 2,
-            paddingTop: 20,
-            paddingBottom: 10,
-          }}>
-          Exercises
-        </Text>
 
+      <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
+        <Text
+          style={{
+            fontFamily: fonts.AnekBanglaMedium,
+            marginTop: moderateScale(20),
+            textAlign: "center",
+            fontSize: RFValue(20),
+          }}
+        >
+          YOGA
+        </Text>
         <View
           style={{
-            //   flexDirection: 'row',
-            borderWidth: 1,
-            borderColor: 'grey',
             width: getWidth(95),
-            height: getHeight(38),
-            borderRadius: 20,
-            // justifyContent: 'center',
-          }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              //   borderWidth: 1,
-              marginTop: 15,
-              borderColor: 'grey',
-              width: getWidth(95),
-              height: getHeight(6),
-              borderRadius: 20,
-              // justifyContent: 'center',
-            }}>
-            <View
-              style={{
-                flexDirection: 'row',
-                // borderWidth: 1,
-                borderColor: 'green',
-                width: getWidth(55),
-                height: getHeight(6),
-                borderRadius: 20,
-                justifyContent: 'space-between',
-                paddingLeft: 10,
-              }}>
-              <View
-                style={{
-                  width: getWidth(8),
-                  //   borderWidth: 1,
-                  //   borderColor: 'red',
-                  height: getHeight(5),
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  borderRadius: 10,
-                  backgroundColor: '#D3D3D3',
-                }}>
-                <Image
-                  style={{
-                    resizeMode: 'contain',
-                    width: getWidth(10),
-                    // borderWidth: 1,
-                    borderColor: 'red',
-                    height: getHeight(3),
-                  }}
-                  source={require('../../assets/images/legs.png')}
-                />
-              </View>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'black',
-                  fontWeight: '500',
-                  fontSize: 22,
-                  letterSpacing: 2,
-                  //   paddingTop: 20,
-                  //   paddingBottom: 10,
-                }}>
-                Pull workout
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                // borderWidth: 1,
-                borderColor: 'green',
-                width: getWidth(40),
-                height: getHeight(6),
-                borderRadius: 20,
-                justifyContent: 'flex-end',
-                alignItems: 'center',
-                // paddingLeft: 10,
-                paddingRight: 5,
-              }}>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'grey',
-                  fontWeight: '400',
-                  fontSize: 18,
-                  letterSpacing: 2,
-                  //   paddingTop: 20,
-                  //   paddingBottom: 10,
-                }}>
-                18/5/23
-              </Text>
-            </View>
-          </View>
-          <View
-            style={{
-              // flexDirection: 'row',
-              // borderWidth: 1,
-              borderColor: 'blue',
-              width: getWidth(95),
-              height: getHeight(29),
-              //   borderRadius: 20,
-              //   justifyContent: 'flex-end',
-              //   alignItems: 'center',
-              // paddingLeft: 10,
-              //   paddingRight: 5,
-            }}>
-            <View
-              style={{
-                flexDirection: 'row',
-                // borderWidth: 1,
-                borderColor: 'green',
-                width: getWidth(95),
-                height: getHeight(5),
-                //   borderRadius: 20,
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                // paddingLeft: 10,
-                // paddingLeft: 5,
-                paddingHorizontal: 10,
-              }}>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'grey',
-                  fontWeight: '400',
-                  fontSize: 18,
-                  letterSpacing: 2,
-                  //   paddingTop: 20,
-                  //   paddingBottom: 10,
-                }}>
-                2h 25 min
-              </Text>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'grey',
-                  fontWeight: '400',
-                  fontSize: 18,
-                  letterSpacing: 2,
-                  //   paddingTop: 20,
-                  //   paddingBottom: 10,
-                }}>
-                25 sets
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                // borderWidth: 1,
-                borderColor: 'green',
-                width: getWidth(95),
-                height: getHeight(5),
-                //   borderRadius: 20,
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                // paddingLeft: 10,
-                // paddingLeft: 5,
-                paddingHorizontal: 10,
-              }}>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'black',
-                  fontWeight: '500',
-                  fontSize: 22,
-                  letterSpacing: 2,
-                  //   paddingTop: 20,
-                  //   paddingBottom: 10,
-                }}>
-                Exercise
-              </Text>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'black',
-                  fontWeight: '500',
-                  fontSize: 22,
-                  letterSpacing: 2,
-                  //   paddingTop: 20,
-                  //   paddingBottom: 10,
-                }}>
-                Repetitions
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                // borderWidth: 1,
-                borderColor: 'green',
-                width: getWidth(95),
-                height: getHeight(3),
-                //   borderRadius: 20,
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                // paddingLeft: 10,
-                // paddingLeft: 5,
-                paddingHorizontal: 10,
-              }}>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'grey',
-                  fontWeight: '400',
-                  fontSize: 14,
-                  letterSpacing: 2,
-                  //   paddingTop: 20,
-                  //   paddingBottom: 10,
-                }}>
-                Pull ups x5
-              </Text>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'grey',
-                  fontWeight: '400',
-                  fontSize: 14,
-                  letterSpacing: 2,
-                  //   paddingTop: 20,
-                  //   paddingBottom: 10,
-                }}>
-                Body Weight x 12 x 3
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                // borderWidth: 1,
-                borderColor: 'green',
-                width: getWidth(95),
-                height: getHeight(3),
-                //   borderRadius: 20,
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                // paddingLeft: 10,
-                // paddingLeft: 5,
-                paddingHorizontal: 10,
-              }}>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'grey',
-                  fontWeight: '400',
-                  fontSize: 14,
-                  letterSpacing: 2,
-                  //   paddingTop: 20,
-                  //   paddingBottom: 10,
-                }}>
-                Lat pull-downs
-              </Text>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'grey',
-                  fontWeight: '400',
-                  fontSize: 14,
-                  letterSpacing: 2,
-                  //   paddingTop: 20,
-                  //   paddingBottom: 10,
-                }}>
-                10 x 3
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                // borderWidth: 1,
-                borderColor: 'green',
-                width: getWidth(95),
-                height: getHeight(3),
-                //   borderRadius: 20,
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                // paddingLeft: 10,
-                // paddingLeft: 5,
-                paddingHorizontal: 10,
-              }}>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'grey',
-                  fontWeight: '400',
-                  fontSize: 14,
-                  letterSpacing: 2,
-                  //   paddingTop: 20,
-                  //   paddingBottom: 10,
-                }}>
-                Bent-over-row
-              </Text>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'grey',
-                  fontWeight: '400',
-                  fontSize: 14,
-                  letterSpacing: 2,
-                  //   paddingTop: 20,
-                  //   paddingBottom: 10,
-                }}>
-                10 x 3
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                // borderWidth: 1,
-                borderColor: 'green',
-                width: getWidth(95),
-                height: getHeight(3),
-                //   borderRadius: 20,
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                // paddingLeft: 10,
-                // paddingLeft: 5,
-                paddingHorizontal: 10,
-              }}>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'grey',
-                  fontWeight: '400',
-                  fontSize: 14,
-                  letterSpacing: 2,
-                  //   paddingTop: 20,
-                  //   paddingBottom: 10,
-                }}>
-                Preachers curl
-              </Text>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'grey',
-                  fontWeight: '400',
-                  fontSize: 14,
-                  letterSpacing: 2,
-                  //   paddingTop: 20,
-                  //   paddingBottom: 10,
-                }}>
-                x 12
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                // borderWidth: 1,
-                borderColor: 'green',
-                width: getWidth(95),
-                height: getHeight(3),
-                //   borderRadius: 20,
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                // paddingLeft: 10,
-                // paddingLeft: 5,
-                paddingHorizontal: 10,
-              }}>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'grey',
-                  fontWeight: '400',
-                  fontSize: 14,
-                  letterSpacing: 2,
-                  //   paddingTop: 20,
-                  //   paddingBottom: 10,
-                }}>
-                Hammer curl
-              </Text>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'grey',
-                  fontWeight: '400',
-                  fontSize: 14,
-                  letterSpacing: 2,
-                  //   paddingTop: 20,
-                  //   paddingBottom: 10,
-                }}>
-                12 x 3
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                // borderWidth: 1,
-                borderColor: 'green',
-                width: getWidth(95),
-                height: getHeight(3),
-                //   borderRadius: 20,
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                // paddingLeft: 10,
-                // paddingLeft: 5,
-                paddingHorizontal: 10,
-              }}>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'grey',
-                  fontWeight: '400',
-                  fontSize: 14,
-                  letterSpacing: 2,
-                  //   paddingTop: 20,
-                  //   paddingBottom: 10,
-                }}>
-                Incline curl
-              </Text>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'grey',
-                  fontWeight: '400',
-                  fontSize: 14,
-                  letterSpacing: 2,
-                  //   paddingTop: 20,
-                  //   paddingBottom: 10,
-                }}>
-                10 x 3
-              </Text>
-            </View>
-          </View>
+            alignItems: "center",
+            justifyContent: "space-evenly",
+          }}
+        >
+          {renderitem()}
         </View>
-        <View
+        <TouchableOpacity
           style={{
-            alignItems: 'center',
-            borderColor: 'red',
-            height: getHeight(15),
-            justifyContent: 'center',
-            // borderWidth: 1,
-          }}>
-          <TouchableOpacity
-            // onPress={() => navigation.navigate('TrainingHome1')}
-            style={{
-              height: 55,
-              margin: 12,
-              //   borderWidth: 1,
-              padding: 14,
-              borderRadius: 20,
-              borderColor: '#1B1561',
-              backgroundColor: '#1B1561',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: getWidth(80),
-            }}>
-            <Text
-              style={{
-                fontFamily: 'AnekBangla-Medium',
-                color: 'white',
-                fontWeight: '400',
-                fontSize: 20,
-                letterSpacing: 2,
-              }}>
-              Start Workout
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+            ...globalstyles.buttonStyle,
+            marginTop: moderateScale(80),
+            width: getWidth(90),
+          }}
+        >
+          <Text style={globalstyles.buttonText}>Start Workout</Text>
+        </TouchableOpacity>
+      </ScrollView>
     </LinearGradient>
   );
 };
 
-export default Yoga;
+export default StartWorkOut;

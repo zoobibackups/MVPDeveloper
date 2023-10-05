@@ -67,52 +67,42 @@ const SignUp31 = () => {
               />
             </View>
             <View style={globalstyles.inputVerticalContainer}>
-            <Text style={globalstyles.inputLabel}>Equipment:</Text>
-            <TextInput
-              style={globalstyles.textInputWithOutIcon}
-              onChangeText={(text) => setMeal(text)}
-              value={meal}
-              placeholder="Benchpress, Dumbells"
-              placeholderTextColor="black"
-            />
+              <Text style={globalstyles.inputLabel}>Equipment:</Text>
+              <TextInput
+                style={globalstyles.textInputWithOutIcon}
+                onChangeText={(text) => setMeal(text)}
+                value={meal}
+                placeholder="Benchpress, Dumbells"
+                placeholderTextColor="black"
+              />
             </View>
             <View style={globalstyles.inputVerticalContainer}>
-            <Text style={globalstyles.inputLabel}>Location:</Text>
-            <TextInput
-              style={globalstyles.textInputWithOutIcon}
-              onChangeText={(text) => setMeal(text)}
-              value={meal}
-              placeholder="Gym"
-              placeholderTextColor="black"
-            />
+              <Text style={globalstyles.inputLabel}>Location:</Text>
+              <TextInput
+                style={globalstyles.textInputWithOutIcon}
+                onChangeText={(text) => setMeal(text)}
+                value={meal}
+                placeholder="Gym"
+                placeholderTextColor="black"
+              />
             </View>
             <View style={globalstyles.inputVerticalContainer}>
-            <Text style={globalstyles.inputLabel}>Days:</Text>
-            <TextInput
-              style={globalstyles.textInputWithOutIcon}
-              onChangeText={(text) => setMeal(text)}
-              value={meal}
-              placeholder="Monday, Wednesday, Saturday"
-              placeholderTextColor="black"
-            />
+              <Text style={globalstyles.inputLabel}>Days:</Text>
+              <TextInput
+                style={globalstyles.textInputWithOutIcon}
+                onChangeText={(text) => setMeal(text)}
+                value={meal}
+                placeholder="Monday, Wednesday, Saturday"
+                placeholderTextColor="black"
+              />
             </View>
 
-            
-           
-           
-
-            <View
-              style={globalstyles.buttonContianer}
-            >
+            <View style={globalstyles.buttonContianer}>
               <TouchableOpacity
                 onPress={() => navigation.navigate("TrainingHome1")}
                 style={globalstyles.buttonStyle}
               >
-                <Text
-                  style={globalstyles.buttonText}
-                >
-                  Next
-                </Text>
+                <Text style={globalstyles.buttonText}>Next</Text>
               </TouchableOpacity>
             </View>
           </View>

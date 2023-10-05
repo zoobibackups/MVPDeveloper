@@ -1,264 +1,102 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 
 import {
-  View,
-  Text,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
   StyleSheet,
+  Text,
   TextInput,
-  KeyboardAvoidingView,
-  ScrollView,
-  Modal,
-  TouchableWithoutFeedback,
-  Pressable,
-  Platform,
-} from 'react-native';
-import {getHeight, getWidth} from '../functions/CommonFunctions';
-import KeyBoardHandle from '../Components/KeyboardHandle';
-import {Button, CheckBox} from '@rneui/themed';
+  TouchableOpacity,
+  View,
+} from "react-native";
+import KeyBoardHandle from "../Components/KeyboardHandle";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
 
-import RadioForm, {
-  RadioButton,
-  RadioButtonInput,
-  RadioButtonLabel,
-} from 'react-native-simple-radio-button';
-
-import {useNavigation} from '@react-navigation/core';
-import LinearGradient from 'react-native-linear-gradient';
-import { SvgXml } from 'react-native-svg';
-import { preformly } from '../../assets/svg';
+import { useNavigation } from "@react-navigation/core";
+import LinearGradient from "react-native-linear-gradient";
+import HeaderMainScreen from "../Components/HeaderMainScreen";
+import textStyles, { globalstyles } from "../styles/globalestyles";
+import { RFValue } from "react-native-responsive-fontsize";
 
 const UpdateWeight = () => {
   const navigation = useNavigation();
-  var radio_props = [
-    {label: 'male', value: 0},
-    {label: 'female', value: 1},
-    {label: 'other', value: 2},
-  ];
-
-  const [time, setTime] = useState('');
-  const [age, setAge] = useState('');
-  const [weight, setWeight] = useState('');
-  //   const [selectedIndex, setIndex] = useState(0);
-  //   const [state, setState] = useState(false);
-  //   //   const [passowrd, setPassword] = useState('');
-  //   //   const [show,setShow]=useState(true)
-  //   //    const [show1,setShow1]=useState(true)
-  //   const [confirmPassword, setConfirmPassowrd] = useState('');
+  const [weight, setWeight] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <>
       <KeyBoardHandle>
         <LinearGradient
           style={{
-            alignItems: 'center',
+            alignItems: "center",
             paddingVertical: 30,
-            borderColor: 'red',
-            height: '100%',
-            // backgroundColor: 'white',
-            // borderWidth:10
+            borderColor: "red",
+            height: "100%",
           }}
-          colors={['#FDFFF4', '#BBC1AD']}
-          start={{x: 0, y: 0}}
-          end={{x: 0.8, y: 0}}
-          // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-          // locations={{x:0,y:0.5,z:0.6}}
-          // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
+          colors={["#FDFFF4", "#BBC1AD"]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 0.8, y: 0 }}
         >
-          <SvgXml
-            width={getWidth(45)}
-            height={getHeight(5)}
-            xml={preformly}
-            style={{marginTop: Platform.OS === 'ios' ? 20 : 0}}
+          <HeaderMainScreen
+            onPress={() => navigation.goBack()}
+            title={"CHANGE  PROFILE"}
+            subTitle={"Update my weight"}
+            subTitleStyle={{
+              textAlign: "center",
+              alignSelf: "center",
+            }}
           />
-          {/* <Text
-            style={{
-              fontFamily: 'Modak-Regular',
-              color: '#1B1561',
-              fontWeight: '400',
-              fontSize: 30,
-            }}>
-            Preformly
-          </Text> */}
-          <View
-            style={{
-              flexDirection: 'row',
-              // borderWidth: 1,
-              borderColor: 'red',
-              width: getWidth(90),
-              height: getHeight(5),
-              // justifyContent: 'center',
-            }}>
-            <TouchableOpacity
-              onPress={() => navigation.goBack()}
-              style={{
-                borderWidth: 0.5,
-                borderColor: 'grey',
-                borderRadius: 40,
-                justifyContent: 'center',
-                width: getWidth(10),
-              }}>
-              <Image
-                style={{
-                  resizeMode: 'contain',
-                  width: getWidth(9),
-                  // borderWidth: 1,
-                  borderColor: 'red',
-                  height: getHeight(2),
-                }}
-                source={require('../../assets/images/back.png')}
-              />
-            </TouchableOpacity>
-            <View
-              style={{
-                // borderWidth: 1,
-                borderColor: 'green',
-                width: getWidth(70),
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text
-                style={{
-                  fontFamily: 'AnekBangla-Medium',
-                  color: 'black',
-                  fontWeight: '500',
-                  fontSize: 18,
-                }}>
-                C R E A T E P R O F I L E
-              </Text>
-            </View>
-          </View>
-          <View
-            style={{
-              paddingVertical: 10,
-              height: getHeight(10),
-              borderColor: 'red',
-              //   borderWidth: 1,
-            }}>
-            <Text
-              style={{
-                fontFamily: 'AnekBangla-Medium',
-                color: 'black',
-                fontWeight: '500',
-                fontSize: 18,
-                letterSpacing: 2,
-              }}>
-              Update my weight
-            </Text>
-          </View>
 
-          <View
-            style={{
-              paddingVertical: 10,
-              height: getHeight(65),
-              width: getWidth(90),
-              borderColor: 'red',
-              //   borderWidth: 1,
-            }}>
-            <Text
-              style={{
-                paddingLeft: 10,
-                fontFamily: 'AnekBangla-Medium',
-                color: 'black',
-                fontWeight: '400',
-                letterSpacing: 2,
-              }}>
-              New Weight:
-            </Text>
+          <View style={globalstyles.inputVerticalContainer}>
+            <Text style={globalstyles.inputLabel}>New Weight:</Text>
             <TextInput
-              style={styles.input}
-              onChangeText={text => setWeight(text)}
+              style={globalstyles.textInputWithOutIcon}
+              onChangeText={(text) => setWeight(text)}
               value={weight}
-              placeholder="Enter your goal weight"
+              placeholder="Enter your new weight"
               placeholderTextColor="grey"
-              // keyboardType="numeric"
             />
-
+          </View>
+          <View>
             <View
               style={{
-                alignItems: 'center',
-                borderColor: 'red',
-                height: getHeight(33),
-                justifyContent: 'flex-end',
-                // borderWidth:1
-              }}>
+                alignItems: "center",
+                borderColor: "red",
+                marginTop:getHeight(5)
+              }}
+            >
               <TouchableOpacity
-                onPress={() => setModalVisible(true)}
-                style={{
-                  height: 55,
-                  margin: 12,
-                  //   borderWidth: 1,
-                  padding: 14,
-                  borderRadius: 20,
-                  borderColor: '#1B1561',
-                  backgroundColor: '#1B1561',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: getWidth(65),
-                }}>
-                <Text
-                  style={{
-                    fontFamily: 'AnekBangla-Medium',
-                    color: 'white',
-                    fontWeight: '500',
-                    fontSize: 18,
-                    letterSpacing: 2,
-                  }}>
-                  Add Pictures
-                </Text>
+                onPress={() => navigation.navigate("WeightProgress")}
+                style={globalstyles.buttonStyle}
+              >
+                <Text style={globalstyles.buttonText}>Add Pictures</Text>
               </TouchableOpacity>
-              <View style={{paddingTop: 25, width: getWidth(60)}}>
+              <View style={{ paddingTop: 25, width: getWidth(60) }}>
                 <Text
                   style={{
-                    fontSize: 16,
-                    fontWeight: '400',
-                    fontFamily: 'AnekBangla-Light',
-                    textAlign: 'center',
-                    letterSpacing: 1,
-                  }}>
+                    ...textStyles.mediumText,
+                    textAlign: "center",
+                    lineHeight: RFValue(14),
+                    fontSize: RFValue(12),
+                  }}
+                >
                   Add a picture of yourself to track your weight journey and
                   keep the motivation high.
                 </Text>
               </View>
             </View>
-            {/* /////////////////////////////////////
-           ahkjdhak
-           //// */}
 
             <View
               style={{
-                alignItems: 'center',
-                borderColor: 'red',
-                height: getHeight(17),
-                justifyContent: 'flex-end',
+                alignItems: "center",
+                borderColor: "red",
+                height: getHeight(32),
+                justifyContent: "flex-end",
                 // borderWidth:1
-              }}>
+              }}
+            >
               <TouchableOpacity
-                onPress={() => navigation.navigate('WeightProgress')}
-                style={{
-                  height: 55,
-                  margin: 12,
-                  //   borderWidth: 1,
-                  padding: 14,
-                  borderRadius: 20,
-                  borderColor: '#1B1561',
-                  backgroundColor: '#1B1561',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: getWidth(65),
-                }}>
-                <Text
-                  style={{
-                    fontFamily: 'AnekBangla-Medium',
-                    color: 'white',
-                    fontWeight: '500',
-                    fontSize: 18,
-                    letterSpacing: 2,
-                  }}>
-                  N e x t
-                </Text>
+                onPress={() => navigation.navigate("AccountDetails1")}
+                style={globalstyles.buttonStyle}
+              >
+                <Text style={globalstyles.buttonText}>Update</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -270,24 +108,24 @@ const UpdateWeight = () => {
 const styles = StyleSheet.create({
   centeredView: {
     // flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    justifyContent: "flex-end",
+    alignItems: "center",
     // marginTop: 110,
     // borderWidth: 3,
-    borderColor: 'green',
+    borderColor: "green",
     height: getHeight(91),
   },
   modalView: {
     // margin: 20,
-    backgroundColor: 'white',
-    borderColor: 'blue',
+    backgroundColor: "white",
+    borderColor: "blue",
     // borderWidth: 1,
     // borderRadius: 20,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     // padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
+    alignItems: "center",
+    shadowColor: "#000",
     // justifyContent: 'flex-end',
     height: getHeight(53),
     width: getWidth(100),
@@ -309,20 +147,20 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   buttonOpen: {
-    backgroundColor: '#F194FF',
+    backgroundColor: "#F194FF",
   },
   buttonClose: {
-    backgroundColor: '#2196F3',
+    backgroundColor: "#2196F3",
   },
   textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
   },
   modalText: {
     marginBottom: 15,
-    textAlign: 'center',
-    fontWeight: '900',
+    textAlign: "center",
+    fontWeight: "900",
   },
   input: {
     height: 55,
@@ -330,26 +168,26 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 14,
     borderRadius: 20,
-    borderColor: '#1B1561',
-    color: 'grey',
+    borderColor: "#1B1561",
+    color: "grey",
   },
   modal: {
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
 
     marginLeft: 0,
     bottom: 0,
     top: 10,
   },
   topBar: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 30,
     borderRadius: 65,
     // borderWidth: 2,
-    borderColor: '#D3D3D3',
+    borderColor: "#D3D3D3",
 
     width: getWidth(15),
     height: getHeight(0.7),
-    backgroundColor: '#D3D3D3',
+    backgroundColor: "#D3D3D3",
   },
   //   modalView: {
   //     borderWidth: 1,

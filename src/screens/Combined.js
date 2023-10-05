@@ -1,94 +1,52 @@
-import React from 'react';
-// import FullfillmentScreen from '../home/FullfillmentScreen';
-// import Manifest from '../home/Manifest';
-import {useNavigation} from '@react-navigation/native';
-
-import {StackActions} from '@react-navigation/native';
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 const Tab = createBottomTabNavigator();
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import { Icon } from '@iconify/react';
-
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Button,
-  Keyboard,
-  Alert,
-  Image,
-  stylesSheet,
-} from 'react-native';
-import {
-  Search,
-  ArrowUpCircle,
-  ArrowDownCircle,
-  Calendar,
-  RotateCcw,
-  Target,
-} from 'react-native-feather';
-// import {Circle} from 'react-native-svg';
-import {getWidth, getHeight} from '../functions/CommonFunctions';
-import History1 from './History1';
-import History2 from './History2';
-import HistoryAndProgress from './HistoryAndProgress';
+import { StyleSheet, View } from "react-native";
+import { Calendar, RotateCcw, Target } from "react-native-feather";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
+import History1 from "./History1";
+import History2 from "./History2";
+import HistoryAndProgress from "./HistoryAndProgress";
+import { RFValue } from "react-native-responsive-fontsize";
+import LinearGradient from "react-native-linear-gradient";
 
 const Combined = () => {
   return (
-    <>
+    <LinearGradient
+      colors={["#FDFFF4", "#BBC1AD"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 0.8, y: 0 }}
+      style={{ flex: 1}}
+    >
       <Tab.Navigator
         screenOptions={{
           tabBarHideOnKeyboard: true,
-        
-          tabBarStyle: {
-            position: 'absolute',
-            backgroundColor: 'rgba(187, 193, 173,1)',
-            borderTopLeftRadius: 20,
-            // colors:{['#FDFFF4','#BBC1AD']},
-            // start:{{x: 0, y: 0}},
-            // end:{{x: 0.8, y: 0}},
-            borderTopRightRadius: 20,
-            borderWidth: 0.5,
-            shadowColor: 'rgba(103, 128, 159)',
-
-            elevation: 1,
-            borderColor: 'grey',
-          },
-        }}>
+          tabBarStyle: styles.tabBarStyle,
+        }}
+      >
         <Tab.Screen
           name="History1"
           component={History1}
           options={{
             headerShown: false,
-
-            tabBarIcon: ({focused}) => (
+            tabBarIcon: ({ focused }) => (
               <>
-                <Calendar size={2} color={focused ? '#1B1561' : 'grey'} />
+                <Calendar
+                  width={RFValue(20)}
+                  height={RFValue(20)}
+                  color={focused ? "#1B1561" : "grey"}
+                />
               </>
             ),
 
-            tabBarLabel: ({focused, color, size}) => (
-              <View
-                style={{
-                  height: getHeight(2),
-                  width: getWidth(15),
-                  borderRadius: 20,
-                  // backgroundColor: 'black',
-                  justifyContent: 'flex-end',
-                  alignItems: 'center',
-                  // borderWidth:1
-                }}>
+            tabBarLabel: ({ focused, color, size }) => (
+              <View style={styles.bgContainer}>
                 <View
                   style={{
-                    height: getHeight(2),
-                    // marginTop:10,
-                    width: getWidth(15),
-                    borderTopRightRadius: 20,
-                    borderTopLeftRadius: 20,
-                    // borderRadius:20,
-                    backgroundColor: focused ? '#1B1561' : 'transparent',
-                    // borderWidth:1
-                  }}></View>
+                    ...styles.ActiveView,
+                    backgroundColor: focused ? "#1B1561" : "transparent",
+                  }}
+                />
               </View>
             ),
           }}
@@ -98,32 +56,23 @@ const Combined = () => {
           component={History2}
           options={{
             headerShown: false,
-
-            tabBarLabel: ({focused, color, size}) => (
-              <View
-                style={{
-                  height: getHeight(2),
-                  width: getWidth(15),
-                  borderRadius: 20,
-                  // backgroundColor: 'white',
-                  justifyContent: 'flex-end',
-                  alignItems: 'center',
-                  // borderWidth:1
-                }}>
+            tabBarLabel: ({ focused, color, size }) => (
+              <View style={styles.bgContainer}>
                 <View
                   style={{
-                    height: getHeight(2),
-                    width: getWidth(15),
-                    borderTopRightRadius: 20,
-                    borderTopLeftRadius: 20,
-                    backgroundColor: focused ? '#1B1561' : 'transparent',
-                    // borderWidth:1
-                  }}></View>
+                    ...styles.ActiveView,
+                    backgroundColor: focused ? "#1B1561" : "transparent",
+                  }}
+                />
               </View>
             ),
-            tabBarIcon: ({focused}) => (
+            tabBarIcon: ({ focused }) => (
               <>
-                <RotateCcw size={2} color={focused ? '#1B1561' : 'gray'} />
+                <RotateCcw
+                  width={RFValue(20)}
+                  height={RFValue(20)}
+                  color={focused ? "#1B1561" : "gray"}
+                />
               </>
             ),
           }}
@@ -133,39 +82,63 @@ const Combined = () => {
           component={HistoryAndProgress}
           options={{
             headerShown: false,
-            tabBarLabel: ({focused, color, size}) => (
-              <View
-                style={{
-                  height: getHeight(2),
-                  width: getWidth(10),
-                  borderRadius: 20,
-                  // backgroundColor: 'white',
-                  justifyContent: 'flex-end',
-                  alignItems: 'center',
-                  // borderWidth:1
-                }}>
+            tabBarLabel: ({ focused, color, size }) => (
+              <View style={styles.bgContainer}>
                 <View
                   style={{
-                    height: getHeight(2),
-                    width: getWidth(15),
-                    borderTopRightRadius: 20,
-                    borderTopLeftRadius: 20,
-                    backgroundColor: focused ? '#1B1561' : 'transparent',
-                    // borderWidth:1
-                  }}></View>
+                    ...styles.ActiveView,
+                    backgroundColor: focused ? "#1B1561" : "transparent",
+                  }}
+                />
               </View>
             ),
-            tabBarIcon: ({focused}) => (
+            tabBarIcon: ({ focused }) => (
               <>
-                <Target size={24} color={focused ? '#1B1561' : 'gray'} />
-                {/* <Icon icon="icon-park-outline:target" /> */}
+                <Target
+                  width={RFValue(20)}
+                  height={RFValue(20)}
+                  color={focused ? "#1B1561" : "gray"}
+                />
               </>
             ),
           }}
         />
       </Tab.Navigator>
-    </>
+    </LinearGradient>
   );
 };
 
 export default Combined;
+
+const styles = StyleSheet.create({
+  tabBarStyle: {
+    backgroundColor: "rgba(187, 193, 173,1)",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderWidth: 0,
+    shadowColor: "rgba(103, 128, 159)",
+    elevation: 10,
+    borderColor: "grey",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 11,
+    },
+    shadowOpacity: 0.55,
+    shadowRadius: 14.78,
+
+    elevation: 22,
+  },
+  bgContainer: {
+    height: getHeight(0.8),
+    width: getWidth(15),
+    borderRadius: 20,
+    alignItems: "center",
+  },
+  ActiveView: {
+    height: getHeight(0.5),
+    width: getWidth(8),
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+  },
+});

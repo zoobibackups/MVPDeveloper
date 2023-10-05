@@ -17,24 +17,14 @@ const Checkbox = ({
   containerStyle,
   textStyle,
   checkboxStyle,
+  imageStyle={}
 }) => {
-  // const animatedWidth = useRef(new Animated.Value(0)).current;
-
-  // const startAnimation = () => {
-  //   const toValue = isChecked ? 0 : 30;
-  //   Animated.timing(animatedWidth, {
-  //     toValue: toValue,
-  //     duration: 500,
-  //     useNativeDriver: false,
-  //   }).start();
-  // };
-
   return (
     <View style={[styles.container, containerStyle]}>
       {isChecked ? (
         <TouchableOpacity
           onPress={() => {
-            // startAnimation();
+          
             onPress();
           }}
           style={[
@@ -44,7 +34,7 @@ const Checkbox = ({
           ]}>
           <Animated.View
             style={{
-              // width: animatedWidth,
+         
               justifyContent: 'center',
               alignItems: 'center',
             }}>
@@ -52,11 +42,11 @@ const Checkbox = ({
               style={{
                 resizeMode: 'contain',
                 width: getWidth(4),
-                // borderWidth: 1,
                 borderColor: 'red',
                 height: getHeight(2),
                 justifyContent: 'center',
                 alignItems: 'center',
+                ...imageStyle
               }}
               source={require('../../assets/images/tick2.png')}
             />
@@ -83,11 +73,11 @@ const Checkbox = ({
               style={{
                 resizeMode: 'contain',
                 width: getWidth(4),
-                // borderWidth: 1,
                 borderColor: 'red',
                 height: getHeight(2),
                 justifyContent: 'center',
                 alignItems: 'center',
+                ...imageStyle
               }}
               source={require('../../assets/images/tick2.png')}
             />

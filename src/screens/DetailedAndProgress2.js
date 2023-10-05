@@ -5,6 +5,7 @@ import {useNavigation} from '@react-navigation/core';
 import LinearGradient from 'react-native-linear-gradient';
 import { SvgXml } from 'react-native-svg';
 import { preformly } from '../../assets/svg';
+import HeaderMainScreen from '../Components/HeaderMainScreen';
 
 const DetailedAndProgress2 = () => {
   const navigation = useNavigation();
@@ -15,101 +16,20 @@ const DetailedAndProgress2 = () => {
         paddingVertical: 30,
         borderColor: 'red',
         height: '100%',
-        // backgroundColor: 'white',
-        // borderWidth:10
       }}
       colors={['#FDFFF4', '#BBC1AD']}
       start={{x: 0, y: 0}}
       end={{x: 0.8, y: 0}}
-      // start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
-      // locations={{x:0,y:0.5,z:0.6}}
-      // start={{x: 0, y: 0.75}} end={{x: 1, y: 0.25}}
     >
-      <SvgXml
-        width={getWidth(45)}
-        height={getHeight(5)}
-        xml={preformly}
-        style={{marginTop: Platform.OS === 'ios' ? 20 : 0}}
-      />
-      {/* <Text
-        style={{
-          fontFamily: 'Modak-Regular',
-          color: '#1B1561',
-          fontWeight: '400',
-          fontSize: 30,
-          marginTop: Platform.OS === 'ios' ? 20 : 0,
-        }}>
-        Preformly
-      </Text> */}
-      <View
-        style={{
-          flexDirection: 'row',
-          // borderWidth: 1,
-          borderColor: 'red',
-          width: getWidth(90),
-          height: getHeight(5),
-          // justifyContent: 'center',
-        }}>
-        <TouchableOpacity
+      <HeaderMainScreen
           onPress={() => navigation.goBack()}
-          style={{
-            borderWidth: 0.5,
-            borderColor: 'grey',
-            borderRadius: 40,
-            justifyContent: 'center',
-            width: getWidth(11),
-          }}>
-          <Image
-            style={{
-              resizeMode: 'contain',
-              width: getWidth(10),
-              // borderWidth: 1,
-              borderColor: 'red',
-              height: getHeight(2),
-            }}
-            source={require('../../assets/images/back.png')}
-          />
-        </TouchableOpacity>
-        <View
-          style={{
-            // borderWidth: 1,
-            borderColor: 'green',
-            width: getWidth(70),
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <Text
-            style={{
-              fontFamily: 'AnekBangla-Medium',
-              color: 'black',
-              fontWeight: '500',
-              fontSize: 18,
-              letterSpacing: 2,
-            }}>
-            Goals
-          </Text>
-        </View>
-      </View>
-      <View
-        style={{
-          // borderWidth: 1,
-          borderColor: 'green',
-          width: getWidth(90),
-          height: getHeight(10),
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Text
-          style={{
-            fontFamily: 'AnekBangla-Medium',
-            color: 'black',
-            fontWeight: '500',
-            fontSize: 18,
-            letterSpacing: 2,
-          }}>
-          Current Challenge or Goal
-        </Text>
-      </View>
+          title={"Goals"}
+          subTitle={"Current Challenge or Goal"}
+          subTitleStyle={{
+            alignSelf: "center",
+          }}
+        />
+    
       <View
         style={{
           // borderWidth: 1,
@@ -148,7 +68,7 @@ const DetailedAndProgress2 = () => {
             borderRadius: 20,
             // borderWidth: 1,
             borderColor: 'red',
-            height: getHeight(2),
+            height: getHeight(1.3),
           }}
           source={require('../../assets/images/progress.png')}
         />

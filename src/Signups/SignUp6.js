@@ -16,11 +16,6 @@ import CustomHeader from "../Components/CustomHeader";
 import textStyles, { globalstyles } from "../styles/globalestyles";
 
 const SignUp6 = () => {
-  const [height, setHeight] = useState("");
-  const [age, setAge] = useState("");
-  const [weight, setWeight] = useState("");
-  const [selectedIndex, setIndex] = useState(0);
-  const [confirmPassword, setConfirmPassowrd] = useState("");
   const [checked, setChecked] = useState(false);
   const [checked1, setChecked1] = useState(false);
   const [checked2, setChecked2] = useState(false);

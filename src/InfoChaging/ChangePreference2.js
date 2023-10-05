@@ -9,9 +9,6 @@ import {
   View
 } from 'react-native';
 import { getHeight, getWidth } from '../functions/CommonFunctions';
-// import { CheckBox } from '@rneui/themed';
-
-// import CheckBox from '@react-native-community/checkbox';
 import { useNavigation } from '@react-navigation/core';
 
 import {
@@ -22,14 +19,7 @@ import { preformly } from '../../assets/svg';
 // import Icon from 'react-native-dynamic-vector-icons';
 
 const ChangePreference2 = () => {
-  //   const [height, setHeight] = useState('');
-  //   const [age, setAge] = useState('');
-  //   const [weight, setWeight] = useState('');
-  //   const [selectedIndex, setIndex] = useState(0);
 
-  //   const [passowrd, setPassword] = useState('');
-  //   const [show,setShow]=useState(true)
-  //    const [show1,setShow1]=useState(true)
   const [confirmPassword, setConfirmPassowrd] = useState('');
   const [checked, setChecked] = useState(false);
   const [checked1, setChecked1] = useState(false);

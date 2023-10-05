@@ -1,20 +1,14 @@
-import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import {
-  Image,
-  ScrollView,
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-  View,
+    Image,
+    StyleSheet,
+    Text,
+    View
 } from "react-native";
-import LinearGradient from "react-native-linear-gradient";
-import HeaderMainScreen from "../Components/HeaderMainScreen";
-import { getHeight, getWidth } from "../functions/CommonFunctions";
+import { RFValue } from "react-native-responsive-fontsize";
 import { moderateScale } from "react-native-size-matters";
 import fonts from "../Constants/fonts";
-import { RFValue } from "react-native-responsive-fontsize";
-import { globalstyles } from "../styles/globalestyles";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
 const styles = StyleSheet.create({
   mainContainer: {
     borderWidth: 1,
@@ -112,7 +106,7 @@ let data = [
   },
 ];
 
-const renderitem = () => {
+const ExerciseItem = () => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.headerRow}>
@@ -148,61 +142,6 @@ const renderitem = () => {
     </View>
   );
 };
-const StartWorkOut = () => {
-  const navigation = useNavigation();
-  return (
-    <LinearGradient
-      style={{
-        alignItems: "center",
-        paddingVertical: 30,
-        height: "100%",
-      }}
-      colors={["#FDFFF4", "#BBC1AD"]}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 0.8, y: 0 }}
-    >
-      <HeaderMainScreen
-        onPress={() => navigation.goBack()}
-        title={"Workouts"}
-        subTitle={"Start Pull Workout"}
-        subTitleStyle={{
-          color: "grey",
-        }}
-      />
 
-      <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
-        <Text
-          style={{
-            fontFamily: fonts.AnekBanglaMedium,
-            marginTop: moderateScale(20),
-            textAlign: "center",
-            fontSize: RFValue(20),
-          }}
-        >
-          Exercises
-        </Text>
-        <View
-          style={{
-            width: getWidth(95),
-            alignItems: "center",
-            justifyContent: "space-evenly",
-          }}
-        >
-          {renderitem()}
-        </View>
-        <TouchableOpacity
-          onPress={() =>  navigation.navigate("ActiveWorkOut1")}
-          style={{
-            ...globalstyles.buttonStyle,
-            marginTop: moderateScale(80),
-            width: getWidth(90),
-          }}
-        >
-          <Text style={globalstyles.buttonText}>Start Workout </Text>
-        </TouchableOpacity>
-      </ScrollView>
-    </LinearGradient>
-  );
-};
 
-export default StartWorkOut;
+export default ExerciseItem
