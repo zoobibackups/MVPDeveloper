@@ -1,24 +1,22 @@
+import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import {
-  View,
-  Text,
   Image,
-  ImageBackground,
-  TouchableOpacity,
-  StyleSheet,
   Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from "react-native";
-import { getHeight, getWidth } from "../functions/CommonFunctions";
-import { useNavigation } from "@react-navigation/core";
+import { RFValue } from "react-native-responsive-fontsize";
+import { moderateScale } from "react-native-size-matters";
 import { SvgXml } from "react-native-svg";
 import { preformly } from "../../assets/svg";
-import { RFValue } from "react-native-responsive-fontsize";
-import fonts from "../Constants/fonts";
-import textStyles from "../styles/globalestyles";
-import { moderateScale } from "react-native-size-matters";
 import theme from "../Constants/theme";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
+import textStyles from "../styles/globalestyles";
 
-const Home = () => {
+const TrainingLogIn = () => {
   const navigation = useNavigation();
   return (
     <>
@@ -59,7 +57,7 @@ const Home = () => {
           }}
         >
           <TouchableOpacity
-            onPress={() => navigation.navigate("LogIn1")}
+            onPress={() => navigation.navigate("LogIn3")}
             style={styles.buttonStyle}
           >
             <Text style={{ ...textStyles.lightText, color: theme.whiteColor }}>
@@ -68,7 +66,7 @@ const Home = () => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate("BusinessSignUp")}
+            onPress={() => navigation.navigate("Error1")}
             style={styles.buttonStyle}
           >
             <Text style={{ ...textStyles.lightText, color: theme.whiteColor }}>
@@ -77,7 +75,7 @@ const Home = () => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate("SignUp1")}
+            onPress={() => navigation.navigate("SignUp18")}
             style={{
               ...styles.buttonStyle,
               backgroundColor: theme.transparentColor,
@@ -138,4 +136,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default TrainingLogIn;

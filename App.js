@@ -106,7 +106,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={__DEV__ ? "Profile1" : "LandingPage"}
+        initialRouteName={__DEV__ ? "Home5" : "LandingPage"}
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen

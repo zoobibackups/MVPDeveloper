@@ -10,14 +10,14 @@ import {
   View,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
+import { RFValue } from "react-native-responsive-fontsize";
 import { SvgXml } from "react-native-svg";
 import { hideEye, preformly } from "../../assets/svg";
 import KeyBoardHandle from "../Components/KeyboardHandle";
 import fonts from "../Constants/fonts";
-import { getHeight, getWidth } from "../functions/CommonFunctions";
-import textStyles, { globalstyles } from "../styles/globalestyles";
-import { RFValue } from "react-native-responsive-fontsize";
 import theme from "../Constants/theme";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
+import { globalstyles } from "../styles/globalestyles";
 const SignUp1 = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");

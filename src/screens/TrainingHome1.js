@@ -501,7 +501,7 @@ const TrainingHome1 = () => {
                   }}
                 >
                   <TouchableOpacity
-                    onPress={() => navigation.navigate("TrainingBox1")}
+                    onPress={() =>  {setModalVisible(false), navigation.navigate("TrainingBox1")}}
                   >
                     <View
                       style={{
@@ -530,7 +530,7 @@ const TrainingHome1 = () => {
                 }}
               >
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("CreateWorkOut1")}
+                  onPress={() => {setModalVisible(false), navigation.navigate("CreateWorkOut1")}}
                   style={{
                     ...globalstyles.buttonStyle,
                     width: getWidth(80),

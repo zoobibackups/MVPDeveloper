@@ -189,6 +189,7 @@ const ChangeIngredients = () => {
           }}
         >
           <TouchableOpacity
+           onPress={() => navigation.goBack()}
             style={{
               ...globalstyles.buttonStyle,
               marginVertical: moderateScale(15),
@@ -477,7 +478,7 @@ const ChangeIngredients = () => {
                     // paddingTop: 7,
                     // borderWidth: 1,
                     width: getWidth(85),
-                    height: getHeight(12),
+                    height: getHeight(9),
                     justifyContent: "flex-end",
                     // paddingHorizontal: 38,
 
@@ -508,7 +509,7 @@ const ChangeIngredients = () => {
                         letterSpacing: 2,
                       }}
                     >
-                      Proceed
+                      Replace
                     </Text>
                   </TouchableOpacity>
                 </View>

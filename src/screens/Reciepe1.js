@@ -15,7 +15,7 @@ import {
 import LinearGradient from "react-native-linear-gradient";
 import { AirbnbRating } from "react-native-ratings";
 import { RFValue } from "react-native-responsive-fontsize";
-import { moderateScale } from "react-native-size-matters";
+import { moderateScale, verticalScale } from "react-native-size-matters";
 import { SvgXml } from "react-native-svg";
 import { backwardBlack, forwardBlack } from "../../assets/svg";
 import RowHeader from "../Components/RowHeader";
@@ -163,7 +163,6 @@ const Reciepe1 = () => {
           <RowHeader
             onPress={() => navigation.goBack()}
             title={"RECIPE OVERVIEW"}
-           
           />
 
           <Text
@@ -297,35 +296,27 @@ const Reciepe1 = () => {
               >
                 Recipe:
               </Text>
-              <View
+
+              <TouchableOpacity
+                onPress={() => navigation.navigate("ChangeIngredients")}
                 style={{
-                  //   borderWidth: 1,
-                  borderRadius: 10,
-                  width: getWidth(40),
-                  height: getHeight(6),
-                  // backgroundColor: '#1B1561',
-                  justifyContent: "flex-end",
-                  //   paddingTop: 25,
-                  paddingLeft: 20,
-                  alignItems: "center",
-                  // marginTop:60
+                  ...styles.button,
+                  width: getWidth(50),
+                  marginTop: verticalScale(5),
+                  marginLeft: getWidth(5),
                 }}
               >
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("ChangeIngredients")}
-                  style={styles.button}
+                <Text
+                  style={{
+                    ...globalstyles.buttonText,
+                    fontSize: RFValue(11),
+                  }}
                 >
-                  <Text
-                    style={{
-                      ...globalstyles.buttonText,
-                      fontSize: RFValue(11),
-                    }}
-                  >
-                    Change ingredients
-                  </Text>
-                </TouchableOpacity>
-              </View>
+                  Change ingredients
+                </Text>
+              </TouchableOpacity>
             </View>
+
             <FlatList
               data={DATA}
               style={{
@@ -364,18 +355,32 @@ const Reciepe1 = () => {
             <FlatList
               data={DATA2}
               renderItem={({ item }) => (
-                <Text
-                  style={{
-                    color: "black",
-                    fontSize: 15,
-                    fontFamily: "AnekBangla-Light",
-                    fontWeight: "400",
-                    paddingLeft: 12,
-                    letterSpacing: 2,
-                  }}
-                >
-                  {`\u2022 ${item.title}`}
-                </Text>
+                <View style={{ flexDirection: "row" }}>
+                  <Text
+                    style={{
+                      color: "black",
+                      fontSize: 15,
+                      fontFamily: "AnekBangla-Light",
+                      fontWeight: "400",
+                      paddingLeft: 12,
+                      letterSpacing: 2,
+                    }}
+                  >
+                    {`\u2022 ${item.title}`}
+                  </Text>
+                  <Text
+                    style={{
+                      color: "black",
+                      fontSize: 15,
+                      fontFamily: "AnekBangla-Light",
+                      fontWeight: "700",
+                      paddingLeft: 12,
+                      letterSpacing: 2,
+                    }}
+                  >
+                    {`${item.id}`}
+                  </Text>
+                </View>
               )}
             />
           </ScrollView>
@@ -397,11 +402,7 @@ const Reciepe1 = () => {
                 <View style={styles.topBar} />
               </View>
 
-              <Text
-                style={styles.rateThisRecipe}
-              >
-                Rate this Recipe
-              </Text>
+              <Text style={styles.rateThisRecipe}>Rate this Recipe</Text>
 
               <AirbnbRating
                 reviews={false}
@@ -600,7 +601,7 @@ const styles = StyleSheet.create({
     height: getHeight(0.7),
     backgroundColor: "rgba(0,0,0,.2)",
   },
-  rateThisRecipe:{
+  rateThisRecipe: {
     fontFamily: fonts.AnekBanglaMedium,
     color: "#000",
     fontWeight: "400",

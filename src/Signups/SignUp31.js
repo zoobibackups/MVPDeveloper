@@ -14,6 +14,8 @@ import KeyBoardHandle from "../Components/KeyboardHandle";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
 import theme from "../Constants/theme";
+import fonts from "../Constants/fonts";
+import { RFValue } from "react-native-responsive-fontsize";
 
 const SignUp31 = () => {
   const navigation = useNavigation();
@@ -56,45 +58,66 @@ const SignUp31 = () => {
           </View>
 
           <View style={globalstyles.innerContainer}>
-            <View style={globalstyles.inputVerticalContainer}>
+            <TouchableOpacity style={globalstyles.inputVerticalContainer}>
               <Text style={globalstyles.inputLabel}>Goal/ Mission:</Text>
-              <TextInput
+              <TouchableOpacity
+                onPress={() => navigation.navigate("SignUp21")}
                 style={globalstyles.textInputWithOutIcon}
-                onChangeText={(text) => setIngredients(text)}
-                value={ingredients}
-                placeholder="Goal/ Mission:"
-                placeholderTextColor="black"
-              />
-            </View>
+              >
+                <Text
+                  style={{
+                    fontFamily: fonts.AnekBanglaMedium,
+                    lineHeight: RFValue(17),
+                  }}
+                >
+                  Goal/ Mission:
+                </Text>
+              </TouchableOpacity>
+            </TouchableOpacity>
             <View style={globalstyles.inputVerticalContainer}>
               <Text style={globalstyles.inputLabel}>Equipment:</Text>
-              <TextInput
+              <TouchableOpacity
+                onPress={() => navigation.navigate("SignUp28")}
                 style={globalstyles.textInputWithOutIcon}
-                onChangeText={(text) => setMeal(text)}
-                value={meal}
-                placeholder="Benchpress, Dumbells"
-                placeholderTextColor="black"
-              />
+              >
+                <Text
+                  style={{
+                    fontFamily: fonts.AnekBanglaMedium,
+                    lineHeight: RFValue(17),
+                  }}
+                >
+                  Benchpress, Dumbells
+                </Text>
+              </TouchableOpacity>
             </View>
-            <View style={globalstyles.inputVerticalContainer}>
+            <TouchableOpacity style={globalstyles.inputVerticalContainer}>
               <Text style={globalstyles.inputLabel}>Location:</Text>
-              <TextInput
+              <TouchableOpacity
+                onPress={() => navigation.navigate("SignUp18")}
                 style={globalstyles.textInputWithOutIcon}
-                onChangeText={(text) => setMeal(text)}
-                value={meal}
-                placeholder="Gym"
-                placeholderTextColor="black"
-              />
-            </View>
+              >
+                <Text
+                  style={{
+                    fontFamily: fonts.AnekBanglaMedium,
+                    lineHeight: RFValue(17),
+                  }}
+                >
+                  Gym
+                </Text>
+              </TouchableOpacity>
+            </TouchableOpacity>
             <View style={globalstyles.inputVerticalContainer}>
               <Text style={globalstyles.inputLabel}>Days:</Text>
-              <TextInput
-                style={globalstyles.textInputWithOutIcon}
-                onChangeText={(text) => setMeal(text)}
-                value={meal}
-                placeholder="Monday, Wednesday, Saturday"
-                placeholderTextColor="black"
-              />
+              <TouchableOpacity style={globalstyles.textInputWithOutIcon}>
+                <Text
+                  style={{
+                    fontFamily: fonts.AnekBanglaMedium,
+                    lineHeight: RFValue(17),
+                  }}
+                >
+                  Monday, Wednesday, Saturday
+                </Text>
+              </TouchableOpacity>
             </View>
 
             <View style={globalstyles.buttonContianer}>

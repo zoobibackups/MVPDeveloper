@@ -1,7 +1,8 @@
+import { useNavigation } from "@react-navigation/core";
 import React, { useState } from "react";
 import {
+  FlatList,
   Image,
-  ImageBackground,
   Modal,
   Platform,
   ScrollView,
@@ -12,26 +13,16 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import { getWidth, getHeight } from "../functions/CommonFunctions";
-import { useNavigation } from "@react-navigation/core";
 import LinearGradient from "react-native-linear-gradient";
-import {
-  backwardBlack,
-  forwardBlack,
-  girl,
-  meal1,
-  noodles,
-  preformly,
-} from "../../assets/svg";
-import { SvgXml } from "react-native-svg";
-import CustomHeader from "../Components/CustomHeader";
-import RowHeader from "../Components/RowHeader";
-import { FlatList } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
-import theme from "../Constants/theme";
-import fonts from "../Constants/fonts";
-import textStyles, { globalstyles } from "../styles/globalestyles";
 import { moderateScale } from "react-native-size-matters";
+import { SvgXml } from "react-native-svg";
+import { backwardBlack, forwardBlack, noodles } from "../../assets/svg";
+import RowHeader from "../Components/RowHeader";
+import fonts from "../Constants/fonts";
+import theme from "../Constants/theme";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
+import textStyles, { globalstyles } from "../styles/globalestyles";
 const days = [
   {
     id: 1,
@@ -157,17 +148,20 @@ const Home5 = () => {
   const [intake1, setIntake1] = useState("");
   return (
     <>
-      <ScrollView>
-        <LinearGradient
-          style={{
-            alignItems: "center",
-            paddingVertical: 30,
-            borderColor: "red",
-            height: "100%",
-          }}
-          colors={["#FDFFF4", "#BBC1AD"]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 0.8, y: 0 }}
+      <LinearGradient
+        style={{
+          alignItems: "center",
+          paddingVertical: 30,
+          borderColor: "red",
+          height: "100%",
+        }}
+        colors={["#FDFFF4", "#BBC1AD"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0.8, y: 0 }}
+      >
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ alignItems: "center" }}
         >
           <RowHeader
             onPress={() => navigation.goBack()}
@@ -186,7 +180,11 @@ const Home5 = () => {
 
             <Text style={styles.nameText}>SVEN-INGVAR</Text>
             <TouchableOpacity
-              style={{ ...globalstyles.buttonStyle, width: getWidth(30) }}
+              style={{
+                ...globalstyles.buttonStyle,
+                height: getHeight(6),
+                width: getWidth(30),
+              }}
             >
               <Text style={globalstyles.buttonText}>Week 3</Text>
             </TouchableOpacity>
@@ -300,8 +298,9 @@ const Home5 = () => {
               <Text style={globalstyles.buttonText}>Time for a snack</Text>
             </TouchableOpacity>
           </View>
-        </LinearGradient>
-      </ScrollView>
+        </ScrollView>
+      </LinearGradient>
+
       <Modal animationType="slide" transparent={true} visible={modalVisible}>
         <TouchableWithoutFeedback
           onPress={() => setModalVisible(!modalVisible)}
@@ -338,7 +337,7 @@ const Home5 = () => {
               </View>
 
               <TouchableOpacity
-                onPress={() => setModalVisible(true)}
+                onPress={() => {setModalVisible(false); navigation.navigate("Reciepe1")}}
                 style={styles.button}
               >
                 <Text style={globalstyles.buttonText}>Add to menu</Text>
@@ -361,9 +360,7 @@ const Home5 = () => {
               <View style={{ borderColor: "red", paddingTop: 5 }}>
                 <View style={styles.topBar} />
               </View>
-
               <Text style={styles.extraIntake}>Extra Intake</Text>
-
               <View style={styles.textInputBox}>
                 <TextInput
                   style={{
@@ -531,7 +528,7 @@ const styles = StyleSheet.create({
   mealContainer: {
     borderRadius: 20,
     width: getWidth(90),
-    height: getHeight(25),
+    height: getHeight(20),
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
