@@ -111,7 +111,7 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName={
-          __DEV__ ? "TestNavigationScreen" : "TestNavigationScreen"
+          __DEV__ ? "History1" : "TestNavigationScreen"
         }
         screenOptions={{ headerShown: false }}
       >

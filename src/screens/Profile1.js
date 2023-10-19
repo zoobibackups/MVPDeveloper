@@ -15,43 +15,6 @@ import HeaderMainScreen from "../Components/HeaderMainScreen";
 import { getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
 
-const data = [
-  {
-    name: "Bench press",
-    weight: "80 kg",
-  },
-  {
-    name: "Deadlift",
-    weight: "100 kg",
-  },
-  {
-    name: "Squats",
-    weight: "120 kg",
-  },
-  {
-    name: "Shoulder press",
-    weight: "60 kg",
-  },
-];
-
-const data2 = [
-  {
-    name: "Current weight",
-    weight: "76 kg",
-  },
-  {
-    name: "Target wright",
-    weight: "83 kg",
-  },
-  {
-    name: "Height",
-    weight: "178 cm",
-  },
-  {
-    name: "Completed workouts",
-    weight: "26",
-  },
-];
 const Profile1 = () => {
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
