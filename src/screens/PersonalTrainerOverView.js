@@ -68,7 +68,7 @@ const PersonalTrainerOverView = () => {
         <Text style={styles.titleText}>GENERATE CUSTOM MEAL PLANS FOR YOUR CLIENTS</Text>
         <TouchableOpacity
           style={{ ...styles.shadowContainer }}
-          onPress={() => navigation.navigate("HistoryAndProgress")}
+          onPress={() => navigation.navigate("TrainingDiary1")}
         >
           <LinearGradient
             style={{
@@ -89,7 +89,7 @@ const PersonalTrainerOverView = () => {
 
         <TouchableOpacity
           style={{ ...styles.shadowContainer, marginTop:getHeight(4) }}
-          onPress={() => navigation.navigate("HistoryAndProgress")}
+          onPress={() => navigation.navigate("Profile8")}
         >
           <LinearGradient
             style={{

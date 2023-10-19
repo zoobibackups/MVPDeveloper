@@ -95,7 +95,11 @@ import TrainingDiary1 from "./src/screens/TrainingDiary1";
 import ClientOverView from "./src/screens/ClientOverView";
 import PersonalTrainerOverView from "./src/screens/PersonalTrainerOverView";
 import Profile1 from "./src/screens/Profile1";
-
+import TestNavigationScreen from "./src/screens/testNaivgationScreens";
+import MicroNutrientsScreen from "./src/screens/MicroNutrientsScreen";
+import ChangrInfo2 from "./src/InfoChaging/ChangrInfo2";
+import ChangrInfo1 from "./src/InfoChaging/ChangrInfo1";
+import Profile8 from "./src/screens/Profile8";
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -106,9 +110,39 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={__DEV__ ? "Home5" : "LandingPage"}
+        initialRouteName={
+          __DEV__ ? "TestNavigationScreen" : "TestNavigationScreen"
+        }
         screenOptions={{ headerShown: false }}
       >
+        <Stack.Screen
+          name="TestNavigationScreen"
+          component={TestNavigationScreen}
+          // options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="Profile8"
+          component={Profile8}
+          // options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ChangrInfo1"
+          component={ChangrInfo1}
+          // options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="ChangrInfo2"
+          component={ChangrInfo2}
+          // options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="MicroNutrientsScreen"
+          component={MicroNutrientsScreen}
+          // options={{ headerShown: false }}
+        />
+
         <Stack.Screen
           name="LandingPage"
           component={LandingPage}
@@ -560,11 +594,7 @@ const App = () => {
           component={PersonalTrainerOverView}
         />
 
-<Stack.Screen
-          name="Profile1"
-          component={Profile1}
-        />
-
+        <Stack.Screen name="Profile1" component={Profile1} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -191,6 +191,7 @@ const BodyControl = () => {
           {renderitem()}
         </View>
         <TouchableOpacity
+        onPress={() => navigation.navigate("ActiveWorkOut1")}
           style={{
             ...globalstyles.buttonStyle,
             marginTop: moderateScale(80),

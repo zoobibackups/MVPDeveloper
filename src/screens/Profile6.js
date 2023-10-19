@@ -6,7 +6,6 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Text,
-  Modal,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -20,7 +19,7 @@ import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
 import theme from "../Constants/theme";
 import { RFValue } from "react-native-responsive-fontsize";
-
+import Modal from "react-native-modal"
 const data = [
   {
     name: "Bench press",
@@ -178,7 +177,7 @@ const ProfileTrainingScreen = () => {
           }}
         >
           <TouchableOpacity
-            onPress={() => setModalVisible(true)}
+            onPress={() => navigation.navigate("Plans")}
             style={styles.buttonStyle}
           >
             <Text style={styles.buttonText}>Upgrade my account</Text>
@@ -222,7 +221,7 @@ const ProfileTrainingScreen = () => {
             />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("TermsAndConditions")}
+            onPress={() => navigation.navigate("ChangrInfo1")}
             style={styles.buttonStyle}
           >
             <Text style={styles.buttonText}>Change information</Text>
@@ -233,7 +232,7 @@ const ProfileTrainingScreen = () => {
             />
           </TouchableOpacity>
         </View>
-        <Modal animationn={"fade"} transparent={true} visible={modalVisible}>
+        <Modal animationn={"fade"} style={{margin:0}} transparent={true} isVisible={modalVisible}>
           <TouchableWithoutFeedback
             onPress={() => setModalVisible(!modalVisible)}
           >

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import {
   Image,
-  Modal,
   Platform,
   ScrollView,
   TextInput,
@@ -22,7 +21,7 @@ import fonts from "../Constants/fonts";
 import theme from "../Constants/theme";
 import { globalstyles } from "../styles/globalestyles";
 import { RFValue } from "react-native-responsive-fontsize";
-
+import Modal from "react-native-modal"
 const itemStyles = StyleSheet.create({
   itemMainView: {
     width: getWidth(90),
@@ -239,7 +238,7 @@ const ActiveWorkOut3 = () => {
           </TouchableOpacity>
         </View>
 
-        <Modal animationType="slide" transparent={true} visible={modalVisible}>
+        <Modal animationType="slide" style={{margin:0}} transparent={true} isVisible={modalVisible}>
           <TouchableWithoutFeedback
             onPress={() => setModalVisible(!modalVisible)}
           >
@@ -281,7 +280,10 @@ const ActiveWorkOut3 = () => {
 
                 <TouchableOpacity
                   onPress={() => {
-                    setModalVisible(false), setModalVisible2(true);
+                    setModalVisible(false)
+                    setTimeout(() => {
+                      setModalVisible2(true);
+                    }, 2000);
                   }}
                   style={{
                     ...globalstyles.buttonStyle,
@@ -295,7 +297,7 @@ const ActiveWorkOut3 = () => {
           </TouchableWithoutFeedback>
         </Modal>
 
-        <Modal animationType="slide" transparent={true} visible={modalVisible2}>
+        <Modal animationType="slide" style={{margin:0}} transparent={true} isVisible={modalVisible2}>
           <TouchableWithoutFeedback
             onPress={() => setModalVisible2(!modalVisible2)}
           >
@@ -343,7 +345,10 @@ const ActiveWorkOut3 = () => {
 
                 <TouchableOpacity
                   onPress={() => {
-                    setModalVisible2(false), setModalVisible3(true);
+                    setModalVisible2(false)
+                    setTimeout(() => {
+                      setModalVisible3(true);
+                    }, 2000);
                   }}
                   style={globalstyles.buttonStyle}
                 >
@@ -354,7 +359,7 @@ const ActiveWorkOut3 = () => {
           </TouchableWithoutFeedback>
         </Modal>
 
-        <Modal animationType="slide" transparent={true} visible={modalVisible3}>
+        <Modal animationType="slide" style={{margin:0}} transparent={true} isVisible={modalVisible3}>
           <TouchableWithoutFeedback
             onPress={() => setModalVisible3(!modalVisible3)}
           >
@@ -396,7 +401,7 @@ const ActiveWorkOut3 = () => {
                 <TouchableOpacity
                   onPress={() => {
                     setModalVisible3(false);
-                    navigation.navigate("Combined");
+                    navigation.navigate("TrainingHome1");
                   }}
                   style={{
                     ...globalstyles.buttonStyle,

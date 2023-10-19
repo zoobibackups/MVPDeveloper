@@ -1,7 +1,6 @@
 import { useNavigation } from "@react-navigation/core";
 import React, { useState } from "react";
 import {
-  Modal,
   ScrollView,
   StyleSheet,
   Text,
@@ -17,7 +16,7 @@ import HeaderMainScreen from "../Components/HeaderMainScreen";
 import fonts from "../Constants/fonts";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
-
+import Modal from "react-native-modal"
 const data = [
   {
     icon: brain,
@@ -336,7 +335,7 @@ const StepCounter = () => {
           </View>
         </View>
       </ScrollView>
-      <Modal animationn={"fade"} transparent={true} visible={modalVisible}>
+      <Modal animationn={"fade"} style={{margin:0}} transparent={true} isVisible={modalVisible}>
         <TouchableWithoutFeedback
           onPress={() => setModalVisible(!modalVisible)}
         >

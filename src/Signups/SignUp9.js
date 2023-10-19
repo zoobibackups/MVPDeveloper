@@ -20,9 +20,7 @@ const SignUp9 = () => {
 
   const [ingredients, setIngredients] = useState("");
   const [checked, setChecked] = useState(false);
-  const [age, setAge] = useState("");
   const [meal, setMeal] = useState("");
-  const [modalVisible, setModalVisible] = useState(false);
   return (
     <>
       <KeyBoardHandle>
@@ -112,7 +110,7 @@ const SignUp9 = () => {
 
             <View style={{...globalstyles.buttonContianer, marginTop:getHeight(10)}}>
               <TouchableOpacity
-                onPress={() => navigation.navigate("SignUp10")}
+                onPress={() => navigation.navigate("MicroNutrientsScreen")}
                 style={globalstyles.buttonStyle}
               >
                 <Text style={globalstyles.buttonText}>Next</Text>

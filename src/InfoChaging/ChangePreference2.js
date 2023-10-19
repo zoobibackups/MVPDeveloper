@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import { useNavigation } from '@react-navigation/core';
 import {
   Image,
   Platform,
@@ -9,7 +10,6 @@ import {
   View
 } from 'react-native';
 import { getHeight, getWidth } from '../functions/CommonFunctions';
-import { useNavigation } from '@react-navigation/core';
 
 import {
   PureRoundedCheckbox

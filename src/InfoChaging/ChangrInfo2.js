@@ -24,7 +24,7 @@ import fonts from "../Constants/fonts";
 import theme from "../Constants/theme";
 import { globalstyles } from "../styles/globalestyles";
 
-const AccountDetails1 = () => {
+const ChangrInfo2 = () => {
   const navigation = useNavigation();
   var radio_props = [
     { label: "Male", value: 0 },
@@ -63,78 +63,6 @@ const AccountDetails1 = () => {
               alignSelf: "center",
             }}
           />
-
-          <View
-            style={{
-              paddingVertical: 10,
-              width: getWidth(90),
-            }}
-          >
-            <View
-              style={{
-                ...globalstyles.inputVerticalContainer,
-                borderColor: theme.blueColor,
-                height: RFValue(45),
-                marginBottom: moderateScale(16),
-              }}
-            >
-              <TextInput
-                style={{
-                  ...globalstyles.textInputWithOutIcon,
-                  borderColor: theme.blueColor,
-                  height: RFValue(45),
-                }}
-                placeholder="Full Name"
-                placeholderTextColor="grey"
-              />
-            </View>
-            <View
-              style={{
-                ...globalstyles.inputVerticalContainer,
-                borderColor: theme.blueColor,
-                height: RFValue(45),
-                marginBottom: moderateScale(11),
-              }}
-            >
-              <TextInput
-                style={{
-                  ...globalstyles.textInputWithOutIcon,
-                  borderColor: theme.blueColor,
-                  height: RFValue(45),
-                }}
-                placeholder="Email Address"
-                placeholderTextColor="grey"
-              />
-            </View>
-            <View
-              style={{ ...globalstyles.inputContainer, height: RFValue(45) }}
-            >
-              <TextInput
-                style={{ ...globalstyles.textInputStyle, height: RFValue(45) }}
-                placeholderTextColor="grey"
-                placeholder="Password"
-                secureTextEntry={show}
-              />
-              <TouchableOpacity onPress={() => setShow(!show)}>
-                <SvgXml xml={hideEye} />
-              </TouchableOpacity>
-            </View>
-            <View
-              style={{ ...globalstyles.inputContainer, height: RFValue(45) }}
-            >
-              <TextInput
-                style={{ ...globalstyles.textInputStyle, height: RFValue(45) }}
-                onChangeText={(text) => setConfirmPassowrd(text)}
-                value={confirmPassword}
-                placeholder="Confirm Password"
-                secureTextEntry={show1}
-                placeholderTextColor="grey"
-              />
-              <TouchableOpacity onPress={() => setShow1(!show1)}>
-                <SvgXml xml={hideEye} />
-              </TouchableOpacity>
-            </View>
-          </View>
 
           <View
             style={{
@@ -210,7 +138,7 @@ const AccountDetails1 = () => {
               }}
             >
               <TouchableOpacity
-                 onPress={() => navigation.navigate('TrainingHome1')}
+                 onPress={() => navigation.navigate('TermsAndConditions')}
                 style={globalstyles.buttonStyle}
               >
                 <Text style={globalstyles.buttonText}>Update</Text>
@@ -233,4 +161,4 @@ const styles = StyleSheet.create({
     color: "grey",
   },
 });
-export default AccountDetails1;
+export default ChangrInfo2;

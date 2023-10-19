@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/core";
 import {
   Image,
-  Modal,
   Platform,
   ScrollView,
   StyleSheet,
@@ -20,6 +19,7 @@ import fonts from "../Constants/fonts";
 import theme from "../Constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { globalstyles } from "../styles/globalestyles";
+import Modal from "react-native-modal"
 const itemStyles = StyleSheet.create({
   itemMainView: {
     width: getWidth(90),
@@ -168,7 +168,7 @@ const ActiveWorkOut1 = () => {
           </TouchableOpacity>
         </View>
       </ScrollView>
-      <Modal animationType="slide" transparent={true} visible={modalVisible}>
+      <Modal animationType="slide" style={{margin:0}} transparent={true} isVisible={modalVisible}>
         <TouchableWithoutFeedback
           onPress={() => setModalVisible(!modalVisible)}
         >

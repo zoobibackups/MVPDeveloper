@@ -3,7 +3,6 @@ import { Text } from "@rneui/themed";
 import React, { useState } from "react";
 import {
   FlatList,
-  Modal,
   Platform,
   ScrollView,
   StyleSheet,
@@ -20,6 +19,7 @@ import { globalstyles } from "../styles/globalestyles";
 import theme from "../Constants/theme";
 import { RFValue } from "react-native-responsive-fontsize";
 import fonts from "../Constants/fonts";
+import Modal from "react-native-modal"
 const data = [
   {
     name: "Olive oil",
@@ -215,7 +215,7 @@ const ChangeIngredients = () => {
             </Text>
           </TouchableOpacity>
         </View>
-        <Modal animationType="slide" transparent={true} visible={modalVisible}>
+        <Modal animationType="slide" style={{margin:0}} transparent={true} isVisible={modalVisible}>
           <TouchableWithoutFeedback
             onPress={() => setModalVisible(!modalVisible)}
           >
@@ -301,7 +301,7 @@ const ChangeIngredients = () => {
           </TouchableWithoutFeedback>
         </Modal>
 
-        <Modal animationType="slide" transparent={true} visible={modalVisible1}>
+        <Modal animationType="slide" style={{margin:0}} transparent={true} isVisible={modalVisible1}>
           <TouchableWithoutFeedback
             onPress={() => setModalVisible1(!modalVisible1)}
           >

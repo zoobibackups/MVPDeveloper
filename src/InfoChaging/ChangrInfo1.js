@@ -24,7 +24,7 @@ import fonts from "../Constants/fonts";
 import theme from "../Constants/theme";
 import { globalstyles } from "../styles/globalestyles";
 
-const AccountDetails1 = () => {
+const ChangrInfo1 = () => {
   const navigation = useNavigation();
   var radio_props = [
     { label: "Male", value: 0 },
@@ -135,73 +135,7 @@ const AccountDetails1 = () => {
               </TouchableOpacity>
             </View>
           </View>
-
           <View
-            style={{
-              paddingVertical: 10,
-              width: getWidth(90),
-            }}
-          >
-            <View style={globalstyles.inputVerticalContainer}>
-              <Text style={globalstyles.inputLabel}>Height:</Text>
-              <TextInput
-                style={globalstyles.textInputWithOutIcon}
-                onChangeText={(text) => setHeight(text)}
-                value={height}
-                placeholder="Your Height"
-                placeholderTextColor="grey"
-              />
-            </View>
-            <View style={globalstyles.inputVerticalContainer}>
-              <Text style={globalstyles.inputLabel}>Weight :</Text>
-              <TextInput
-                style={globalstyles.textInputWithOutIcon}
-                onChangeText={(num) => setWeight(num)}
-                value={weight}
-                placeholder="Your Weight"
-                placeholderTextColor="grey"
-              />
-            </View>
-            <View style={globalstyles.inputVerticalContainer}>
-              <Text style={globalstyles.inputLabel}>Goal weight:</Text>
-              <TextInput
-                style={globalstyles.textInputWithOutIcon}
-                onChangeText={(text) => setAge(text)}
-                value={age}
-                placeholder="Your goal weight"
-                placeholderTextColor="grey"
-              />
-            </View>
-            <Text style={globalstyles.inputLabel}>Gender :</Text>
-            <View
-              style={{ borderColor: "red", paddingLeft: 10, paddingTop: 20 }}
-            >
-              <RadioForm
-                radio_props={radio_props}
-                initial={state}
-                buttonSize={10}
-                formHorizontal={true}
-                labelHorizontal={true}
-                style={{
-                  justifyContent: "space-between",
-                  fontFamily: fonts.AnekBanglaMedium,
-                }}
-                animation={true}
-                labelStyle={{
-                  marginTop: RFValue(3),
-                  fontFamily: fonts.AnekBanglaMedium,
-                  fontSize: RFValue(12),
-                  color: theme.blueColor,
-                }}
-                buttonColor={"#1B1561"}
-                selectedButtonColor="#1B1561"
-                onPress={(value) => {
-                  setState(value);
-                }}
-              />
-            </View>
-
-            <View
               style={{
                 alignItems: "center",
                 borderColor: "red",
@@ -210,13 +144,12 @@ const AccountDetails1 = () => {
               }}
             >
               <TouchableOpacity
-                 onPress={() => navigation.navigate('TrainingHome1')}
+                 onPress={() => navigation.navigate('ChangrInfo2')}
                 style={globalstyles.buttonStyle}
               >
-                <Text style={globalstyles.buttonText}>Update</Text>
+                <Text style={globalstyles.buttonText}>Next</Text>
               </TouchableOpacity>
             </View>
-          </View>
         </ScrollView>
       </LinearGradient>
     </KeyBoardHandle>
@@ -233,4 +166,4 @@ const styles = StyleSheet.create({
     color: "grey",
   },
 });
-export default AccountDetails1;
+export default ChangrInfo1;

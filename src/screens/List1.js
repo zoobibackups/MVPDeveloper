@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import {
   FlatList,
   Image,
-  Modal,
   StyleSheet,
   TouchableOpacity,
   TouchableWithoutFeedback,
@@ -21,6 +20,7 @@ import fonts from "../Constants/fonts";
 import theme from "../Constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { globalstyles } from "../styles/globalestyles";
+import Modal from "react-native-modal"
 const data = [
   {
     name: "Pasta",
@@ -172,7 +172,7 @@ const List1 = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      <Modal animationType="slide" transparent={true} visible={modalVisible}>
+      <Modal animationType="slide" style={{margin:0}} transparent={true} isVisible={modalVisible}>
         <TouchableWithoutFeedback
           onPress={() => setModalVisible(!modalVisible)}
         >

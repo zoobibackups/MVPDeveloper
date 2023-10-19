@@ -1,7 +1,6 @@
 import { useNavigation } from "@react-navigation/core";
 import React, { useState } from "react";
 import {
-  Modal,
   Platform,
   ScrollView,
   StyleSheet,
@@ -12,6 +11,7 @@ import {
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { SvgXml } from "react-native-svg";
+import Modal from "react-native-modal"
 import {
   bicep,
   chart,
@@ -347,7 +347,7 @@ const TrainingHome1 = () => {
                   </LinearGradient>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("History1")}
+                  onPress={() => navigation.navigate("Combined")}
                 >
                   <LinearGradient
                     style={{
@@ -437,7 +437,7 @@ const TrainingHome1 = () => {
           </View>
         </ScrollView>
       </LinearGradient>
-      <Modal animationType="slide" transparent={true} visible={modalVisible}>
+      <Modal animationType="slide" style={{margin:0}} transparent={true} isVisible={modalVisible}>
         <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
           <View style={styles.centeredView}>
             <LinearGradient

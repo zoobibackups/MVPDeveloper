@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+import { useNavigation } from "@react-navigation/core";
 import {
   Platform,
   StyleSheet,
@@ -7,13 +8,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { getHeight, getWidth } from "../functions/CommonFunctions";
-import { useNavigation } from "@react-navigation/core";
 import LinearGradient from "react-native-linear-gradient";
-import { SvgXml } from "react-native-svg";
-import { backward, preformly } from "../../assets/svg";
-import Checkbox from "../Components/CheckBox";
 import HeaderMainScreen from "../Components/HeaderMainScreen";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { globalstyles } from "../styles/globalestyles";
 
 const ChangePreferenceTraining = () => {
@@ -125,7 +122,8 @@ const ChangePreferenceTraining = () => {
         }}
       >
         <TouchableOpacity
-          onPress={() => navigation.navigate("ChangeGoal")}
+          //onPress={() => navigation.navigate("ChangeGoal")}
+          onPress={() => navigation.goBack()}
           style={globalstyles.buttonStyle}
         >
           <Text style={globalstyles.buttonText}>Update</Text>

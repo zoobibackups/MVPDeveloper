@@ -1,25 +1,20 @@
+import { useNavigation } from "@react-navigation/core";
 import React, { useState } from "react";
 import {
-  View,
-  Text,
   Image,
-  ImageBackground,
-  TouchableOpacity,
   StyleSheet,
-  TextInput,
-  Platform,
+  Text,
+  TouchableOpacity,
+  View
 } from "react-native";
-import { getHeight, getWidth } from "../functions/CommonFunctions";
-import { useNavigation } from "@react-navigation/core";
-import { TouchableWithoutFeedback } from "react-native";
-import { Modal } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
+import { moderateScale } from "react-native-size-matters";
 import { SvgXml } from "react-native-svg";
-import { noodles, preformly } from "../../assets/svg";
+import { noodles } from "../../assets/svg";
 import MainCustomHeader from "../Components/MainCustomHeader";
 import fonts from "../Constants/fonts";
 import theme from "../Constants/theme";
-import { moderateScale } from "react-native-size-matters";
-import { RFValue } from "react-native-responsive-fontsize";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { globalstyles } from "../styles/globalestyles";
 const Home4 = () => {
   const navigation = useNavigation();

@@ -1,30 +1,24 @@
+import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import {
-  View,
-  Text,
-  Image,
   FlatList,
-  Platform,
-  TouchableOpacity,
   StyleSheet,
-  ScrollView,
+  Text,
+  TouchableOpacity
 } from "react-native";
-import { getWidth, getHeight } from "../functions/CommonFunctions";
-import { useNavigation } from "@react-navigation/core";
 import LinearGradient from "react-native-linear-gradient";
+import { moderateScale } from "react-native-size-matters";
+import { SvgXml } from "react-native-svg";
 import {
   arms,
   chest,
   legs,
-  preformly,
-  pull,
   pullBig,
-  push,
+  push
 } from "../../assets/svg";
-import { SvgXml } from "react-native-svg";
-import { back } from "../Components/Index";
-import { moderateScale } from "react-native-size-matters";
 import HeaderMainScreen from "../Components/HeaderMainScreen";
+import { back } from "../Components/Index";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { globalstyles } from "../styles/globalestyles";
 const data = [
   {

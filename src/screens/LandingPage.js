@@ -60,7 +60,8 @@ const LandingPage = () => {
       >
         <TouchableOpacity
           onPress={() => {
-            // if account naivgate to Home5 else signUp1
+            // if account naivgate to Home5 else SignUp1
+            // if account naivgate to Home5 else SignUp1
             setFocus2(false), setFocus(true), navigation.navigate("SignUp1");
           }}
           style={customstyle}

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import {
-  Modal,
   StyleSheet,
   Text,
   TextInput,
@@ -16,7 +15,7 @@ import LinearGradient from "react-native-linear-gradient";
 import { RFValue } from "react-native-responsive-fontsize";
 import CustomHeader from "../Components/CustomHeader";
 import textStyles, { globalstyles } from "../styles/globalestyles";
-
+import Modal from "react-native-modal"
 const SignUp14 = () => {
   const navigation = useNavigation();
   
@@ -102,7 +101,7 @@ const SignUp14 = () => {
             </TouchableOpacity>
           </View>
 
-          <Modal animationn={"fade"} transparent={true} visible={modalVisible}>
+          <Modal animationn={"fade"} style={{margin:0}} transparent={true} isVisible={modalVisible}>
             <TouchableWithoutFeedback
               onPress={() => setModalVisible(!modalVisible)}
             >

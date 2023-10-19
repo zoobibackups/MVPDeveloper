@@ -43,9 +43,9 @@ const data = [
   },
 ];
 
-const ClientOverView = () => {
+const Profile8 = () => {
   const navigation = useNavigation();
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(true);
   const [modalVisible3, setModalVisible3] = useState(false);
   return (
     <LinearGradient
@@ -92,7 +92,7 @@ const ClientOverView = () => {
         <Text style={textStyles.mediumText}>Muhammad</Text>
         <TouchableOpacity
           style={{ ...styles.shadowContainer }}
-          onPress={() => navigation.navigate("HistoryAndProgress")}
+         
         >
           <LinearGradient
             style={{
@@ -118,14 +118,6 @@ const ClientOverView = () => {
               </View>
             ))}
           </LinearGradient>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => navigation.navigate("TrainingDiary1")}
-          //onPress={() => setModalVisible(true)}
-          style={{ ...globalstyles.buttonStyle, marginTop: getHeight(5) }}
-        >
-          <Text style={globalstyles.buttonText}>Training Diary</Text>
         </TouchableOpacity>
 
         <Modal animationn={"fade"} style={{margin:0}} transparent={true} isVisible={modalVisible}>
@@ -223,7 +215,9 @@ const ClientOverView = () => {
                   <TouchableOpacity
                     onPress={() => {
                       setModalVisible(false);
-                      setModalVisible3(true);
+                      setTimeout(() => {
+                        setModalVisible3(true);
+                      }, 2000);
                     }}
                     style={globalstyles.buttonStyle}
                   >
@@ -297,7 +291,7 @@ const ClientOverView = () => {
   );
 };
 
-export default ClientOverView;
+export default Profile8;
 
 const styles = StyleSheet.create({
   titleText: {

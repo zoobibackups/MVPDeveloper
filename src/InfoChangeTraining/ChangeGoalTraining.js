@@ -143,7 +143,8 @@ const ChangeGoalTraining = () => {
         }}
       >
         <TouchableOpacity
-          onPress={() => navigation.navigate('UpdateWeight')}
+          //onPress={() => navigation.navigate('UpdateWeight')}
+          onPress={() => navigation.goBack()}
           style={globalstyles.buttonStyle}
         >
           <Text style={globalstyles.buttonText}>Update</Text>

@@ -1,26 +1,19 @@
 import { useNavigation } from "@react-navigation/core";
 import React, { useState } from "react";
 import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  Text,
-  Modal,
-  TouchableOpacity,
-  View,
   FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import { moderateScale } from "react-native-size-matters";
+import { RFValue } from "react-native-responsive-fontsize";
 import { SvgXml } from "react-native-svg";
 import { man } from "../../assets/svg";
 import HeaderMainScreen from "../Components/HeaderMainScreen";
-import fonts from "../Constants/fonts";
-import { getHeight, getWidth } from "../functions/CommonFunctions";
+import { getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
-import theme from "../Constants/theme";
-import { RFValue } from "react-native-responsive-fontsize";
 
 const data = [
   {
@@ -92,6 +85,7 @@ const Profile1 = () => {
           return (
             <View>
               <TouchableOpacity
+               onPress={() => navigation.navigate("ClientOverView") }
                 style={{
                   alignItems: "center",
                  
@@ -107,7 +101,7 @@ const Profile1 = () => {
           );
         }}
       />
-      <TouchableOpacity style={{...globalstyles.buttonStyle, width:getWidth(80)}}>
+      <TouchableOpacity onPress={() => navigation.navigate("SignUp1")}  style={{...globalstyles.buttonStyle, width:getWidth(80)}}>
         <Text style={{...globalstyles.buttonText}}>Create Profile</Text>
       </TouchableOpacity>
     </LinearGradient>

@@ -1,20 +1,19 @@
+import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import {
-  FlatList,
   Image,
   Platform,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
-import { getHeight, getWidth } from "../functions/CommonFunctions";
-import { useNavigation } from "@react-navigation/core";
 import LinearGradient from "react-native-linear-gradient";
 import { SvgXml } from "react-native-svg";
-import { backwardBlack, noodles, preformly } from "../../assets/svg";
+import { noodles, preformly } from "../../assets/svg";
 import fonts from "../Constants/fonts";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
 
 const Instruction = () => {
   const navigation = useNavigation();

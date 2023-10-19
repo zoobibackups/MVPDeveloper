@@ -1,7 +1,6 @@
 import { useNavigation } from "@react-navigation/core";
 import React, { useState } from "react";
 import {
-  Modal,
   StyleSheet,
   Text,
   TextInput,
@@ -19,6 +18,7 @@ import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
 import fonts from "../Constants/fonts";
 import theme from "../Constants/theme";
+import Modal from "react-native-modal"
 const SignUp12 = () => {
   const navigation = useNavigation();
   const [ingredients, setIngredients] = useState("");
@@ -122,9 +122,9 @@ const SignUp12 = () => {
           </View>
         </LinearGradient>
       </KeyBoardHandle>
-      <Modal animationType="slide" transparent={true} visible={modalVisible}>
+      <Modal style={{margin:0}} transparent={true} isVisible={modalVisible}>
         <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
-          <KeyBoardHandle>
+        
             <View style={styles.centeredView}>
               <LinearGradient
                 style={styles.modalView}
@@ -264,7 +264,7 @@ const SignUp12 = () => {
                 </View>
               </LinearGradient>
             </View>
-          </KeyBoardHandle>
+         
         </TouchableWithoutFeedback>
       </Modal>
     </>
@@ -311,7 +311,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderColor: "green",
     backgroundColor: "rgba(0,0,0,.1)",
-    height: getHeight(91),
+    height: getHeight(100),
   },
   modalView: {
     borderTopColor: "grey",
@@ -320,9 +320,9 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     alignItems: "center",
     shadowColor: "#000",
-    height: getHeight(37),
+    height: getHeight(40),
     width: getWidth(100),
-
+    marginBottom:0,
     shadowOffset: {
       width: 0,
       height: 2,

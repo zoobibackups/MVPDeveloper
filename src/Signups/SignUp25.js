@@ -2,29 +2,26 @@ import Slider from "@react-native-community/slider";
 import { useNavigation } from "@react-navigation/core";
 import React, { useState } from "react";
 import {
-  Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
-  Modal,
   TouchableWithoutFeedback,
-  ScrollView,
+  View,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import Checkbox from "../Components/CheckBox";
-import CheckboxSquare from "../Components/CheckBoxSquare";
+import Modal from "react-native-modal";
+import { RFValue } from "react-native-responsive-fontsize";
+import { SvgXml } from "react-native-svg";
+import { graph } from "../../assets/svg";
 import CustomHeader from "../Components/CustomHeader";
+import theme from "../Constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
-import { SvgXml } from "react-native-svg";
-import { backward, graph, preformly } from "../../assets/svg";
-import theme from "../Constants/theme";
-import { RFValue } from "react-native-responsive-fontsize";
+import AntDesign from "react-native-vector-icons/AntDesign";
 const SignUp25 = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
-  const [range, setRange] = useState();
+  const [range, setRange] = useState(0);
   const navigation = useNavigation();
   return (
     <LinearGradient
@@ -88,16 +85,63 @@ const SignUp25 = () => {
         >
           Per Week
         </Text>
-        <Slider
-          style={{ width: getWidth(90), height: 10, borderWidth: 0 }}
-          minimumValue={0}
-          maximumValue={100}
-          minimumTrackTintColor="#1B1561"
-          maximumTrackTintColor="white"
-          thumbTintColor="#1B1561"
-          value={0.5}
-          onValueChange={(value) => setRange(value)}
-        />
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            width: getWidth(94),
+            justifyContent: "space-between",
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => {
+              if (range > 0) {
+                setRange(range - 10);
+              } else {
+                setRange(0);
+              }
+            }}
+            style={{
+              width: getWidth(4),
+              height: getWidth(4),
+              backgroundColor: "rgba(0, 0, 0, .4)",
+              borderRadius: getWidth(4),
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <AntDesign name={"minus"} color={theme.whiteColor} />
+          </TouchableOpacity>
+          <Slider
+            style={{ width: getWidth(80), height: 10, borderWidth: 0 }}
+            minimumValue={0}
+            maximumValue={100}
+            minimumTrackTintColor="#1B1561"
+            maximumTrackTintColor="white"
+            thumbTintColor="#1B1561"
+            value={range}
+            onValueChange={(value) => setRange(value)}
+          />
+          <TouchableOpacity
+            onPress={() => {
+              if (range < 100) {
+                setRange(range + 10);
+              } else {
+                setRange(100);
+              }
+            }}
+            style={{
+              width: getWidth(4),
+              height: getWidth(4),
+              backgroundColor: "rgba(0, 0, 0, .4)",
+              borderRadius: getWidth(4),
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <AntDesign name={"plus"} color={theme.whiteColor} />
+          </TouchableOpacity>
+        </View>
       </View>
       <View style={styles.butotnContainer}>
         <TouchableOpacity
@@ -126,7 +170,12 @@ const SignUp25 = () => {
           <Text style={globalstyles.buttonText}>Next</Text>
         </TouchableOpacity>
       </View>
-      <Modal animationType="slide" transparent={true} visible={modalVisible}>
+      <Modal
+        animationType="slide"
+        style={{ margin: 0 }}
+        transparent={true}
+        isVisible={modalVisible}
+      >
         <TouchableWithoutFeedback
           onPress={() => setModalVisible(!modalVisible)}
         >

@@ -5,7 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import HeaderMainScreen from '../Components/HeaderMainScreen';
 import { getHeight, getWidth } from '../functions/CommonFunctions';
 
-const DetailedAndProgress2 = () => {
+const DetailedAndProgress = () => {
   const navigation = useNavigation();
   return (
     <LinearGradient
@@ -241,4 +241,4 @@ const DetailedAndProgress2 = () => {
   );
 };
 
-export default DetailedAndProgress2;
+export default DetailedAndProgress;

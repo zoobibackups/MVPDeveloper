@@ -2,7 +2,6 @@ import { useNavigation } from "@react-navigation/core";
 import React, { useState } from "react";
 import {
   Image,
-  Modal,
   StyleSheet,
   Text,
   TextInput,
@@ -20,6 +19,7 @@ import fonts from "../Constants/fonts";
 import theme from "../Constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { globalstyles } from "../styles/globalestyles";
+import Modal from "react-native-modal"
 const Home2 = () => {
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
@@ -90,9 +90,9 @@ const Home2 = () => {
         <Text style={styles.termAndCOnditionText}>TERMS AND CONDITIONS</Text>
         <Modal
           animationType="slide"
-          style={{ justifyContent: "flex-end" }}
+          style={{ justifyContent: "flex-end", margin:0 }}
           transparent={true}
-          visible={modalVisible}
+          isVisible={modalVisible}
         >
           <TouchableWithoutFeedback
             onPress={() => setModalVisible(!modalVisible)}

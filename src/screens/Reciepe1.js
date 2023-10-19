@@ -4,7 +4,6 @@ import {
   FlatList,
   Image,
   ImageBackground,
-  Modal,
   ScrollView,
   StyleSheet,
   Text,
@@ -13,6 +12,7 @@ import {
   View,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
+import Modal from "react-native-modal";
 import { AirbnbRating } from "react-native-ratings";
 import { RFValue } from "react-native-responsive-fontsize";
 import { moderateScale, verticalScale } from "react-native-size-matters";
@@ -22,7 +22,6 @@ import RowHeader from "../Components/RowHeader";
 import fonts from "../Constants/fonts";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
-
 const Reciepe1 = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [instruction, setInstruction] = useState(false);
@@ -103,15 +102,11 @@ const Reciepe1 = () => {
         <ImageBackground
           source={require("../../assets/images/noodles.png")}
           style={{
-            // resizeMode: 'contain',
             width: getWidth(50),
             height: getHeight(24),
             justifyContent: "center",
             alignItems: "center",
-            // borderWidth: 1,
-            // backgroundColor: 'rgba(0,0,0,0.1)',
-            opacity: 0.9,
-            // marginTop:10
+            opacity: 1,
           }}
         >
           <TouchableOpacity
@@ -127,15 +122,15 @@ const Reciepe1 = () => {
               backgroundColor: "#1B1561",
               justifyContent: "center",
               alignItems: "center",
-              // opacity:10
-              // paddingBottom:10
+             
             }}
           >
             <Text
               style={{
                 color: "white",
                 fontSize: 16,
-                fontFamily: "AnekBangla-Medium",
+                fontFamily: fonts.AnekBanglaMedium,
+                letterSpacing:1.5,
                 fontWeight: "400",
               }}
             >
@@ -159,7 +154,7 @@ const Reciepe1 = () => {
         start={{ x: 0, y: 0 }}
         end={{ x: 0.8, y: 0 }}
       >
-        <ScrollView>
+        <ScrollView bounces={false} showsVerticalScrollIndicator={false} >
           <RowHeader
             onPress={() => navigation.goBack()}
             title={"RECIPE OVERVIEW"}
@@ -214,6 +209,7 @@ const Reciepe1 = () => {
                       height: getHeight(20),
                     }}
                   />
+                  
                 </TouchableOpacity>
               )}
 
@@ -387,7 +383,7 @@ const Reciepe1 = () => {
         </ScrollView>
       </LinearGradient>
 
-      <Modal animationType="slide" transparent={true} visible={modalVisible}>
+      <Modal animationType="slide" style={{margin:0}} transparent={true} isVisible={modalVisible}>
         <TouchableWithoutFeedback
           onPress={() => setModalVisible(!modalVisible)}
         >

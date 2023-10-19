@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import {
   FlatList,
   Image,
-  Modal,
   Platform,
   ScrollView,
   StyleSheet,
@@ -23,6 +22,7 @@ import fonts from "../Constants/fonts";
 import theme from "../Constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
+import Modal from "react-native-modal";
 const days = [
   {
     id: 1,
@@ -169,6 +169,7 @@ const Home5 = () => {
           />
 
           <View style={styles.profileView}>
+            <TouchableOpacity onPress={() => navigation.navigate("ProfileSetting6")} >
             <Image
               source={require("../../assets/images/girl.png")}
               style={{
@@ -177,6 +178,7 @@ const Home5 = () => {
                 height: getWidth(25),
               }}
             />
+            </TouchableOpacity>
 
             <Text style={styles.nameText}>SVEN-INGVAR</Text>
             <TouchableOpacity
@@ -301,7 +303,12 @@ const Home5 = () => {
         </ScrollView>
       </LinearGradient>
 
-      <Modal animationType="slide" transparent={true} visible={modalVisible}>
+      <Modal
+        animationType="slide"
+        style={{ margin: 0 }}
+        transparent={true}
+        isVisible={modalVisible}
+      >
         <TouchableWithoutFeedback
           onPress={() => setModalVisible(!modalVisible)}
         >
@@ -337,7 +344,10 @@ const Home5 = () => {
               </View>
 
               <TouchableOpacity
-                onPress={() => {setModalVisible(false); navigation.navigate("Reciepe1")}}
+                onPress={() => {
+                  setModalVisible(false);
+                  navigation.navigate("Reciepe1");
+                }}
                 style={styles.button}
               >
                 <Text style={globalstyles.buttonText}>Add to menu</Text>
@@ -346,7 +356,13 @@ const Home5 = () => {
           </View>
         </TouchableWithoutFeedback>
       </Modal>
-      <Modal animationType="slide" transparent={true} visible={modalVisible1}>
+      <Modal
+        animationType="slide"
+        style={{ margin: 0 }}
+        backdropOpacity={0.4}
+        transparent={true}
+        isVisible={modalVisible1}
+      >
         <TouchableWithoutFeedback
           onPress={() => setModalVisible1(!modalVisible1)}
         >
@@ -389,7 +405,7 @@ const Home5 = () => {
               <View style={styles.buttonContianer}>
                 <TouchableOpacity
                   onPress={() => {
-                    setModalVisible1(false), setModalVisible2(true);
+                    setModalVisible2(true);
                   }}
                 >
                   <Text style={textStyles.mediumText}>Advanced</Text>
@@ -404,8 +420,12 @@ const Home5 = () => {
             </LinearGradient>
           </View>
         </TouchableWithoutFeedback>
-      </Modal>
-      <Modal animationType="slide" transparent={true} visible={modalVisible2}>
+        <Modal
+        backdropOpacity={0}
+        style={{ margin: 0 }}
+        transparent={true}
+        isVisible={modalVisible2}
+      >
         <TouchableWithoutFeedback
           onPress={() => setModalVisible2(!modalVisible2)}
         >
@@ -459,6 +479,8 @@ const Home5 = () => {
           </View>
         </TouchableWithoutFeedback>
       </Modal>
+      </Modal>
+    
     </>
   );
 };
