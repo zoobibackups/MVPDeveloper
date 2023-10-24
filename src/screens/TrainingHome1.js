@@ -30,7 +30,7 @@ import {
 } from "../../assets/svg";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { RFValue } from "react-native-responsive-fontsize";
-import fonts from "../Constants/fonts";
+import fonts from "../constants/fonts";
 import { globalstyles } from "../styles/globalestyles";
 import { moderateScale } from "react-native-size-matters";
 

@@ -12,8 +12,8 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { verticalScale } from "react-native-size-matters";
 import { SvgXml } from "react-native-svg";
 import { apple, preformly, training } from "../../assets/svg";
-import fonts from "../Constants/fonts";
-import theme from "../Constants/theme";
+import fonts from "../constants/fonts";
+import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 
 const LandingPage = () => {

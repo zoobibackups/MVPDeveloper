@@ -17,8 +17,8 @@ import LinearGradient from "react-native-linear-gradient";
 import Checkbox from "../Components/CheckBox";
 import HeaderMainScreen from "../Components/HeaderMainScreen";
 import { moderateScale } from "react-native-size-matters";
-import fonts from "../Constants/fonts";
-import theme from "../Constants/theme";
+import fonts from "../constants/fonts";
+import theme from "../constants/theme";
 import { globalstyles } from "../styles/globalestyles";
 import { RFValue } from "react-native-responsive-fontsize";
 import Modal from "react-native-modal"

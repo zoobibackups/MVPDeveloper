@@ -12,7 +12,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { moderateScale } from "react-native-size-matters";
 import { SvgXml } from "react-native-svg";
 import { preformly } from "../../assets/svg";
-import theme from "../Constants/theme";
+import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles from "../styles/globalestyles";
 
@@ -57,7 +57,7 @@ const Home = () => {
           }}
         >
           <TouchableOpacity
-            onPress={() => navigation.navigate("LogIn1")}
+            onPress={() => navigation.navigate("LogIn2")}
             style={styles.buttonStyle}
           >
             <Text style={{ ...textStyles.lightText, color: theme.whiteColor }}>

@@ -11,7 +11,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { SvgXml } from "react-native-svg";
 import { Email, hideEye, lock, preformly } from "../../assets/svg";
 import KeyBoardHandle from "../Components/KeyboardHandle";
-import theme from "../Constants/theme";
+import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
 

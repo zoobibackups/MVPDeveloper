@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { moderateScale } from "react-native-size-matters";
-import fonts from "../Constants/fonts";
+import fonts from "../constants/fonts";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 const styles = StyleSheet.create({
   mainContainer: {

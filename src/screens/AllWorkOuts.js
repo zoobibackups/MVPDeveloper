@@ -5,7 +5,7 @@ import LinearGradient from "react-native-linear-gradient";
 import HeaderMainScreen from "../Components/HeaderMainScreen";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { moderateScale } from "react-native-size-matters";
-import fonts from "../Constants/fonts";
+import fonts from "../constants/fonts";
 import { RFValue } from "react-native-responsive-fontsize";
 
 const styles = StyleSheet.create({

@@ -1,6 +1,6 @@
-import fonts from "../Constants/fonts";
+import fonts from "../constants/fonts";
 import { StyleSheet } from "react-native";
-import theme from "../Constants/theme";
+import theme from "../constants/theme";
 import { RFValue } from "react-native-responsive-fontsize";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 const textStyles = StyleSheet.create({

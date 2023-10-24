@@ -7,7 +7,7 @@ import { moderateScale } from "react-native-size-matters";
 import ExerciseItem from "../Components/ExerciseItem";
 import HeaderMainScreen from "../Components/HeaderMainScreen";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
-import fonts from "../Constants/fonts";
+import fonts from "../constants/fonts";
 
 const History2 = () => {
   const navigation = useNavigation();

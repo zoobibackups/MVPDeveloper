@@ -17,7 +17,7 @@ import { useNavigation } from "@react-navigation/core";
 import LinearGradient from "react-native-linear-gradient";
 import { SvgXml } from "react-native-svg";
 import { backward, preformly } from "../../assets/svg";
-import fonts from "../Constants/fonts";
+import fonts from "../constants/fonts";
 
 const UpdateWeightTraining = () => {
   const navigation = useNavigation();

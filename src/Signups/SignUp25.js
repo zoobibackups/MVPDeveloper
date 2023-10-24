@@ -14,7 +14,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { SvgXml } from "react-native-svg";
 import { graph } from "../../assets/svg";
 import CustomHeader from "../Components/CustomHeader";
-import theme from "../Constants/theme";
+import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
 import AntDesign from "react-native-vector-icons/AntDesign";

@@ -12,8 +12,8 @@ import { moderateScale } from "react-native-size-matters";
 import { SvgXml } from "react-native-svg";
 import { noodles } from "../../assets/svg";
 import MainCustomHeader from "../Components/MainCustomHeader";
-import fonts from "../Constants/fonts";
-import theme from "../Constants/theme";
+import fonts from "../constants/fonts";
+import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { globalstyles } from "../styles/globalestyles";
 const Home4 = () => {

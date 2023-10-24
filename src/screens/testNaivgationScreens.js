@@ -4,6 +4,7 @@ import { heightPercentageToDP, widthPercentageToDP as wp } from "react-native-re
 import textStyles from "../styles/globalestyles";
 import { FlatList } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
+import { getHeight } from "../functions/CommonFunctions";
 const TestNavigationScreen = ({ navigation }) => {
   const routes = [
     {
@@ -40,9 +41,12 @@ const TestNavigationScreen = ({ navigation }) => {
     
   ];
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{flex:1, backgroundColor:"#fff", justifyContent:"center", alignItems:"center"}} >
       <FlatList
         data={routes}
+        style={{
+          flex:1, marginTop:getHeight(25)
+        }}
         keyExtractor={(item, idex) => idex.toString()}
         renderItem={({ item, inxex }) => {
           return (

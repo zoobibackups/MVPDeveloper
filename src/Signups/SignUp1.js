@@ -14,8 +14,8 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { SvgXml } from "react-native-svg";
 import { hideEye, preformly } from "../../assets/svg";
 import KeyBoardHandle from "../Components/KeyboardHandle";
-import fonts from "../Constants/fonts";
-import theme from "../Constants/theme";
+import fonts from "../constants/fonts";
+import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { globalstyles } from "../styles/globalestyles";
 const SignUp1 = () => {

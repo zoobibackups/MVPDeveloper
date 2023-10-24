@@ -19,7 +19,7 @@ import { moderateScale, verticalScale } from "react-native-size-matters";
 import { SvgXml } from "react-native-svg";
 import { backwardBlack, forwardBlack } from "../../assets/svg";
 import RowHeader from "../Components/RowHeader";
-import fonts from "../Constants/fonts";
+import fonts from "../constants/fonts";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
 const Reciepe1 = () => {

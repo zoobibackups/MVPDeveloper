@@ -19,7 +19,7 @@ import {
   preformly,
 } from "../../assets/svg";
 import CustomHeader from "../Components/CustomHeader";
-import theme from "../Constants/theme";
+import theme from "../constants/theme";
 import { RFValue } from "react-native-responsive-fontsize";
 import { globalstyles } from "../styles/globalestyles";
 const Connectwatch = () => {

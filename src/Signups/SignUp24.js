@@ -4,7 +4,7 @@ import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { useNavigation } from "@react-navigation/core";
 import LinearGradient from "react-native-linear-gradient";
 import CustomHeader from "../Components/CustomHeader";
-import theme from "../Constants/theme";
+import theme from "../constants/theme";
 import { globalstyles } from "../styles/globalestyles";
 
 const SignUp24 = () => {

@@ -8,8 +8,8 @@ import {
 import { RFValue } from "react-native-responsive-fontsize";
 import { SvgXml } from "react-native-svg";
 import { preformly } from "../../assets/svg";
-import fonts from "../Constants/fonts";
-import theme from "../Constants/theme";
+import fonts from "../constants/fonts";
+import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 const MainCustomHeader = ({
   mainViewStyle = {},

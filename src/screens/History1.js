@@ -6,13 +6,13 @@ import LinearGradient from "react-native-linear-gradient";
 import { RFValue } from "react-native-responsive-fontsize";
 import { moderateScale } from "react-native-size-matters";
 import HeaderMainScreen from "../Components/HeaderMainScreen";
-import fonts from "../Constants/fonts";
+import fonts from "../constants/fonts";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import ExerciseItem from "../Components/ExerciseItem";
 import { ScrollView } from "react-native";
 import CalendarPicker from "react-native-calendar-picker";
 import Feather from "react-native-vector-icons/Feather";
-import theme from "../Constants/theme";
+import theme from "../constants/theme";
 const History1 = () => {
   const [selected, setSelected] = useState("");
   const navigation = useNavigation();

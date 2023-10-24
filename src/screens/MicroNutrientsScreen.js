@@ -12,7 +12,7 @@ import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
 import Slider from "@react-native-community/slider";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import theme from "../Constants/theme";
+import theme from "../constants/theme";
 const MicroNutrientsScreen = () => {
   const navigation = useNavigation();
 

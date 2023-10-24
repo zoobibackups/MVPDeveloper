@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { SvgXml } from "react-native-svg";
 import { backward, preformly } from "../../assets/svg";
-import fonts from "../Constants/fonts";
+import fonts from "../constants/fonts";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 const HeaderMainScreen = ({
   onPress,

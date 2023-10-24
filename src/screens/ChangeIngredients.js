@@ -16,9 +16,9 @@ import { preformly } from "../../assets/svg";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { moderateScale } from "react-native-size-matters";
 import { globalstyles } from "../styles/globalestyles";
-import theme from "../Constants/theme";
+import theme from "../constants/theme";
 import { RFValue } from "react-native-responsive-fontsize";
-import fonts from "../Constants/fonts";
+import fonts from "../constants/fonts";
 import Modal from "react-native-modal"
 const data = [
   {

@@ -20,8 +20,8 @@ import { moderateScale } from "react-native-size-matters";
 import { SvgXml } from "react-native-svg";
 import { hideEye } from "../../assets/svg";
 import HeaderMainScreen from "../Components/HeaderMainScreen";
-import fonts from "../Constants/fonts";
-import theme from "../Constants/theme";
+import fonts from "../constants/fonts";
+import theme from "../constants/theme";
 import { globalstyles } from "../styles/globalestyles";
 
 const AccountDetails1 = () => {

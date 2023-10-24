@@ -13,8 +13,8 @@ import CustomHeader from "../Components/CustomHeader";
 import KeyBoardHandle from "../Components/KeyboardHandle";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
-import theme from "../Constants/theme";
-import fonts from "../Constants/fonts";
+import theme from "../constants/theme";
+import fonts from "../constants/fonts";
 import { RFValue } from "react-native-responsive-fontsize";
 
 const SignUp31 = () => {

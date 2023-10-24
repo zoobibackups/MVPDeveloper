@@ -17,7 +17,7 @@ import { hideEye, preformly } from '../../assets/svg';
 import KeyBoardHandle from '../Components/KeyboardHandle';
 import { getHeight, getWidth } from '../functions/CommonFunctions';
 import textStyles, { globalstyles } from '../styles/globalestyles';
-import theme from '../Constants/theme';
+import theme from '../constants/theme';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 const BusinessSignUp = () => {

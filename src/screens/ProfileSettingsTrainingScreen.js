@@ -13,10 +13,10 @@ import { moderateScale } from "react-native-size-matters";
 import { SvgXml } from "react-native-svg";
 import { man } from "../../assets/svg";
 import HeaderMainScreen from "../Components/HeaderMainScreen";
-import fonts from "../Constants/fonts";
+import fonts from "../constants/fonts";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
-import theme from "../Constants/theme";
+import theme from "../constants/theme";
 import { RFValue } from "react-native-responsive-fontsize";
 
 const data = [

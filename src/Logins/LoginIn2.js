@@ -11,15 +11,19 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { SvgXml } from "react-native-svg";
 import { Email, hideEye, lock, preformly } from "../../assets/svg";
 import KeyBoardHandle from "../Components/KeyboardHandle";
-import theme from "../Constants/theme";
+import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
-
-const LogIn1 = () => {
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import { moderateScale } from "react-native-size-matters";
+const LogIn2 = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [show, setShow] = useState(true);
   const [show1, setShow1] = useState(true);
+
+  const LoginUser = () => {
+    
+  }
   return (
     <KeyBoardHandle>
       <View>
@@ -70,9 +74,7 @@ const LogIn1 = () => {
               placeholderTextColor="grey"
               value={email}
               placeholder="Email  address"
-
-              // secureTextEntry={show}
-              // keyboardType="numeric"
+              keyboardType="numeric"
             />
           </View>
           <View style={globalstyles.inputContainer}>
@@ -84,17 +86,18 @@ const LogIn1 = () => {
               value={password}
               placeholder="Password"
               secureTextEntry={show1}
-              // keyboardType="numeric"
             />
             <TouchableOpacity
               onPress={() => setShow1(!show1)}
               style={{
-                borderColor: "red",
+                position:"absolute",
+                right:moderateScale(15),
                 height: getHeight(7),
                 justifyContent: "center",
+                
               }}
             >
-              <SvgXml xml={hideEye} />
+              <Ionicons name={show1 ?"eye-off-outline" :"eye-outline"} size={RFValue(20)} />
             </TouchableOpacity>
           </View>
           <TouchableOpacity
@@ -159,4 +162,4 @@ const LogIn1 = () => {
 };
 const styles = StyleSheet.create({});
 
-export default LogIn1;
+export default LogIn2;

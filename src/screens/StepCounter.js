@@ -13,7 +13,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { SvgXml } from "react-native-svg";
 import { brain, chart, runningMan } from "../../assets/svg";
 import HeaderMainScreen from "../Components/HeaderMainScreen";
-import fonts from "../Constants/fonts";
+import fonts from "../constants/fonts";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
 import Modal from "react-native-modal"

@@ -15,8 +15,8 @@ import LinearGradient from "react-native-linear-gradient";
 import { moderateScale } from "react-native-size-matters";
 import Checkbox from "../Components/CheckBox";
 import HeaderMainScreen from "../Components/HeaderMainScreen";
-import fonts from "../Constants/fonts";
-import theme from "../Constants/theme";
+import fonts from "../constants/fonts";
+import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { globalstyles } from "../styles/globalestyles";
 import Modal from "react-native-modal"

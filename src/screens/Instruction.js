@@ -12,7 +12,7 @@ import {
 import LinearGradient from "react-native-linear-gradient";
 import { SvgXml } from "react-native-svg";
 import { noodles, preformly } from "../../assets/svg";
-import fonts from "../Constants/fonts";
+import fonts from "../constants/fonts";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 
 const Instruction = () => {

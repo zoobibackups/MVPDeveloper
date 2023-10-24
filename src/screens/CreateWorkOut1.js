@@ -10,7 +10,7 @@ import { Search } from "react-native-feather";
 import LinearGradient from "react-native-linear-gradient";
 import { RFValue } from "react-native-responsive-fontsize";
 import HeaderMainScreen from "../Components/HeaderMainScreen";
-import theme from "../Constants/theme";
+import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { globalstyles } from "../styles/globalestyles";
 const CreateWorkOut1 = () => {

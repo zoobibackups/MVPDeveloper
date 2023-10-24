@@ -16,8 +16,8 @@ import CustomHeader from "../Components/CustomHeader";
 import KeyBoardHandle from "../Components/KeyboardHandle";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
-import fonts from "../Constants/fonts";
-import theme from "../Constants/theme";
+import fonts from "../constants/fonts";
+import theme from "../constants/theme";
 import Modal from "react-native-modal"
 const SignUp12 = () => {
   const navigation = useNavigation();

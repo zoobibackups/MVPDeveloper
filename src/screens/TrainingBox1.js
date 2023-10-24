@@ -24,7 +24,7 @@ import {
 } from "../../assets/svg";
 import { StyleSheet } from "react-native";
 import { moderateScale } from "react-native-size-matters";
-import theme from "../Constants/theme";
+import theme from "../constants/theme";
 import HeaderMainScreen from "../Components/HeaderMainScreen";
 
 const data = [

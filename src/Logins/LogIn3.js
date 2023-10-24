@@ -23,7 +23,7 @@ import KeyBoardHandle from "../Components/KeyboardHandle";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
 import { RFValue } from "react-native-responsive-fontsize";
-import theme from "../Constants/theme";
+import theme from "../constants/theme";
 const LogIn3 = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

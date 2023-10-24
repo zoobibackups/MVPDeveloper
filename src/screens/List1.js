@@ -16,8 +16,8 @@ import { SvgXml } from "react-native-svg";
 import { mail, message } from "../../assets/svg";
 import CheckboxSquare from "../Components/CheckBoxSquare";
 import RowHeader from "../Components/RowHeader";
-import fonts from "../Constants/fonts";
-import theme from "../Constants/theme";
+import fonts from "../constants/fonts";
+import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { globalstyles } from "../styles/globalestyles";
 import Modal from "react-native-modal"
