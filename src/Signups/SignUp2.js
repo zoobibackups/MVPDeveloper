@@ -1,32 +1,58 @@
 import React, { useState } from "react";
-
 import { useNavigation } from "@react-navigation/core";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { RFValue } from "react-native-responsive-fontsize";
 import RadioForm from "react-native-simple-radio-button";
-
 import CustomHeader from "../Components/CustomHeader";
 import KeyBoardHandle from "../Components/KeyboardHandle";
 import fonts from "../constants/fonts";
 import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { globalstyles } from "../styles/globalestyles";
-
+import { setAgeHeightWeight } from "../store/actions/userActions";
+import { useDispatch, useSelector } from "react-redux";
 const SignUp2 = () => {
+  const dispatch = useDispatch()
+  const {foodMetaData} = useSelector(state => state.userReducer)
   const navigation = useNavigation();
   var radio_props = [
-    { label: "Male", value: 0 },
-    { label: "Female", value: 1 },
-    { label: "Other", value: 2 },
+    { label: "Male", value: 1 },
+    { label: "Female", value: 2 },
+    { label: "Other", value: 3},
   ];
-
   const [height, setHeight] = useState("");
   const [age, setAge] = useState("");
   const [weight, setWeight] = useState("");
-  const [selectedIndex, setIndex] = useState(0);
   const [state, setState] = useState(false);
-  const [confirmPassword, setConfirmPassowrd] = useState("");
+
+  const validateData = () => {
+   if(age.trim() == ""){
+    Alert.alert("INVALID AGE","Please enter valid age")
+    return
+   }
+   if(height.trim() == ""){
+    Alert.alert("INVALID HEIGHT","Please enter valid height")
+    return
+   }
+   if(weight.trim() == ""){
+    Alert.alert("INVALID WEIGTH","Please enter valid weight")
+    return
+   }
+   if(state== false){
+    Alert.alert("INVALID GENDER","Please select Gender")
+    return
+   }
+   let data = {
+    age:age,
+    weight:weight,
+    height:height,
+    gender:state
+   }
+   dispatch(setAgeHeightWeight(data)).then(() => {
+    navigation.navigate("SignUp3")
+   })
+  }
   return (
     <KeyBoardHandle>
       <LinearGradient
@@ -35,8 +61,6 @@ const SignUp2 = () => {
           paddingVertical: 30,
           borderColor: "red",
           height: "100%",
-          // backgroundColor: 'white',
-          // borderWidth:10
         }}
         colors={["#FDFFF4", "#BBC1AD"]}
         start={{ x: 0, y: 0 }}
@@ -61,7 +85,7 @@ const SignUp2 = () => {
               style={globalstyles.textInputWithOutIcon}
               onChangeText={(text) => setAge(text)}
               value={age}
-              placeholder="DD/MM/YYYY"
+              placeholder="30"
               placeholderTextColor="grey"
               keyboardType="numeric"
             />
@@ -72,9 +96,9 @@ const SignUp2 = () => {
               style={globalstyles.textInputWithOutIcon}
               onChangeText={(text) => setHeight(text)}
               value={height}
-              placeholder="Your height"
+              placeholder="Your height in cm"
               placeholderTextColor="grey"
-              // keyboardType="numeric"
+              keyboardType="numeric"
             />
           </View>
           <View style={globalstyles.inputVerticalContainer}>
@@ -83,9 +107,9 @@ const SignUp2 = () => {
               style={globalstyles.textInputWithOutIcon}
               onChangeText={(num) => setWeight(num)}
               value={weight}
-              placeholder="Your weight"
+              placeholder="Your weight kg"
               placeholderTextColor="grey"
-              // keyboardType="numeric"
+               keyboardType="numeric"
             />
           </View>
           <View style={globalstyles.inputVerticalContainer}>
@@ -125,7 +149,7 @@ const SignUp2 = () => {
           </View>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate("SignUp3")}
+            onPress={() => validateData("SignUp3")}
             style={globalstyles.buttonStyle}
           >
             <Text style={globalstyles.buttonText}>NEXT</Text>

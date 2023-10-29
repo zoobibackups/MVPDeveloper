@@ -72,15 +72,18 @@ const globalstyles = {
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
-    paddingLeft: 5,
+   
   },
   textInputStyle: {
-    height: RFValue(53),
+    height: RFValue(30),
+   
     borderRadius: RFValue(18),
     width: getWidth(70),
     borderColor: theme.blueColor,
     color: theme.blueColor,
     paddingLeft: RFValue(10),
+    fontSize:RFValue(14),
+    ///backgroundColor:"red",
     letterSpacing: RFValue(1.5),
     fontFamily: fonts.AnekBanglaMedium,
   },

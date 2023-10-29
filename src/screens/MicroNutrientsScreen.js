@@ -13,12 +13,23 @@ import textStyles, { globalstyles } from "../styles/globalestyles";
 import Slider from "@react-native-community/slider";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import theme from "../constants/theme";
+import { setMicroNutrients } from "../store/actions/userActions";
+import { useDispatch } from "react-redux";
 const MicroNutrientsScreen = () => {
   const navigation = useNavigation();
-
-  const [ingredients, setIngredients] = useState("");
-  const [checked, setChecked] = useState(false);
-  const [meal, setMeal] = useState("");
+  const dispatch = useDispatch();
+  const [carbohydrates, setCarbohydrates] = useState(0);
+  const [protine, setProtine] = useState(0);
+  const [fats, setFats] = useState(0);
+  const validateData = () => {
+    dispatch(
+      setMicroNutrients({
+        carbohydrates: carbohydrates,
+        protine: protine,
+        fats: fats,
+      })
+    );
+  };
   return (
     <>
       <KeyBoardHandle>
@@ -76,134 +87,7 @@ const MicroNutrientsScreen = () => {
               />
               <Text style={textStyles.simpleText}>Carbohydrates</Text>
               <Text style={textStyles.simpleText}>329 g</Text>
-              <Text style={textStyles.simpleText}>50%</Text>
-              <Text style={textStyles.simpleText}>1316kcal</Text>
-            </View>
-
-            <View
-              style={{
-                flexDirection: "row",
-                width: getWidth(90),
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <TouchableOpacity style={{
-                  width: getWidth(4),
-                  height: getWidth(4),
-                  backgroundColor: "rgba(0, 0, 0, .4)",
-                  borderRadius:getWidth(4),
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}>
-                <AntDesign name={"minus"} color={theme.whiteColor} />
-              </TouchableOpacity>
-              <Slider
-                style={{
-                  width: getWidth(80),
-                  height: getWidth(1),
-                }}
-                minimumValue={0}
-                value={0.5}
-                maximumValue={1}
-                thumbTintColor={theme.blueColor}
-                minimumTrackTintColor={theme.blueColor}
-                maximumTrackTintColor={theme.whiteColor}
-              />
-              <TouchableOpacity style={{
-                  width: getWidth(4),
-                  height: getWidth(4),
-                  backgroundColor: "rgba(0, 0, 0, .4)",
-                  borderRadius:getWidth(4),
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}>
-                <AntDesign name={"plus"} color={theme.whiteColor} />
-              </TouchableOpacity>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                width: getWidth(90),
-                marginTop: getHeight(3),
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <View
-                style={{
-                  width: getWidth(5),
-                  height: getWidth(5),
-                  borderRadius: getHeight(5),
-                  backgroundColor: "##FFA81A",
-                }}
-              />
-
-              <Text style={textStyles.simpleText}>329 g</Text>
-              <Text style={textStyles.simpleText}>50%</Text>
-              <Text style={textStyles.simpleText}>1316kcal</Text>
-            </View>
-
-            <View
-              style={{
-                flexDirection: "row",
-                width: getWidth(90),
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <TouchableOpacity style={{
-                  width: getWidth(4),
-                  height: getWidth(4),
-                  backgroundColor: "rgba(0, 0, 0, .4)",
-                  borderRadius:getWidth(4),
-                  justifyContent: "center",
-                  alignItems: "center",
-                }} >
-                <AntDesign name={"minus"} color={theme.whiteColor} />
-              </TouchableOpacity>
-              <Slider
-                style={{
-                  width: getWidth(80),
-                  height: getWidth(1),
-                }}
-                minimumValue={0}
-                value={0.5}
-                maximumValue={1}
-                thumbTintColor={theme.blueColor}
-                minimumTrackTintColor={theme.blueColor}
-                maximumTrackTintColor={theme.whiteColor}
-              />
-              <TouchableOpacity style={{
-                  width: getWidth(4),
-                  height: getWidth(4),
-                  backgroundColor: "rgba(0, 0, 0, .4)",
-                  borderRadius:getWidth(4),
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}>
-                <AntDesign name={"plus"} color={theme.whiteColor} />
-              </TouchableOpacity>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                width: getWidth(90),
-                marginTop: getHeight(3),
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <View
-                style={{
-                  width: getWidth(5),
-                  height: getWidth(5),
-                  borderRadius: getHeight(5),
-                  backgroundColor: "##F464FF",
-                }}
-              />
-              <Text style={textStyles.simpleText}>329 g</Text>
-              <Text style={textStyles.simpleText}>50%</Text>
+              <Text style={textStyles.simpleText}>{carbohydrates}%</Text>
               <Text style={textStyles.simpleText}>1316kcal</Text>
             </View>
 
@@ -216,11 +100,18 @@ const MicroNutrientsScreen = () => {
               }}
             >
               <TouchableOpacity
+                onPress={() => {
+                  if (carbohydrates > 2) {
+                    setCarbohydrates(
+                      (carbohydrates) => parseInt(carbohydrates) - 2
+                    );
+                  }
+                }}
                 style={{
                   width: getWidth(4),
                   height: getWidth(4),
                   backgroundColor: "rgba(0, 0, 0, .4)",
-                  borderRadius:getWidth(4),
+                  borderRadius: getWidth(4),
                   justifyContent: "center",
                   alignItems: "center",
                 }}
@@ -233,20 +124,197 @@ const MicroNutrientsScreen = () => {
                   height: getWidth(1),
                 }}
                 minimumValue={0}
-                value={0.5}
-                maximumValue={1}
+                value={carbohydrates}
+                maximumValue={100}
+                onValueChange={(value) => {
+                  console.log(value);
+                  setCarbohydrates(parseInt(value));
+                }}
                 thumbTintColor={theme.blueColor}
                 minimumTrackTintColor={theme.blueColor}
                 maximumTrackTintColor={theme.whiteColor}
               />
-              <TouchableOpacity  style={{
+              <TouchableOpacity
+                onPress={() => {
+                  if (carbohydrates < 98) {
+                    setCarbohydrates(
+                      (carbohydrates) => parseInt(carbohydrates) + 2
+                    );
+                  }
+                }}
+                style={{
                   width: getWidth(4),
                   height: getWidth(4),
                   backgroundColor: "rgba(0, 0, 0, .4)",
-                  borderRadius:getWidth(4),
+                  borderRadius: getWidth(4),
                   justifyContent: "center",
                   alignItems: "center",
-                }}>
+                }}
+              >
+                <AntDesign name={"plus"} color={theme.whiteColor} />
+              </TouchableOpacity>
+            </View>
+
+            <View
+              style={{
+                flexDirection: "row",
+                width: getWidth(90),
+                marginTop: getHeight(3),
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <View
+                style={{
+                  width: getWidth(5),
+                  height: getWidth(5),
+                  borderRadius: getHeight(5),
+                  backgroundColor: "#FFA81A",
+                }}
+              />
+              <Text style={textStyles.simpleText}>Protine</Text>
+              <Text style={textStyles.simpleText}>132 g</Text>
+              <Text style={textStyles.simpleText}>{protine}%</Text>
+              <Text style={textStyles.simpleText}>526kcal</Text>
+            </View>
+
+            <View
+              style={{
+                flexDirection: "row",
+                width: getWidth(90),
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <TouchableOpacity
+                onPress={() => {
+                  if (protine > 2) {
+                    setProtine((protine) => parseInt(protine) - 2);
+                  }
+                }}
+                style={{
+                  width: getWidth(4),
+                  height: getWidth(4),
+                  backgroundColor: "rgba(0, 0, 0, .4)",
+                  borderRadius: getWidth(4),
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <AntDesign name={"minus"} color={theme.whiteColor} />
+              </TouchableOpacity>
+              <Slider
+                style={{
+                  width: getWidth(80),
+                  height: getWidth(1),
+                }}
+                minimumValue={0}
+                value={protine}
+                onValueChange={(value) => {
+                  console.log(value);
+                  setProtine(parseInt(value));
+                }}
+                maximumValue={100}
+                thumbTintColor={theme.blueColor}
+                minimumTrackTintColor={theme.blueColor}
+                maximumTrackTintColor={theme.whiteColor}
+              />
+              <TouchableOpacity
+                onPress={() => {
+                  if (protine < 98) {
+                    setProtine((protine) => parseInt(protine) + 2);
+                  }
+                }}
+                style={{
+                  width: getWidth(4),
+                  height: getWidth(4),
+                  backgroundColor: "rgba(0, 0, 0, .4)",
+                  borderRadius: getWidth(4),
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <AntDesign name={"plus"} color={theme.whiteColor} />
+              </TouchableOpacity>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                width: getWidth(90),
+                marginTop: getHeight(3),
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <View
+                style={{
+                  width: getWidth(5),
+                  height: getWidth(5),
+                  borderRadius: getHeight(5),
+                  backgroundColor: "#F464FF",
+                }}
+              />
+              <Text style={textStyles.simpleText}>Fats</Text>
+              <Text style={textStyles.simpleText}>68 g</Text>
+              <Text style={textStyles.simpleText}>{fats}%</Text>
+              <Text style={textStyles.simpleText}>786kcal</Text>
+            </View>
+
+            <View
+              style={{
+                flexDirection: "row",
+                width: getWidth(90),
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <TouchableOpacity
+                onPress={() => {
+                  if (fats > 2) {
+                    setFats((fats) => parseInt(fats) - 2);
+                  }
+                }}
+                style={{
+                  width: getWidth(4),
+                  height: getWidth(4),
+                  backgroundColor: "rgba(0, 0, 0, .4)",
+                  borderRadius: getWidth(4),
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <AntDesign name={"minus"} color={theme.whiteColor} />
+              </TouchableOpacity>
+              <Slider
+                style={{
+                  width: getWidth(80),
+                  height: getWidth(1),
+                }}
+                minimumValue={0}
+                value={fats}
+                maximumValue={100}
+                onValueChange={(value) => {
+                  setFats(parseInt(value));
+                }}
+                thumbTintColor={theme.blueColor}
+                minimumTrackTintColor={theme.blueColor}
+                maximumTrackTintColor={theme.whiteColor}
+              />
+              <TouchableOpacity
+                onPress={() => {
+                  if (fats < 98) {
+                    setFats((fats) => parseInt(fats) + 2);
+                  }
+                }}
+                style={{
+                  width: getWidth(4),
+                  height: getWidth(4),
+                  backgroundColor: "rgba(0, 0, 0, .4)",
+                  borderRadius: getWidth(4),
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
                 <AntDesign name={"plus"} />
               </TouchableOpacity>
             </View>

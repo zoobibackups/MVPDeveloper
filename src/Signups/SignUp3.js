@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { useNavigation } from "@react-navigation/core";
 import {
+  Alert,
   Platform,
   StyleSheet,
   Text,
@@ -14,22 +15,48 @@ import Checkbox from "../Components/CheckBox";
 import CustomHeader from "../Components/CustomHeader";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
+import { useDispatch, useSelector } from "react-redux";
+import { setWorkOutTime } from "../store/actions/userActions";
 const elevationValue = Platform.OS === "android" ? 0 : 5;
 const SignUp3 = () => {
-  const [height, setHeight] = useState("");
-  const [age, setAge] = useState("");
-  const [weight, setWeight] = useState("");
-  const [selectedIndex, setIndex] = useState(0);
-
-  const [confirmPassword, setConfirmPassowrd] = useState("");
+  const dispatch = useDispatch();
+  const { foodMetaData } = useSelector((state) => state.userReducer);
+  console.log(foodMetaData);
   const [checked, setChecked] = useState(false);
   const [checked1, setChecked1] = useState(false);
   const [checked2, setChecked2] = useState(false);
   const [checked3, setChecked3] = useState(false);
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const [check1, setCheck1] = useState(false);
   const navigation = useNavigation();
-
+  const validateData = () => {
+    if (checked || checked1 || checked2 || checked3) {
+      if (checked) {
+        dispatch(setWorkOutTime({ value: "More than 5 times a week" })).then(
+          () => {
+            navigation.navigate("SignUp13");
+          }
+        );
+      }
+      if (checked1) {
+        dispatch(setWorkOutTime({ value: "3 to 5 times a week" })).then(() => {
+          navigation.navigate("SignUp13");
+        });
+      }
+      if (checked2) {
+        dispatch(setWorkOutTime({ value: "1 to 3 times a week" })).then(() => {
+          navigation.navigate("SignUp13");
+        });
+      }
+      if (checked3) {
+        dispatch(setWorkOutTime({ value: "I rarely work out or move" })).then(
+          () => {
+            navigation.navigate("SignUp13");
+          }
+        );
+      }
+    } else {
+      Alert.alert("NO OPTION SELECTED", "Please select an option");
+    }
+  };
   return (
     <LinearGradient
       style={{
@@ -146,7 +173,7 @@ const SignUp3 = () => {
       </View>
       <View style={styles.buttonContianer}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("SignUp13")}
+          onPress={() => validateData()}
           style={globalstyles.buttonStyle}
         >
           <Text style={globalstyles.buttonText}>Next</Text>
@@ -198,13 +225,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 5,
   },
-  buttonContianer:{
+  buttonContianer: {
     alignItems: "center",
     borderColor: "red",
     height: getHeight(10),
     justifyContent: "flex-end",
     backgroundColor: "transparent",
     width: getWidth(99),
-  }
+  },
 });
 export default SignUp3;

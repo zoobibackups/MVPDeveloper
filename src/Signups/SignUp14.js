@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import {
   StyleSheet,
-  Text,
+  Text,Alert,
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
@@ -16,14 +16,28 @@ import { RFValue } from "react-native-responsive-fontsize";
 import CustomHeader from "../Components/CustomHeader";
 import textStyles, { globalstyles } from "../styles/globalestyles";
 import Modal from "react-native-modal"
+import { setGoalWeightTime } from "../store/actions/userActions";
+import { useDispatch } from "react-redux";
 const SignUp14 = () => {
   const navigation = useNavigation();
-  
+  const dispatch = useDispatch()
 
   const [time, setTime] = useState("");
-  const [age, setAge] = useState("");
   const [weight, setWeight] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+
+  const validateData = () => {
+    if(time.trim() == ""){
+      Alert.alert("INVALID TIME","Please enter valid time")
+      return
+     }
+     if(weight.trim() == ""){
+      Alert.alert("INVALID WEIGHT","Please enter valid weight")
+      return
+     }
+
+     dispatch(setGoalWeightTime({time:time,weight:weight}))
+  }
   return (
     <>
       <KeyBoardHandle>

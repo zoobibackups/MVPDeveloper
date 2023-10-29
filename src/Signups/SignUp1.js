@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import { useNavigation } from "@react-navigation/core";
 import {
+  ActivityIndicator,
+  Alert,
   Platform,
   StyleSheet,
   Text,
@@ -12,22 +14,115 @@ import {
 import LinearGradient from "react-native-linear-gradient";
 import { RFValue } from "react-native-responsive-fontsize";
 import { SvgXml } from "react-native-svg";
-import { hideEye, preformly } from "../../assets/svg";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { preformly } from "../../assets/svg";
 import KeyBoardHandle from "../Components/KeyboardHandle";
 import fonts from "../constants/fonts";
 import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
+import BASE_URL from "../store/services/baseUrl";
 import { globalstyles } from "../styles/globalestyles";
+import {
+  isValidEmail,
+  isValidName,
+  isValidPassword,
+  isValidPhoneNumber,
+} from "../validation/commonValidation";
 const SignUp1 = () => {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
-  const [passowrd, setPassword] = useState("");
+  const [email, setEmail] = useState(
+    __DEV__ ? "engr3.aftabufaq@gmail.com" : ""
+  );
+  const [name, setName] = useState(__DEV__ ? "Aftab Amin" : "");
+  const [username, setUserName] = useState(__DEV__ ? "aftabameen1920" : "");
+  const [number, setNumber] = useState(__DEV__ ? "923408901078" : "");
+  const [passowrd, setPassword] = useState(__DEV__ ? "Tikt0k@1" : "");
   const [show, setShow] = useState(true);
   const [show1, setShow1] = useState(true);
-  const [confirmPassword, setConfirmPassowrd] = useState("");
-
+  const [confirmPassword, setConfirmPassowrd] = useState(
+    __DEV__ ? "Tikt0k@1" : ""
+  );
+  const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
+  const validateData = () => {
+    if (!isValidName(name)) {
+      Alert.alert("INVALID NAME", "Please enter a valid name");
+      return;
+    }
+    if (!isValidEmail(email)) {
+      Alert.alert("INVALID EMAIL", "Please enter a valid name");
+      return;
+    }
+    if (!isValidPhoneNumber(number)) {
+      Alert.alert("INVALID EMAIL", "Please enter a valid name");
+      return;
+    }
+    if (!isValidPassword(passowrd)) {
+      Alert.alert(
+        "INVALID PASSWORD",
+        "Password must have lower, upper , number and a special character"
+      );
+      return;
+    }
+    if (passowrd != confirmPassword) {
+      Alert.alert("PASSWORD MISS MATCHED", "Password must be same");
+      return;
+    }
+    signUpUser();
+  };
+
+  const signUpUser = () => {
+    setLoading(true);
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    console.log({
+      password1: passowrd,
+      password2: confirmPassword,
+      name: name,
+      username: username,
+      phone: number,
+      activeClient: 5,
+      accountType: "Food",
+      email: email,
+      referredBy: "aftabameen",
+    });
+    var raw = JSON.stringify({
+      password1: passowrd,
+      password2: confirmPassword,
+      name: name,
+      username: username,
+      phone: number,
+      activeClient: 5,
+      accountType: "Food",
+      email: email,
+      referredBy: "aftabameen",
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch(`${BASE_URL}api/auth/sign-up`, requestOptions)
+      .then((response) => {
+        setLoading(false)
+        if (response.status != 200) {
+          response.json().then((data) => {
+            console.log(data ,"ERROR");
+          });
+        } else {
+          response.json().then((data) => {
+            console.log(data, "SUCCESS");
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+        Alert.alert("Sign Up Error", `${JSON.stringify(error)}`);
+      });
+  };
   return (
     <KeyBoardHandle>
       <LinearGradient
@@ -35,6 +130,7 @@ const SignUp1 = () => {
           alignItems: "center",
           paddingVertical: 30,
           borderColor: "red",
+
           height: "100%",
         }}
         colors={["#FDFFF4", "#BBC1AD"]}
@@ -85,8 +181,6 @@ const SignUp1 = () => {
             paddingVertical: 10,
             height: getHeight(65),
             width: getWidth(90),
-          
-           
           }}
         >
           <TextInput
@@ -95,7 +189,13 @@ const SignUp1 = () => {
             value={name}
             placeholder="Full name"
             placeholderTextColor="grey"
-            // keyboardType="numeric"
+          />
+          <TextInput
+            style={styles.input}
+            onChangeText={(text) => setUserName(text)}
+            value={username}
+            placeholder="User name"
+            placeholderTextColor="grey"
           />
           <TextInput
             style={styles.input}
@@ -103,7 +203,8 @@ const SignUp1 = () => {
             value={email}
             placeholder="Email address"
             placeholderTextColor="grey"
-            // keyboardType="numeric"
+            autoCorrect={false}
+            autoCapitalize="none"
           />
 
           <TextInput
@@ -112,11 +213,8 @@ const SignUp1 = () => {
             value={number}
             placeholder="Phone number"
             placeholderTextColor="grey"
-            // keyboardType="numeric"
           />
-          <View
-           style={globalstyles.inputContainer}
-          >
+          <View style={globalstyles.inputContainer}>
             <TextInput
               style={globalstyles.textInputStyle}
               onChangeText={(text) => setPassword(text)}
@@ -124,36 +222,47 @@ const SignUp1 = () => {
               value={passowrd}
               placeholder="Password"
               secureTextEntry={show}
-              // keyboardType="numeric"
             />
             <TouchableOpacity onPress={() => setShow(!show)}>
-              <SvgXml xml={hideEye} />
-             
+              <Ionicons
+                name={show ? "eye-outline" : "eye-off-outline"}
+                size={RFValue(22)}
+                color={"rgba(0,0,0,.5)"}
+              />
             </TouchableOpacity>
           </View>
-          <View
-            style={globalstyles.inputContainer}
-          >
+          <View style={globalstyles.inputContainer}>
             <TextInput
-              style={globalstyles.textInputStyle}
+              style={{
+                ...globalstyles.textInputStyle,
+                textAlignVertical: "center",
+              }}
               onChangeText={(text) => setConfirmPassowrd(text)}
               value={confirmPassword}
               placeholder="Confirm password"
               secureTextEntry={show1}
-              // keyboardType="numeric"
               placeholderTextColor="grey"
             />
             <TouchableOpacity onPress={() => setShow1(!show1)}>
-              <SvgXml xml={hideEye} />
-              
+              <Ionicons
+                name={show1 ? "eye-outline" : "eye-off-outline"}
+                size={RFValue(22)}
+                color={"rgba(0,0,0,.5)"}
+              />
             </TouchableOpacity>
           </View>
           <View style={{ paddingTop: 50, alignItems: "center" }}>
             <TouchableOpacity
-              onPress={() => navigation.navigate("SignUp2")}
+              disabled={loading}
+             // onPress={() => validateData()}
+             onPress={() => navigation.navigate("SignUp2")}
               style={globalstyles.buttonStyle}
             >
-              <Text style={globalstyles.buttonText}>NEXT</Text>
+              {loading ? (
+                <ActivityIndicator color={theme.whiteColor} />
+              ) : (
+                <Text style={globalstyles.buttonText}>NEXT</Text>
+              )}
             </TouchableOpacity>
           </View>
         </View>

@@ -14,17 +14,33 @@ import Checkbox from "../Components/CheckBox";
 import CustomHeader from "../Components/CustomHeader";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
-
+import { setTimeInKitchen } from "../store/actions/userActions";
+import { useDispatch } from "react-redux";
 const TimeInKitchen = () => {
-  const [confirmPassword, setConfirmPassowrd] = useState("");
+  const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
   const [checked1, setChecked1] = useState(false);
   const [checked2, setChecked2] = useState(false);
   const [checked3, setChecked3] = useState(false);
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const [check1, setCheck1] = useState(false);
   const navigation = useNavigation();
-
+  const validateData = () => {
+    if (checked) {
+      dispatch(setTimeInKitchen({ value: "Over 2 Hours" }));
+      return;
+    }
+    if (checked1) {
+      dispatch(setTimeInKitchen({ value: "1-2 Hours" }));
+      return;
+    }
+    if (checked2) {
+      dispatch(setTimeInKitchen({ value: "30 Min -  1 Hour" }));
+      return;
+    }
+    if (checked3) {
+      dispatch(setTimeInKitchen({ value: "Less than 30 min" }));
+      return;
+    }
+  };
   return (
     <LinearGradient
       style={{
@@ -45,9 +61,7 @@ const TimeInKitchen = () => {
         subTitle={"TIME SPENT IN THE KITCHEN"}
       />
 
-      <View
-        style={styles.innerContainer}
-      >
+      <View style={styles.innerContainer}>
         <TouchableOpacity onPress={() => setChecked(!checked)}>
           <LinearGradient
             colors={["#FDFFF4", "#BBC1AD"]}
@@ -57,7 +71,6 @@ const TimeInKitchen = () => {
           >
             <Text style={styles.selectItemText}>Over 2 Hours</Text>
             <Checkbox
-             
               isChecked={checked}
               onPress={() => {
                 setChecked(!checked);
@@ -91,7 +104,6 @@ const TimeInKitchen = () => {
           >
             <Text style={styles.selectItemText}>30 Min - 1 Hour</Text>
             <Checkbox
-             
               isChecked={checked2}
               onPress={() => {
                 setChecked2(!checked2);
@@ -130,20 +142,19 @@ const TimeInKitchen = () => {
 };
 const styles = StyleSheet.create({
   innerContainer: {
-    
-      paddingVertical: 10,
-      height: getHeight(50),
-      width: getWidth(97),
-      borderColor: "red",
-      // borderWidth: 1,
-      alignItems: "center",
-      justifyContent: "space-evenly",
-      shadowColor: "rgba(103, 128, 159, 0.5)", // Adjust the shadow color as needed
-      shadowOffset: { width: 0, height: 5 }, // Adjust the shadow offset as needed
-      shadowOpacity: 1, // Adjust the shadow opacity as needed
-      shadowRadius: 10, // Adjust the shadow radius as needed
-      elevation: Platform.OS === "android" ? 0 : 5,
-    },
+    paddingVertical: 10,
+    height: getHeight(50),
+    width: getWidth(97),
+    borderColor: "red",
+    // borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    shadowColor: "rgba(103, 128, 159, 0.5)", // Adjust the shadow color as needed
+    shadowOffset: { width: 0, height: 5 }, // Adjust the shadow offset as needed
+    shadowOpacity: 1, // Adjust the shadow opacity as needed
+    shadowRadius: 10, // Adjust the shadow radius as needed
+    elevation: Platform.OS === "android" ? 0 : 5,
+  },
   optionsContainer: {
     paddingVertical: 10,
     height: getHeight(50),

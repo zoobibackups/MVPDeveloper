@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/core";
 import {
+  Alert,
   StyleSheet,
   Text,
   TextInput,
@@ -13,13 +14,27 @@ import CustomHeader from "../Components/CustomHeader";
 import KeyBoardHandle from "../Components/KeyboardHandle";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { globalstyles } from "../styles/globalestyles";
-
+import { setThingsToAvoid } from "../store/actions/userActions";
+import { useDispatch } from "react-redux";
 const SignUp8 = () => {
+  const dispatch = useDispatch()
+
   const navigation = useNavigation();
   const [ingredients, setIngredients] = useState("");
   const [checked, setChecked] = useState(false);
-  const [age, setAge] = useState("");
   const [meal, setMeal] = useState("");
+
+  const validateData = () => {
+    if(checked){
+
+    }else if(ingredients == ""){
+      Alert.alert("INGREDIENTS EMPTY", "Please enter some ingredients")
+      return
+    }else if(meal == ""){
+      Alert.alert("Meal/COURSES EMPTY", "Please enter some meal/courses")
+    }
+    dispatch(setThingsToAvoid({meal:meal, ingredients:ingredients}))
+  }
   return (
     <>
       <KeyBoardHandle>

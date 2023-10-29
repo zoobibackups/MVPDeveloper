@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/core";
 import {
+  Alert,
   StyleSheet,
   Text,
   TextInput,
@@ -14,13 +15,24 @@ import KeyBoardHandle from "../Components/KeyboardHandle";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
 import { RFValue } from "react-native-responsive-fontsize";
-
+import { setMoreThingsToAvoid } from "../store/actions/userActions";
+import { useDispatch } from "react-redux";
 const SignUp9 = () => {
   const navigation = useNavigation();
-
+  const dispatch = useDispatch();
   const [ingredients, setIngredients] = useState("");
   const [checked, setChecked] = useState(false);
   const [meal, setMeal] = useState("");
+  const validateData = () => {
+    if (checked) {
+    } else if (ingredients == "") {
+      Alert.alert("INGREDIENTS EMPTY", "Please enter some ingredients");
+      return;
+    } else if (meal == "") {
+      Alert.alert("Meal/COURSES EMPTY", "Please enter some meal/courses");
+    }
+    dispatch(setMoreThingsToAvoid({ meal: meal, ingredients: ingredients }));
+  };
   return (
     <>
       <KeyBoardHandle>
@@ -108,7 +120,12 @@ const SignUp9 = () => {
               </Text>
             </View>
 
-            <View style={{...globalstyles.buttonContianer, marginTop:getHeight(10)}}>
+            <View
+              style={{
+                ...globalstyles.buttonContianer,
+                marginTop: getHeight(10),
+              }}
+            >
               <TouchableOpacity
                 onPress={() => navigation.navigate("MicroNutrientsScreen")}
                 style={globalstyles.buttonStyle}

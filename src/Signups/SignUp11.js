@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/core";
 import React, { useState } from "react";
 import {
+  Alert,
   Platform,
   StyleSheet,
   Text,
@@ -13,8 +14,10 @@ import Checkbox from "../Components/CheckBox";
 import CustomHeader from "../Components/CustomHeader";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
-
+import { useDispatch } from "react-redux";
+import { setBudget } from "../store/actions/userActions";
 const SignUp11 = () => {
+  const dispatch = useDispatch()
   const [confirmPassword, setConfirmPassowrd] = useState("");
   const [checked, setChecked] = useState(false);
   const [checked1, setChecked1] = useState(false);
@@ -23,6 +26,26 @@ const SignUp11 = () => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [check1, setCheck1] = useState(false);
   const navigation = useNavigation();
+  const validateData = () => {
+    if (checked) {
+      dispatch(setBudget({ value: "Low budget" }));
+      return;
+    }
+    if (checked1) {
+      dispatch(setBudget({ value: "Medium budget" }));
+      return;
+    }
+    if (checked2) {
+      dispatch(setBudget({ value: "Luxury budget" }));
+      return;
+    }
+    if (checked3) {
+      dispatch(setBudget({ value: "No budget" }));
+      return;
+    } 
+
+    Alert.alert("BUDGET EMPTY", "Please select a budget option")
+  };
   return (
     <LinearGradient
       style={{

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/core";
 import {
+  Alert,
   StyleSheet,
   Text,
   TextInput,
@@ -14,15 +15,44 @@ import KeyBoardHandle from "../Components/KeyboardHandle";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
 import { RFValue } from "react-native-responsive-fontsize";
-
+import { setSchedule } from "../store/actions/userActions";
+import { useDispatch } from "react-redux";
 const SignUp10 = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
-
-  const [ingredients, setIngredients] = useState("");
+  const [breakfast, setBreakFast] = useState("");
+  const [lunch, setLunch] = useState("");
+  const [snack, setSnack] = useState("");
+  const [dinner, setDinner] = useState("");
   const [checked, setChecked] = useState(false);
-  const [age, setAge] = useState("");
-  const [meal, setMeal] = useState("");
-  const [modalVisible, setModalVisible] = useState(false);
+  const validateData = () => {
+    if (!checked) {
+      if (breakfast == "") {
+        Alert.alert("BREAKFAST TIME EMPTY", "Please enter breakfast time");
+        return;
+      }
+      if (lunch == "") {
+        Alert.alert("LUNCH TIME EMPTY", "Please enter lunch time");
+        return;
+      }
+      if (snack == "") {
+        Alert.alert("SNACK TIME EMPTY", "Please enter breakfast time");
+        return;
+      }
+      if (dinner == "") {
+        Alert.alert("DINNER TIME EMPTY", "Please enter dinner time");
+        return;
+      }
+      dispatch(
+        setSchedule({
+          lunch: lunch,
+          snack: snack,
+          breakfast: breakfast,
+          dinner: dinner,
+        })
+      );
+    }
+  };
   return (
     <>
       <KeyBoardHandle>
@@ -67,11 +97,10 @@ const SignUp10 = () => {
               </Text>
               <TextInput
                 style={globalstyles.textInputWithOutIcon}
-                onChangeText={(text) => setIngredients(text)}
-                value={ingredients}
-                placeholder="Input here........"
+                onChangeText={(text) => setBreakFast(text)}
+                value={breakfast}
+                placeholder="12:00"
                 placeholderTextColor="grey"
-                // keyboardType="numeric"
               />
             </View>
             <View style={globalstyles.inputVerticalContainer}>
@@ -80,11 +109,10 @@ const SignUp10 = () => {
               </Text>
               <TextInput
                 style={globalstyles.textInputWithOutIcon}
-                onChangeText={(text) => setMeal(text)}
-                value={meal}
-                placeholder="Input here........"
+                onChangeText={(text) => setLunch(text)}
+                value={lunch}
+                placeholder="12:00"
                 placeholderTextColor="grey"
-                // keyboardType="numeric"
               />
             </View>
 
@@ -94,9 +122,9 @@ const SignUp10 = () => {
               </Text>
               <TextInput
                 style={globalstyles.textInputWithOutIcon}
-                onChangeText={(text) => setIngredients(text)}
-                value={ingredients}
-                placeholder="Input here........"
+                onChangeText={(text) => setSnack(text)}
+                value={snack}
+                placeholder="12:00"
                 placeholderTextColor="grey"
                 // keyboardType="numeric"
               />
@@ -107,16 +135,14 @@ const SignUp10 = () => {
               </Text>
               <TextInput
                 style={globalstyles.textInputWithOutIcon}
-                onChangeText={(text) => setIngredients(text)}
-                value={ingredients}
+                onChangeText={(text) => setDinner(text)}
+                value={dinner}
                 placeholder="Input here........"
                 placeholderTextColor="grey"
-                // keyboardType="numeric"
               />
             </View>
             <View style={styles.rowCheckBox}>
               <CheckboxSquare
-                // text="Blue"
                 isChecked={checked}
                 onPress={() => {
                   setChecked(!checked);

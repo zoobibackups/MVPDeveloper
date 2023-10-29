@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {
   Platform,
   StyleSheet,
-  Text,
+  Text,Alert,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -14,16 +14,37 @@ import Checkbox from "../Components/CheckBox";
 import CheckboxSquare from "../Components/CheckBoxSquare";
 import CustomHeader from "../Components/CustomHeader";
 import textStyles, { globalstyles } from "../styles/globalestyles";
-
+import { setDietryPreferences } from "../store/actions/userActions";
+import { useDispatch } from "react-redux";
 const SignUp6 = () => {
+  const dispatch = useDispatch()
   const [checked, setChecked] = useState(false);
   const [checked1, setChecked1] = useState(false);
   const [checked2, setChecked2] = useState(false);
   const [checked3, setChecked3] = useState(false);
   const [checked4, setChecked4] = useState(false);
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const [check1, setCheck1] = useState(false);
   const navigation = useNavigation();
+  const validateData = () => {
+    if(checked || checked1 || checked2 || checked3 || checked4){
+      if(checked){
+        dispatch(setDietryPreferences({value:"Lazy Keto"})) // 
+      }
+      if(checked1){
+        dispatch(setDietryPreferences({value:"Gluten Free"}))
+      }
+      if(checked2){
+        dispatch(setDietryPreferences({value:"Pescatarian"}))
+      }
+      if(checked3){
+        dispatch(setDietryPreferences({value:"Vegan"}))
+      }
+      if(checked4){
+        dispatch(setDietryPreferences({value:"Use the app without goal"}))
+      }
+    }else{
+      Alert.alert("NO OPTION SELECTED", "Please select an option")
+    }
+  }
   return (
     <LinearGradient
       style={{
