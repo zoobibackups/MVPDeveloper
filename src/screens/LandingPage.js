@@ -15,8 +15,10 @@ import { apple, preformly, training } from "../../assets/svg";
 import fonts from "../constants/fonts";
 import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
-
+import {setStack} from "../store/actions/userActions";
+import { useDispatch } from "react-redux";
 const LandingPage = () => {
+  const dispatch = useDispatch();
   const [focus, setFocus] = useState(true);
   const [focus2, setFocus2] = useState(false);
   const customstyle = focus ? styles.change : styles.noChange;
@@ -60,32 +62,36 @@ const LandingPage = () => {
       >
         <TouchableOpacity
           onPress={() => {
-            // if account naivgate to Home5 else SignUp1
-            // if account naivgate to Home5 else SignUp1
-            setFocus2(false), setFocus(true), navigation.navigate("SignUp1");
-          }}
-          style={customstyle}
-        >
-          <SvgXml width={getWidth(15)} height={getHeight(12)} xml={apple} />
-
-          <Text style={styles.buttonText}>Food</Text>
-        </TouchableOpacity>
-
-          <View style={{height:getHeight(2)}} />
-       
-
-        <TouchableOpacity
-          onPress={() => {
-            setFocus2(true),
-              setFocus(false),
-              navigation.navigate("TrainingLogIn");
+            setFocus2(false), setFocus(true)
+            dispatch(setStack({whichStack:"FoodAuthStack",accounttype:"Food"}))
           }}
         >
           <LinearGradient
             style={customstyle2}
             colors={["#BBC1AD", "#FDFFF4"]}
-            start={{ x: 0, y: .5 }}
-            end={{ x: 1, y: .5 }}
+            start={{ x: 0, y: 0.5 }}
+            end={{ x: 1, y: 0.5 }}
+          >
+            <SvgXml width={getWidth(15)} height={getHeight(12)} xml={apple} />
+
+            <Text style={styles.buttonText}>Food</Text>
+          </LinearGradient>
+        </TouchableOpacity>
+
+        <View style={{ height: getHeight(2) }} />
+
+        <TouchableOpacity
+          onPress={() => {
+            setFocus2(true),
+              setFocus(false),
+              dispatch(setStack({whichStack:"TrainingAuthStack",accounttype:"Training"}))
+          }}
+        >
+          <LinearGradient
+            style={customstyle2}
+            colors={["#BBC1AD", "#FDFFF4"]}
+            start={{ x: 0, y: 0.5 }}
+            end={{ x: 1, y: 0.5 }}
           >
             <SvgXml
               width={getWidth(15)}

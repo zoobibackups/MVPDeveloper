@@ -18,9 +18,9 @@ import { useDispatch } from "react-redux";
 const MicroNutrientsScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const [carbohydrates, setCarbohydrates] = useState(0);
-  const [protine, setProtine] = useState(0);
-  const [fats, setFats] = useState(0);
+  const [carbohydrates, setCarbohydrates] = useState(50);
+  const [protine, setProtine] = useState(30);
+  const [fats, setFats] = useState(20);
   const validateData = () => {
     dispatch(
       setMicroNutrients({
@@ -28,7 +28,9 @@ const MicroNutrientsScreen = () => {
         protine: protine,
         fats: fats,
       })
-    );
+    ).then(() => {
+      navigation.navigate("SignUp10");
+    })
   };
   return (
     <>
@@ -326,7 +328,7 @@ const MicroNutrientsScreen = () => {
               }}
             >
               <TouchableOpacity
-                onPress={() => navigation.navigate("SignUp10")}
+                onPress={() => validateData()}
                 style={globalstyles.buttonStyle}
               >
                 <Text style={globalstyles.buttonText}>Next</Text>

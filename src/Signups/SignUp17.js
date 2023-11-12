@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/core";
 import React, { useState } from "react";
 import {
+  Alert,
   Platform,
   StyleSheet,
   Text,
@@ -13,18 +14,48 @@ import Checkbox from "../Components/CheckBox";
 import CustomHeader from "../Components/CustomHeader";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
+import { useDispatch } from "react-redux";
+import { setTrainTimeSpentInExercise } from "../store/actions/userActions";
 
 const SignUp17 = () => {
-  const [confirmPassword, setConfirmPassowrd] = useState("");
+  const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
   const [checked1, setChecked1] = useState(false);
   const [checked2, setChecked2] = useState(false);
   const [checked3, setChecked3] = useState(false);
   const [checked4, setChecked4] = useState(false);
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const [check1, setCheck1] = useState(false);
   const navigation = useNavigation();
 
+  const validateData = () => {
+    if (!checked && !checked1 && !checked2 && !checked3 && !checked4) {
+      Alert.alert("NO OPTION SELECTED", "Please select an option");
+      return;
+    }
+    if (checked) {
+      dispatch(setTrainTimeSpentInExercise({ value: "0 - 30 MIN" })).then(() => {
+        navigation.navigate("SignUp18T");
+      });
+    } else if (checked1) {
+      dispatch(setTrainTimeSpentInExercise({ value: "30 - 60 MIN" })).then(() => {
+        navigation.navigate("SignUp18T");
+      });
+    } else if (checked2) {
+      dispatch(setTrainTimeSpentInExercise({ value: "1 - 2 hours" })).then(() => {
+        navigation.navigate("SignUp18T");
+      });
+    } else if (checked3) {
+      dispatch(setTrainTimeSpentInExercise({ value: "2 - 3 hours" })).then(() => {
+        navigation.navigate("SignUp18T");
+      });
+    } else if (checked4) {
+      dispatch(setTrainTimeSpentInExercise({ value: "custom" })).then(() => {
+        navigation.navigate("SignUp18T");
+      });
+    } else {
+      Alert.alert("NO OPTION SELECTED", "Please select an option");
+      return;
+    }
+  };
   return (
     <LinearGradient
       style={{
@@ -130,7 +161,7 @@ const SignUp17 = () => {
 
       <View style={globalstyles.buttonContianer}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("SignUp18T")}
+          onPress={() => validateData()}
           style={globalstyles.buttonStyle}
         >
           <Text style={globalstyles.buttonText}>Next</Text>

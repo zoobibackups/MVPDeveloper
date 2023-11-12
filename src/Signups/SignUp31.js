@@ -1,30 +1,74 @@
-import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/core";
+import React, { useState } from "react";
 import {
   StyleSheet,
+  Alert,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
+  ActivityIndicator,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import CheckboxSquare from "../Components/CheckBoxSquare";
+import { RFValue } from "react-native-responsive-fontsize";
 import CustomHeader from "../Components/CustomHeader";
 import KeyBoardHandle from "../Components/KeyboardHandle";
+import fonts from "../constants/fonts";
+import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
-import theme from "../constants/theme";
-import fonts from "../constants/fonts";
-import { RFValue } from "react-native-responsive-fontsize";
+import { useSelector } from "react-redux";
 
 const SignUp31 = () => {
+  const { trainingMetaData, accessToken } = useSelector(
+    (state) => state.userReducer
+  );
+  const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
 
-  const [ingredients, setIngredients] = useState("");
-  const [checked, setChecked] = useState(false);
-  const [age, setAge] = useState("");
-  const [meal, setMeal] = useState("");
-  const [modalVisible, setModalVisible] = useState(false);
+  const createFoodMetaData = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", `Bearer ${accessToken}`);
+
+    var requestOptions = {
+      method: "PATCH",
+      headers: myHeaders,
+      body: JSON.stringify({
+        ...trainingMetaData,
+        height: Number(trainingMetaData.height),
+        age: Number(trainingMetaData.age),
+        weight: Number(trainingMetaData.weight),
+      }),
+      redirect: "follow",
+    };
+    setLoading(true);
+    fetch(
+      "https://as-dev.code-freaks.com/mvp/api/users/update/training/metadata",
+      requestOptions
+    )
+      .then((result) => {
+        if (result.status == 200) {
+          setLoading(false)
+          Alert.alert("SUCCESS", "Food schedule has been created", [
+            {
+              text: "Login to Continue",
+              onPress: () => navigation.navigate("LogIn3")
+            },
+          ]);
+        } else {
+          result.json().then((data) => {
+            setLoading(false);
+            
+            Alert.alert("ERROR IN CREATE SCHEDULE");
+          });
+        }
+      })
+      .catch((error) => {
+        console.log("error", error)
+        Alert.alert("ERROR IN CREATE SCHEDULE");
+        setLoading(false)
+      });
+  };
   return (
     <>
       <KeyBoardHandle>
@@ -58,9 +102,9 @@ const SignUp31 = () => {
           </View>
 
           <View style={globalstyles.innerContainer}>
-            <TouchableOpacity style={globalstyles.inputVerticalContainer}>
+            <View style={globalstyles.inputVerticalContainer}>
               <Text style={globalstyles.inputLabel}>Goal/ Mission:</Text>
-              <TouchableOpacity
+              <View
                 onPress={() => navigation.navigate("SignUp21")}
                 style={globalstyles.textInputWithOutIcon}
               >
@@ -70,13 +114,13 @@ const SignUp31 = () => {
                     lineHeight: RFValue(17),
                   }}
                 >
-                  Goal/ Mission:
+                  {trainingMetaData.finalGoal}
                 </Text>
-              </TouchableOpacity>
-            </TouchableOpacity>
+              </View>
+            </View>
             <View style={globalstyles.inputVerticalContainer}>
               <Text style={globalstyles.inputLabel}>Equipment:</Text>
-              <TouchableOpacity
+              <View
                 onPress={() => navigation.navigate("SignUp28")}
                 style={globalstyles.textInputWithOutIcon}
               >
@@ -86,13 +130,13 @@ const SignUp31 = () => {
                     lineHeight: RFValue(17),
                   }}
                 >
-                  Benchpress, Dumbells
+                  {trainingMetaData.equipments}
                 </Text>
-              </TouchableOpacity>
+              </View>
             </View>
-            <TouchableOpacity style={globalstyles.inputVerticalContainer}>
+            <View style={globalstyles.inputVerticalContainer}>
               <Text style={globalstyles.inputLabel}>Location:</Text>
-              <TouchableOpacity
+              <View
                 onPress={() => navigation.navigate("SignUp18")}
                 style={globalstyles.textInputWithOutIcon}
               >
@@ -102,30 +146,34 @@ const SignUp31 = () => {
                     lineHeight: RFValue(17),
                   }}
                 >
-                  Gym
+                  {trainingMetaData.workoutPlace}
                 </Text>
-              </TouchableOpacity>
-            </TouchableOpacity>
+              </View>
+            </View>
             <View style={globalstyles.inputVerticalContainer}>
               <Text style={globalstyles.inputLabel}>Days:</Text>
-              <TouchableOpacity style={globalstyles.textInputWithOutIcon}>
+              <View style={globalstyles.textInputWithOutIcon}>
                 <Text
                   style={{
                     fontFamily: fonts.AnekBanglaMedium,
                     lineHeight: RFValue(17),
                   }}
                 >
-                  Monday, Wednesday, Saturday
+                  {trainingMetaData.workourdays}
                 </Text>
-              </TouchableOpacity>
+              </View>
             </View>
 
             <View style={globalstyles.buttonContianer}>
               <TouchableOpacity
-                onPress={() => navigation.navigate("TrainingHome1")}
+                onPress={() => createFoodMetaData()}
                 style={globalstyles.buttonStyle}
               >
-                <Text style={globalstyles.buttonText}>Next</Text>
+                {loading ? (
+                  <ActivityIndicator color={theme.whiteColor} size={"small"} />
+                ) : (
+                  <Text style={globalstyles.buttonText}>Next</Text>
+                )}
               </TouchableOpacity>
             </View>
           </View>

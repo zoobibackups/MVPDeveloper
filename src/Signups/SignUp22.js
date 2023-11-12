@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Alert,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { RFValue } from "react-native-responsive-fontsize";
@@ -14,9 +15,11 @@ import Checkbox from "../Components/CheckBox";
 import CustomHeader from "../Components/CustomHeader";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
+import { useDispatch } from "react-redux";
+import { setTrainSportsName } from "../store/actions/userActions";
 
 const SignUp22 = () => {
-  const [checked, setChecked] = useState(false);
+  const dispatch = useDispatch();
 
   const navigation = useNavigation();
   const [data, setData] = useState([
@@ -81,6 +84,26 @@ const SignUp22 = () => {
       isSelected: false,
     },
   ]);
+
+  const [selectedItem, setSelectedItem] = useState(null);
+  const handleSelect = (index) => {
+    const updatedData = data.map((item, i) => ({
+      ...item,
+      isSelected: i === index ? true : false,
+    }));
+
+    setData(updatedData);
+  };
+
+  const validateData = () => {
+    if (selectedItem == null) {
+      Alert.alert("NO OPTION SELECTED", "Select an option");
+      return;
+    }
+    dispatch(setTrainSportsName({ value: selectedItem })).then(() => {
+      navigation.navigate("SignUp23");
+    });
+  };
   return (
     <LinearGradient
       style={{
@@ -93,11 +116,11 @@ const SignUp22 = () => {
       start={{ x: 0, y: 0 }}
       end={{ x: 0.8, y: 0 }}
     >
-     <CustomHeader
+      <CustomHeader
         onPress={() => navigation.goBack()}
         title={"CREATE PROFILE"}
         subTitle={"WHAT DO YOU DO/PRACTICE? "}
-      /> 
+      />
 
       <View style={styles.innerContainer}>
         <ScrollView
@@ -119,9 +142,10 @@ const SignUp22 = () => {
               >
                 <Text style={styles.selectItemText}>{item.name}</Text>
                 <Checkbox
-                  isChecked={checked}
+                  isChecked={item.isSelected}
                   onPress={() => {
-                    setChecked(!checked);
+                    handleSelect(index);
+                    setSelectedItem(item.name);
                   }}
                 />
               </LinearGradient>
@@ -131,7 +155,7 @@ const SignUp22 = () => {
       </View>
       <View style={globalstyles.buttonContianer}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("SignUp23")}
+          onPress={() => validateData()}
           style={globalstyles.buttonStyle}
         >
           <Text style={globalstyles.buttonText}>Next</Text>

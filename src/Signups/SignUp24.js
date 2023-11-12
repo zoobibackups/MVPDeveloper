@@ -6,10 +6,24 @@ import LinearGradient from "react-native-linear-gradient";
 import CustomHeader from "../Components/CustomHeader";
 import theme from "../constants/theme";
 import { globalstyles } from "../styles/globalestyles";
+import { useDispatch } from "react-redux";
+import { setTrainIsTrusts } from "../store/actions/userActions";
 
 const SignUp24 = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
+  const validateData = (value) => {
+    if (value) {
+      dispatch(setTrainIsTrusts({ value: value })).then(() => {
+        navigation.navigate("SignUp22");
+      });
+    } else {
+      dispatch(setTrainIsTrusts({ value: value })).then(() => {
+        navigation.navigate("SignUp26");
+      });
+    }
+  };
   return (
     <LinearGradient
       style={{
@@ -47,13 +61,13 @@ const SignUp24 = () => {
         style={{ ...globalstyles.buttonContianer, marginTop: getHeight(5) }}
       >
         <TouchableOpacity
-          onPress={() => navigation.navigate("SignUp22")}
+          onPress={() => validateData(true)}
           style={{ ...globalstyles.buttonStyle, width: getWidth(70) }}
         >
           <Text style={globalstyles.buttonText}>Trust us</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate("SignUp26")}
+          onPress={() => validateData(false)}
           style={{
             ...globalstyles.buttonStyle,
             width: getWidth(70),

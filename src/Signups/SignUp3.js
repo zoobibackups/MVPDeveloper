@@ -20,8 +20,7 @@ import { setWorkOutTime } from "../store/actions/userActions";
 const elevationValue = Platform.OS === "android" ? 0 : 5;
 const SignUp3 = () => {
   const dispatch = useDispatch();
-  const { foodMetaData } = useSelector((state) => state.userReducer);
-  console.log(foodMetaData);
+ 
   const [checked, setChecked] = useState(false);
   const [checked1, setChecked1] = useState(false);
   const [checked2, setChecked2] = useState(false);

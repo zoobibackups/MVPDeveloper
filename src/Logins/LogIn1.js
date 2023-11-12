@@ -14,10 +14,13 @@ import KeyBoardHandle from "../Components/KeyboardHandle";
 import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
+import { useSelector } from "react-redux";
 
 const LogIn1 = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { user } = useSelector((state) => state.userReducer);
+  console.log(user);
+  const [email, setEmail] = useState(__DEV__ ?user.email:"");
+  const [password, setPassword] = useState(__DEV__?"Tikt0k@1":"");
   const [show, setShow] = useState(true);
   const [show1, setShow1] = useState(true);
   return (

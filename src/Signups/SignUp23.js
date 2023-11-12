@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Alert,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { RFValue } from "react-native-responsive-fontsize";
@@ -14,17 +15,39 @@ import Checkbox from "../Components/CheckBox";
 import CustomHeader from "../Components/CustomHeader";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
+import { useDispatch } from "react-redux";
+import { setTrainSportsTime } from "../store/actions/userActions";
 
 const SignUp23 = () => {
-  const [confirmPassword, setConfirmPassowrd] = useState("");
+  const dispatch = useDispatch()
   const [checked, setChecked] = useState(false);
   const [checked1, setChecked1] = useState(false);
   const [checked2, setChecked2] = useState(false);
   const [checked3, setChecked3] = useState(false);
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const [check1, setCheck1] = useState(false);
   const navigation = useNavigation();
 
+  const vaidateData = () => {
+    if(checked){
+      dispatch(setTrainSportsTime({value:"More than 5 hours a week"})).then(() => {
+        navigation.navigate("SignUp24")
+      })
+    }else if(checked1){
+      dispatch(setTrainSportsTime({value:"3 to 5 hours a week"})).then(() => {
+        navigation.navigate("SignUp24")
+      })
+    }else if(checked2){
+      dispatch(setTrainSportsTime({value:"1 to 3 hours a week"})).then(() => {
+        navigation.navigate("SignUp24")
+      })
+    }else if(checked3){
+      dispatch(setTrainSportsTime({value:"Less than 1 hour a week"})).then(() => {
+        navigation.navigate("SignUp24")
+      })
+    }else{
+      Alert.alert("NO OPTION SELECTED", "Please select an option")
+    }
+   
+  }
   return (
     <LinearGradient
       style={{
@@ -32,8 +55,6 @@ const SignUp23 = () => {
         paddingVertical: 30,
         borderColor: "red",
         height: "100%",
-        // backgroundColor: 'white',
-        // borderWidth:10
       }}
       colors={["#FDFFF4", "#BBC1AD"]}
       start={{ x: 0, y: 0 }}
@@ -109,7 +130,7 @@ const SignUp23 = () => {
 
       <View style={globalstyles.buttonContianer}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("SignUp24")}
+          onPress={() => vaidateData()}
           style={globalstyles.buttonStyle}
         >
           <Text style={globalstyles.buttonText}>Next</Text>

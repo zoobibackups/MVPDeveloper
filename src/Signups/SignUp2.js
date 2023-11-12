@@ -47,7 +47,7 @@ const SignUp2 = () => {
     age:age,
     weight:weight,
     height:height,
-    gender:state
+    gender:state == "1" ? "Male" : state ==2 ?'Female':"Other"
    }
    dispatch(setAgeHeightWeight(data)).then(() => {
     navigation.navigate("SignUp3")

@@ -49,8 +49,11 @@ const SignUp10 = () => {
           snack: snack,
           breakfast: breakfast,
           dinner: dinner,
+          isNeedSchedule:checked
         })
-      );
+      ).then(() => {
+        navigation.navigate("TimeInKitchen")
+      })
     }
   };
   return (
@@ -175,7 +178,7 @@ const SignUp10 = () => {
           </View>
           <View style={globalstyles.buttonContianer}>
             <TouchableOpacity
-              onPress={() => navigation.navigate("TimeInKitchen")}
+              onPress={() => validateData()}
               style={globalstyles.buttonStyle}
             >
               <Text style={globalstyles.buttonText}>Next</Text>

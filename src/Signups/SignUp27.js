@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import {
   Platform,
   StyleSheet,
-  Text,
+  Text,Alert,
   TouchableOpacity,
   View
 } from "react-native";
@@ -13,17 +13,38 @@ import Checkbox from "../Components/CheckBox";
 import CustomHeader from "../Components/CustomHeader";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
+import { setTrainPreferredWorkOutAvoid } from "../store/actions/userActions";
+import { useDispatch } from "react-redux";
 
 const SignUp27 = () => {
-  const [confirmPassword, setConfirmPassowrd] = useState("");
+  const dispatch = useDispatch()
   const [checked, setChecked] = useState(false);
   const [checked1, setChecked1] = useState(false);
   const [checked2, setChecked2] = useState(false);
   const [checked3, setChecked3] = useState(false);
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const [check1, setCheck1] = useState(false);
+  
   const navigation = useNavigation();
-
+  const validateData = () => {
+    if (checked) {
+      dispatch(setTrainPreferredWorkOutAvoid({ value: "Calisthenics" })).then(() => {
+        navigation.navigate("SignUp28");
+      });
+    } else if (checked1) {
+      dispatch(setTrainPreferredWorkOutAvoid({ value: "Swimming" })).then(() => {
+        navigation.navigate("SignUp28");
+      });
+    } else if (checked2) {
+      dispatch(setTrainPreferredWorkOutAvoid({ value: "Weight lifting" })).then(() => {
+        navigation.navigate("SignUp28");
+      });
+    } else if (checked3) {
+      dispatch(setTrainPreferredWorkOutAvoid({ value: "Home workouts" })).then(() => {
+        navigation.navigate("SignUp28");
+      });
+    } else {
+      Alert.alert("NO OPTION SELECTED", "Please select an option");
+    }
+  };
   return (
     <LinearGradient
       style={{
@@ -114,7 +135,7 @@ const SignUp27 = () => {
 
       <View style={globalstyles.buttonContianer}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("SignUp28")}
+          onPress={() => validateData()}
           style={globalstyles.buttonStyle}
         >
           <Text style={globalstyles.buttonText}>Next</Text>

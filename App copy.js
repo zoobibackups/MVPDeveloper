@@ -22,7 +22,7 @@ import SignUp13 from "./src/Signups/SignUp13";
 import SignUp14 from "./src/Signups/SignUp14";
 import SignUp17 from "./src/Signups/SignUp17";
 import SignUp18 from "./src/Signups/SignUp18";
-import SignUp18T from "./src/Signups/SignUp18(2)";
+import SignUp18T from "./src/Signups/SignUp18T";
 import SignUp19 from "./src/Signups/SignUp19";
 import SignUp2 from "./src/Signups/SignUp2";
 import SignUp20 from "./src/Signups/SignUp20";

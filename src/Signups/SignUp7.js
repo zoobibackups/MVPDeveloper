@@ -41,93 +41,120 @@ const SignUp7 = () => {
   const [checked19, setChecked19] = useState(false);
   const navigation = useNavigation();
   const validateData = () => {
-    const values = "";
-    if (
-      checked ||
-      checked1 ||
-      checked2 ||
-      checked3 ||
-      checked4 ||
-      checked5 ||
-      checked6 ||
-      checked7 ||
-      checked8 ||
-      checked9 ||
-      checked10 ||
-      checked11 ||
-      checked12 ||
-      checked13 ||
-      checked14 ||
-      checked15 ||
-      checked16 ||
-      checked17 ||
-      checked18 ||
-      checked19
-    ) {
-      if (checked) {
-        values.concat(", ", "Italian cuisine"); //
+    var values = "";
+    try {
+      if (
+        checked ||
+        checked1 ||
+        checked2 ||
+        checked3 ||
+        checked4 ||
+        checked5 ||
+        checked6 ||
+        checked7 ||
+        checked8 ||
+        checked9 ||
+        checked10 ||
+        checked11 ||
+        checked12 ||
+        checked13 ||
+        checked14 ||
+        checked15 ||
+        checked16 ||
+        checked17 ||
+        checked18 ||
+        checked19
+      ) {
+        console.log(
+          checked,
+          checked1,
+          checked2,
+          checked3,
+          checked4,
+          checked5,
+          checked6,
+          checked7,
+          checked8,
+          checked9,
+          checked10,
+          checked11,
+          checked12,
+          checked13,
+          checked14,
+          checked15,
+          checked16,
+          checked17,
+          checked18,
+          checked19
+        );
+        if (checked) {
+          values = values.concat("Italian cuisine", ", ");
+        }
+        if (checked1) {
+          values = values.concat("Chinese cuisine", ", ");
+        }
+        if (checked2) {
+          values = values.concat("Mexican cuisine", ", ");
+        }
+        if (checked3) {
+          values = values.concat("Japanese cuisine", ", ");
+        }
+        if (checked4) {
+          values = values.concat("Indian cuisine", ", ");
+        }
+        if (checked5) {
+          values = values.concat("French cuisine", ", ");
+        }
+        if (checked6) {
+          values = values.concat("Thai cuisine", ", ");
+        }
+        if (checked7) {
+          values = values.concat("Greek cuisine", ", ");
+        }
+        if (checked8) {
+          values = values.concat("Spanish cuisine", ", ");
+        }
+        if (checked9) {
+          values = values.concat("Lebanese cuisine", ", ");
+        }
+        if (checked10) {
+          values = values.concat("Korean cuisine", ", ");
+        }
+        if (checked11) {
+          values = values.concat("Vietnamese cuisine", ", ");
+        }
+        if (checked12) {
+          values = values.concat("Moroccan cuisine", ", ");
+        }
+        if (checked13) {
+          values = values.concat("Ethiopian cuisine", ", ");
+        }
+        if (checked14) {
+          values = values.concat("Brazilian cuisine", ", ");
+        }
+        if (checked15) {
+          values = values.concat("Turkish cuisine", ", ");
+        }
+        if (checked16) {
+          values = values.concat("Russian cuisine", ", ");
+        }
+        if (checked17) {
+          values = values.concat("Indonesian cuisine", ", ");
+        }
+        if (checked18) {
+          values = values.concat("Jamaican cuisine", ", ");
+        }
+        if (checked19) {
+          values = values.concat("Peruvian cuisine", ", ");
+        }
+        dispatch(setFavoriteCuisines({value:values})).then(() => {
+          navigation.navigate("SignUp8");
+        });
+      } else {
+        Alert.alert("NO OPTION SELECTED", "Please select an option");
       }
-      if (checked1) {
-        values.concat(", ", "Chinese cuisine");
-      }
-      if (checked2) {
-        values.concat(", ", "Mexican cuisine");
-      }
-      if (checked3) {
-        values.concat(", ", "Japanese cuisine");
-      }
-      if (checked4) {
-        values.concat(", ", "Indian cuisine");
-      }
-      if (checked5) {
-        values.concat(", ", "French cuisine");
-      }
-      if (checked6) {
-        values.concat(", ", "Thai cuisine");
-      }
-      if (checked7) {
-        values.concat(", ", "Greek cuisine");
-      }
-      if (checked8) {
-        values.concat(", ", "Spanish cuisine");
-      }
-      if (checked9) {
-        values.concat(", ", "Lebanese cuisine");
-      }
-      if (checked10) {
-        values.concat(", ", "Korean cuisine");
-      }
-      if (checked11) {
-        values.concat(", ", "Vietnamese cuisine");
-      }
-      if (checked12) {
-        values.concat(", ", "Moroccan cuisine");
-      }
-      if (checked13) {
-        values.concat(", ", "Ethiopian cuisine");
-      }
-      if (checked14) {
-        values.concat(", ", "Brazilian cuisine");
-      }
-      if (checked15) {
-        values.concat(", ", "Turkish cuisine");
-      }
-      if (checked16) {
-        values.concat(", ", "Russian cuisine");
-      }
-      if (checked17) {
-        values.concat(", ", "Indonesian cuisine");
-      }
-      if (checked18) {
-        values.concat(", ", "Jamaican cuisine");
-      }
-      if (checked19) {
-        values.concat(", ", "Peruvian cuisine");
-      }
-      dispatch(setFavoriteCuisines(values));
-    }
-    {
-      Alert.alert("NO OPTION SELECTED", "Please select an option");
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -440,7 +467,6 @@ const SignUp7 = () => {
           <TouchableOpacity
             onPress={() => {
               validateData();
-              navigation.navigate("SignUp8");
             }}
             style={globalstyles.buttonStyle}
           >

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { useNavigation } from "@react-navigation/core";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { RFValue } from "react-native-responsive-fontsize";
 import RadioForm from "react-native-simple-radio-button";
@@ -12,21 +12,50 @@ import fonts from "../constants/fonts";
 import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { globalstyles } from "../styles/globalestyles";
-
-const SignUp2 = () => {
+import { useDispatch } from "react-redux";
+import { setTrainAgeHeightWeight } from "../store/actions/userActions";
+const SignUp19 = () => {
+  const dispatch = useDispatch()
   const navigation = useNavigation();
   var radio_props = [
-    { label: "Male", value: 0 },
-    { label: "Female", value: 1 },
-    { label: "Other", value: 2 },
+    { label: "Male", value: 1 },
+    { label: "Female", value: 2 },
+    { label: "Other", value: 3 },
   ];
 
   const [height, setHeight] = useState("");
   const [age, setAge] = useState("");
   const [weight, setWeight] = useState("");
-  const [selectedIndex, setIndex] = useState(0);
   const [state, setState] = useState(false);
-  const [confirmPassword, setConfirmPassowrd] = useState("");
+
+  const validateData = () => {
+    if(age == ""){
+      Alert.alert("INVALID AGE", "Please enter a valid age")
+      return
+    }
+    if(height == ''){
+      Alert.alert("INVALID HEIGHT", "Please enter valid height")
+      return
+    }
+    if(weight == ""){
+      Alert.alert("INVALID WEIGHT", "Please enter valid weight")
+      return
+    }
+
+    if(!state){
+      Alert.alert("INVALID GENDER", "Please select gender")
+      return
+    }
+    let data = {
+      age:age,
+      height:height,
+      weight:weight,
+      gender:radio_props[state-1].label
+    }
+    dispatch(setTrainAgeHeightWeight(data)).then((data) => {
+      navigation.navigate("SignUp20")
+    })
+  }
   return (
     <KeyBoardHandle>
       <LinearGradient
@@ -35,9 +64,7 @@ const SignUp2 = () => {
           paddingVertical: 30,
           borderColor: "red",
           height: "100%",
-          // backgroundColor: 'white',
-          // borderWidth:10
-        }}
+       }}
         colors={["#FDFFF4", "#BBC1AD"]}
         start={{ x: 0, y: 0 }}
         end={{ x: 0.8, y: 0 }}
@@ -125,7 +152,7 @@ const SignUp2 = () => {
           </View>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate("SignUp20")}
+            onPress={() => validateData()}
             style={globalstyles.buttonStyle}
           >
             <Text style={globalstyles.buttonText}>NEXT</Text>
@@ -136,4 +163,4 @@ const SignUp2 = () => {
   );
 };
 
-export default SignUp2;
+export default SignUp19;

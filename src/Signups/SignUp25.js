@@ -2,6 +2,7 @@ import Slider from "@react-native-community/slider";
 import { useNavigation } from "@react-navigation/core";
 import React, { useState } from "react";
 import {
+  Alert,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -18,11 +19,33 @@ import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import { useDispatch } from "react-redux";
+import { setTrainEstimatedTargetDate } from "../store/actions/userActions";
 const SignUp25 = () => {
   const [modalVisible, setModalVisible] = useState(false);
-
+  const dispatch = useDispatch();
   const [range, setRange] = useState(0);
   const navigation = useNavigation();
+  const currentDate = new Date();
+  const futureDate = new Date(currentDate);
+  futureDate.setDate(currentDate.getDate() + 7);
+  // Format the date to a string using the toLocaleDateString method
+  const formattedDate = futureDate.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: "2-digit",
+    day: 'numeric',
+  });
+  const validateData = () => {
+    if (range < 1) {
+      Alert.alert("INVALID RANGE", "Please select a range");
+      return;
+    }
+    dispatch(
+      setTrainEstimatedTargetDate({ weightPerWeek: parseFloat(range).toFixed(2), estimatedTargetDate:formattedDate })
+    ).then(() => {
+      navigation.navigate("SignUp17");
+    });
+  };
   return (
     <LinearGradient
       style={{
@@ -159,7 +182,7 @@ const SignUp25 = () => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate("SignUp17")}
+          onPress={() => validateData()}
           style={{
             ...styles.buttonStyle,
 

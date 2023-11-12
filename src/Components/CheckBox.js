@@ -12,7 +12,7 @@ import {getWidth, getHeight} from '../functions/CommonFunctions';
 
 const Checkbox = ({
   text,
-  onPress,
+  onPress=() => null,
   isChecked,
   containerStyle,
   textStyle,

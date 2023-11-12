@@ -25,13 +25,30 @@ const SignUp9 = () => {
   const [meal, setMeal] = useState("");
   const validateData = () => {
     if (checked) {
+      dispatch(
+        setMoreThingsToAvoid({
+          meal: meal,
+          ingredients: ingredients,
+          checked: checked,
+        })
+      ).then(() => {
+        navigation.navigate("MicroNutrientsScreen");
+      });
     } else if (ingredients == "") {
       Alert.alert("INGREDIENTS EMPTY", "Please enter some ingredients");
       return;
     } else if (meal == "") {
       Alert.alert("Meal/COURSES EMPTY", "Please enter some meal/courses");
     }
-    dispatch(setMoreThingsToAvoid({ meal: meal, ingredients: ingredients }));
+    dispatch(
+      setMoreThingsToAvoid({
+        meal: meal,
+        ingredients: ingredients,
+        checked: checked,
+      })
+    ).then(() => {
+      navigation.navigate("MicroNutrientsScreen");
+    });
   };
   return (
     <>
@@ -127,7 +144,7 @@ const SignUp9 = () => {
               }}
             >
               <TouchableOpacity
-                onPress={() => navigation.navigate("MicroNutrientsScreen")}
+                onPress={() => validateData()}
                 style={globalstyles.buttonStyle}
               >
                 <Text style={globalstyles.buttonText}>Next</Text>

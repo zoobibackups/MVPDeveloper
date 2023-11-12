@@ -12,12 +12,34 @@ import {
   SET_SCHEDULE,
   SET_TIME_IN_KITCHEN,
   SET_BUDGET,
+  SET_USER_SIGNED_IN,
+  SET_USER_LOGGED_IN,
+  SET_ACCOUNT_TYPE,
+  SET_TRAIN_USER_SIGNED_IN,
+  SET_TRAIN_AGE_HEIGHT_WEIGHT,
+  SET_TRAIN_USER_LOGGED_IN,
+  SET_TRAIN_WORK_OUT,
+  SET_TRAIN_FINAL_GOAL,
+  SET_TRAIN_ESTIMATED_TARGET_DATE,
+  SET_TRAIN_TIME_SPENT_EXERCISING,
+  SET_TRAIN_WORKOUT_PLACE,
+  SET_TRAIN_IS_CURRENTLY_DOING_SPORTS,
+  SET_TRAIN_SPORTS_NAME,
+  SET_TRAIN_SPORTS_TIME,
+  SET_TRAIN_IS_TRUSTS,
+  SET_TRAIN_PREFERRED_WORKOUT,
+  SET_TRAIN_PREFERRED_WORKOUT_AVOID,
+  SET_TRAIN_EQUIPMENTS,
+  SET_TRAIN_EXERCISE,
+  SET_TRAIN_WORKOUT_DAYS
 } from "../types";
 
 const initialState = {
   accounttype: null,
   user: null,
   accessToken: null,
+  isLoggedIn: false,
+  refreshToken: null,
   foodMetaData: {
     age: null,
     height: null,
@@ -47,14 +69,189 @@ const initialState = {
     timeInKitchen: null,
     budget: null,
   },
-  whichStack: "LandingStack",
+  trainingMetaData: {
+    age: null,
+    height:null,
+    weight: null,
+    gender:null,
+    workout: null,
+    finalGoal: null,
+    estimatedTargetDate:null,
+    weightPerWeek: null,
+    timeSpendExercising: null,
+    workoutPlace: null,
+    isCurrentlyDoSport: true,
+    sportsName:null,
+    sportsPracticeTime:null,
+    isTrustus: true,
+    preferedWorkout:null,
+    avoidWorkout:null,
+    equipments:null,
+    exercises: null,
+    isNeedSchedule: false,
+    workourdays:null
+  },
+  whichStack: null,
 };
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_TRAIN_WORK_OUT:{
+      return{
+        ...state,
+        trainingMetaData: {
+          ...state.trainingMetaData,
+          workout:action.payload.value
+        }
+      }
+    }
+    case SET_TRAIN_FINAL_GOAL:{
+      return{
+        ...state,
+        trainingMetaData: {
+          ...state.trainingMetaData,
+          finalGoal:action.payload.value
+        }
+      }
+    }
+    case SET_TRAIN_ESTIMATED_TARGET_DATE:{
+      return{
+        ...state,
+        trainingMetaData:{
+          ...state.trainingMetaData,
+          estimatedTargetDate:action.payload.estimatedTargetDate,
+          weightPerWeek:action.payload.weightPerWeek,
+        }
+      }
+    }
+    case SET_TRAIN_TIME_SPENT_EXERCISING:{
+      return{
+        ...state,
+        trainingMetaData:{
+          ...state.trainingMetaData,
+          timeSpendExercising:action.payload.value
+        }
+      }
+    }
+    case SET_TRAIN_WORKOUT_PLACE:{
+      return{
+        ...state,
+        trainingMetaData:{
+          ...state.trainingMetaData,
+          workoutPlace:action.payload.value
+        }
+      }
+    }
+    case SET_TRAIN_IS_CURRENTLY_DOING_SPORTS:{
+      return{
+        ...state,
+        trainingMetaData:{
+          ...state.trainingMetaData,
+          isCurrentlyDoSport:action.payload.value
+        }
+      }
+    }
+    case SET_TRAIN_SPORTS_NAME:{
+      return{
+        ...state,
+        trainingMetaData:{
+          ...state.trainingMetaData,
+          sportsName:action.payload.value
+        }
+      }
+    }
+    case SET_TRAIN_SPORTS_TIME:{
+      return{
+        ...state,
+        trainingMetaData:{
+          ...state.trainingMetaData,
+          sportsPracticeTime:action.payload.value
+        }
+      }
+    }
+    case SET_TRAIN_IS_TRUSTS:{
+      return{
+        ...state,
+        trainingMetaData:{
+          ...state.trainingMetaData,
+          isTrustus:action.payload.value
+        }
+      }
+    }
+    case SET_TRAIN_PREFERRED_WORKOUT:{
+      return{
+        ...state,
+        trainingMetaData:{
+          ...state.trainingMetaData,
+          preferedWorkout:action.payload.value
+        }
+      }
+    }
+    case SET_TRAIN_PREFERRED_WORKOUT_AVOID:{
+      return{
+        ...state,
+        trainingMetaData:{
+          ...state.trainingMetaData,
+          avoidWorkout:action.payload.value
+        }
+      }
+    }
+    case SET_TRAIN_EQUIPMENTS:{
+      return{
+        ...state,
+        trainingMetaData:{
+          ...state.trainingMetaData,
+          equipments:action.payload.value
+        }
+      }
+    }
+    case SET_TRAIN_EXERCISE:{
+      return{
+        ...state,
+        trainingMetaData:{
+          ...state.trainingMetaData,
+          exercises:action.payload.value
+        }
+      }
+    }
+    case SET_TRAIN_WORKOUT_DAYS:{
+      return{
+        ...state,
+        trainingMetaData:{
+          ...state.trainingMetaData,
+          isNeedSchedule:action.payload.isNeedSchedule,
+          workourdays:action.payload.workourdays
+        }
+      }
+    }  
     case SET_STACK: {
       return {
         ...state,
-        whichStack: action.payload,
+        whichStack: action.payload.whichStack,
+        accounttype: action.payload.accounttype,
+      };
+    }
+    case SET_ACCOUNT_TYPE: {
+      return {
+        ...state,
+        accounttype: action.payload,
+      };
+    }
+    case SET_USER_LOGGED_IN: {
+      return {
+        ...state,
+        user: action.payload.user,
+        accessToken: action.payload.accessToken,
+        refreshToken: action.payload.refreshToken,
+        isLoggedIn: true,
+      };
+    }
+    case SET_USER_SIGNED_IN: {
+      return {
+        ...state,
+        user: action.payload.user,
+        accessToken: action.payload.accessToken,
+        refreshToken: action.payload.refreshToken,
+        isLoggedIn: true,
       };
     }
     case SET_AGE_HEIGHT_WEIGHT: {
@@ -74,32 +271,16 @@ const userReducer = (state = initialState, action) => {
         ...state,
         foodMetaData: {
           ...state.foodMetaData,
-          workout: action.payload.value
+          workout: action.payload.value,
         },
       };
-      
     }
     case SET_GOAL: {
       return {
         ...state,
         foodMetaData: {
-          ...foodMetaData,
-          age: action.payload.age,
-          height: action.payload.height,
-          weight: action.payload.weight,
-          gender: action.payload.gender,
-        },
-      };
-    }
-    case DIETRY_PREFERENCES: {
-      return {
-        ...state,
-        foodMetaData: {
-          ...foodMetaData,
-          age: action.payload.age,
-          height: action.payload.height,
-          weight: action.payload.weight,
-          gender: action.payload.gender,
+          ...state.foodMetaData,
+          finalGoal: action.payload.value,
         },
       };
     }
@@ -107,11 +288,19 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         foodMetaData: {
-          ...foodMetaData,
-          age: action.payload.age,
-          height: action.payload.height,
-          weight: action.payload.weight,
-          gender: action.payload.gender,
+          ...state.foodMetaData,
+          goalWeight: action.payload.weight,
+          goalAchieveTime: action.payload.time,
+        },
+      };
+    }
+    case DIETRY_PREFERENCES: {
+      return {
+        ...state,
+        foodMetaData: {
+          ...state.foodMetaData,
+          dietPrefrence: action.payload.value,
+          isFollowDiet: action.payload.isNeedSchedule,
         },
       };
     }
@@ -119,11 +308,8 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         foodMetaData: {
-          ...foodMetaData,
-          age: action.payload.age,
-          height: action.payload.height,
-          weight: action.payload.weight,
-          gender: action.payload.gender,
+          ...state.foodMetaData,
+          favoriteCuisines: action.payload.value,
         },
       };
     }
@@ -131,11 +317,10 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         foodMetaData: {
-          ...foodMetaData,
-          age: action.payload.age,
-          height: action.payload.height,
-          weight: action.payload.weight,
-          gender: action.payload.gender,
+          ...state.foodMetaData,
+          isWantToAvoid: action.payload.checked,
+          avoidIngredients: action.payload.ingredients,
+          avoidMeals: action.payload.meal,
         },
       };
     }
@@ -143,11 +328,10 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         foodMetaData: {
-          ...foodMetaData,
-          age: action.payload.age,
-          height: action.payload.height,
-          weight: action.payload.weight,
-          gender: action.payload.gender,
+          ...state.foodMetaData,
+          isWantToSeeMore: action.payload.checked,
+          seeMoreIngredients: action.payload.ingredients,
+          seeMoreMeals: action.payload.meal,
         },
       };
     }
@@ -155,11 +339,10 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         foodMetaData: {
-          ...foodMetaData,
-          age: action.payload.age,
-          height: action.payload.height,
-          weight: action.payload.weight,
-          gender: action.payload.gender,
+          ...state.foodMetaData,
+          carbohydrates: action.payload.carbohydrates,
+          protein: action.payload.protine,
+          fats: action.payload.fats,
         },
       };
     }
@@ -167,11 +350,12 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         foodMetaData: {
-          ...foodMetaData,
-          age: action.payload.age,
-          height: action.payload.height,
-          weight: action.payload.weight,
-          gender: action.payload.gender,
+          ...state.foodMetaData,
+          lunch: action.payload.lunch,
+          snack: action.payload.snack,
+          breakfast: action.payload.breakfast,
+          dinner: action.payload.dinner,
+          isNeedSchedule: action.payload.isNeedSchedule,
         },
       };
     }
@@ -179,11 +363,8 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         foodMetaData: {
-          ...foodMetaData,
-          age: action.payload.age,
-          height: action.payload.height,
-          weight: action.payload.weight,
-          gender: action.payload.gender,
+          ...state.foodMetaData,
+          timeInKitchen: action.payload.value,
         },
       };
     }
@@ -191,7 +372,34 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         foodMetaData: {
-          ...foodMetaData,
+          ...state.foodMetaData,
+          budget: action.payload.value,
+        },
+      };
+    }
+    case SET_TRAIN_USER_LOGGED_IN: {
+      return {
+        ...state,
+        user: action.payload.user,
+        accessToken: action.payload.accessToken,
+        refreshToken: action.payload.refreshToken,
+        isLoggedIn: true,
+      };
+    }
+    case SET_TRAIN_USER_SIGNED_IN: {
+      return {
+        ...state,
+        user: action.payload.user,
+        accessToken: action.payload.accessToken,
+        refreshToken: action.payload.refreshToken,
+        isLoggedIn: true,
+      };
+    }
+    case SET_TRAIN_AGE_HEIGHT_WEIGHT: {
+      return {
+        ...state,
+        trainingMetaData: {
+          ...state.trainingMetaData,
           age: action.payload.age,
           height: action.payload.height,
           weight: action.payload.weight,
@@ -199,6 +407,7 @@ const userReducer = (state = initialState, action) => {
         },
       };
     }
+
     default:
       return state;
   }

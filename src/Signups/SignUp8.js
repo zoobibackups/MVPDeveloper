@@ -6,7 +6,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import CheckboxSquare from "../Components/CheckBoxSquare";
@@ -17,7 +17,7 @@ import { globalstyles } from "../styles/globalestyles";
 import { setThingsToAvoid } from "../store/actions/userActions";
 import { useDispatch } from "react-redux";
 const SignUp8 = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const navigation = useNavigation();
   const [ingredients, setIngredients] = useState("");
@@ -25,16 +25,32 @@ const SignUp8 = () => {
   const [meal, setMeal] = useState("");
 
   const validateData = () => {
-    if(checked){
-
-    }else if(ingredients == ""){
-      Alert.alert("INGREDIENTS EMPTY", "Please enter some ingredients")
-      return
-    }else if(meal == ""){
-      Alert.alert("Meal/COURSES EMPTY", "Please enter some meal/courses")
+    if (checked) {
+      dispatch(
+        setThingsToAvoid({
+          meal: meal,
+          ingredients: ingredients,
+          checked: checked,
+        })
+      ).then(() => {
+        navigation.navigate("SignUp9");
+      });
+    } else if (ingredients == "") {
+      Alert.alert("INGREDIENTS EMPTY", "Please enter some ingredients");
+      return;
+    } else if (meal == "") {
+      Alert.alert("Meal/COURSES EMPTY", "Please enter some meal/courses");
     }
-    dispatch(setThingsToAvoid({meal:meal, ingredients:ingredients}))
-  }
+    dispatch(
+      setThingsToAvoid({
+        meal: meal,
+        ingredients: ingredients,
+        checked: checked,
+      })
+    ).then(() => {
+      navigation.navigate("SignUp9");
+    });
+  };
   return (
     <>
       <KeyBoardHandle>
@@ -118,7 +134,7 @@ const SignUp8 = () => {
 
             <View style={styles.buttonContianer}>
               <TouchableOpacity
-                onPress={() => navigation.navigate("SignUp9")}
+                onPress={() => validateData()}
                 style={globalstyles.buttonStyle}
               >
                 <Text style={globalstyles.buttonText}>Next</Text>

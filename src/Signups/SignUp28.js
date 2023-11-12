@@ -1,21 +1,29 @@
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/core";
-import {
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View
-} from "react-native";
+import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { RFValue } from "react-native-responsive-fontsize";
 import CustomHeader from "../Components/CustomHeader";
 import KeyBoardHandle from "../Components/KeyboardHandle";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
+import { useDispatch } from "react-redux";
+import { setTrainEquipments } from "../store/actions/userActions";
 
 const SignUp28 = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
-  const [weight, setWeight] = useState("");
+  const [equipments, setEquipments] = useState("");
+  const validateData = () => {
+    if ((equipments == "")) {
+      Alert.alert("ERROR", "Pleasse enter equipments");
+      return;
+    }
+
+    dispatch(setTrainEquipments({ value: equipments })).then(() => {
+      navigation.navigate("SignUp29");
+    });
+  };
   return (
     <>
       <KeyBoardHandle>
@@ -40,14 +48,16 @@ const SignUp28 = () => {
               <Text style={globalstyles.inputLabel}>Equipment:</Text>
               <TextInput
                 style={globalstyles.textInputWithOutIcon}
-                onChangeText={(text) => setWeight(text)}
-                value={weight}
+                onChangeText={(text) => setEquipments(text)}
+                value={equipments}
                 placeholder="Dumbells, Kettelbells......."
                 placeholderTextColor="grey"
               />
             </View>
 
-            <View style={{ paddingTop: 25, width: getWidth(90), marginLeft: 5 }}>
+            <View
+              style={{ paddingTop: 25, width: getWidth(90), marginLeft: 5 }}
+            >
               <Text
                 style={{
                   ...textStyles.lightText,
@@ -80,7 +90,7 @@ const SignUp28 = () => {
               }}
             >
               <TouchableOpacity
-                onPress={() => navigation.navigate("SignUp29")}
+                onPress={() => validateData()}
                 style={globalstyles.buttonStyle}
               >
                 <Text style={globalstyles.buttonText}>Next</Text>

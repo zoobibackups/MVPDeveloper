@@ -4,7 +4,8 @@ import {
   Platform,
   StyleSheet,
   Text,
-  TouchableOpacity,Alert,
+  TouchableOpacity,
+  Alert,
   View,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
@@ -17,7 +18,7 @@ const elevationValue = Platform.OS === "android" ? 0 : 5;
 import { setGoal } from "../store/actions/userActions";
 import { useDispatch } from "react-redux";
 const SignUp13 = () => {
- const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
   const [checked1, setChecked1] = useState(false);
   const [checked2, setChecked2] = useState(false);
@@ -26,26 +27,46 @@ const SignUp13 = () => {
   const navigation = useNavigation();
 
   const validateData = () => {
-    if(checked || checked1 || checked2 || checked3 || checked4){
-      if(checked){
-        dispatch(setGoal({value:"Lose Weight"})) // 
+    if (checked || checked1 || checked2 || checked3 || checked4) {
+      if (checked) {
+        dispatch(setGoal({ value: "Lose Weight", goalWeight: true })).then(
+          () => {
+            navigation.navigate("SignUp14");
+          }
+        );
       }
-      if(checked1){
-        dispatch(setGoal({value:"Gain Weight"}))
+      if (checked1) {
+        dispatch(setGoal({ value: "Gain Weight", goalWeight: true })).then(
+          () => {
+            navigation.navigate("SignUp14");
+          }
+        );
       }
-      if(checked2){
-        dispatch(setGoal({value:"Maintain Weight"}))
+      if (checked2) {
+        dispatch(setGoal({ value: "Maintain Weight", goalWeight: true })).then(
+          () => {
+            navigation.navigate("SignUp14");
+          }
+        );
       }
-      if(checked3){
-        dispatch(setGoal({value:"Live healthier"}))
+      if (checked3) {
+        dispatch(setGoal({ value: "Live healthier", goalWeight: true })).then(
+          () => {
+            navigation.navigate("SignUp14");
+          }
+        );
       }
-      if(checked4){
-        dispatch(setGoal({value:"Use the app without goal"}))
+      if (checked4) {
+        dispatch(
+          setGoal({ value: "Use the app without goal", goalWeight: false })
+        ).then(() => {
+          navigation.navigate("SignUp14");
+        });
       }
-    }else{
-      Alert.alert("NO OPTION SELECTED", "Please select an option")
+    } else {
+      Alert.alert("NO OPTION SELECTED", "Please select an option");
     }
-  }
+  };
   return (
     <LinearGradient
       style={{
@@ -152,7 +173,7 @@ const SignUp13 = () => {
       </View>
       <View style={styles.buttonContianer}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("SignUp14")}
+          onPress={() => validateData()}
           style={globalstyles.buttonStyle}
         >
           <Text style={globalstyles.buttonText}>Next</Text>

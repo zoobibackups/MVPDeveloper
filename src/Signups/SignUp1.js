@@ -28,12 +28,15 @@ import {
   isValidPassword,
   isValidPhoneNumber,
 } from "../validation/commonValidation";
+import { setUserSignUp } from "../store/actions/userActions";
+import { useDispatch } from "react-redux";
 const SignUp1 = () => {
+  const dispatch = useDispatch()
   const [email, setEmail] = useState(
-    __DEV__ ? "engr3.aftabufaq@gmail.com" : ""
+    __DEV__ ? "dr.aftabufaq@gmail.com" : ""
   );
   const [name, setName] = useState(__DEV__ ? "Aftab Amin" : "");
-  const [username, setUserName] = useState(__DEV__ ? "aftabameen1920" : "");
+  const [username, setUserName] = useState(__DEV__ ? "draftabameen" : "");
   const [number, setNumber] = useState(__DEV__ ? "923408901078" : "");
   const [passowrd, setPassword] = useState(__DEV__ ? "Tikt0k@1" : "");
   const [show, setShow] = useState(true);
@@ -43,6 +46,7 @@ const SignUp1 = () => {
   );
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
+
   const validateData = () => {
     if (!isValidName(name)) {
       Alert.alert("INVALID NAME", "Please enter a valid name");
@@ -74,17 +78,6 @@ const SignUp1 = () => {
     setLoading(true);
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    console.log({
-      password1: passowrd,
-      password2: confirmPassword,
-      name: name,
-      username: username,
-      phone: number,
-      activeClient: 5,
-      accountType: "Food",
-      email: email,
-      referredBy: "aftabameen",
-    });
     var raw = JSON.stringify({
       password1: passowrd,
       password2: confirmPassword,
@@ -106,14 +99,20 @@ const SignUp1 = () => {
 
     fetch(`${BASE_URL}api/auth/sign-up`, requestOptions)
       .then((response) => {
-        setLoading(false)
-        if (response.status != 200) {
+        console.log(response.status);
+        if (response.status != 201) {
+          setLoading(false)
           response.json().then((data) => {
-            console.log(data ,"ERROR");
+           // console.log(data);
+            Alert.alert("Error while siging In",data.message);
           });
         } else {
           response.json().then((data) => {
-            console.log(data, "SUCCESS");
+           
+            dispatch(setUserSignUp(data.data)).then((data) => {
+              setLoading(false)
+              navigation.navigate("SignUp2")
+            })
           });
         }
       })
@@ -254,8 +253,8 @@ const SignUp1 = () => {
           <View style={{ paddingTop: 50, alignItems: "center" }}>
             <TouchableOpacity
               disabled={loading}
-             // onPress={() => validateData()}
-             onPress={() => navigation.navigate("SignUp2")}
+              onPress={() => validateData()}
+             //onPress={() => navigation.navigate("SignUp2")}
               style={globalstyles.buttonStyle}
             >
               {loading ? (

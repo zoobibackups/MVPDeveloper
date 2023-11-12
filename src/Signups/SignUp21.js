@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/core";
 import {
   Platform,
+  Alert,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -13,19 +14,48 @@ import Checkbox from "../Components/CheckBox";
 import CustomHeader from "../Components/CustomHeader";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
+import { useDispatch } from "react-redux";
+import { setTrainFinalGoal } from "../store/actions/userActions";
 const elevationValue = Platform.OS === "android" ? 0 : 5;
 
 const SignUp21 = () => {
-  const [confirmPassword, setConfirmPassowrd] = useState("");
+  const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
   const [checked1, setChecked1] = useState(false);
   const [checked2, setChecked2] = useState(false);
   const [checked3, setChecked3] = useState(false);
   const [checked4, setChecked4] = useState(false);
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const [check1, setCheck1] = useState(false);
   const navigation = useNavigation();
 
+  const validateData = () => {
+    if (!checked && !checked1 && !checked2 && !checked3 && !checked4) {
+      Alert.alert("NO OPTION SELECTED", "Please select an option");
+      return;
+    }
+    if (checked) {
+      dispatch(setTrainFinalGoal({ value: "Lose Weight" })).then((data) => {
+        navigation.navigate("SignUp25");
+      });
+    } else if (checked1) {
+      dispatch(setTrainFinalGoal({ value: "Gain Weight" })).then((data) => {
+        navigation.navigate("SignUp25");
+      });
+    } else if (checked2) {
+      dispatch(setTrainFinalGoal({ value: "Gain Muscle" })).then((data) => {
+        navigation.navigate("SignUp25");
+      });
+    } else if (checked3) {
+      dispatch(setTrainFinalGoal({ value: "Maintain Weight" })).then((data) => {
+        navigation.navigate("SignUp25");
+      });
+    } else if (checked4) {
+      dispatch(setTrainFinalGoal({ value: "Use without a goal" })).then((data) => {
+        navigation.navigate("SignUp25");
+      });
+    } else {
+      Alert.alert("NO OPTION SELECTED", "Please select an option");
+    }
+  };
   return (
     <LinearGradient
       style={{
@@ -62,7 +92,7 @@ const SignUp21 = () => {
           </LinearGradient>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => setChecked2(!checked2)}>
+        <TouchableOpacity onPress={() => setChecked1(!checked1)}>
           <LinearGradient
             colors={["#FDFFF4", "#BBC1AD"]}
             start={{ x: 0, y: 0 }}
@@ -71,15 +101,15 @@ const SignUp21 = () => {
           >
             <Text style={styles.selectItemText}>Gain Weight</Text>
             <Checkbox
-              isChecked={checked2}
+              isChecked={checked1}
               onPress={() => {
-                setChecked2(!checked2);
+                setChecked1(!checked1);
               }}
             />
           </LinearGradient>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => setChecked1(!checked1)}>
+        <TouchableOpacity onPress={() => setChecked2(!checked1)}>
           <LinearGradient
             colors={["#FDFFF4", "#BBC1AD"]}
             start={{ x: 0, y: 0 }}
@@ -88,9 +118,9 @@ const SignUp21 = () => {
           >
             <Text style={styles.selectItemText}>Gain Muscle</Text>
             <Checkbox
-              isChecked={checked1}
+              isChecked={checked2}
               onPress={() => {
-                setChecked1(!checked1);
+                setChecked2(!checked2);
               }}
             />
           </LinearGradient>
@@ -132,7 +162,7 @@ const SignUp21 = () => {
       </View>
       <View style={styles.buttonContianer}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("SignUp25")}
+          onPress={() => validateData()}
           style={globalstyles.buttonStyle}
         >
           <Text style={globalstyles.buttonText}>Next</Text>
@@ -195,4 +225,3 @@ const styles = StyleSheet.create({
 });
 
 export default SignUp21;
-

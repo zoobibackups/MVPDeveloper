@@ -1,9 +1,9 @@
 import { useNavigation } from "@react-navigation/core";
 import React, { useState } from "react";
 import {
+  Alert,
   Platform,
   StyleSheet,
-  ScrollView,
   Text,
   TouchableOpacity,
   View,
@@ -14,17 +14,38 @@ import Checkbox from "../Components/CheckBox";
 import CustomHeader from "../Components/CustomHeader";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
+import { useDispatch } from "react-redux";
+import { setTrainPreferredWorkOut } from "../store/actions/userActions";
 
 const SignUp26 = () => {
-  const [confirmPassword, setConfirmPassowrd] = useState("");
+  const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
   const [checked1, setChecked1] = useState(false);
   const [checked2, setChecked2] = useState(false);
   const [checked3, setChecked3] = useState(false);
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const [check1, setCheck1] = useState(false);
   const navigation = useNavigation();
 
+  const validateData = () => {
+    if (checked) {
+      dispatch(setTrainPreferredWorkOut({ value: "Cardio" })).then(() => {
+        navigation.navigate("SignUp27");
+      });
+    } else if (checked1) {
+      dispatch(setTrainPreferredWorkOut({ value: "Hi-intensity interval training" })).then(() => {
+        navigation.navigate("SignUp27");
+      });
+    } else if (checked2) {
+      dispatch(setTrainPreferredWorkOut({ value: "Weight lifting" })).then(() => {
+        navigation.navigate("SignUp27");
+      });
+    } else if (checked3) {
+      dispatch(setTrainPreferredWorkOut({ value: "Home workouts" })).then(() => {
+        navigation.navigate("SignUp27");
+      });
+    } else {
+      Alert.alert("NO OPTION SELECTED", "Please select an option");
+    }
+  };
   return (
     <LinearGradient
       style={{
@@ -119,7 +140,7 @@ const SignUp26 = () => {
 
       <View style={globalstyles.buttonContianer}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("SignUp27")}
+          onPress={() => validateData()}
           style={globalstyles.buttonStyle}
         >
           <Text style={globalstyles.buttonText}>Next</Text>

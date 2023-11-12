@@ -1,6 +1,8 @@
 import { useNavigation } from "@react-navigation/core";
 import React, { useState } from "react";
 import {
+  ActivityIndicator,
+  Alert,
   StyleSheet,
   Text,
   TextInput,
@@ -18,17 +20,69 @@ import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
 import fonts from "../constants/fonts";
 import theme from "../constants/theme";
-import Modal from "react-native-modal"
+import Modal from "react-native-modal";
+import { useSelector } from "react-redux";
 const SignUp12 = () => {
   const navigation = useNavigation();
-  const [ingredients, setIngredients] = useState("");
-  const [checked, setChecked] = useState(false);
-  const [age, setAge] = useState("");
-  const [meal, setMeal] = useState("");
+  const { foodMetaData, accessToken } = useSelector(
+    (state) => state.userReducer
+  );
+  const [goal_mission, setGoalMission] = useState(
+    `${foodMetaData.finalGoal}, ${foodMetaData.goalWeight}, ${foodMetaData.goalAchieveTime}`
+  );
+
+  const [meal, setMeal] = useState(
+    `${foodMetaData.avoidIngredients},${foodMetaData.avoidMeals}, `
+  );
+  const [diet, setDiet] = useState(
+    `${foodMetaData.dietPrefrence},${foodMetaData.seeMoreIngredients}, ${foodMetaData.seeMoreMeals},${foodMetaData.favoriteCuisines}`
+  );
   const [modalVisible, setModalVisible] = useState(false);
   const [focus, setFocus] = useState(false);
   const customstyle = focus ? styles.change : styles.noChange;
+  const [loading, setLoading] = useState(false);
+  const createFoodMetaData = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", `Bearer ${accessToken}`);
 
+    var requestOptions = {
+      method: "PATCH",
+      headers: myHeaders,
+      body: JSON.stringify({
+        ...foodMetaData,
+        height: Number(foodMetaData.height),
+        age: Number(foodMetaData.age),
+        weight:Number(foodMetaData.weight),
+        carbohydrates:`${foodMetaData.carbohydrates}`,
+        protein:`${foodMetaData.protein}`,
+        fats:`${foodMetaData.fats}`,
+      }),
+      redirect: "follow",
+    };
+    setLoading(true);
+    fetch(
+      "https://as-dev.code-freaks.com/mvp/api/users/update/food/metadata",
+      requestOptions
+    )
+      .then((result) => {
+        if (result.status == 200) {
+          Alert.alert("SUCCESS", "Food schedule has been created", [
+            {
+              text: "Login to Continue",
+              onPress: () => navigation.navigate("LogIn2"),
+            },
+          ]);
+        } else {
+          result.json().then((data) => {
+            setLoading(false);
+            console.log(data);
+            Alert.alert("ERROR IN CREATE SCHEDULE");
+          });
+        }
+      })
+      .catch((error) => console.log("error", error));
+  };
   return (
     <>
       <KeyBoardHandle>
@@ -61,30 +115,28 @@ const SignUp12 = () => {
               <Text style={globalstyles.inputLabel}>Goal / Mission:</Text>
               <TextInput
                 style={globalstyles.textInputWithOutIcon}
-                onChangeText={(text) => setIngredients(text)}
-                value={ingredients}
+                editable={false}
+                value={goal_mission}
                 placeholder="Live healthier"
                 placeholderTextColor="grey"
-                // keyboardType="numeric"
               />
             </View>
             <View style={globalstyles.inputVerticalContainer}>
               <Text style={globalstyles.inputLabel}>Avoid:</Text>
               <TextInput
                 style={globalstyles.textInputWithOutIcon}
-                onChangeText={(text) => setMeal(text)}
                 value={meal}
+                editable={false}
                 placeholder="Fish, Beans"
                 placeholderTextColor="grey"
-                // keyboardType="numeric"
               />
             </View>
             <View style={globalstyles.inputVerticalContainer}>
               <Text style={globalstyles.inputLabel}>Diet:</Text>
               <TextInput
                 style={globalstyles.textInputWithOutIcon}
-                onChangeText={(text) => setIngredients(text)}
-                value={ingredients}
+                editable={false}
+                value={diet}
                 placeholder="Vegetarian"
                 placeholderTextColor="grey"
               />
@@ -114,157 +166,166 @@ const SignUp12 = () => {
           </View>
           <View style={globalstyles.buttonContianer}>
             <TouchableOpacity
-              onPress={() => navigation.navigate("Home2")}
+              onPress={() => {
+                //navigation.navigate("Home2")
+                createFoodMetaData();
+              }}
               style={globalstyles.buttonStyle}
             >
-              <Text style={globalstyles.buttonText}>Next</Text>
+              {loading ? (
+                <ActivityIndicator color={"#ffff"} />
+              ) : (
+                <Text style={globalstyles.buttonText}>Next</Text>
+              )}
             </TouchableOpacity>
           </View>
         </LinearGradient>
       </KeyBoardHandle>
-      <Modal style={{margin:0}} transparent={true} isVisible={modalVisible}>
+      <Modal style={{ margin: 0 }} transparent={true} isVisible={modalVisible}>
         <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
-        
-            <View style={styles.centeredView}>
-              <LinearGradient
-                style={styles.modalView}
-                colors={["#FDFFF4", "#BBC1AD"]}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 0.8, y: 0 }}
-              >
-                <View style={{ borderColor: "red", paddingTop: 5 }}>
-                  <View style={styles.topBar} />
-                </View>
-                <View style={styles.rowStyleWithTextAndInput}>
-                  <Text
-                    style={{
-                      ...textStyles.simpleText,
-                      lineHeight: RFValue(13) * 1.8,
-                      fontSize: RFValue(13),
-                      color: "grey",
-                      fontWeight: "500",
-                    }}
-                  >
-                    Breakfast
-                  </Text>
-
-                  <TouchableOpacity style={customstyle}>
-                    <TextInput
-                      onPressIn={() => setFocus(true)}
-                      style={styles.inputStyle}
-                      placeholder="08:00"
-                      placeholderTextColor="black"
-                    />
-                  </TouchableOpacity>
-                </View>
-                <View style={styles.rowStyleWithTextAndInput}>
-                  <Text
-                    style={{
-                      ...textStyles.simpleText,
-                      lineHeight: RFValue(13) * 1.8,
-                      fontSize: RFValue(13),
-                      color: "grey",
-                      fontWeight: "500",
-                    }}
-                  >
-                    Lunch
-                  </Text>
-
-                  <TouchableOpacity style={customstyle}>
-                    <TextInput
-                      onPressIn={() => setFocus(true)}
-                      style={styles.inputStyle}
-                      placeholder="12:30"
-                      placeholderTextColor="black"
-                    />
-                  </TouchableOpacity>
-                </View>
-                <View style={styles.rowStyleWithTextAndInput}>
-                  <Text
-                    style={{
-                      ...textStyles.simpleText,
-                      lineHeight: RFValue(13) * 1.8,
-                      fontSize: RFValue(13),
-                      color: "grey",
-                      fontWeight: "500",
-                    }}
-                  >
-                    Snack
-                  </Text>
-                  <TouchableOpacity style={customstyle}>
-                    <TextInput
-                      onPressIn={() => setFocus(true)}
-                      style={styles.inputStyle}
-                      placeholder="15:20"
-                      placeholderTextColor="black"
-                    />
-                  </TouchableOpacity>
-                </View>
-                <View style={styles.rowStyleWithTextAndInput}>
-                  <Text
-                    style={{
-                      ...textStyles.simpleText,
-                      lineHeight: RFValue(13) * 1.8,
-                      fontSize: RFValue(13),
-                      color: "grey",
-                      fontWeight: "500",
-                    }}
-                  >
-                    Dinner
-                  </Text>
-
-                  <TouchableOpacity style={customstyle}>
-                    <TextInput
-                      onPressIn={() => setFocus(true)}
-                      style={styles.inputStyle}
-                      placeholder="19:00"
-                      placeholderTextColor="black"
-                    />
-                  </TouchableOpacity>
-                </View>
-                <View
+          <View style={styles.centeredView}>
+            <LinearGradient
+              style={styles.modalView}
+              colors={["#FDFFF4", "#BBC1AD"]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 0.8, y: 0 }}
+            >
+              <View style={{ borderColor: "red", paddingTop: 5 }}>
+                <View style={styles.topBar} />
+              </View>
+              <View style={styles.rowStyleWithTextAndInput}>
+                <Text
                   style={{
-                    ...globalstyles.buttonContianer,
-                    marginTop: RFValue(20),
-                    flexDirection: focus ? "row" : "column",
-                    justifyContent: "space-between",
+                    ...textStyles.simpleText,
+                    lineHeight: RFValue(13) * 1.8,
+                    fontSize: RFValue(13),
+                    color: "grey",
+                    fontWeight: "500",
                   }}
                 >
-                  {focus && (
-                    <TouchableOpacity
-                      onPress={() => {
-                        setFocus(false), setModalVisible(false);
-                      }}
-                      style={{
-                        ...globalstyles.buttonStyle,
-                        width: getWidth(40),
-                        backgroundColor: theme.transparentColor,
-                      }}
-                    >
-                      <Text
-                        style={{
-                          ...globalstyles.buttonText,
-                          color: theme.blueColor,
-                        }}
-                      >
-                        Cancel
-                      </Text>
-                    </TouchableOpacity>
-                  )}
+                  Breakfast
+                </Text>
+
+                <TouchableOpacity style={customstyle}>
+                  <TextInput
+                    onPressIn={() => setFocus(true)}
+                    style={styles.inputStyle}
+                    value={foodMetaData.breakfast}
+                    placeholder="08:00"
+                    placeholderTextColor="black"
+                  />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.rowStyleWithTextAndInput}>
+                <Text
+                  style={{
+                    ...textStyles.simpleText,
+                    lineHeight: RFValue(13) * 1.8,
+                    fontSize: RFValue(13),
+                    color: "grey",
+                    fontWeight: "500",
+                  }}
+                >
+                  Lunch
+                </Text>
+
+                <TouchableOpacity style={customstyle}>
+                  <TextInput
+                    onPressIn={() => setFocus(true)}
+                    style={styles.inputStyle}
+                    value={foodMetaData.lunch}
+                    placeholder="12:30"
+                    placeholderTextColor="black"
+                  />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.rowStyleWithTextAndInput}>
+                <Text
+                  style={{
+                    ...textStyles.simpleText,
+                    lineHeight: RFValue(13) * 1.8,
+                    fontSize: RFValue(13),
+                    color: "grey",
+                    fontWeight: "500",
+                  }}
+                >
+                  Snack
+                </Text>
+                <TouchableOpacity style={customstyle}>
+                  <TextInput
+                    onPressIn={() => setFocus(true)}
+                    style={styles.inputStyle}
+                    placeholder="15:20"
+                    value={foodMetaData.snack}
+                    placeholderTextColor="black"
+                  />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.rowStyleWithTextAndInput}>
+                <Text
+                  style={{
+                    ...textStyles.simpleText,
+                    lineHeight: RFValue(13) * 1.8,
+                    fontSize: RFValue(13),
+                    color: "grey",
+                    fontWeight: "500",
+                  }}
+                >
+                  Dinner
+                </Text>
+
+                <TouchableOpacity style={customstyle}>
+                  <TextInput
+                    onPressIn={() => setFocus(true)}
+                    style={styles.inputStyle}
+                    value={foodMetaData.dinner}
+                    placeholder="19:00"
+                    placeholderTextColor="black"
+                  />
+                </TouchableOpacity>
+              </View>
+              <View
+                style={{
+                  ...globalstyles.buttonContianer,
+                  marginTop: RFValue(20),
+                  flexDirection: focus ? "row" : "column",
+                  justifyContent: "space-between",
+                }}
+              >
+                {focus && (
                   <TouchableOpacity
                     onPress={() => {
                       setFocus(false), setModalVisible(false);
                     }}
-                    style={{ ...globalstyles.buttonStyle, width: getWidth(40) }}
+                    style={{
+                      ...globalstyles.buttonStyle,
+                      width: getWidth(40),
+                      backgroundColor: theme.transparentColor,
+                    }}
                   >
-                    <Text style={globalstyles.buttonText}>
-                      {focus ? "Save" : "Edit"}
+                    <Text
+                      style={{
+                        ...globalstyles.buttonText,
+                        color: theme.blueColor,
+                      }}
+                    >
+                      Cancel
                     </Text>
                   </TouchableOpacity>
-                </View>
-              </LinearGradient>
-            </View>
-         
+                )}
+                <TouchableOpacity
+                  onPress={() => {
+                    setFocus(false), setModalVisible(false);
+                  }}
+                  style={{ ...globalstyles.buttonStyle, width: getWidth(40) }}
+                >
+                  <Text style={globalstyles.buttonText}>
+                    {focus ? "Save" : "Edit"}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </LinearGradient>
+          </View>
         </TouchableWithoutFeedback>
       </Modal>
     </>
@@ -322,7 +383,7 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     height: getHeight(40),
     width: getWidth(100),
-    marginBottom:0,
+    marginBottom: 0,
     shadowOffset: {
       width: 0,
       height: 2,

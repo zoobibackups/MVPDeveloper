@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/core";
 import React, { useState } from "react";
 import {
+  Alert,
   Platform,
   StyleSheet,
   Text,
@@ -13,17 +14,39 @@ import Checkbox from "../Components/CheckBox";
 import CustomHeader from "../Components/CustomHeader";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
+import { useDispatch } from "react-redux";
+import { setTrainWorkOutPlace } from "../store/actions/userActions";
 
 const SignUp18T = () => {
-  const [confirmPassword, setConfirmPassowrd] = useState("");
+  const dispatch = useDispatch()
   const [checked, setChecked] = useState(false);
   const [checked1, setChecked1] = useState(false);
   const [checked2, setChecked2] = useState(false);
-  const [checked3, setChecked3] = useState(false);
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const [check1, setCheck1] = useState(false);
   const navigation = useNavigation();
 
+  const validateData = () => {
+    if(!checked && !checked1 && !checked2){
+      Alert.alert("NO OPTION SELECTED", "Please select an option")
+      return
+    }
+    if(checked){
+      dispatch(setTrainWorkOutPlace({value:"At the Gym"})).then(() => {
+        navigation.navigate("Sport1")
+      })
+    }else if(checked1){
+      dispatch(setTrainWorkOutPlace({value:"At home"})).then(() => {
+        navigation.navigate("Sport1")
+      })
+    }else if(checked2){
+      dispatch(setTrainWorkOutPlace({value:"both"})).then(() => {
+        navigation.navigate("Sport1")
+      })
+    }else{
+      Alert.alert("NO OPTION SELECTED", "Please select an option")
+      return
+    }
+   
+  }
   return (
     <LinearGradient
       style={{
@@ -95,7 +118,7 @@ const SignUp18T = () => {
 
       <View style={{...globalstyles.buttonContianer, marginTop:getHeight(32)}}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("Sport1")}
+          onPress={() => validateData()}
           style={globalstyles.buttonStyle}
         >
           <Text style={globalstyles.buttonText}>Next</Text>

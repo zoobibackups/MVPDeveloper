@@ -27,7 +27,7 @@ import theme from "../constants/theme";
 const LogIn3 = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [show, setShow] = useState(true);
+
   const [show1, setShow1] = useState(true);
   return (
     <KeyBoardHandle>

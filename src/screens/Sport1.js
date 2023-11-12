@@ -6,8 +6,22 @@ import LinearGradient from "react-native-linear-gradient";
 import CustomHeader from "../Components/CustomHeader";
 import theme from "../constants/theme";
 import { globalstyles } from "../styles/globalestyles";
+import { useDispatch } from "react-redux";
+import { setTrainIsCurrentlyDoingSports } from "../store/actions/userActions";
 const Sport1 = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
+  const vaidateData = (value) => {
+    if (value) {
+      dispatch(setTrainIsCurrentlyDoingSports({ value: value })).then(() => {
+        navigation.navigate("SignUp22");
+      });
+    } else {
+      dispatch(setTrainIsCurrentlyDoingSports({ value: value })).then(() => {
+        navigation.navigate("SignUp26");
+      });
+    }
+  };
   return (
     <LinearGradient
       style={{
@@ -30,13 +44,13 @@ const Sport1 = () => {
         style={{ ...globalstyles.buttonContianer, marginTop: getHeight(10) }}
       >
         <TouchableOpacity
-          onPress={() => navigation.navigate("SignUp22")}
+          onPress={() => vaidateData(true)}
           style={{ ...globalstyles.buttonStyle, width: getWidth(70) }}
         >
           <Text style={globalstyles.buttonText}>Yes</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate("SignUp26")}
+          onPress={() => vaidateData(false)}
           style={{
             ...globalstyles.buttonStyle,
             width: getWidth(70),

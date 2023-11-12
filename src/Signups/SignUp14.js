@@ -2,11 +2,12 @@ import React, { useState } from "react";
 
 import {
   StyleSheet,
-  Text,Alert,
+  Text,
+  Alert,
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View
+  View,
 } from "react-native";
 import KeyBoardHandle from "../Components/KeyboardHandle";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
@@ -15,29 +16,31 @@ import LinearGradient from "react-native-linear-gradient";
 import { RFValue } from "react-native-responsive-fontsize";
 import CustomHeader from "../Components/CustomHeader";
 import textStyles, { globalstyles } from "../styles/globalestyles";
-import Modal from "react-native-modal"
+import Modal from "react-native-modal";
 import { setGoalWeightTime } from "../store/actions/userActions";
 import { useDispatch } from "react-redux";
 const SignUp14 = () => {
   const navigation = useNavigation();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [time, setTime] = useState("");
   const [weight, setWeight] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
 
   const validateData = () => {
-    if(time.trim() == ""){
-      Alert.alert("INVALID TIME","Please enter valid time")
-      return
-     }
-     if(weight.trim() == ""){
-      Alert.alert("INVALID WEIGHT","Please enter valid weight")
-      return
-     }
+    if (time.trim() == "") {
+      Alert.alert("INVALID TIME", "Please enter valid time");
+      return;
+    }
+    if (weight.trim() == "") {
+      Alert.alert("INVALID WEIGHT", "Please enter valid weight");
+      return;
+    }
 
-     dispatch(setGoalWeightTime({time:time,weight:weight}))
-  }
+    dispatch(setGoalWeightTime({ time: time, weight: weight })).then(() => {
+      navigation.navigate("SignUp6")
+    })
+  };
   return (
     <>
       <KeyBoardHandle>
@@ -115,7 +118,12 @@ const SignUp14 = () => {
             </TouchableOpacity>
           </View>
 
-          <Modal animationn={"fade"} style={{margin:0}} transparent={true} isVisible={modalVisible}>
+          <Modal
+            animationn={"fade"}
+            style={{ margin: 0 }}
+            transparent={true}
+            isVisible={modalVisible}
+          >
             <TouchableWithoutFeedback
               onPress={() => setModalVisible(!modalVisible)}
             >
@@ -153,11 +161,8 @@ const SignUp14 = () => {
                   <View
                     style={{
                       borderColor: "red",
-
                       width: getWidth(79),
-
                       height: getHeight(42),
-
                       alignItems: "center",
                     }}
                   >
@@ -199,7 +204,7 @@ const SignUp14 = () => {
                   >
                     <TouchableOpacity
                       onPress={() => {
-                        setModalVisible(false), navigation.navigate("SignUp6");
+                        setModalVisible(false),validateData();
                       }}
                       style={globalstyles.buttonStyle}
                     >

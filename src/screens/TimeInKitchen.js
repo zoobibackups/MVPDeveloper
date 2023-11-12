@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/core";
 import React, { useState } from "react";
 import {
+  Alert,
   Platform,
   ScrollView,
   StyleSheet,
@@ -25,21 +26,30 @@ const TimeInKitchen = () => {
   const navigation = useNavigation();
   const validateData = () => {
     if (checked) {
-      dispatch(setTimeInKitchen({ value: "Over 2 Hours" }));
+      dispatch(setTimeInKitchen({ value: "Over 2 Hours" })).then(() => {
+        navigation.navigate("SignUp11");
+      });
       return;
     }
     if (checked1) {
-      dispatch(setTimeInKitchen({ value: "1-2 Hours" }));
+      dispatch(setTimeInKitchen({ value: "1-2 Hours" })).then(() => {
+        navigation.navigate("SignUp11");
+      });
       return;
     }
     if (checked2) {
-      dispatch(setTimeInKitchen({ value: "30 Min -  1 Hour" }));
+      dispatch(setTimeInKitchen({ value: "30 Min -  1 Hour" })).then(() => {
+        navigation.navigate("SignUp11");
+      });
       return;
     }
     if (checked3) {
-      dispatch(setTimeInKitchen({ value: "Less than 30 min" }));
+      dispatch(setTimeInKitchen({ value: "Less than 30 min" })).then(() => {
+        navigation.navigate("SignUp11");
+      });
       return;
     }
+    Alert.alert("NO OPTION SELECTED","Please selete an option")
   };
   return (
     <LinearGradient
@@ -131,7 +141,7 @@ const TimeInKitchen = () => {
       </View>
       <View style={globalstyles.buttonContianer}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("SignUp11")}
+          onPress={() => validateData()}
           style={globalstyles.buttonStyle}
         >
           <Text style={globalstyles.buttonText}>N e x t</Text>

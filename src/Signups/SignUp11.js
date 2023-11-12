@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { RFValue } from "react-native-responsive-fontsize";
@@ -17,34 +17,39 @@ import textStyles, { globalstyles } from "../styles/globalestyles";
 import { useDispatch } from "react-redux";
 import { setBudget } from "../store/actions/userActions";
 const SignUp11 = () => {
-  const dispatch = useDispatch()
-  const [confirmPassword, setConfirmPassowrd] = useState("");
+  const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
   const [checked1, setChecked1] = useState(false);
   const [checked2, setChecked2] = useState(false);
   const [checked3, setChecked3] = useState(false);
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const [check1, setCheck1] = useState(false);
   const navigation = useNavigation();
   const validateData = () => {
     if (checked) {
-      dispatch(setBudget({ value: "Low budget" }));
+      dispatch(setBudget({ value: "Low budget" })).then(() => {
+        navigation.navigate("SignUp12");
+      });
       return;
     }
     if (checked1) {
-      dispatch(setBudget({ value: "Medium budget" }));
+      dispatch(setBudget({ value: "Medium budget" })).then(() => {
+        navigation.navigate("SignUp12");
+      });
       return;
     }
     if (checked2) {
-      dispatch(setBudget({ value: "Luxury budget" }));
+      dispatch(setBudget({ value: "Luxury budget" })).then(() => {
+        navigation.navigate("SignUp12");
+      });
       return;
     }
     if (checked3) {
-      dispatch(setBudget({ value: "No budget" }));
+      dispatch(setBudget({ value: "No budget" })).then(() => {
+        navigation.navigate("SignUp12");
+      });
       return;
-    } 
+    }
 
-    Alert.alert("BUDGET EMPTY", "Please select a budget option")
+    Alert.alert("BUDGET EMPTY", "Please select a budget option");
   };
   return (
     <LinearGradient
@@ -137,7 +142,7 @@ const SignUp11 = () => {
       </View>
       <View style={globalstyles.buttonContianer}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("SignUp12")}
+          onPress={() => validateData()}
           style={globalstyles.buttonStyle}
         >
           <Text style={globalstyles.buttonText}>Next</Text>

@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import {
   Platform,
   StyleSheet,
-  Text,Alert,
+  Text,
+  Alert,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -17,7 +18,7 @@ import textStyles, { globalstyles } from "../styles/globalestyles";
 import { setDietryPreferences } from "../store/actions/userActions";
 import { useDispatch } from "react-redux";
 const SignUp6 = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
   const [checked1, setChecked1] = useState(false);
   const [checked2, setChecked2] = useState(false);
@@ -25,26 +26,49 @@ const SignUp6 = () => {
   const [checked4, setChecked4] = useState(false);
   const navigation = useNavigation();
   const validateData = () => {
-    if(checked || checked1 || checked2 || checked3 || checked4){
-      if(checked){
-        dispatch(setDietryPreferences({value:"Lazy Keto"})) // 
+    if (checked || checked1 || checked2 || checked3 || checked4) {
+      if (checked) {
+        dispatch(
+          setDietryPreferences({ value: "Lazy Keto", isNeedSchedule: true })
+        ).then(() => {
+          navigation.navigate("SignUp7");
+        });
       }
-      if(checked1){
-        dispatch(setDietryPreferences({value:"Gluten Free"}))
+      if (checked1) {
+        dispatch(
+          setDietryPreferences({ value: "Gluten Free", isNeedSchedule: true })
+        ).then(() => {
+          navigation.navigate("SignUp7");
+        });
       }
-      if(checked2){
-        dispatch(setDietryPreferences({value:"Pescatarian"}))
+      if (checked2) {
+        dispatch(
+          setDietryPreferences({ value: "Pescatarian", isNeedSchedule: true })
+        ).then(() => {
+          navigation.navigate("SignUp7");
+        });
       }
-      if(checked3){
-        dispatch(setDietryPreferences({value:"Vegan"}))
+      if (checked3) {
+        dispatch(
+          setDietryPreferences({ value: "Vegan", isNeedSchedule: true })
+        ).then(() => {
+          navigation.navigate("SignUp7");
+        });
       }
-      if(checked4){
-        dispatch(setDietryPreferences({value:"Use the app without goal"}))
+      if (checked4) {
+        dispatch(
+          setDietryPreferences({
+            value: "Use the app without goal",
+            isNeedSchedule: false,
+          })
+        ).then(() => {
+          navigation.navigate("SignUp7");
+        });
       }
-    }else{
-      Alert.alert("NO OPTION SELECTED", "Please select an option")
+    } else {
+      Alert.alert("NO OPTION SELECTED", "Please select an option");
     }
-  }
+  };
   return (
     <LinearGradient
       style={{
@@ -63,9 +87,7 @@ const SignUp6 = () => {
         subTitle={"DIETRY PREFERENCES"}
       />
 
-      <View
-        style={styles.optionsContainer}
-      >
+      <View style={styles.optionsContainer}>
         <TouchableOpacity onPress={() => setChecked(!checked)}>
           <LinearGradient
             colors={["#FDFFF4", "#BBC1AD"]}
@@ -148,31 +170,23 @@ const SignUp6 = () => {
               setChecked4(!checked4);
             }}
           />
-          <Text
-            style={styles.selectItemText}
-          >
-            I don’t want follow a diet.
-          </Text>
+          <Text style={styles.selectItemText}>I don’t want follow a diet.</Text>
         </View>
       </View>
 
-      <View
-        style={styles.buttonContianer}
-      >
+      <View style={styles.buttonContianer}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("SignUp7")}
+          onPress={() => validateData()}
           style={globalstyles.buttonStyle}
         >
-          <Text style={globalstyles.buttonText}>
-            Next
-          </Text>
+          <Text style={globalstyles.buttonText}>Next</Text>
         </TouchableOpacity>
       </View>
     </LinearGradient>
   );
 };
 const styles = StyleSheet.create({
-  optionsContainer:{
+  optionsContainer: {
     paddingVertical: 10,
     height: getHeight(50),
     width: getWidth(97),
@@ -203,13 +217,13 @@ const styles = StyleSheet.create({
     fontSize: RFValue(12),
     paddingLeft: RFValue(10),
   },
-  buttonContianer:{
+  buttonContianer: {
     alignItems: "center",
     borderColor: "red",
     height: getHeight(10),
     justifyContent: "flex-end",
     backgroundColor: "transparent",
     width: getWidth(99),
-  }
+  },
 });
 export default SignUp6;

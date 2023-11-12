@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/core";
 import React, { useState } from "react";
 import {
+  Alert,
   Platform,
   StyleSheet,
   Text,
@@ -13,19 +14,54 @@ import CheckboxSquare from "../Components/CheckBoxSquare";
 import CustomHeader from "../Components/CustomHeader";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
+import { useDispatch } from "react-redux";
+import { setTrainWorkOutDays } from "../store/actions/userActions";
 
 const SignUp30 = () => {
-  const [confirmPassword, setConfirmPassowrd] = useState("");
+  const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
   const [checked1, setChecked1] = useState(false);
   const [checked2, setChecked2] = useState(false);
   const [checked3, setChecked3] = useState(false);
   const [checked4, setChecked4] = useState(false);
   const [checked5, setChecked5] = useState(false);
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const [check1, setCheck1] = useState(false);
   const navigation = useNavigation();
 
+  const validateData = () => {
+    let days = "";
+    if(checked) {
+      days = days.concat("Monday, ");
+    }
+    if(checked1) {
+      days = days.concat("Tuesday, ");
+    } 
+    if(checked2) {
+     days=  days.concat("Wednesday, ");
+    }
+    if(checked3) {
+     days=  days.concat("Thursday, ");
+    }
+    if(checked4) {
+      days = days.concat("Friday, ");
+    }
+
+   
+    if(checked5) {
+      dispatch(
+        setTrainWorkOutDays({ workourdays: null, isNeedSchedule: false })
+      ).then(() => {
+        navigation.navigate("SignUp31");
+      });
+    } else if(checked || checked1 || checked2 || checked3 || checked4){
+      dispatch(
+        setTrainWorkOutDays({ workourdays: days, isNeedSchedule: true })
+      ).then(() => {
+        navigation.navigate("SignUp31");
+      });
+    }else{
+      Alert.alert("NO OPTION SELECTED", "Please select an option");
+    }
+  };
   return (
     <LinearGradient
       style={{
@@ -173,7 +209,7 @@ const SignUp30 = () => {
 
       <View style={globalstyles.buttonContianer}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("SignUp31")}
+          onPress={() => validateData()}
           style={globalstyles.buttonStyle}
         >
           <Text style={globalstyles.buttonText}>Next</Text>

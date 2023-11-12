@@ -4,7 +4,8 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View
+  View,
+  Alert
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { RFValue } from "react-native-responsive-fontsize";
@@ -12,10 +13,25 @@ import CustomHeader from "../Components/CustomHeader";
 import KeyBoardHandle from "../Components/KeyboardHandle";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
+import { setTrainExercise } from "../store/actions/userActions";
+import { useDispatch } from "react-redux";
 
 const SignUp29 = () => {
+  const dispatch = useDispatch()
   const navigation = useNavigation();
-  const [weight, setWeight] = useState("");
+  const [exercises, setExercises] = useState("");
+  
+  const validateData = () => {
+    if ((exercises == "")) {
+      Alert.alert("ERROR", "Pleasse enter equipments");
+      return;
+    }
+
+    dispatch(setTrainExercise({ value: exercises })).then(() => {
+      navigation.navigate("SignUp30")
+    });
+  };
+
   return (
     <>
       <KeyBoardHandle>
@@ -40,8 +56,8 @@ const SignUp29 = () => {
               <Text style={globalstyles.inputLabel}>Exercises</Text>
               <TextInput
                 style={globalstyles.textInputWithOutIcon}
-                onChangeText={(text) => setWeight(text)}
-                value={weight}
+                onChangeText={(text) => setExercises(text)}
+                value={exercises}
                 placeholder="Pushups, running......"
                 placeholderTextColor="grey"
               />
@@ -80,7 +96,7 @@ const SignUp29 = () => {
               }}
             >
               <TouchableOpacity
-                onPress={() => navigation.navigate("SignUp30")}
+                onPress={() => validateData()}
                 style={globalstyles.buttonStyle}
               >
                 <Text style={globalstyles.buttonText}>Next</Text>
