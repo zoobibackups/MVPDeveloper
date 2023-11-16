@@ -14,7 +14,7 @@ const MainApp = () => {
   return (
     <NavigationContainer>
       {isLoggedIn ? (
-        accounttype == "Training" ? (
+        accounttype !== "Training" ? (
           <TrainingMainStackNavigation />
         ) : (
           <FoodMainStackNavigation />

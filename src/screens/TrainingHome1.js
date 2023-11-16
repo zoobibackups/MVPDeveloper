@@ -33,10 +33,14 @@ import { RFValue } from "react-native-responsive-fontsize";
 import fonts from "../constants/fonts";
 import { globalstyles } from "../styles/globalestyles";
 import { moderateScale } from "react-native-size-matters";
+import { useSelector } from "react-redux";
+import { Image } from "react-native";
 
 const TrainingHome1 = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation();
+  const {user} = useSelector(state => state.userReducer)
+  console.log(user, "USer");
   return (
     <>
       <LinearGradient
@@ -80,7 +84,7 @@ const TrainingHome1 = () => {
                   includeFontPadding: false,
                 }}
               >
-                Alex
+                {user.name}
               </Text>
             </View>
             <TouchableOpacity
@@ -91,7 +95,7 @@ const TrainingHome1 = () => {
                 width: getWidth(15),
               }}
             >
-              <SvgXml width={getWidth(15)} xml={man} />
+             <Image source={{uri:user.profilePhoto}} style={{width:moderateScale(55), height:moderateScale(55), borderRadius:moderateScale(50)}} />
             </TouchableOpacity>
           </View>
           <TouchableOpacity onPress={() => navigation.navigate("StepCounter")}>

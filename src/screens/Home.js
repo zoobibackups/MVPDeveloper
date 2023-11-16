@@ -15,9 +15,12 @@ import { preformly } from "../../assets/svg";
 import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles from "../styles/globalestyles";
+import { useSelector } from "react-redux";
 
 const Home = () => {
   const navigation = useNavigation();
+  const {user} = useSelector(state => state.userReducer)
+  console.log(user, "USer");
   return (
     <>
       <View
