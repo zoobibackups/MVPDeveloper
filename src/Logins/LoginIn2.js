@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import {
+  ActivityIndicator,
+  Alert,
   Platform,
   StyleSheet,
   Text,
@@ -14,19 +16,64 @@ import KeyBoardHandle from "../Components/KeyboardHandle";
 import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import Ionicons from "react-native-vector-icons/Ionicons";
 import { moderateScale } from "react-native-size-matters";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserLogin } from "../store/actions/userActions";
 const LogIn2 = () => {
   const { user } = useSelector((state) => state.userReducer);
-  console.log(user);
-  const [email, setEmail] = useState(__DEV__ ?user.email:"");
-  const [password, setPassword] = useState(__DEV__?"Tikt0k@1":"");
+  const dispatch = useDispatch()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [show1, setShow1] = useState(true);
 
-  const LoginUser = () => {
-    
-  }
+  const [loading, setLoading] = useState(false);
+  const loginUser = () => {
+    setLoading(true);
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      emailOrUsername: "engr3.aftabufaq@gmail.com",
+      password: "Tikt0k@1",
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch("https://as-dev.code-freaks.com/mvp/api/auth/sign-in", requestOptions)
+      .then((response) => {
+        if (response.status != 200) {
+          setLoading(false);
+          response.json().then((data) => {
+            // console.log(data);
+            Alert.alert("Error while siging In", data.message[0]);
+          });
+        } else {
+          response.json().then((data) => {
+            console.log(data);
+            dispatch(
+              setUserLogin({
+                accessToken: data.data.accessToken,
+                refreshToken: data.data.refreshToken,
+                user: data.data.user,
+              })
+            ).then((data) => {
+              setLoading(false);
+            });
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+        Alert.alert("Sign Up Error", `${JSON.stringify(error)}`);
+      });
+  };
   return (
     <KeyBoardHandle>
       <View>
@@ -93,14 +140,16 @@ const LogIn2 = () => {
             <TouchableOpacity
               onPress={() => setShow1(!show1)}
               style={{
-                position:"absolute",
-                right:moderateScale(15),
+                position: "absolute",
+                right: moderateScale(15),
                 height: getHeight(7),
                 justifyContent: "center",
-                
               }}
             >
-              <Ionicons name={show1 ?"eye-off-outline" :"eye-outline"} size={RFValue(20)} />
+              <Ionicons
+                name={show1 ? "eye-off-outline" : "eye-outline"}
+                size={RFValue(20)}
+              />
             </TouchableOpacity>
           </View>
           <TouchableOpacity
@@ -128,15 +177,22 @@ const LogIn2 = () => {
               justifyContent: "center",
             }}
           >
-            <TouchableOpacity style={globalstyles.buttonStyle}>
-              <Text
-                style={{
-                  ...textStyles.lightText,
-                  color: theme.whiteColor,
-                }}
-              >
-                LOG IN
-              </Text>
+            <TouchableOpacity
+              onPress={() => loginUser()}
+              style={globalstyles.buttonStyle}
+            >
+              {loading ? (
+                <ActivityIndicator size={"small"} color={"#fff"} />
+              ) : (
+                <Text
+                  style={{
+                    ...textStyles.lightText,
+                    color: theme.whiteColor,
+                  }}
+                >
+                  LOG IN
+                </Text>
+              )}
             </TouchableOpacity>
           </View>
         </View>

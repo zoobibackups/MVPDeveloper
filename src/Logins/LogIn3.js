@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import {
+  ActivityIndicator,
+  Alert,
   Image,
   Platform,
   StyleSheet,
@@ -8,8 +10,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import LinearGradient from "react-native-linear-gradient";
+import { RFValue } from "react-native-responsive-fontsize";
 import { SvgXml } from "react-native-svg";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Email,
   appleLogo,
@@ -20,15 +23,65 @@ import {
   preformly,
 } from "../../assets/svg";
 import KeyBoardHandle from "../Components/KeyboardHandle";
-import { getHeight, getWidth } from "../functions/CommonFunctions";
-import textStyles, { globalstyles } from "../styles/globalestyles";
-import { RFValue } from "react-native-responsive-fontsize";
 import theme from "../constants/theme";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
+import { setUserLogin } from "../store/actions/userActions";
+import textStyles, { globalstyles } from "../styles/globalestyles";
 const LogIn3 = () => {
+  const dispatch = useDispatch()
+  const { user } = useSelector((state) => state.userReducer);
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [show1, setShow1] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const loginUser = () => {
+    setLoading(true);
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      emailOrUsername: "engr3.aftabufaq@gmail.com",
+      password: "Tikt0k@1",
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch("https://as-dev.code-freaks.com/mvp/api/auth/sign-in", requestOptions)
+      .then((response) => {
+        if (response.status != 200) {
+          setLoading(false);
+          response.json().then((data) => {
+            // console.log(data);
+            Alert.alert("Error while siging In", data.message[0]);
+          });
+        } else {
+          response.json().then((data) => {
+            dispatch(
+              setUserLogin({
+                accessToken: data.data.accessToken,
+                refreshToken: data.data.refreshToken,
+                user: data.data.user,
+              })
+             
+            ).then((data) => {
+              setLoading(false);
+             
+            });
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+        Alert.alert("Sign Up Error", `${JSON.stringify(error)}`);
+      });
+  };
   return (
     <KeyBoardHandle>
       <View>
@@ -126,15 +179,22 @@ const LogIn3 = () => {
               justifyContent: "center",
             }}
           >
-            <TouchableOpacity style={globalstyles.buttonStyle}>
-              <Text
-                style={{
-                  ...textStyles.lightText,
-                  color: theme.whiteColor,
-                }}
-              >
-                LOG IN
-              </Text>
+            <TouchableOpacity
+              onPress={() => loginUser()}
+              style={globalstyles.buttonStyle}
+            >
+              {loading ? (
+                <ActivityIndicator color={theme.whiteColor} size={"small"} />
+              ) : (
+                <Text
+                  style={{
+                    ...textStyles.lightText,
+                    color: theme.whiteColor,
+                  }}
+                >
+                  LOG IN
+                </Text>
+              )}
             </TouchableOpacity>
           </View>
         </View>

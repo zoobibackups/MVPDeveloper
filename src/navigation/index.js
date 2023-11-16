@@ -4,12 +4,22 @@ import LandingStack from "./LandingStackNavigation";
 import { useSelector } from "react-redux";
 import FoodAuthStackNavigation from "./FoodAuthStackNavigation";
 import TrainingAuthStackNavigation from "./TrainingAuthStackNavigation";
+import TrainingMainStackNavigation from "./TrainingMainStackNavigation";
+import FoodMainStackNavigation from "./FoodMainStackNavigation";
 const MainApp = () => {
-  const { whichStack } = useSelector((state) => state.userReducer);
-
+  const { whichStack, accounttype,user, isLoggedIn } = useSelector(
+    (state) => state.userReducer
+  );
+ 
   return (
     <NavigationContainer>
-      {whichStack == "FoodAuthStack" ? (
+      {isLoggedIn ? (
+        accounttype == "Training" ? (
+          <TrainingMainStackNavigation />
+        ) : (
+          <FoodMainStackNavigation />
+        )
+      ) : whichStack == "FoodAuthStack" ? (
         <FoodAuthStackNavigation />
       ) : whichStack == "TrainingAuthStack" ? (
         <TrainingAuthStackNavigation />
