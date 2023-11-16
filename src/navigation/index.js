@@ -31,3 +31,6 @@ const MainApp = () => {
 };
 
 export default MainApp;
+
+// https://as-dev.code-freaks.com/mvp/api/docs
+// https://www.figma.com/file/5jWy81DwthKwdQfnRDus6N/Preformly-MVP-Developer?type=design&node-id=0-1&mode=design&t=RQVTsHjoF7TfTCQX-0
