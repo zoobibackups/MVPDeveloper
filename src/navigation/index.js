@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import LandingStack from "./LandingStackNavigation";
 import { useSelector } from "react-redux";
@@ -10,11 +10,13 @@ const MainApp = () => {
   const { whichStack, accounttype,user, isLoggedIn } = useSelector(
     (state) => state.userReducer
   );
- 
+  useEffect(() => {
+
+  },[isLoggedIn, accounttype])
   return (
     <NavigationContainer>
       {isLoggedIn ? (
-        accounttype !== "Training" ? (
+        accounttype == "Training" ? (
           <TrainingMainStackNavigation />
         ) : (
           <FoodMainStackNavigation />
@@ -31,6 +33,3 @@ const MainApp = () => {
 };
 
 export default MainApp;
-
-// https://as-dev.code-freaks.com/mvp/api/docs
-// https://www.figma.com/file/5jWy81DwthKwdQfnRDus6N/Preformly-MVP-Developer?type=design&node-id=0-1&mode=design&t=RQVTsHjoF7TfTCQX-0

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>465383489247-ggqkg1pc6e64r3k67teqdfjmpdiffq15.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.465383489247-ggqkg1pc6e64r3k67teqdfjmpdiffq15</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB1z1aNo7tC3-Aqc6YUSUgjOqXDj8x_jko</string>
+	<key>GCM_SENDER_ID</key>
+	<string>465383489247</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>zedk</string>
+	<key>PROJECT_ID</key>
+	<string>mvpworkout1122</string>
+	<key>STORAGE_BUCKET</key>
+	<string>mvpworkout1122.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:465383489247:ios:fc2e3c9f734003ec04336a</string>
+</dict>
+</plist>

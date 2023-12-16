@@ -70,7 +70,7 @@ const Stack = createNativeStackNavigator();
 const FoodMainStackNavigation = () => {
   return (
     <Stack.Navigator
-      initialRouteName={"Home2"}
+      initialRouteName={"Home5"}
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen

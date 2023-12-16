@@ -20,7 +20,7 @@ import { useSelector } from "react-redux";
 const Home = () => {
   const navigation = useNavigation();
   const {user} = useSelector(state => state.userReducer)
-  console.log(user, "USer");
+  
   return (
     <>
       <View

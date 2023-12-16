@@ -138,7 +138,6 @@ const ChangeGoalTraining = () => {
           borderColor: "red",
           height: getHeight(15),
           justifyContent: "flex-end",
-          // backgroundColor: 'white',
           width: getWidth(99),
         }}
       >

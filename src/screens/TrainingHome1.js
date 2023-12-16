@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/core";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Platform,
   ScrollView,
@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { SvgXml } from "react-native-svg";
-import Modal from "react-native-modal"
+import Modal from "react-native-modal";
 import {
   bicep,
   chart,
@@ -35,12 +35,107 @@ import { globalstyles } from "../styles/globalestyles";
 import { moderateScale } from "react-native-size-matters";
 import { useSelector } from "react-redux";
 import { Image } from "react-native";
+import moment from "moment";
+let currentDate = new Date();
+let oneDayAgo = new Date(currentDate);
+oneDayAgo.setDate(currentDate.getDate() - 1);
+import AppleHealthKit, {
+  HealthValue,
+  HealthKitPermissions,
+} from "react-native-health";
 
+/* Permission options */
+const permissions = {
+  permissions: {
+    read: [
+      AppleHealthKit.Constants.Permissions.HeartRate,
+      AppleHealthKit.Constants.Permissions.AppleExerciseTime,
+      AppleHealthKit.Constants.Permissions.ActiveEnergyBurned,
+      AppleHealthKit.Constants.Permissions.DistanceWalkingRunning,
+
+      AppleHealthKit.Constants.Activities.Walking,
+      AppleHealthKit.Constants.Permissions.SleepAnalysis,
+      AppleHealthKit.Constants.Permissions.StepCount,
+    ],
+  },
+};
 const TrainingHome1 = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation();
-  const {user} = useSelector(state => state.userReducer)
-  console.log(user, "USer");
+  const { user } = useSelector((state) => state.userReducer);
+  const [greeting, setGreeting] = useState("");
+  const [stepCount, setStepCount] = useState(0);
+  const [exerciseTime, setExerciseTime] = useState(0);
+  const [calories, setCalories] = useState(0);
+  const [walking, setWalking] = useState(0);
+  const [sleeptime, setSleepTime] = useState(0);
+  useEffect(() => {
+    AppleHealthKit.initHealthKit(permissions, (error) => {
+      /* Called after we receive a response from the system */
+
+      if (error) {
+        console.log("[ERROR] Cannot grant permissions!");
+      }
+
+      /* Can now read or write to HealthKit */
+
+      const options = {
+        startDate: new Date(2023, 10, 14).toISOString(),
+        endDate: new Date().toISOString(),
+      };
+
+      AppleHealthKit.getStepCount(options, (callbackError, results) => {
+        setStepCount(results.value);
+      });
+
+      AppleHealthKit.getAppleExerciseTime(options, (callbackError, results) => {
+        console.log(results, "exercise time");
+        //setExerciseTime(results.value);
+      });
+      AppleHealthKit.getActiveEnergyBurned(options, (callbackError, results) => {
+       let value = 0
+       results.forEach(element => {
+          value  = parseFloat(value) + parseFloat(element.value)
+       });
+       setCalories(parseFloat(value).toFixed(1));
+      });
+      AppleHealthKit.getDistanceWalkingRunning(
+        options,
+        (callbackError, results) => {
+         if(callbackError == null){
+          setWalking(parseFloat(results.value/1000).toFixed(2))
+         }
+        }
+      );
+      AppleHealthKit.getSleepSamples(
+        {
+          startDate: new Date(2023, 12, 11).toISOString(), // required
+        },
+        (callbackError, results) => {
+          console.log(results[0],callbackError, "results");
+          // let data = results[0];
+          // const startDate = moment(data.startDate);
+          // const endDate = moment(data.endDate);
+          // const durationInMilliseconds = endDate.diff(startDate);
+          // const duration = moment.duration(durationInMilliseconds);
+          // setSleepTime(`${duration.hours()}`);
+        }
+      );
+    });
+    const currentTime = new Date().getHours();
+
+    if (currentTime >= 5 && currentTime < 11) {
+      setGreeting("Good Morning");
+    } else if (currentTime >= 11 && currentTime < 14) {
+      setGreeting("Good Noon");
+    } else if (currentTime >= 14 && currentTime < 17) {
+      setGreeting("Good Afternoon");
+    } else if (currentTime >= 17 && currentTime < 20) {
+      setGreeting("Good Evening");
+    } else {
+      setGreeting("Good Night");
+    }
+  }, []);
   return (
     <>
       <LinearGradient
@@ -73,7 +168,7 @@ const TrainingHome1 = () => {
                 justifyContent: "center",
               }}
             >
-              <Text style={styles.morningmsgText}>Good Morning,</Text>
+              <Text style={styles.morningmsgText}>{greeting}</Text>
               <Text
                 style={{
                   fontFamily: "AnekBangla-Medium",
@@ -95,7 +190,14 @@ const TrainingHome1 = () => {
                 width: getWidth(15),
               }}
             >
-             <Image source={{uri:user.profilePhoto}} style={{width:moderateScale(55), height:moderateScale(55), borderRadius:moderateScale(50)}} />
+              <Image
+                source={{ uri: user.profilePhoto }}
+                style={{
+                  width: moderateScale(55),
+                  height: moderateScale(55),
+                  borderRadius: moderateScale(50),
+                }}
+              />
             </TouchableOpacity>
           </View>
           <TouchableOpacity onPress={() => navigation.navigate("StepCounter")}>
@@ -172,7 +274,7 @@ const TrainingHome1 = () => {
                         letterSpacing: 2,
                       }}
                     >
-                      6,566
+                      {stepCount}
                     </Text>
                   </View>
                   <View
@@ -237,7 +339,7 @@ const TrainingHome1 = () => {
                   <Text style={styles.iconText}>Calories</Text>
                 </View>
                 <Text style={styles.numberText}>
-                  618
+                  {calories}
                   <Text style={styles.unitText}>kcal</Text>
                 </Text>
               </View>
@@ -273,7 +375,7 @@ const TrainingHome1 = () => {
                   </Text>
                 </View>
                 <Text style={{ ...styles.numberText, color: "#0DB1AD" }}>
-                  10
+                 {walking}
                   <Text style={{ ...styles.unitText, color: "#0DB1AD" }}>
                     km
                   </Text>
@@ -292,7 +394,7 @@ const TrainingHome1 = () => {
                   </Text>
                 </View>
                 <Text style={{ ...styles.numberText, color: "#197BD2" }}>
-                  8
+                {sleeptime}
                   <Text style={{ ...styles.unitText, color: "#197BD2" }}>
                     hrs
                   </Text>
@@ -441,7 +543,12 @@ const TrainingHome1 = () => {
           </View>
         </ScrollView>
       </LinearGradient>
-      <Modal animationType="slide" style={{margin:0}} transparent={true} isVisible={modalVisible}>
+      <Modal
+        animationType="slide"
+        style={{ margin: 0 }}
+        transparent={true}
+        isVisible={modalVisible}
+      >
         <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
           <View style={styles.centeredView}>
             <LinearGradient
@@ -505,7 +612,10 @@ const TrainingHome1 = () => {
                   }}
                 >
                   <TouchableOpacity
-                    onPress={() =>  {setModalVisible(false), navigation.navigate("TrainingBox1")}}
+                    onPress={() => {
+                      setModalVisible(false),
+                        navigation.navigate("TrainingBox1");
+                    }}
                   >
                     <View
                       style={{
@@ -534,7 +644,10 @@ const TrainingHome1 = () => {
                 }}
               >
                 <TouchableOpacity
-                  onPress={() => {setModalVisible(false), navigation.navigate("CreateWorkOut1")}}
+                  onPress={() => {
+                    setModalVisible(false),
+                      navigation.navigate("CreateWorkOut1");
+                  }}
                   style={{
                     ...globalstyles.buttonStyle,
                     width: getWidth(80),
@@ -681,3 +794,17 @@ const styles = StyleSheet.create({
   },
 });
 export default TrainingHome1;
+
+
+/*
+
+a4:83:e7:c0:f2:20 // removed 
+ae:09:81:bd:fb:f5 // removed 
+//f8:ff:c2:50:00:44 // own macbook 
+//38:f9:d3:d5:41:e7 // office mac 
+//14:99:3e:80:35:94 // aftab redmi 
+00:92:e5:a5:84:10   // baji mobile 
+ee:ad:d8:f6:e4:7e // tajul amin  mobile 
+a8:7d:12:fe:b8:c7 // removed 
+
+*/

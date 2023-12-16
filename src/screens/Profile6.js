@@ -188,7 +188,7 @@ const ProfileTrainingScreen = () => {
             />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("ChangePreferenceTraining")}
+            onPress={() => navigation.navigate("ChangePreference2")}
             style={styles.buttonStyle}
           >
             <Text style={styles.buttonText}>Change preferences</Text>

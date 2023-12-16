@@ -23,51 +23,11 @@ import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
 import Modal from "react-native-modal";
-const days = [
-  {
-    id: 1,
-    name: "MON",
-    date: 12,
-    isSelected: false,
-  },
-  {
-    id: 2,
-    name: "TUE",
-    date: 13,
-    isSelected: false,
-  },
-  {
-    id: 3,
-    name: "WEN",
-    date: 14,
-    isSelected: true,
-  },
-  {
-    id: 4,
-    name: "THU",
-    date: 15,
-    isSelected: false,
-  },
-  {
-    id: 5,
-    name: "FRI",
-    date: 16,
-    isSelected: false,
-  },
-  {
-    id: 6,
-    name: "SAT",
-    date: 17,
-    isSelected: false,
-  },
-  {
-    id: 7,
-    name: "SUN",
-    date: 18,
-    isSelected: false,
-  },
-];
-
+import { getWeekData } from "../logic";
+import moment from "moment";
+import { useSelector } from "react-redux";
+const days = getWeekData();
+const currentDate = moment();
 const snacksData = [
   {
     id: 1,
@@ -140,6 +100,8 @@ const renderItemSnacks = ({ item, index }) => (
   </TouchableOpacity>
 );
 const Home5 = () => {
+  const {user }= useSelector(state => state.userReducer)
+  console.log(user);
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible1, setModalVisible1] = useState(false);
@@ -171,16 +133,17 @@ const Home5 = () => {
           <View style={styles.profileView}>
             <TouchableOpacity onPress={() => navigation.navigate("ProfileSetting6")} >
             <Image
-              source={require("../../assets/images/girl.png")}
+              source={{uri:user.profilePhoto}}
               style={{
-                resizeMode: "contain",
+                resizeMode:"cover",
                 width: getWidth(25),
                 height: getWidth(25),
+                borderRadius:getWidth(25)
               }}
             />
             </TouchableOpacity>
 
-            <Text style={styles.nameText}>SVEN-INGVAR</Text>
+            <Text style={styles.nameText}>{user.name}</Text>
             <TouchableOpacity
               style={{
                 ...globalstyles.buttonStyle,
@@ -188,7 +151,7 @@ const Home5 = () => {
                 width: getWidth(30),
               }}
             >
-              <Text style={globalstyles.buttonText}>Week 3</Text>
+              <Text style={globalstyles.buttonText}>Week {Math.ceil(currentDate.diff(moment(currentDate).startOf('month'), 'days') / 7)}</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.profileView}>
