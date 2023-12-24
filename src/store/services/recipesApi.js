@@ -14,7 +14,7 @@ const baseQueryWithToken = fetchBaseQuery({
 
 
 export const recipesApi = createApi({
-  reducerPath: 'RecipesApi',
+  reducerPath: 'recipesApi',
   baseQuery: baseQueryWithToken,
   tagTypes: ['recipesData'],
   endpoints: builder => ({

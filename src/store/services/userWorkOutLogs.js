@@ -10,66 +10,50 @@ const baseQueryWithToken = fetchBaseQuery({
     return headers;
   },
 });
-
-
-
 export const userWorkOutLogs = createApi({
-  reducerPath: 'RecipesApi',
+  reducerPath: 'userWorkOutLogs',
   baseQuery: baseQueryWithToken,
-  tagTypes: ['recipesData'],
+  tagTypes: ['userWorkOutLogData'],
   endpoints: builder => ({
-    getSchedule: builder.query({
-      query: args => { 
-        return {
-          url: `schedule`,
-          method: 'GET',
-
-        };
-      },
-      providesTags: ['recipesData'],
-    }),
-    getScheduleById: builder.query({
+    createWorkOutLogs:builder.query({
       query: args => {
-       const {id}  =args
+       const {data} = args
         return {
-          url: `schedule/${id}`,
-          method: 'GET',
-
-        };
-      },
-      providesTags: ['scheduleData'],
-    }),
-    createSchedule:builder.query({
-      query: args => {
-       const {data}  =args
-        return {
-          url: `schedule`,
+          url: `user_workout_logs`,
           method: 'POST',
           data:data
-
         };
       },
-      providesTags: ['scheduleData'],
+      providesTags: ['userWorkOutLogData'],
     }),
-    getScheduleByUserId:builder.query({
+    updateWorkOutLogs:builder.query({
       query: args => {
-       const {id}  =args
+       const {id,data} = args
         return {
-          url: `schedule/scheduleByUserId/${id}`,
+          url: `user_workout_logs/${id}`,
+          method: 'PATCH',
+          data:data
+        };
+      },
+      providesTags: ['userWorkOutLogData'],
+    }),
+    getWorkOutLogsByUserId:builder.query({
+      query: args => {
+       const {id} = args
+        return {
+          url: `user_workout_logs/byUserId/${id}`,
           method: 'GET',
         };
       },
-      providesTags: ['scheduleData'],
+      providesTags: ['userWorkOutLogData'],
     }),
   }),
 });
 export const {
-  useGetScheduleQuery,
-  useLazyGetScheduleQuery,
-  useCreateScheduleQuery,
-  useLazyCreateScheduleQuery,
-  useGetScheduleByIdQuery,
-  useLazyGetScheduleByIdQuery,
-  useGetScheduleByUserIdQuery,
-  useLazyGetScheduleByUserIdQuery
+ useCreateWorkOutLogsQuery,
+ useLazyCreateWorkOutLogsQuery,
+ useGetWorkOutLogsByUserIdQuery,
+ useLazyGetWorkOutLogsByUserIdQuery,
+ useLazyUpdateWorkOutLogsQuery,
+ useUpdateWorkOutLogsQuery
 } = userWorkOutLogs;

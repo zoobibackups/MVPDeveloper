@@ -11,65 +11,49 @@ const baseQueryWithToken = fetchBaseQuery({
   },
 });
 
-
-
 export const userExerciseLogs = createApi({
-  reducerPath: 'RecipesApi',
+  reducerPath: 'userExerciseLogs',
   baseQuery: baseQueryWithToken,
-  tagTypes: ['recipesData'],
+  tagTypes: ['userExerciseLogData'],
   endpoints: builder => ({
-    getSchedule: builder.query({
+    getUserExerciseLogs: builder.query({
       query: args => { 
         return {
-          url: `schedule`,
+          url: `users_exercise_logs`,
           method: 'GET',
 
         };
       },
-      providesTags: ['recipesData'],
+      providesTags: ['userExerciseLogData'],
     }),
-    getScheduleById: builder.query({
-      query: args => {
-       const {id}  =args
-        return {
-          url: `schedule/${id}`,
-          method: 'GET',
-
-        };
-      },
-      providesTags: ['scheduleData'],
-    }),
-    createSchedule:builder.query({
+    createUserExerciseLogs: builder.query({
       query: args => {
        const {data}  =args
         return {
-          url: `schedule`,
+          url: `users_exercise_logs`,
           method: 'POST',
           data:data
-
         };
       },
-      providesTags: ['scheduleData'],
+      providesTags: ['userExerciseLogData'],
     }),
-    getScheduleByUserId:builder.query({
+    getUserExerciseLogsByUserId: builder.query({
       query: args => {
        const {id}  =args
         return {
-          url: `schedule/scheduleByUserId/${id}`,
+          url: `users_exercise_logs/${id}`,
           method: 'GET',
         };
       },
-      providesTags: ['scheduleData'],
-    }),
+      providesTags: ['userExerciseLogData'],
+    })
   }),
 });
 export const {
-  useGetScheduleQuery,
-  useLazyGetScheduleQuery,
-  useCreateScheduleQuery,
-  useLazyCreateScheduleQuery,
-  useGetScheduleByIdQuery,
-  useLazyGetScheduleByIdQuery,
-  useGetScheduleByUserIdQuery,
-  useLazyGetScheduleByUserIdQuery
+ useGetUserExerciseLogsByUserIdQuery,
+ useLazyGetUserExerciseLogsByUserIdQuery,
+ useGetUserExerciseLogsQuery,
+ useLazyGetUserExerciseLogsQuery,
+ useCreateUserExerciseLogsQuery,
+ useLazyCreateUserExerciseLogsQuery,
 } = userExerciseLogs;

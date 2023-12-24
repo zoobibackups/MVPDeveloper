@@ -37,7 +37,6 @@ export const userApi = createApi({
         return {
           url: `/users/food/metadata/${id}`,
           method: 'GET',
-
         };
       },
       providesTags: ['userData'],
