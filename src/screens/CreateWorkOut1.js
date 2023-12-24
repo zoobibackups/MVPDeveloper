@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/core";
-import React from "react";
+import React, { useState } from "react";
 import {
   Text,
   TextInput,
@@ -15,6 +15,13 @@ import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { globalstyles } from "../styles/globalestyles";
 const CreateWorkOut1 = () => {
   const navigation = useNavigation();
+  const [name, setName] = useState(null)
+  const [numberFOfSets , setNumberOfSets] = useState(null)
+
+  const createCustomWorkOut = () => {
+
+  }
+
   return (
     <LinearGradient
       style={{
@@ -51,6 +58,8 @@ const CreateWorkOut1 = () => {
             placeholder="Search muscle group"
             placeholderTextColor="#0004"
             style={globalstyles.textInputStyle}
+            value={name}
+            onChangeText={(value) => setName(value)}
           />
         </View>
       </View>
@@ -63,9 +72,9 @@ const CreateWorkOut1 = () => {
         <Text style={globalstyles.inputLabel}>Repetitions</Text>
         <TextInput
           style={globalstyles.textInputWithOutIcon}
-          onChangeText={(text) => setPassword(text)}
+          onChangeText={(value) =>  setNumberOfSets(value)}
           placeholderTextColor="grey"
-          value={""}
+          value={numberFOfSets}
           placeholder="Repetitions"
         />
       </View>
@@ -87,7 +96,7 @@ const CreateWorkOut1 = () => {
           <Text style={globalstyles.buttonText}>Add</Text>
         </TouchableOpacity>
       </View>
-      <View
+      {/* <View
         style={{ ...globalstyles.buttonContianer, marginTop: getHeight(30) }}
       >
         <TouchableOpacity
@@ -96,7 +105,7 @@ const CreateWorkOut1 = () => {
         >
           <Text style={globalstyles.buttonText}>Start your workout</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </LinearGradient>
   );
 };

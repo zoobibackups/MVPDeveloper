@@ -20,6 +20,7 @@ import textStyles, { globalstyles } from "../styles/globalestyles";
 import theme from "../constants/theme";
 import { RFValue } from "react-native-responsive-fontsize";
 import Modal from "react-native-modal"
+import { useSelector } from "react-redux";
 const data = [
   {
     challenge: "Number of meals ",
@@ -47,6 +48,8 @@ const Profile8 = () => {
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(true);
   const [modalVisible3, setModalVisible3] = useState(false);
+  const {user} = useSelector(state => state.userReducer)
+  
   return (
     <LinearGradient
       style={{
@@ -82,14 +85,15 @@ const Profile8 = () => {
               alignItems: "center",
               borderColor: "grey",
               justifyContent: "center",
-              width: getWidth(20),
+              width: getWidth(30),
+              height:getWidth(30)
             }}
           >
-            <SvgXml width={getWidth(30)} height={getHeight(15)} xml={man} />
+            <Image source={{uri:user.profilePhoto}} />
           </TouchableOpacity>
         </View>
 
-        <Text style={textStyles.mediumText}>Muhammad</Text>
+        <Text style={textStyles.mediumText}>{user.name}</Text>
         <TouchableOpacity
           style={{ ...styles.shadowContainer }}
          

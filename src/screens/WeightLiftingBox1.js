@@ -2,6 +2,7 @@ import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import {
   FlatList,
+  Image,
   StyleSheet,
   Text,
   TouchableOpacity
@@ -20,7 +21,10 @@ import HeaderMainScreen from "../Components/HeaderMainScreen";
 import { back } from "../Components/Index";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { globalstyles } from "../styles/globalestyles";
-const data = [
+import { useGetSubCategoryByIdQuery } from "../store/services/workOutApi";
+import Loading from "../Components/Loading";
+import Error1 from "./Error1";
+const routes = [
   {
     xml: pullBig,
     name: "Pull",
@@ -52,8 +56,21 @@ const data = [
     route: "StartWorkOutBack",
   },
 ];
-const WeightLiftingBox1 = () => {
-  const navigation = useNavigation();
+const WeightLiftingBox1 = ({route, navigation}) => {
+  const item = route.params.item
+  const { data, isSuccess, isLoading, isError, isFetching }  = useGetSubCategoryByIdQuery({id:item.id})
+  if(isLoading || isFetching){
+    return(
+      <Loading />
+    )
+  }
+
+  if(isError){
+    return(
+      <Error1 />
+    )
+  }
+  if(isSuccess){
   return (
     <LinearGradient
       style={{
@@ -74,7 +91,7 @@ const WeightLiftingBox1 = () => {
       <FlatList
         numColumns={2}
         bounces={false}
-        data={data}
+        data={data.data}
         style={{ flex: 1, width: getWidth(96) }}
         columnWrapperStyle={{
           margin: moderateScale(5),
@@ -84,15 +101,15 @@ const WeightLiftingBox1 = () => {
         }}
         renderItem={({ item, index }) => {
           return (
-            <TouchableOpacity onPress={() => navigation.navigate(item.route)}>
+            <TouchableOpacity onPress={() => navigation.navigate('StartWorkOut',{item})}>
               <LinearGradient
                 style={{ ...styles.boxStyle }}
                 colors={["#FDFFF4", "#BBC1AD"]}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 0.8, y: 0 }}
               >
-                <SvgXml width={getWidth(20)} xml={item.xml} />
-                <Text style={styles.boxStyleText}>{item.name}</Text>
+               <Image source={{uri:item.categoryAvatar}} style={{width:getWidth(15), height:getWidth(15)}} />
+                <Text style={styles.boxStyleText}>{item.categoryName}</Text>
               </LinearGradient>
             </TouchableOpacity>
           );
@@ -107,6 +124,7 @@ const WeightLiftingBox1 = () => {
       </TouchableOpacity>
     </LinearGradient>
   );
+      }
 };
 
 export default WeightLiftingBox1;

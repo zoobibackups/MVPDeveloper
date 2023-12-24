@@ -3,7 +3,9 @@ import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import { persistReducer, persistStore } from "redux-persist";
 import userReducer from "./reducers/userReducer";
-import { mapsApi } from "./services/mapsAPI.js";
+import { userApi } from "./services/userApi";
+import { scheduleApi } from "./services/scheduleApi";
+import { workOutApi } from "./services/workOutApi";
 const persistConfig = {
   key: "root",
   storage: AsyncStorage,
@@ -18,7 +20,9 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  [mapsApi.reducerPath]: mapsApi.reducer,
+  [userApi.reducerPath]: userApi.reducer,
+  [scheduleApi.reducerPath]:scheduleApi.reducer,
+  [workOutApi.reducerPath]:workOutApi.reducer,
   userReducer: persistReducer(persistConfig, userReducer),
 });
 
@@ -29,6 +33,6 @@ export const store = configureStore({
       serializableCheck: false,
       immutableCheck: false,
       serializableCheck: false,
-    }).concat(mapsApi.middleware),
+    }).concat(userApi.middleware).concat(workOutApi.middleware).concat(scheduleApi.middleware),
 });
 export const persistor = persistStore(store);

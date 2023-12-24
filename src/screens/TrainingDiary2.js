@@ -18,6 +18,7 @@ import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { moderateScale } from "react-native-size-matters";
 import { RFValue } from "react-native-responsive-fontsize";
+import { useSelector } from "react-redux";
 const itemstyles = StyleSheet.create({
   mainContainer: {
     borderWidth: 1,
@@ -119,46 +120,46 @@ const Renderitem = () => {
   return (
     <View style={styles.shadowContainer}>
       <LinearGradient
-            style={{
-              flex: 1,
-              width: getWidth(90),
-              borderRadius: 20,
-              padding: moderateScale(7),
-            }}
-            colors={["#FDFFF4", "#BBC1AD"]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 0.8, y: 0 }}
-          >
-      <View style={itemstyles.headerRow}>
-        <View style={itemstyles.leftRow}>
-          <Image
-            style={{
-              resizeMode: "contain",
-              width: getHeight(3),
-              height: getHeight(3),
-            }}
-            source={require("../../assets/images/legs.png")}
-          />
+        style={{
+          flex: 1,
+          width: getWidth(90),
+          borderRadius: 20,
+          padding: moderateScale(7),
+        }}
+        colors={["#FDFFF4", "#BBC1AD"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0.8, y: 0 }}
+      >
+        <View style={itemstyles.headerRow}>
+          <View style={itemstyles.leftRow}>
+            <Image
+              style={{
+                resizeMode: "contain",
+                width: getHeight(3),
+                height: getHeight(3),
+              }}
+              source={require("../../assets/images/legs.png")}
+            />
 
-          <Text style={itemstyles.headerleftText}>Pull workout</Text>
-        </View>
+            <Text style={itemstyles.headerleftText}>Pull workout</Text>
+          </View>
 
-        <Text style={itemstyles.headerRightText}>18/5/23</Text>
-      </View>
-      <View style={itemstyles.headerRow}>
-        <Text style={itemstyles.timeText}>2h 25 min</Text>
-        <Text style={itemstyles.timeText}>25 sets</Text>
-      </View>
-      <View style={{ ...itemstyles.headerRow, height: getHeight(4.2) }}>
-        <Text style={itemstyles.boldText}>Exercise</Text>
-        <Text style={itemstyles.boldText}>Repetitions</Text>
-      </View>
-      {item_data.map((item, index) => (
-        <View style={itemstyles.headerRow} key={`${index}`}>
-          <Text style={itemstyles.normalTxt}>{item.left}</Text>
-          <Text style={itemstyles.normalTxt}>{item.right}</Text>
+          <Text style={itemstyles.headerRightText}>18/5/23</Text>
         </View>
-      ))}
+        <View style={itemstyles.headerRow}>
+          <Text style={itemstyles.timeText}>2h 25 min</Text>
+          <Text style={itemstyles.timeText}>25 sets</Text>
+        </View>
+        <View style={{ ...itemstyles.headerRow, height: getHeight(4.2) }}>
+          <Text style={itemstyles.boldText}>Exercise</Text>
+          <Text style={itemstyles.boldText}>Repetitions</Text>
+        </View>
+        {item_data.map((item, index) => (
+          <View style={itemstyles.headerRow} key={`${index}`}>
+            <Text style={itemstyles.normalTxt}>{item.left}</Text>
+            <Text style={itemstyles.normalTxt}>{item.right}</Text>
+          </View>
+        ))}
       </LinearGradient>
     </View>
   );
@@ -255,6 +256,8 @@ const data4 = [
 ];
 const TrainingDiary2 = () => {
   const navigation = useNavigation();
+  const { user, trainingMetaData } = useSelector((state) => state.userReducer);
+  console.log(trainingMetaData);
   return (
     <LinearGradient
       style={{
@@ -290,14 +293,23 @@ const TrainingDiary2 = () => {
               alignItems: "center",
               borderColor: "grey",
               justifyContent: "center",
-              width: getWidth(20),
+              width: getWidth(30),
+              height: getWidth(30),
             }}
           >
-            <SvgXml width={getWidth(30)} height={getHeight(15)} xml={man} />
+            <Image
+              source={{ uri: user.profilePhoto }}
+              style={{
+                width: getWidth(30),
+                height: getWidth(30),
+                borderRadius: getWidth(30),
+                resizeMode: "cover",
+              }}
+            />
           </TouchableOpacity>
         </View>
 
-        <Text style={textStyles.mediumText}>Muhammad</Text>
+        <Text style={textStyles.mediumText}>{user.name}</Text>
 
         <Text style={styles.titleText}>Challenges </Text>
         <TouchableOpacity
@@ -442,13 +454,13 @@ const TrainingDiary2 = () => {
             start={{ x: 0, y: 0 }}
             end={{ x: 0.8, y: 0 }}
           >
-            {data3.map((item, index) => (
+
               <View
                 style={{
                   ...styles.rowStyle,
-                  borderBottomWidth: index == data.length - 1 ? 0 : 1,
+                  borderBottomWidth: 1,
                 }}
-                key={`${index}`}
+              
               >
                 <Text
                   style={{
@@ -457,7 +469,7 @@ const TrainingDiary2 = () => {
                     color: "rgba(0,0,0,.6)",
                   }}
                 >
-                  {item.challenge}
+                  Current Weight
                 </Text>
 
                 <Text
@@ -467,10 +479,38 @@ const TrainingDiary2 = () => {
                     color: "#000",
                   }}
                 >
-                  {item.status}
+                  {trainingMetaData.weight} Kg
                 </Text>
               </View>
-            ))}
+
+              <View
+                style={{
+                  ...styles.rowStyle,
+                  borderBottomWidth: 1,
+                }}
+              
+              >
+                <Text
+                  style={{
+                    ...styles.rowText,
+
+                    color: "rgba(0,0,0,.6)",
+                  }}
+                >
+                  Goal Weight
+                </Text>
+
+                <Text
+                  style={{
+                    ...styles.rowText,
+
+                    color: "#000",
+                  }}
+                >
+                  {trainingMetaData.weight + 4} Kg
+                </Text>
+              </View>
+            
           </LinearGradient>
         </TouchableOpacity>
 
@@ -492,35 +532,110 @@ const TrainingDiary2 = () => {
             start={{ x: 0, y: 0 }}
             end={{ x: 0.8, y: 0 }}
           >
-            {data4.map((item, index) => (
-              <View
+            <View
+              style={{
+                ...styles.rowStyle,
+                borderBottomWidth: 1,
+              }}
+            >
+              <Text
                 style={{
-                  ...styles.rowStyle,
-                  borderBottomWidth: index == data.length - 1 ? 0 : 1,
+                  ...styles.rowText,
+
+                  color: "rgba(0,0,0,.6)",
                 }}
-                key={`${index}`}
               >
-                <Text
-                  style={{
-                    ...styles.rowText,
+                Body weight
+              </Text>
 
-                    color: "rgba(0,0,0,.6)",
-                  }}
-                >
-                  {item.challenge}
-                </Text>
+              <Text
+                style={{
+                  ...styles.rowText,
 
-                <Text
-                  style={{
-                    ...styles.rowText,
+                  color: "#000",
+                }}
+              >
+                {trainingMetaData.weight} Kg
+              </Text>
+            </View>
+            <View
+              style={{
+                ...styles.rowStyle,
+                borderBottomWidth: 1,
+              }}
+            >
+              <Text
+                style={{
+                  ...styles.rowText,
 
-                    color: "#000",
-                  }}
-                >
-                  {item.status}
-                </Text>
-              </View>
-            ))}
+                  color: "rgba(0,0,0,.6)",
+                }}
+              >
+                Height
+              </Text>
+
+              <Text
+                style={{
+                  ...styles.rowText,
+
+                  color: "#000",
+                }}
+              >
+                {trainingMetaData.height} CM
+              </Text>
+            </View>
+            <View
+              style={{
+                ...styles.rowStyle,
+                borderBottomWidth: 1,
+              }}
+            >
+              <Text
+                style={{
+                  ...styles.rowText,
+
+                  color: "rgba(0,0,0,.6)",
+                }}
+              >
+                Age
+              </Text>
+
+              <Text
+                style={{
+                  ...styles.rowText,
+
+                  color: "#000",
+                }}
+              >
+                {trainingMetaData.age} Years
+              </Text>
+            </View>
+            <View
+              style={{
+                ...styles.rowStyle,
+                borderBottomWidth: 1,
+              }}
+            >
+              <Text
+                style={{
+                  ...styles.rowText,
+
+                  color: "rgba(0,0,0,.6)",
+                }}
+              >
+                Gender
+              </Text>
+
+              <Text
+                style={{
+                  ...styles.rowText,
+
+                  color: "#000",
+                }}
+              >
+                {trainingMetaData.gender}
+              </Text>
+            </View>
           </LinearGradient>
         </TouchableOpacity>
         <View style={{ height: getHeight(10) }} />
@@ -564,7 +679,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 5,
     flexDirection: "row",
-    alignSelf:"center",
+    alignSelf: "center",
     paddingVertical: moderateScale(7),
   },
   rowText: {

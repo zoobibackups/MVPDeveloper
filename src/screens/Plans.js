@@ -11,10 +11,12 @@ import theme from "../constants/theme";
 import { moderateScale } from "react-native-size-matters";
 import { globalstyles } from "../styles/globalestyles";
 import { RFValue } from "react-native-responsive-fontsize";
+import { useSelector } from "react-redux";
 
 const Plans = () => {
   const navigation = useNavigation();
-
+  const {user} = useSelector(state => state.userReducer)
+  console.log(user);
   const renderSlides = ({ item }) => {
     return (
       <View style={styles.mainView}>
@@ -181,14 +183,15 @@ const Plans = () => {
         />
         <Image
           style={{
-            resizeMode: "contain",
+            resizeMode:"cover",
             width: getWidth(30),
             alignSelf: "center",
-            height: getHeight(15),
+            borderRadius:getWidth(30),
+            height: getWidth(30),
           }}
-          source={require("../../assets/images/man.png")}
+          source={{uri:user.profilePhoto}}
         />
-        <Text style={styles.nameText}>SVEN-INGVAR</Text>
+        <Text style={styles.nameText}>{user.name} </Text>
         <AppIntroSlider
           data={slides}
           showNextButton={false}

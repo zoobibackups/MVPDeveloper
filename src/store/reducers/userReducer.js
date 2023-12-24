@@ -95,6 +95,12 @@ const initialState = {
 };
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "SET_TRAIN_COMPLETE_DATA":{
+      return{
+        ...state,
+        trainingMetaData: action.payload
+      }
+    }
     case SET_TRAIN_WORK_OUT:{
       return{
         ...state,

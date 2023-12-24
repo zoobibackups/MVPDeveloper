@@ -20,6 +20,7 @@ import textStyles, { globalstyles } from "../styles/globalestyles";
 import theme from "../constants/theme";
 import { RFValue } from "react-native-responsive-fontsize";
 import Modal from "react-native-modal"
+import { useSelector } from "react-redux";
 const data = [
   {
     name: "Bench press",
@@ -58,6 +59,8 @@ const data2 = [
   },
 ];
 const ProfileTrainingScreen = () => {
+  const {user} = useSelector(state => state.userReducer)
+  console.log(user,"TT");
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   return (
@@ -98,11 +101,19 @@ const ProfileTrainingScreen = () => {
               width: getWidth(20),
             }}
           >
-            <SvgXml width={getWidth(30)} height={getHeight(15)} xml={man} />
+              <Image
+              source={{ uri: user.profilePhoto }}
+              style={{
+                width: getWidth(30),
+                height: getWidth(30),
+                borderRadius: getWidth(30),
+                resizeMode: "cover",
+              }}
+            />
           </TouchableOpacity>
         </View>
 
-        <Text style={textStyles.mediumText}>Muhammad</Text>
+        <Text style={textStyles.mediumText}>{user.name}</Text>
 
         <Text style={styles.titleText}>Personal bests</Text>
         <TouchableOpacity

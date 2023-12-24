@@ -67,6 +67,9 @@ import WeightLiftingBox1 from "../screens/WeightLiftingBox1";
 import WhySchedule from "../screens/WhySchedule";
 import WhySchedule2 from "../screens/WhySchedule2";
 import Yoga from "../screens/Yoga";
+import CommingSoon from "../screens/CommingSoon";
+import CustomWorkOut from "../screens/CustomWorkOut";
+import SignUp18T from "../Signups/SignUp18T";
 const Stack = createNativeStackNavigator();
 
 const TrainingMainStackNavigation = () => {
@@ -198,6 +201,13 @@ const TrainingMainStackNavigation = () => {
         component={Cardio}
         // options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="CommingSoon"
+        component={CommingSoon}
+        // options={{ headerShown: false }}
+      />
+
+
       <Stack.Screen
         name="Yoga"
         component={Yoga}
@@ -388,6 +398,11 @@ const TrainingMainStackNavigation = () => {
       />
 
       <Stack.Screen name="Profile1" component={Profile1} />
+      <Stack.Screen name="CustomWorkOut" component={CustomWorkOut} />
+      <Stack.Screen name="SignUp18T" component={SignUp18T} />
+      
+      
+      
     </Stack.Navigator>
   );
 };

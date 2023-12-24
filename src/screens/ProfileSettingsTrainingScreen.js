@@ -18,6 +18,7 @@ import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
 import theme from "../constants/theme";
 import { RFValue } from "react-native-responsive-fontsize";
+import { useSelector } from "react-redux";
 
 const data = [
   {
@@ -58,6 +59,8 @@ const data2 = [
 ];
 const ProfileTrainingScreen = () => {
   const navigation = useNavigation();
+  const { user, trainingMetaData } = useSelector((state) => state.userReducer);
+  console.log(trainingMetaData);
   return (
     <LinearGradient
       style={{
@@ -93,14 +96,24 @@ const ProfileTrainingScreen = () => {
               alignItems: "center",
               borderColor: "grey",
               justifyContent: "center",
-              width: getWidth(20),
+              width: getWidth(30),
+              height: getWidth(30),
+              borderRadius: getWidth(20),
             }}
           >
-            <SvgXml width={getWidth(30)} height={getHeight(15)} xml={man} />
+            <Image
+              source={{ uri: user.profilePhoto }}
+              style={{
+                width: getWidth(30),
+                height: getWidth(30),
+                borderRadius: getWidth(30),
+                resizeMode: "cover",
+              }}
+            />
           </TouchableOpacity>
         </View>
 
-        <Text style={textStyles.mediumText}>Muhammad</Text>
+        <Text style={textStyles.mediumText}>{user.name}</Text>
 
         <Text style={styles.titleText}>Personal bests</Text>
         <TouchableOpacity
@@ -287,5 +300,9 @@ const styles = StyleSheet.create({
     width: getWidth(5),
     height: getHeight(2),
   },
-  buttonText: { ...globalstyles.buttonText, fontSize:RFValue(14), fontWeight: "400" },
+  buttonText: {
+    ...globalstyles.buttonText,
+    fontSize: RFValue(14),
+    fontWeight: "400",
+  },
 });

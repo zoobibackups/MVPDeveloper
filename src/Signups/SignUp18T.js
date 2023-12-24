@@ -14,39 +14,53 @@ import Checkbox from "../Components/CheckBox";
 import CustomHeader from "../Components/CustomHeader";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setTrainWorkOutPlace } from "../store/actions/userActions";
 
-const SignUp18T = () => {
-  const dispatch = useDispatch()
+const SignUp18T = ({ route }) => {
+  const is_go_back = route.params?.item?.is_go_back;
+ const {trainingMetaData} = useSelector(state => state.userReducer)
+  const place = (trainingMetaData.workoutPlace);
+  const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
   const [checked1, setChecked1] = useState(false);
   const [checked2, setChecked2] = useState(false);
   const navigation = useNavigation();
 
   const validateData = () => {
-    if(!checked && !checked1 && !checked2){
-      Alert.alert("NO OPTION SELECTED", "Please select an option")
-      return
+    if (!checked && !checked1 && !checked2) {
+      Alert.alert("NO OPTION SELECTED", "Please select an option");
+      return;
     }
-    if(checked){
-      dispatch(setTrainWorkOutPlace({value:"At the Gym"})).then(() => {
-        navigation.navigate("Sport1")
-      })
-    }else if(checked1){
-      dispatch(setTrainWorkOutPlace({value:"At home"})).then(() => {
-        navigation.navigate("Sport1")
-      })
-    }else if(checked2){
-      dispatch(setTrainWorkOutPlace({value:"both"})).then(() => {
-        navigation.navigate("Sport1")
-      })
-    }else{
-      Alert.alert("NO OPTION SELECTED", "Please select an option")
-      return
+    if (checked) {
+      dispatch(setTrainWorkOutPlace({ value: "At the Gym" })).then(() => {
+        if (is_go_back) {
+          navigation.goBack();
+        } else {
+          navigation.navigate("Sport1");
+        }
+      });
+    } else if (checked1) {
+      dispatch(setTrainWorkOutPlace({ value: "At home" })).then(() => {
+        if (is_go_back) {
+          navigation.goBack();
+        } else {
+          navigation.navigate("Sport1");
+        }
+      });
+    } else if (checked2) {
+      dispatch(setTrainWorkOutPlace({ value: "both" })).then(() => {
+        if (is_go_back) {
+          navigation.goBack();
+        } else {
+          navigation.navigate("Sport1");
+        }
+      });
+    } else {
+      Alert.alert("NO OPTION SELECTED", "Please select an option");
+      return;
     }
-   
-  }
+  };
   return (
     <LinearGradient
       style={{
@@ -116,7 +130,9 @@ const SignUp18T = () => {
         </TouchableOpacity>
       </View>
 
-      <View style={{...globalstyles.buttonContianer, marginTop:getHeight(32)}}>
+      <View
+        style={{ ...globalstyles.buttonContianer, marginTop: getHeight(32) }}
+      >
         <TouchableOpacity
           onPress={() => validateData()}
           style={globalstyles.buttonStyle}

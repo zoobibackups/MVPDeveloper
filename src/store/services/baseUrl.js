@@ -1,3 +1,3 @@
- const BASE_URL ="https://pr-backend-55993a5bc9ee.herokuapp.com/"
+ const BASE_URL ="https://as-dev.code-freaks.com/mvp/api"
 
  export default BASE_URL

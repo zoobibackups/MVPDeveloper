@@ -1,33 +1,31 @@
+import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import {
-  View,
-  Text,
-  Image,
-  Platform,
-  TouchableOpacity,
-  ScrollView,
+  Alert,
   FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity
 } from "react-native";
-import { getWidth, getHeight } from "../functions/CommonFunctions";
-import { useNavigation } from "@react-navigation/core";
 import LinearGradient from "react-native-linear-gradient";
-import { SvgXml } from "react-native-svg";
+import { moderateScale } from "react-native-size-matters";
 import {
-  backward,
   body,
   boxing,
   calesthenics,
   cardio,
   meditation,
-  preformly,
-  yoga,
+  yoga
 } from "../../assets/svg";
-import { StyleSheet } from "react-native";
-import { moderateScale } from "react-native-size-matters";
-import theme from "../constants/theme";
 import HeaderMainScreen from "../Components/HeaderMainScreen";
+import Loading from "../Components/Loading";
+import theme from "../constants/theme";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
+import { useGetCategoriesQuery } from "../store/services/workOutApi";
+import Error1 from "./Error1";
 
-const data = [
+const routes = [
   {
     xml: require("../../assets/images/lifting.png"),
     name: "Weight lifting",
@@ -36,103 +34,130 @@ const data = [
   {
     xml: yoga,
     name: "Yoga",
-    route: "Yoga",
+    route: "CommingSoon",
   },
   {
     xml: cardio,
     name: "Cardio",
-    route: "Cardio",
+    route: "CommingSoon",
   },
   {
     xml: boxing,
     name: "Boxing",
-    route: "Boxing",
+    route: "CommingSoon",
   },
   {
     xml: meditation,
     name: "Meditation",
-    route: "Meditation",
+    route: "CommingSoon",
   },
   {
     xml: calesthenics,
     name: "Calisthenics",
-    route: "Calisthenics",
+    route: "CommingSoon",
   },
   {
     xml: body,
     name: "Body Control",
-    route: "BodyControl",
+    route: "CommingSoon",
   },
 ];
 const TrainingBox1 = () => {
-  const navigation = useNavigation();
-  return (
-    <LinearGradient
-      style={{
-        alignItems: "center",
-        paddingVertical: 30,
-        borderColor: "red",
-        height: "100%",
-      }}
-      colors={["#FDFFF4", "#BBC1AD"]}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 0.8, y: 0 }}
-    >
-      <HeaderMainScreen
-        onPress={() => navigation.goBack()}
-        title={"PLANS"}
-        subTitle={"Choose Plan"}
-      />
-      <FlatList
-        numColumns={2}
-        bounces={false}
-        data={data}
-        style={{ flex: 1, width: getWidth(96) }}
-        columnWrapperStyle={{
-          margin: moderateScale(5),
-          alignItems: "flex-start",
-          flexGrow: 1,
-          justifyContent: "flex-start",
+  const { data, isSuccess, isLoading, isError, isFetching } =
+    useGetCategoriesQuery();
+
+  if (isError) {
+    return <Error1 />;
+  }
+  if (isSuccess || isFetching) {
+    <Loading />;
+  }
+  if (isSuccess) {
+    const navigation = useNavigation();
+    return (
+      <LinearGradient
+        style={{
+          alignItems: "center",
+          paddingVertical: 30,
+          borderColor: "red",
+          height: "100%",
         }}
-        renderItem={({ item, index }) => {
-          return (
-            <TouchableOpacity onPress={() => navigation.navigate(item.route)}>
-              <LinearGradient
-                style={{ ...styles.boxStyle }}
-                colors={
-                  index == 0
-                    ? [theme.blueColor, theme.blueColor]
-                    : ["#FDFFF4", "#BBC1AD"]
-                }
-                start={{ x: 0, y: 0 }}
-                end={{ x: 0.8, y: 0 }}
+        colors={["#FDFFF4", "#BBC1AD"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0.8, y: 0 }}
+      >
+        <HeaderMainScreen
+          onPress={() => navigation.goBack()}
+          title={"PLANS"}
+          subTitle={"Choose Plan"}
+        />
+        <FlatList
+          numColumns={2}
+          bounces={false}
+          data={data.data}
+          style={{ flex: 1, width: getWidth(96) }}
+          columnWrapperStyle={{
+            margin: moderateScale(5),
+            alignItems: "flex-start",
+            flexGrow: 1,
+            justifyContent: "flex-start",
+          }}
+          renderItem={({ item, index }) => {
+            return (
+              <TouchableOpacity
+                onPress={() => {
+                  if (true) {
+                    navigation.navigate(routes[index].route ,{item:item})
+                  }else{
+                    Alert.alert(`${item.categoryName}`, "We are working on it. will be launched soon")
+                  }
+                }}
               >
-                {index == 0 ? (
-                  <Image
-                    style={{
-                      resizeMode: "contain",
-                      width: getWidth(30),
-                    }}
-                    source={require("../../assets/images/lifting.png")}
-                  />
-                ) : (
-                  <SvgXml width={getWidth(20)} xml={item.xml} />
-                )}
-                <Text
-                  style={{
-                    ...styles.boxStyleText,
-                    color: index == 0 ? theme.whiteColor : theme.blackColor,
-                  }}
+                <LinearGradient
+                  style={{ ...styles.boxStyle }}
+                  colors={
+                    index == 0
+                      ? [theme.blueColor, theme.blueColor]
+                      : ["#FDFFF4", "#BBC1AD"]
+                  }
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 0.8, y: 0 }}
                 >
-                  {item.name}
-                </Text>
-              </LinearGradient>
-            </TouchableOpacity>
-          );
-        }}
-      />
-    </LinearGradient>
-  );
+                  {index == 0 ? (
+                    <Image
+                      style={{
+                        resizeMode: "contain",
+                        width: getWidth(15),
+                        height: getWidth(15),
+                      }}
+                      source={require("../../assets/images/lifting.png")}
+                    />
+                  ) : (
+                    <Image
+                      style={{
+                        resizeMode: "contain",
+                        width: getWidth(15),
+                        height: getWidth(20),
+                      }}
+                      source={{ uri: item.categoryAvatar }}
+                    />
+                  )}
+                  <Text
+                    style={{
+                      ...styles.boxStyleText,
+                      color: index == 0 ? theme.whiteColor : theme.blackColor,
+                    }}
+                  >
+                    {item.categoryName}
+                  </Text>
+                </LinearGradient>
+              </TouchableOpacity>
+            );
+          }}
+        />
+      </LinearGradient>
+    );
+  }
 };
 
 export default TrainingBox1;

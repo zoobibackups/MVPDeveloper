@@ -33,7 +33,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 import fonts from "../constants/fonts";
 import { globalstyles } from "../styles/globalestyles";
 import { moderateScale } from "react-native-size-matters";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Image } from "react-native";
 import moment from "moment";
 let currentDate = new Date();
@@ -43,6 +43,8 @@ import AppleHealthKit, {
   HealthValue,
   HealthKitPermissions,
 } from "react-native-health";
+import { useGetUserTrainingDataQuery } from "../store/services/userApi";
+import { setTrainingData } from "../store/actions/userActions";
 
 /* Permission options */
 const permissions = {
@@ -60,6 +62,7 @@ const permissions = {
   },
 };
 const TrainingHome1 = () => {
+  const dispatch = useDispatch()
   const [modalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation();
   const { user } = useSelector((state) => state.userReducer);
@@ -69,6 +72,14 @@ const TrainingHome1 = () => {
   const [calories, setCalories] = useState(0);
   const [walking, setWalking] = useState(0);
   const [sleeptime, setSleepTime] = useState(0);
+  const {data, isSuccess, isError, isFetching} = useGetUserTrainingDataQuery({id:user.id})
+
+  useEffect(() => {
+    
+    if(isSuccess){
+      dispatch(setTrainingData(data));
+    }
+  },[data,isSuccess, isError, isFetching])
   useEffect(() => {
     AppleHealthKit.initHealthKit(permissions, (error) => {
       /* Called after we receive a response from the system */
@@ -113,12 +124,12 @@ const TrainingHome1 = () => {
         },
         (callbackError, results) => {
           console.log(results[0],callbackError, "results");
-          // let data = results[0];
-          // const startDate = moment(data.startDate);
-          // const endDate = moment(data.endDate);
-          // const durationInMilliseconds = endDate.diff(startDate);
-          // const duration = moment.duration(durationInMilliseconds);
-          // setSleepTime(`${duration.hours()}`);
+          let data = results[0];
+          const startDate = moment(options.startDate);
+          const endDate = moment(options.endDate);
+          const durationInMilliseconds = endDate.diff(startDate);
+          const duration = moment.duration(durationInMilliseconds);
+          setSleepTime(`${duration.hours()}`);
         }
       );
     });
@@ -584,7 +595,7 @@ const TrainingHome1 = () => {
                     alignItems: "center",
                   }}
                 >
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => {                       setModalVisible(false),navigation.navigate("CustomWorkOut")}}>
                     <View
                       style={{
                         height: getHeight(14),

@@ -23,23 +23,25 @@ import HeaderMainScreen from "../Components/HeaderMainScreen";
 import fonts from "../constants/fonts";
 import theme from "../constants/theme";
 import { globalstyles } from "../styles/globalestyles";
+import { useSelector } from "react-redux";
 
 const AccountDetails1 = () => {
+  const {user,trainingMetaData} = useSelector(state => state.userReducer )
+  const gender = trainingMetaData.gender.toLowerCase()
   const navigation = useNavigation();
   var radio_props = [
     { label: "Male", value: 0 },
     { label: "Female", value: 1 },
     { label: "Other", value: 2 },
   ];
-
-  const [height, setHeight] = useState("");
-  const [age, setAge] = useState("");
-  const [weight, setWeight] = useState("");
-  const [selectedIndex, setIndex] = useState(0);
-  const [state, setState] = useState(false);
-  const [show, setShow] = useState(true);
-  const [show1, setShow1] = useState(true);
-  const [confirmPassword, setConfirmPassowrd] = useState("");
+  const [name, setName] =  useState(user.name)
+  const [email,setEmail] = useState(user.email)
+  const [height, setHeight] = useState(`${trainingMetaData.height}`);
+  const [age, setAge] = useState(`${trainingMetaData.age}`);
+  const [weight, setWeight] = useState(`${trainingMetaData.weight}`);
+ 
+  const [state, setState] = useState(gender == "male" ? 0 : gender == "female" ? 1:2);
+  
   return (
     <KeyBoardHandle>
       <LinearGradient
@@ -79,6 +81,8 @@ const AccountDetails1 = () => {
               }}
             >
               <TextInput
+                value={name}
+                onChangeText={(text) => setName(name)}
                 style={{
                   ...globalstyles.textInputWithOutIcon,
                   borderColor: theme.blueColor,
@@ -97,6 +101,8 @@ const AccountDetails1 = () => {
               }}
             >
               <TextInput
+              value={email}
+              onChangeText={(value) => setEmail(value)}
                 style={{
                   ...globalstyles.textInputWithOutIcon,
                   borderColor: theme.blueColor,
@@ -106,34 +112,7 @@ const AccountDetails1 = () => {
                 placeholderTextColor="grey"
               />
             </View>
-            <View
-              style={{ ...globalstyles.inputContainer, height: RFValue(45) }}
-            >
-              <TextInput
-                style={{ ...globalstyles.textInputStyle, height: RFValue(45) }}
-                placeholderTextColor="grey"
-                placeholder="Password"
-                secureTextEntry={show}
-              />
-              <TouchableOpacity onPress={() => setShow(!show)}>
-                <SvgXml xml={hideEye} />
-              </TouchableOpacity>
-            </View>
-            <View
-              style={{ ...globalstyles.inputContainer, height: RFValue(45) }}
-            >
-              <TextInput
-                style={{ ...globalstyles.textInputStyle, height: RFValue(45) }}
-                onChangeText={(text) => setConfirmPassowrd(text)}
-                value={confirmPassword}
-                placeholder="Confirm Password"
-                secureTextEntry={show1}
-                placeholderTextColor="grey"
-              />
-              <TouchableOpacity onPress={() => setShow1(!show1)}>
-                <SvgXml xml={hideEye} />
-              </TouchableOpacity>
-            </View>
+            
           </View>
 
           <View

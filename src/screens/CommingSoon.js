@@ -15,23 +15,19 @@ import { moderateScale } from "react-native-size-matters";
 import fonts from "../constants/fonts";
 import { RFValue } from "react-native-responsive-fontsize";
 import { globalstyles } from "../styles/globalestyles";
-import { useGetSubCategoryDataByIdQuery } from "../store/services/workOutApi";
-import Loading from "../Components/Loading";
-import Error1 from "./Error1";
-import moment from "moment";
 const styles = StyleSheet.create({
   mainContainer: {
     borderWidth: 1,
     borderColor: "grey",
     width: getWidth(94),
     borderRadius: 20,
-    marginTop: 10,
+    marginTop: 1,
     padding: moderateScale(10),
   },
   headerRow: {
     flexDirection: "row",
     width: getWidth(94) - moderateScale(20),
-    height: getHeight(3),
+    height: getHeight(2.8),
     paddingHorizontal: moderateScale(5),
     borderRadius: 20,
     justifyContent: "space-between",
@@ -90,33 +86,79 @@ const styles = StyleSheet.create({
 
 let data = [
   {
-    left: "Pull ups x5",
-    right: "Body Weight x 12 x 3",
+    left: "Jumping Jacks",
+    right: "50 seconds for each exercise",
   },
   {
-    left: "Lat pull-downs",
-    right: "70 kg  x 10 x 3",
+    left: "High Knees",
+    right: "10 seconds of rest",
   },
 
   {
-    left: "Bent-over-row",
-    right: "40 kg  x 10 x 3",
+    left: "Butt Kicks",
+    right: "",
+  },
+
+  {
+    left: "Skaters",
+    right: "",
+  },
+
+  {
+    left: "Jump Rope",
+    right: "",
+  },
+
+  {
+    left: "Mountain Climbers",
+    right: "",
+  },
+
+  {
+    left: "Burpees",
+    right: "",
+  },
+
+  {
+    left: "Side-to-Side Hop Squats",
+    right: "",
+  },
+
+  {
+    left: "High-Intensity Interval Training (HIIT) - 4 minutes:",
+    right: "",
   },
   {
-    left: "Preachers curl",
-    right: "35 kg  x 12",
+    left: "20 seconds high-intensity cardio exercise",
+    right: "",
   },
   {
-    left: "Hammer curls",
-    right: "15kg  x 12 x 3",
+    left: "10 seconds rest (Repeat for 4 minutes)",
+    right: "",
   },
   {
-    left: "Inclined curls",
-    right: "15 kg  x 10 x 3",
+    left: "Alternating Reverse Lunges",
+    right: "",
+  },
+  {
+    left: "Fast Feet",
+    right: "",
+  },
+  {
+    left: "Cross Punches",
+    right: "",
+  },
+  {
+    left: "Plank Jacks",
+    right: "",
+  },
+  {
+    left: "Cool Down and Stretch",
+    right: "",
   },
 ];
 
-const renderitem = (name) => {
+const renderitem = () => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.headerRow}>
@@ -130,10 +172,10 @@ const renderitem = (name) => {
             source={require("../../assets/images/legs.png")}
           />
 
-          <Text style={styles.headerleftText}>{name} workout</Text>
+          <Text style={styles.headerleftText}>Pull workout</Text>
         </View>
 
-        <Text style={styles.headerRightText}>{moment().format("DD-MMM-YY")}</Text>
+        <Text style={styles.headerRightText}>18/5/23</Text>
       </View>
       <View style={styles.headerRow}>
         <Text style={styles.timeText}>2h 25 min</Text>
@@ -141,7 +183,7 @@ const renderitem = (name) => {
       </View>
       <View style={{ ...styles.headerRow, height: getHeight(4.2) }}>
         <Text style={styles.boldText}>Exercise</Text>
-        <Text style={styles.boldText}>Repetitions</Text>
+        <Text style={styles.boldText}>Time</Text>
       </View>
       {data.map((item, index) => (
         <View style={styles.headerRow} key={`${index}`}>
@@ -152,24 +194,8 @@ const renderitem = (name) => {
     </View>
   );
 };
-const StartWorkOut = ({route}) => {
-  const item = route.params.item
-  
+const CommingSoon = () => {
   const navigation = useNavigation();
-  const { data, isSuccess, isLoading, isError, isFetching }  = useGetSubCategoryDataByIdQuery({id:item.id})
-  console.log(data, "DTAAA");
-  if(isLoading || isFetching){
-    return(
-      <Loading />
-    )
-  }
-
-  if(isError){
-    return(
-      <Error1 />
-    )
-  }
-  if(isSuccess){
   return (
     <LinearGradient
       style={{
@@ -199,31 +225,13 @@ const StartWorkOut = ({route}) => {
             fontSize: RFValue(20),
           }}
         >
-          Exercises
+          Comming Soon
         </Text>
-        <View
-          style={{
-            width: getWidth(95),
-            alignItems: "center",
-            justifyContent: "space-evenly",
-          }}
-        >
-          {renderitem(item.categoryName)}
-        </View>
-        <TouchableOpacity
-          onPress={() =>  navigation.navigate("ActiveWorkOut1")}
-          style={{
-            ...globalstyles.buttonStyle,
-            marginTop: moderateScale(80),
-            width: getWidth(90),
-          }}
-        >
-          <Text style={globalstyles.buttonText}>Start Workout</Text>
-        </TouchableOpacity>
+       
+       
       </ScrollView>
     </LinearGradient>
   );
-        }
 };
 
-export default StartWorkOut;
+export default CommingSoon;

@@ -12,8 +12,10 @@ import LinearGradient from "react-native-linear-gradient";
 import HeaderMainScreen from "../Components/HeaderMainScreen";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { globalstyles } from "../styles/globalestyles";
+import { useSelector } from "react-redux";
 
 const ChangePreferenceTraining = () => {
+  const {user,trainingMetaData} = useSelector(state => state.userReducer )
   const [confirmPassword, setConfirmPassowrd] = useState("");
   const [checked, setChecked] = useState(false);
   const [checked1, setChecked1] = useState(false);
@@ -56,12 +58,14 @@ const ChangePreferenceTraining = () => {
             end={{ x: 0.8, y: 0 }}
           >
             <Text style={globalstyles.selectItemText}>
-              How often you work out
+              How often you work out ?
             </Text>
           </LinearGradient>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => setChecked1(!checked1)}>
+        <TouchableOpacity onPress={() => navigation.navigate("SignUp18T",{item:{
+          is_go_back:true
+        }}) }>
           <LinearGradient
             style={globalstyles.selectItem}
             colors={["#FDFFF4", "#BBC1AD"]}
@@ -69,7 +73,7 @@ const ChangePreferenceTraining = () => {
             end={{ x: 0.8, y: 0 }}
           >
             <Text style={globalstyles.selectItemText}>
-              Where you want to work out
+              Where you want to work out ?
             </Text>
           </LinearGradient>
         </TouchableOpacity>
@@ -122,8 +126,8 @@ const ChangePreferenceTraining = () => {
         }}
       >
         <TouchableOpacity
-          //onPress={() => navigation.navigate("ChangeGoal")}
-          onPress={() => navigation.goBack()}
+          onPress={() => navigation.navigate("ChangeGoal")}
+          //onPress={() => navigation.goBack()}
           style={globalstyles.buttonStyle}
         >
           <Text style={globalstyles.buttonText}>Update</Text>

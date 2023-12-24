@@ -7,12 +7,13 @@ import TrainingAuthStackNavigation from "./TrainingAuthStackNavigation";
 import TrainingMainStackNavigation from "./TrainingMainStackNavigation";
 import FoodMainStackNavigation from "./FoodMainStackNavigation";
 const MainApp = () => {
-  const { whichStack, accounttype,user, isLoggedIn } = useSelector(
+  const { whichStack, accounttype,isLoggedIn } = useSelector(
     (state) => state.userReducer
   );
+ 
   useEffect(() => {
 
-  },[isLoggedIn, accounttype])
+  },[isLoggedIn,whichStack, accounttype])
   return (
     <NavigationContainer>
       {isLoggedIn ? (

@@ -431,3 +431,16 @@ export const setTrainWorkOutDays = (data) => {
     });
   };
 }
+
+
+export const setTrainingData = (data) => {
+  return (dispatch) => {
+    return new Promise(function (resolve, reject) {
+      dispatch({
+        type: "SET_TRAIN_COMPLETE_DATA",
+        payload: data,
+      });
+      resolve();
+    });
+  };
+}

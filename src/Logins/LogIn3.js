@@ -1,9 +1,9 @@
 import {
   appleAuth,
   AppleButton,
-} from '@invertase/react-native-apple-authentication';
-import auth from '@react-native-firebase/auth';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+} from "@invertase/react-native-apple-authentication";
+import auth from "@react-native-firebase/auth";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import React, { useState } from "react";
 import {
   ActivityIndicator,
@@ -34,22 +34,23 @@ import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { setUserLogin } from "../store/actions/userActions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
 const LogIn3 = () => {
-  const dispatch = useDispatch()
-  const { user } = useSelector((state) => state.userReducer);
-  
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const { whichStack, accounttype, user, isLoggedIn } = useSelector(
+    (state) => state.userReducer
+  );
+  const [email, setEmail] = useState("engr.aftabufaq100@gmail.com");
+  const [password, setPassword] = useState("Tikt0k@1");
   const [show1, setShow1] = useState(true);
   const [loading, setLoading] = useState(false);
-  
+
   const loginUser = () => {
     setLoading(true);
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-      emailOrUsername: "engr3.aftabufaq@gmail.com",
-      password: "Tikt0k@1",
+      emailOrUsername: email,
+      password: password,
     });
 
     var requestOptions = {
@@ -64,22 +65,24 @@ const LogIn3 = () => {
         if (response.status != 200) {
           setLoading(false);
           response.json().then((data) => {
-            // console.log(data);
             Alert.alert("Error while siging In", data.message[0]);
           });
         } else {
           response.json().then((data) => {
-            dispatch(
-              setUserLogin({
-                accessToken: data.data.accessToken,
-                refreshToken: data.data.refreshToken,
-                user: data.data.user,
-              })
-             
-            ).then((data) => {
+            if (data.data.user.accountType == accounttype) {
+              dispatch(
+                setUserLogin({
+                  accessToken: data.data.accessToken,
+                  refreshToken: data.data.refreshToken,
+                  user: data.data.user,
+                })
+              ).then((data) => {
+                setLoading(false);
+              });
+            } else {
               setLoading(false);
-             
-            });
+              Alert.alert("Wrong Account", "Please check your credentials");
+            }
           });
         }
       })
@@ -92,19 +95,18 @@ const LogIn3 = () => {
 
   const appleSignIn = async () => {
     onAppleButtonPress()
-      .then(identityToken => {
-        Alert.alert("Login Success", identityToken)
+      .then((identityToken) => {
+        Alert.alert("Login Success", identityToken);
       })
-      .catch(err => {
+      .catch((err) => {
         Alert.alert(
-          'APPLE LOGIN ERROR',
-          'SOME THING WENT WRONG WHILE APPLE SIGNING IN',
+          "APPLE LOGIN ERROR",
+          "SOME THING WENT WRONG WHILE APPLE SIGNING IN",
           [
             {
-              text: 'OK',
-             
+              text: "OK",
             },
-          ],
+          ]
         );
       });
   };
@@ -118,21 +120,21 @@ const LogIn3 = () => {
         });
         // Ensure Apple returned a user identityToken
         if (!appleAuthRequestResponse.identityToken) {
-          reject('Apple Sign-In failed - no identify token returned');
+          reject("Apple Sign-In failed - no identify token returned");
         }
 
         // Create a Firebase credential from the response
-        const {identityToken, nonce} = appleAuthRequestResponse;
+        const { identityToken, nonce } = appleAuthRequestResponse;
         const appleCredential = auth.AppleAuthProvider.credential(
           identityToken,
-          nonce,
+          nonce
         );
         // Sign the user in with the credential
         try {
           let data = await auth().signInWithCredential(appleCredential);
           return resolve(identityToken);
         } catch (err) {
-          reject('Apple Sign-In failed - no identify token returned');
+          reject("Apple Sign-In failed - no identify token returned");
         }
       } catch (err) {
         reject(JSON.stringify(err));
@@ -145,54 +147,53 @@ const LogIn3 = () => {
       autoResolve: true,
       showPlayServicesUpdateDialog: true,
     })
-      .then(async playServicesReponse => {
+      .then(async (playServicesReponse) => {
         GoogleSignin.signIn()
-          .then(userInfo => {
+          .then((userInfo) => {
             const googleCredential = auth.GoogleAuthProvider.credential(
-              userInfo.idToken,
+              userInfo.idToken
             );
             auth()
               .signInWithCredential(googleCredential)
-              .then(data => {
+              .then((data) => {
                 Alert.alert("GOOGLE DONE", auth().currentUser.displayName);
               })
-              .catch(err => {
+              .catch((err) => {
                 setLoading(false);
                 Alert.alert(
-                  'GOOGLE SIGNIN ERROR',
+                  "GOOGLE SIGNIN ERROR",
                   JSON.stringify(err.userInfo.NSLocalizedDescription, [
                     {
-                      text: 'OK',
+                      text: "OK",
                       onPress: () => setLoading(false),
                     },
-                  ]),
+                  ])
                 );
               });
           })
-          .catch(err => {
+          .catch((err) => {
             setLoading(false);
             Alert.alert(
-              'GOOGLE SIGNIN ERROR',
+              "GOOGLE SIGNIN ERROR",
               JSON.stringify(err.userInfo.NSLocalizedDescription, [
                 {
-                  text: 'OK',
+                  text: "OK",
                   onPress: () => setLoading(false),
                 },
-              ]),
+              ])
             );
           });
       })
-      .catch(err => {
+      .catch((err) => {
         setLoading(false);
-        Alert.alert('GOOGLE PLAY ERROR', JSON.stringify(err.message), [
+        Alert.alert("GOOGLE PLAY ERROR", JSON.stringify(err.message), [
           {
-            text: 'OK',
+            text: "OK",
             onPress: () => setLoading(false),
           },
         ]);
       });
   };
-
 
   return (
     <KeyBoardHandle>
@@ -218,7 +219,7 @@ const LogIn3 = () => {
               fontWeight: "400",
               fontSize: RFValue(12),
             }}
-          > 
+          >
             LOG IN
           </Text>
         </View>
@@ -337,10 +338,16 @@ const LogIn3 = () => {
             <TouchableOpacity style={styles.buttonBox}>
               <SvgXml xml={facebook} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonBox} onPress={() => googleSignIn()} >
+            <TouchableOpacity
+              style={styles.buttonBox}
+              onPress={() => googleSignIn()}
+            >
               <SvgXml xml={google} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonBox} onPress={() => appleSignIn()} >
+            <TouchableOpacity
+              style={styles.buttonBox}
+              onPress={() => appleSignIn()}
+            >
               <SvgXml xml={appleLogo} />
             </TouchableOpacity>
           </View>
