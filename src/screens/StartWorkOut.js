@@ -15,7 +15,7 @@ import { moderateScale } from "react-native-size-matters";
 import fonts from "../constants/fonts";
 import { RFValue } from "react-native-responsive-fontsize";
 import { globalstyles } from "../styles/globalestyles";
-import { useGetSubCategoryDataByIdQuery } from "../store/services/workOutApi";
+import { useGetCustomWorkOutByIdQuery } from "../store/services/workOutApi";
 import Loading from "../Components/Loading";
 import Error1 from "./Error1";
 import moment from "moment";
@@ -88,142 +88,119 @@ const styles = StyleSheet.create({
   },
 });
 
-let data = [
-  {
-    left: "Pull ups x5",
-    right: "Body Weight x 12 x 3",
-  },
-  {
-    left: "Lat pull-downs",
-    right: "70 kg  x 10 x 3",
-  },
+const StartWorkOut = ({ route }) => {
+  const item = route.params.item;
 
-  {
-    left: "Bent-over-row",
-    right: "40 kg  x 10 x 3",
-  },
-  {
-    left: "Preachers curl",
-    right: "35 kg  x 12",
-  },
-  {
-    left: "Hammer curls",
-    right: "15kg  x 12 x 3",
-  },
-  {
-    left: "Inclined curls",
-    right: "15 kg  x 10 x 3",
-  },
-];
-
-const renderitem = (name) => {
-  return (
-    <View style={styles.mainContainer}>
-      <View style={styles.headerRow}>
-        <View style={styles.leftRow}>
-          <Image
-            style={{
-              resizeMode: "contain",
-              width: getHeight(3),
-              height: getHeight(3),
-            }}
-            source={require("../../assets/images/legs.png")}
-          />
-
-          <Text style={styles.headerleftText}>{name} workout</Text>
-        </View>
-
-        <Text style={styles.headerRightText}>{moment().format("DD-MMM-YY")}</Text>
-      </View>
-      <View style={styles.headerRow}>
-        <Text style={styles.timeText}>2h 25 min</Text>
-        <Text style={styles.timeText}>25 sets</Text>
-      </View>
-      <View style={{ ...styles.headerRow, height: getHeight(4.2) }}>
-        <Text style={styles.boldText}>Exercise</Text>
-        <Text style={styles.boldText}>Repetitions</Text>
-      </View>
-      {data.map((item, index) => (
-        <View style={styles.headerRow} key={`${index}`}>
-          <Text style={styles.normalTxt}>{item.left}</Text>
-          <Text style={styles.normalTxt}>{item.right}</Text>
-        </View>
-      ))}
-    </View>
-  );
-};
-const StartWorkOut = ({route}) => {
-  const item = route.params.item
-  
   const navigation = useNavigation();
-  const { data, isSuccess, isLoading, isError, isFetching }  = useGetSubCategoryDataByIdQuery({id:item.id})
-  console.log(data, "DTAAA");
-  if(isLoading || isFetching){
-    return(
-      <Loading />
-    )
+  const { data, isSuccess, isLoading, isError, isFetching } =
+    useGetCustomWorkOutByIdQuery({ id: item.id });
+  if (isLoading || isFetching) {
+    return <Loading />;
   }
 
-  if(isError){
-    return(
-      <Error1 />
-    )
+  if (isError) {
+    return <Error1 />;
   }
-  if(isSuccess){
-  return (
-    <LinearGradient
-      style={{
-        alignItems: "center",
-        paddingVertical: 30,
-        height: "100%",
-      }}
-      colors={["#FDFFF4", "#BBC1AD"]}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 0.8, y: 0 }}
-    >
-      <HeaderMainScreen
-        onPress={() => navigation.goBack()}
-        title={"Workouts"}
-        subTitle={"Start Pull Workout"}
-        subTitleStyle={{
-          color: "grey",
+  if (isSuccess && data.data.length > 0) {
+    const exerciseData = data.data[0];
+    const duration = moment.duration(exerciseData.time, "minutes");
+    const hours = duration.hours();
+    const minutes = duration.minutes();
+    return (
+      <LinearGradient
+        style={{
+          alignItems: "center",
+          paddingVertical: 30,
+          height: "100%",
         }}
-      />
+        colors={["#FDFFF4", "#BBC1AD"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0.8, y: 0 }}
+      >
+        <HeaderMainScreen
+          onPress={() => navigation.goBack()}
+          title={"Workouts"}
+          subTitle={`Start ${exerciseData.subCategory.categoryName} Workout`}
+          subTitleStyle={{
+            color: "grey",
+          }}
+        />
 
-      <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
-        <Text
-          style={{
-            fontFamily: fonts.AnekBanglaMedium,
-            marginTop: moderateScale(20),
-            textAlign: "center",
-            fontSize: RFValue(20),
-          }}
-        >
-          Exercises
-        </Text>
-        <View
-          style={{
-            width: getWidth(95),
-            alignItems: "center",
-            justifyContent: "space-evenly",
-          }}
-        >
-          {renderitem(item.categoryName)}
-        </View>
-        <TouchableOpacity
-          onPress={() =>  navigation.navigate("ActiveWorkOut1")}
-          style={{
-            ...globalstyles.buttonStyle,
-            marginTop: moderateScale(80),
-            width: getWidth(90),
-          }}
-        >
-          <Text style={globalstyles.buttonText}>Start Workout</Text>
-        </TouchableOpacity>
-      </ScrollView>
-    </LinearGradient>
-  );
-        }
+        <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
+          <Text
+            style={{
+              fontFamily: fonts.AnekBanglaMedium,
+              marginTop: moderateScale(20),
+              textAlign: "center",
+              fontSize: RFValue(20),
+            }}
+          >
+            Exercises
+          </Text>
+          <View
+            style={{
+              width: getWidth(95),
+              alignItems: "center",
+              justifyContent: "space-evenly",
+            }}
+          >
+            <View style={styles.mainContainer}>
+              <View style={styles.headerRow}>
+                <View style={styles.leftRow}>
+                  <Image
+                    style={{
+                      resizeMode: "contain",
+                      width: getHeight(3),
+                      height: getHeight(3),
+                    }}
+                    source={{ uri: exerciseData.subCategory.categoryAvatar }}
+                  />
+
+                  <Text style={styles.headerleftText}>
+                    {exerciseData.subCategory.categoryName} workout
+                  </Text>
+                </View>
+
+                <Text style={styles.headerRightText}>
+                  {moment().format("DD-MMM-YY")}
+                </Text>
+              </View>
+              <View style={styles.headerRow}>
+                <Text style={styles.timeText}>
+                  {hours} hr {minutes} min
+                </Text>
+              </View>
+              <View style={{ ...styles.headerRow, height: getHeight(4.2) }}>
+                <Text style={styles.boldText}>Exercise</Text>
+                <Text style={styles.boldText}>Repetitions</Text>
+              </View>
+              {exerciseData.exercises.map((item, index) => (
+                <View style={styles.headerRow} key={`${index}`}>
+                  <Text style={styles.normalTxt}>{item.name}</Text>
+                  <Text style={styles.normalTxt}>
+                    {item.weight} x {item.sets} x {item.repetitions}
+                  </Text>
+                </View>
+              ))}
+            </View>
+          </View>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("ActiveWorkOut1", { item: exerciseData })
+            }
+            style={{
+              ...globalstyles.buttonStyle,
+              marginTop: moderateScale(80),
+              width: getWidth(90),
+            }}
+          >
+            <Text style={globalstyles.buttonText}>Start Workout</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      </LinearGradient>
+    );
+  }
+  return <Error1 />;
 };
 
 export default StartWorkOut;

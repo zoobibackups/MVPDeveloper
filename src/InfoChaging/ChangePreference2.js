@@ -1,28 +1,22 @@
 import React, { useState } from "react";
 
-import { useNavigation } from "@react-navigation/core";
 import {
-  Image,
   Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import Checkbox from "../Components/CheckBox";
+import { moderateScale } from "react-native-size-matters";
+import AntDesign from "react-native-vector-icons/AntDesign";
 import HeaderMainScreen from "../Components/HeaderMainScreen";
+import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { globalstyles } from "../styles/globalestyles";
-
-const ChangePreference2 = () => {
-  const [confirmPassword, setConfirmPassowrd] = useState("");
-  const [checked, setChecked] = useState(false);
-  const [checked1, setChecked1] = useState(false);
-  const [checked2, setChecked2] = useState(false);
-  const [checked3, setChecked3] = useState(false);
+const ChangePreference2 = ({navigation, route}) => {
   const [checked4, setChecked4] = useState(false);
-  const navigation = useNavigation();
+  
 
   return (
     <LinearGradient
@@ -47,7 +41,7 @@ const ChangePreference2 = () => {
       />
 
       <View style={styles.itemContainer}>
-        <TouchableOpacity onPress={() => setChecked(!checked)}>
+        <TouchableOpacity onPress={() =>  navigation.navigate("SignUp3",{isUpdate:true}) }>
           <LinearGradient
             style={globalstyles.selectItem}
             colors={["#FDFFF4", "#BBC1AD"]}
@@ -55,17 +49,17 @@ const ChangePreference2 = () => {
             end={{ x: 0.8, y: 0 }}
           >
             <Text style={globalstyles.selectItemText}>
-              Where you want to work out
+              How Often You Workout
             </Text>
-            <Checkbox
-              isChecked={checked}
-              onPress={() => {
-                setChecked(!checked);
-              }}
+            <AntDesign
+              color={theme.blueColor}
+              size={moderateScale(22)}
+              style={{marginRight:moderateScale(20)}}
+              name="rightcircleo"
             />
           </LinearGradient>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setChecked1(!checked1)}>
+        <TouchableOpacity  onPress={() =>  navigation.navigate("SignUp6",{isUpdate:true}) }>
           <LinearGradient
             style={globalstyles.selectItem}
             colors={["#FDFFF4", "#BBC1AD"]}
@@ -73,15 +67,17 @@ const ChangePreference2 = () => {
             end={{ x: 0.8, y: 0 }}
           >
             <Text style={globalstyles.selectItemText}>Dietary preferences</Text>
-            <Checkbox
-              isChecked={checked1}
-              onPress={() => {
-                setChecked1(!checked1);
-              }}
+            <AntDesign
+              color={theme.blueColor}
+              size={moderateScale(22)}
+              style={{marginRight:moderateScale(20)}}
+              name="rightcircleo"
             />
           </LinearGradient>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setChecked2(!checked2)}>
+        <TouchableOpacity 
+        onPress={() =>  navigation.navigate("SignUp7",{isUpdate:true}) }
+        >
           <LinearGradient
             style={globalstyles.selectItem}
             colors={["#FDFFF4", "#BBC1AD"]}
@@ -89,15 +85,16 @@ const ChangePreference2 = () => {
             end={{ x: 0.8, y: 0 }}
           >
             <Text style={globalstyles.selectItemText}>Cuisines</Text>
-            <Checkbox
-              isChecked={checked2}
-              onPress={() => {
-                setChecked2(!checked2);
-              }}
+            <AntDesign
+              color={theme.blueColor}
+              size={moderateScale(22)}
+              style={{marginRight:moderateScale(20)}}
+              name="rightcircleo"
             />
           </LinearGradient>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setChecked3(!checked3)}>
+        <TouchableOpacity 
+         onPress={() =>  navigation.navigate("SignUp8",{isUpdate:true}) }>
           <LinearGradient
             style={globalstyles.selectItem}
             colors={["#FDFFF4", "#BBC1AD"]}
@@ -107,15 +104,15 @@ const ChangePreference2 = () => {
             <Text style={globalstyles.selectItemText}>
               Ingredients to avoid
             </Text>
-            <Checkbox
-              isChecked={checked3}
-              onPress={() => {
-                setChecked3(!checked3);
-              }}
+            <AntDesign
+              color={theme.blueColor}
+              size={moderateScale(22)}
+              style={{marginRight:moderateScale(20)}}
+              name="rightcircleo"
             />
           </LinearGradient>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setChecked4(!checked4)}>
+        <TouchableOpacity   onPress={() =>  navigation.navigate("SignUp9",{isUpdate:true}) }>
           <LinearGradient
             style={globalstyles.selectItem}
             colors={["#FDFFF4", "#BBC1AD"]}
@@ -125,17 +122,17 @@ const ChangePreference2 = () => {
             <Text style={globalstyles.selectItemText}>
               Ingredients you prefer
             </Text>
-            <Checkbox
-              isChecked={checked4}
-              onPress={() => {
-                setChecked4(!checked4);
-              }}
+            <AntDesign
+              color={theme.blueColor}
+              size={moderateScale(22)}
+              style={{marginRight:moderateScale(20)}}
+              name="rightcircleo"
             />
           </LinearGradient>
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate("ChangeGoal")}
+         
           style={globalstyles.buttonStyle}
         >
           <Text

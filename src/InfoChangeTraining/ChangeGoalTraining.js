@@ -1,29 +1,74 @@
 import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/core";
 import {
   Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
+  Alert,
   View,
 } from "react-native";
-import { getHeight, getWidth } from "../functions/CommonFunctions";
-import { useNavigation } from "@react-navigation/core";
 import LinearGradient from "react-native-linear-gradient";
-import { SvgXml } from "react-native-svg";
-import { backward, preformly } from "../../assets/svg";
+import { RFValue } from "react-native-responsive-fontsize";
 import Checkbox from "../Components/CheckBox";
-import HeaderMainScreen from "../Components/HeaderMainScreen";
-import { globalstyles } from "../styles/globalestyles";
-const ChangeGoalTraining = () => {
-  const [confirmPassword, setConfirmPassowrd] = useState("");
-  const [checked, setChecked] = useState(false);
-  const [checked1, setChecked1] = useState(false);
-  const [checked2, setChecked2] = useState(false);
-  const [checked3, setChecked3] = useState(false);
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const [check1, setCheck1] = useState(false);
-  const navigation = useNavigation();
+import CustomHeader from "../Components/CustomHeader";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
+import textStyles, { globalstyles } from "../styles/globalestyles";
+const elevationValue = Platform.OS === "android" ? 0 : 5;
+import { setGoal } from "../store/actions/userActions";
+import { useDispatch, useSelector } from "react-redux";
+const ChangeGoalTraining = ({navigation, route}) => {
+  const dispatch = useDispatch();
+  const { user, foodMetaData } = useSelector((state) => state.userReducer);
+  const finalGoal = foodMetaData.finalGoal
+  console.log(finalGoal);
+  const [checked, setChecked] = useState(finalGoal == "Lose Weight"?true:false);
+  const [checked1, setChecked1] = useState(finalGoal == "Gain Weight"?true:false);
+  const [checked2, setChecked2] = useState(finalGoal == "Maintain Weight"?true:false);
+  const [checked3, setChecked3] = useState(finalGoal == "Live healthier"?true:false);
+  const [checked4, setChecked4] = useState(finalGoal == "Use the app without goal"?true:false);
 
+  const validateData = () => {
+    if (checked || checked1 || checked2 || checked3 || checked4) {
+      if (checked) {
+        dispatch(setGoal({ value: "Lose Weight", goalWeight: true })).then(
+          () => {
+              navigation.goBack()
+          }
+        );
+      }
+      if (checked1) {
+        dispatch(setGoal({ value: "Gain Weight", goalWeight: true })).then(
+          () => {
+            navigation.goBack()
+          }
+        );
+      }
+      if (checked2) {
+        dispatch(setGoal({ value: "Maintain Weight", goalWeight: true })).then(
+          () => {
+            navigation.goBack()
+          }
+        );
+      }
+      if (checked3) {
+        dispatch(setGoal({ value: "Live healthier", goalWeight: true })).then(
+          () => {
+            navigation.goBack()
+          }
+        );
+      }
+      if (checked4) {
+        dispatch(
+          setGoal({ value: "Use the app without goal", goalWeight: false })
+        ).then(() => {
+          navigation.goBack()
+        });
+      }
+    } else {
+      Alert.alert("NO OPTION SELECTED", "Please select an option");
+    }
+  };
   return (
     <LinearGradient
       style={{
@@ -36,40 +81,21 @@ const ChangeGoalTraining = () => {
       start={{ x: 0, y: 0 }}
       end={{ x: 0.8, y: 0 }}
     >
-      <HeaderMainScreen
+      <CustomHeader
         onPress={() => navigation.goBack()}
-        title={"CHANGE  PROFILE"}
-        subTitle={"TELL US ABOUT YOUR GOALS"}
-        subTitleStyle={{
-          textAlign: "center",
-          alignSelf: "center",
-        }}
+        title={"CREATE PROFILE"}
+        subTitle={"TELL US ABOUT YOUR GOALS:"}
       />
 
-      <View
-        style={{
-          paddingVertical: 10,
-          height: getHeight(50),
-          width: getWidth(97),
-          borderColor: "red",
-          // borderWidth: 1,
-          alignItems: "center",
-          justifyContent: "space-evenly",
-          shadowColor: "rgba(103, 128, 159, 0.5)", // Adjust the shadow color as needed
-          shadowOffset: { width: 0, height: 5 }, // Adjust the shadow offset as needed
-          shadowOpacity: 1, // Adjust the shadow opacity as needed
-          shadowRadius: 10, // Adjust the shadow radius as needed
-          elevation: Platform.OS === "android" ? 0 : 5,
-        }}
-      >
+      <View style={styles.innerContainer}>
         <TouchableOpacity onPress={() => setChecked(!checked)}>
           <LinearGradient
-            style={globalstyles.selectItem}
             colors={["#FDFFF4", "#BBC1AD"]}
             start={{ x: 0, y: 0 }}
             end={{ x: 0.8, y: 0 }}
+            style={styles.selectItem}
           >
-            <Text style={globalstyles.selectItemText}>Lose Weight</Text>
+            <Text style={styles.selectItemText}>Lose Weight</Text>
             <Checkbox
               isChecked={checked}
               onPress={() => {
@@ -79,31 +105,14 @@ const ChangeGoalTraining = () => {
           </LinearGradient>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => setChecked1(!checked1)}>
-          <LinearGradient
-            style={globalstyles.selectItem}
-            colors={["#FDFFF4", "#BBC1AD"]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 0.8, y: 0 }}
-          >
-            <Text style={globalstyles.selectItemText}>Gain Weight</Text>
-            <Checkbox
-              isChecked={checked1}
-              onPress={() => {
-                setChecked1(!checked1);
-              }}
-            />
-          </LinearGradient>
-        </TouchableOpacity>
-
         <TouchableOpacity onPress={() => setChecked2(!checked2)}>
           <LinearGradient
-            style={globalstyles.selectItem}
             colors={["#FDFFF4", "#BBC1AD"]}
             start={{ x: 0, y: 0 }}
             end={{ x: 0.8, y: 0 }}
+            style={styles.selectItem}
           >
-            <Text style={globalstyles.selectItemText}>Live healthier</Text>
+            <Text style={styles.selectItemText}>Gain Weight</Text>
             <Checkbox
               isChecked={checked2}
               onPress={() => {
@@ -113,16 +122,31 @@ const ChangeGoalTraining = () => {
           </LinearGradient>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => setChecked3(!checked3)}>
+        <TouchableOpacity onPress={() => setChecked1(!checked1)}>
           <LinearGradient
-            style={globalstyles.selectItem}
             colors={["#FDFFF4", "#BBC1AD"]}
             start={{ x: 0, y: 0 }}
             end={{ x: 0.8, y: 0 }}
+            style={styles.selectItem}
           >
-            <Text style={globalstyles.selectItemText}>
-              Use the app without a goal
-            </Text>
+            <Text style={styles.selectItemText}>Maintain Weight</Text>
+            <Checkbox
+              isChecked={checked1}
+              onPress={() => {
+                setChecked1(!checked1);
+              }}
+            />
+          </LinearGradient>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => setChecked3(!checked3)}>
+          <LinearGradient
+            colors={["#FDFFF4", "#BBC1AD"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0.8, y: 0 }}
+            style={styles.selectItem}
+          >
+            <Text style={styles.selectItemText}>Live healthier</Text>
             <Checkbox
               isChecked={checked3}
               onPress={() => {
@@ -131,22 +155,30 @@ const ChangeGoalTraining = () => {
             />
           </LinearGradient>
         </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => setChecked4(!checked4)}>
+          <LinearGradient
+            colors={["#FDFFF4", "#BBC1AD"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0.8, y: 0 }}
+            style={styles.selectItem}
+          >
+            <Text style={styles.selectItemText}>Use the app without goal</Text>
+            <Checkbox
+              isChecked={checked4}
+              onPress={() => {
+                setChecked4(!checked4);
+              }}
+            />
+          </LinearGradient>
+        </TouchableOpacity>
       </View>
-      <View
-        style={{
-          alignItems: "center",
-          borderColor: "red",
-          height: getHeight(15),
-          justifyContent: "flex-end",
-          width: getWidth(99),
-        }}
-      >
+      <View style={styles.buttonContianer}>
         <TouchableOpacity
-          //onPress={() => navigation.navigate('UpdateWeight')}
-          onPress={() => navigation.goBack()}
+          onPress={() => validateData()}
           style={globalstyles.buttonStyle}
         >
-          <Text style={globalstyles.buttonText}>Update</Text>
+          <Text style={globalstyles.buttonText}>Next</Text>
         </TouchableOpacity>
       </View>
     </LinearGradient>
@@ -161,5 +193,48 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderColor: "#1B1561",
   },
+  checkbox: {
+    marginHorizontal: 10,
+    marginVertical: 5,
+  },
+  innerContainer: {
+    paddingVertical: 10,
+    height: getHeight(50),
+    width: getWidth(97),
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    shadowColor: "rgba(103, 128, 159, 0.5)", // Adjust the shadow color as needed
+    shadowOffset: { width: 0, height: 5 }, // Adjust the shadow offset as needed
+    shadowOpacity: 1, // Adjust the shadow opacity as needed
+    shadowRadius: 10, // Adjust the shadow radius as needed
+    elevation: elevationValue,
+  },
+  selectItemText: {
+    ...textStyles.lightText,
+    fontWeight: "400",
+    fontSize: RFValue(12),
+    paddingLeft: RFValue(10),
+  },
+  selectItem: {
+    width: getWidth(90),
+    borderRadius: 20,
+    height: getHeight(7),
+    borderColor: "#F5F5F5",
+    shadowColor: "rgba(103, 128, 159)",
+    elevation: 32,
+    justifyContent: "space-between",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 5,
+  },
+  buttonContianer: {
+    alignItems: "center",
+    borderColor: "red",
+    height: getHeight(10),
+    justifyContent: "flex-end",
+    backgroundColor: "transparent",
+    width: getWidth(99),
+  },
 });
+
 export default ChangeGoalTraining;

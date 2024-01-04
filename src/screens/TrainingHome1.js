@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/core";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Platform,
   ScrollView,
@@ -10,8 +10,11 @@ import {
   View,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import { SvgXml } from "react-native-svg";
 import Modal from "react-native-modal";
+import { RFValue } from "react-native-responsive-fontsize";
+import { moderateScale } from "react-native-size-matters";
+import { SvgXml } from "react-native-svg";
+import { useDispatch, useSelector } from "react-redux";
 import {
   bicep,
   chart,
@@ -22,29 +25,24 @@ import {
   fire,
   flag,
   history,
-  man,
   preformly,
   runningMan,
   sleep,
   spark,
 } from "../../assets/svg";
-import { getHeight, getWidth } from "../functions/CommonFunctions";
-import { RFValue } from "react-native-responsive-fontsize";
 import fonts from "../constants/fonts";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { globalstyles } from "../styles/globalestyles";
-import { moderateScale } from "react-native-size-matters";
-import { useDispatch, useSelector } from "react-redux";
-import { Image } from "react-native";
+import * as Progress from "react-native-progress";
 import moment from "moment";
+import { Image } from "react-native";
+import AppleHealthKit from "react-native-health";
+import { setTrainingData } from "../store/actions/userActions";
+import { useGetUserTrainingDataQuery } from "../store/services/userApi";
+import theme from "../constants/theme";
 let currentDate = new Date();
 let oneDayAgo = new Date(currentDate);
 oneDayAgo.setDate(currentDate.getDate() - 1);
-import AppleHealthKit, {
-  HealthValue,
-  HealthKitPermissions,
-} from "react-native-health";
-import { useGetUserTrainingDataQuery } from "../store/services/userApi";
-import { setTrainingData } from "../store/actions/userActions";
 
 /* Permission options */
 const permissions = {
@@ -62,7 +60,7 @@ const permissions = {
   },
 };
 const TrainingHome1 = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation();
   const { user } = useSelector((state) => state.userReducer);
@@ -72,14 +70,15 @@ const TrainingHome1 = () => {
   const [calories, setCalories] = useState(0);
   const [walking, setWalking] = useState(0);
   const [sleeptime, setSleepTime] = useState(0);
-  const {data, isSuccess, isError, isFetching} = useGetUserTrainingDataQuery({id:user.id})
+  const { data, isSuccess, isError, isFetching } = useGetUserTrainingDataQuery({
+    id: user.id,
+  });
 
   useEffect(() => {
-    
-    if(isSuccess){
+    if (isSuccess) {
       dispatch(setTrainingData(data));
     }
-  },[data,isSuccess, isError, isFetching])
+  }, [data, isSuccess, isError, isFetching]);
   useEffect(() => {
     AppleHealthKit.initHealthKit(permissions, (error) => {
       /* Called after we receive a response from the system */
@@ -103,19 +102,22 @@ const TrainingHome1 = () => {
         console.log(results, "exercise time");
         //setExerciseTime(results.value);
       });
-      AppleHealthKit.getActiveEnergyBurned(options, (callbackError, results) => {
-       let value = 0
-       results.forEach(element => {
-          value  = parseFloat(value) + parseFloat(element.value)
-       });
-       setCalories(parseFloat(value).toFixed(1));
-      });
+      AppleHealthKit.getActiveEnergyBurned(
+        options,
+        (callbackError, results) => {
+          let value = 0;
+          results.forEach((element) => {
+            value = parseFloat(value) + parseFloat(element.value);
+          });
+          setCalories(parseFloat(value).toFixed(1));
+        }
+      );
       AppleHealthKit.getDistanceWalkingRunning(
         options,
         (callbackError, results) => {
-         if(callbackError == null){
-          setWalking(parseFloat(results.value/1000).toFixed(2))
-         }
+          if (callbackError == null) {
+            setWalking(parseFloat(results.value / 1000).toFixed(2));
+          }
         }
       );
       AppleHealthKit.getSleepSamples(
@@ -123,7 +125,7 @@ const TrainingHome1 = () => {
           startDate: new Date(2023, 12, 11).toISOString(), // required
         },
         (callbackError, results) => {
-          console.log(results[0],callbackError, "results");
+
           let data = results[0];
           const startDate = moment(options.startDate);
           const endDate = moment(options.endDate);
@@ -211,7 +213,10 @@ const TrainingHome1 = () => {
               />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate("StepCounter")}>
+          <TouchableOpacity onPress={() => navigation.navigate("StepCounter", {item:{
+            stepCount:stepCount,
+
+          }})}>
             <View style={styles.stepsRow}>
               <View
                 style={{
@@ -221,11 +226,18 @@ const TrainingHome1 = () => {
                   alignItems: "center",
                 }}
               >
-                <SvgXml
-                  width={getWidth(30)}
-                  height={getHeight(20)}
-                  xml={chart}
+                
+                <Progress.Circle
+                  size={getWidth(28)}
+                  color={theme.blueColor}
+                  unfilledColor={"gray"}
+                  borderColor={"#0000"}
+                  progress= {parseFloat((stepCount/10000))}
+                  indeterminate={false}
+                  thickness={moderateScale(8)}
+                  borderWidth={moderateScale(1)}
                 />
+
                 <Text
                   style={{
                     position: "absolute",
@@ -233,7 +245,7 @@ const TrainingHome1 = () => {
                     fontFamily: fonts.AnekBanglaMedium,
                   }}
                 >
-                  85%
+                  {(stepCount/10000)*100} %
                 </Text>
               </View>
               <View
@@ -386,7 +398,7 @@ const TrainingHome1 = () => {
                   </Text>
                 </View>
                 <Text style={{ ...styles.numberText, color: "#0DB1AD" }}>
-                 {walking}
+                  {walking}
                   <Text style={{ ...styles.unitText, color: "#0DB1AD" }}>
                     km
                   </Text>
@@ -405,7 +417,7 @@ const TrainingHome1 = () => {
                   </Text>
                 </View>
                 <Text style={{ ...styles.numberText, color: "#197BD2" }}>
-                {sleeptime}
+                  {sleeptime}
                   <Text style={{ ...styles.unitText, color: "#197BD2" }}>
                     hrs
                   </Text>
@@ -595,7 +607,12 @@ const TrainingHome1 = () => {
                     alignItems: "center",
                   }}
                 >
-                  <TouchableOpacity onPress={() => {                       setModalVisible(false),navigation.navigate("CustomWorkOut")}}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setModalVisible(false),
+                        navigation.navigate("CustomWorkOut");
+                    }}
+                  >
                     <View
                       style={{
                         height: getHeight(14),
@@ -805,7 +822,6 @@ const styles = StyleSheet.create({
   },
 });
 export default TrainingHome1;
-
 
 /*
 

@@ -9,6 +9,7 @@ const getWeekData = () => {
     const dayObject = {
       date: currentDate.date(),
       name: currentDate.format("ddd"), // 'ddd' gives the abbreviated day name,
+      fullName:currentDate.format("dddd"),
       isSelected: currentDate.isSame(moment(), 'day'), // Check if it's today
     };
     weekData.push(dayObject);

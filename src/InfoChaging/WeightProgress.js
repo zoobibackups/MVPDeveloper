@@ -1,21 +1,18 @@
 import React from "react";
 
 import {
+  FlatList,
   Image,
   StyleSheet,
   Text,
-  TouchableOpacity,
-  View,
-  FlatList,
+  View
 } from "react-native";
-import { getHeight, getWidth } from "../functions/CommonFunctions";
-import { useNavigation } from "@react-navigation/core";
 import LinearGradient from "react-native-linear-gradient";
+import { useSelector } from "react-redux";
 import HeaderMainScreen from "../Components/HeaderMainScreen";
-
-const data = ["67 Kg", "66 Kg", "64 Kg", "60 Kg", "59 Kg", "58 Kg"];
-const WeightProgress = () => {
-  const navigation = useNavigation();
+import { getHeight, getWidth } from "../functions/CommonFunctions";
+const WeightProgress = ({navigation,route}) => {
+  const {userWeight} = useSelector(state => state.userWeightReducer)
   return (
     <LinearGradient
       style={{
@@ -38,18 +35,19 @@ const WeightProgress = () => {
         }}
       />
       <FlatList
-        data={data}
+        data={userWeight}
         numColumns={2}
+        ListEmptyComponent={<View><Text>No Data Found</Text></View>}
         renderItem={({ item, index }) => {
           return (
             <View style={styles.itemContainer}>
-              <Text style={styles.text}>{item}</Text>
+              <Text style={styles.text}>{item.weight} Kg</Text>
               <Image
                 style={{
                   width: getWidth(25),
                   height: getHeight(15),
                 }}
-                source={require("../../assets/images/weights.png")}
+                source={{uri:item.image}}
               />
             </View>
           );

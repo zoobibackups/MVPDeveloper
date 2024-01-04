@@ -20,9 +20,9 @@ export const userExercise = createApi({
       query: args => { 
         const {data} = args;
         return {
-          url: `user_exercise`,
+          url: `exercise`,
           method: 'POST',
-          body:data
+          data:data
 
         };
       },
@@ -30,8 +30,9 @@ export const userExercise = createApi({
     }),
     getUserExercise: builder.query({
       query: args => {
+       
         return {
-          url: `user_exercise`,
+          url: `exercise`,
           method: 'GET',
         
         };
@@ -40,9 +41,9 @@ export const userExercise = createApi({
     }),
     getUserExerciseByUserId: builder.query({
       query: args => {
-       const {id}  = args
+       const {id}  =args
         return {
-          url: `user_exercise/${id}`,
+          url: `exercise/${id}`,
           method: 'GET',
         };
       },
@@ -52,7 +53,7 @@ export const userExercise = createApi({
       query: args => {
        const {id, data}  =args
         return {
-          url: `user_exercise/${id}`,
+          url: `exercise/${id}`,
           method: 'PATCH',
           data:data
         };
@@ -63,7 +64,7 @@ export const userExercise = createApi({
       query: args => {
        const {id}  =args
         return {
-          url: `user_exercise/${id}`,
+          url: `exercise/${id}`,
           method: 'DELETE',
         };
       },

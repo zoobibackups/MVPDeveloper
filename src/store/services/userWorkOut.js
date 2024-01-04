@@ -15,13 +15,13 @@ export const userWorkOut = createApi({
   baseQuery: baseQueryWithToken,
   tagTypes: ['userWorkOutData'],
   endpoints: builder => ({
-    createWorkOut:builder.query({
+    createCustomWorkOut:builder.query({
       query: args => {
        const {data} = args
         return {
           url: `user_workout`,
           method: 'POST',
-          data:data
+          body:data
         };
       },
       providesTags: ['userWorkOutData'],
@@ -81,8 +81,8 @@ export const userWorkOut = createApi({
   }),
 });
 export const {
- useCreateWorkOutQuery,
- useLazyCreateWorkOutQuery,
+ useCreateCustomWorkOutQuery,
+ useLazyCreateCustomWorkOutQuery,
  useGetWorkOutQuery,
  useLazyGetWorkOutQuery,
  useGetWorkOutByIdQuery,

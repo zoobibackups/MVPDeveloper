@@ -18,9 +18,11 @@ export const userSetsApi = createApi({
   endpoints: (builder) => ({
     createUserSets: builder.query({
       query: (args) => {
+        const {data} = args
         return {
-          url: `schedule`,
-          method: "GET",
+          url: `users_sets`,
+          method: "POST",
+          body:data
         };
       },
       providesTags: ["userSetsData"],
@@ -29,7 +31,7 @@ export const userSetsApi = createApi({
       query: (args) => {
         const { id } = args;
         return {
-          url: `schedule/${id}`,
+          url: `users_sets/${id}`,
           method: "GET",
         };
       },
@@ -39,7 +41,7 @@ export const userSetsApi = createApi({
       query: (args) => {
         const { data } = args;
         return {
-          url: `schedule`,
+          url: `users_sets`,
           method: "POST",
           data: data,
         };
@@ -48,10 +50,11 @@ export const userSetsApi = createApi({
     }),
     updateUsetSets: builder.query({
       query: (args) => {
-        const { id } = args;
+        const {data, id } = args;
         return {
-          url: `schedule/scheduleByUserId/${id}`,
-          method: "GET",
+          url: `users_sets/${id}`,
+          method: "PATCH",
+          data:data
         };
       },
       providesTags: ["userSetsData"],
@@ -60,8 +63,8 @@ export const userSetsApi = createApi({
       query: (args) => {
         const { id } = args;
         return {
-          url: `schedule/scheduleByUserId/${id}`,
-          method: "GET",
+          url: `users_sets/${id}`,
+          method: "DELETE",
         };
       },
       providesTags: ["userSetsData"],

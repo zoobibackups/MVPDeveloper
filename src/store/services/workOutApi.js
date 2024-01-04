@@ -64,10 +64,11 @@ export const workOutApi = createApi({
     }),
     getCustomWorkOutById: builder.query({
       query: (args) => {
-        const { id } = { args };
+        const { id } = args;
+       
         return {
-          url: `/workout/${id}`,
-          method: "POST",
+          url: `/workout?subCategory=${id}`,
+          method: "GET",
         };
       },
     }),

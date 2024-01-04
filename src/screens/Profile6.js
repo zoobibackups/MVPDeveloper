@@ -1,68 +1,120 @@
 import { useNavigation } from "@react-navigation/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
+  Alert,
   Image,
   ScrollView,
   StyleSheet,
-  TouchableWithoutFeedback,
   Text,
+  ActivityIndicator,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
+import ImagePicker from "react-native-image-crop-picker";
 import LinearGradient from "react-native-linear-gradient";
+import Modal from "react-native-modal";
+import { RFValue } from "react-native-responsive-fontsize";
 import { moderateScale } from "react-native-size-matters";
-import { SvgXml } from "react-native-svg";
-import { man } from "../../assets/svg";
+import { useSelector } from "react-redux";
 import HeaderMainScreen from "../Components/HeaderMainScreen";
 import fonts from "../constants/fonts";
-import { getHeight, getWidth } from "../functions/CommonFunctions";
-import textStyles, { globalstyles } from "../styles/globalestyles";
 import theme from "../constants/theme";
-import { RFValue } from "react-native-responsive-fontsize";
-import Modal from "react-native-modal"
-import { useSelector } from "react-redux";
-const data = [
-  {
-    name: "Bench press",
-    weight: "80 kg",
-  },
-  {
-    name: "Deadlift",
-    weight: "100 kg",
-  },
-  {
-    name: "Squats",
-    weight: "120 kg",
-  },
-  {
-    name: "Shoulder press",
-    weight: "60 kg",
-  },
-];
-
-const data2 = [
-  {
-    name: "Current weight",
-    weight: "76 kg",
-  },
-  {
-    name: "Target wright",
-    weight: "83 kg",
-  },
-  {
-    name: "Height",
-    weight: "178 cm",
-  },
-  {
-    name: "Completed workouts",
-    weight: "26",
-  },
-];
+import { getHeight, getWidth } from "../functions/CommonFunctions";
+import { useLazyUploadCategoryImageQuery } from "../store/services/categoryApi";
+import textStyles, { globalstyles } from "../styles/globalestyles";
 const ProfileTrainingScreen = () => {
-  const {user} = useSelector(state => state.userReducer)
-  console.log(user,"TT");
+  const { user, foodMetaData } = useSelector((state) => state.userReducer);
+  const [uploadCategoryImage, data] = useLazyUploadCategoryImageQuery();
+  const [userData, setUserData] = useState(user);
+  const [exerciseData, setData] = useState([
+    {
+      name: "Number Of Meals",
+      weight: "80 kg",
+    },
+    {
+      name: "Carbs",
+      weight: "100 kg",
+    },
+    {
+      name: "Protein",
+      weight: foodMetaData.protein,
+    },
+    {
+      name: "Calories",
+      weight: "60 kg",
+    },
+  ]);
+  const [data2, setData2] = useState([
+    {
+      name: "Number Of Meals",
+      weight: "80 kg",
+    },
+    {
+      name: "Carbs",
+      weight: "100 kg",
+    },
+    {
+      name: "Protein",
+      weight: foodMetaData.protein,
+    },
+    {
+      name: "Calories",
+      weight: "60 kg",
+    },
+  ]);
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
+
+  useEffect(() => {
+    if (data.isSuccess) {
+      console.log(data.data.secure_url);
+      setUserData({ ...userData, profilePhoto: data.data.secure_url });
+    }
+  }, [data]);
+
+  const openCamera = () => {
+    ImagePicker.openCamera({
+      width: 300,
+      height: 400,
+      cropping: true,
+    })
+      .then((image) => {
+        //setImage(image);
+        uploadImage(image);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const openGalley = () => {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true,
+    })
+      .then((image) => {
+        // setImage(image);
+        uploadImage(image);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const uploadImage = (image) => {
+    const formData = new FormData();
+    formData.append("submit", "submit");
+    const uriPart = image.sourceURL.split(".");
+    const fileExtension = uriPart[uriPart.length - 1];
+    formData.append("file", {
+      uri: image.sourceURL,
+      name: `${fileExtension}`,
+      type: image.mime,
+    });
+    uploadCategoryImage({ data: formData });
+  };
   return (
     <LinearGradient
       style={{
@@ -93,7 +145,22 @@ const ProfileTrainingScreen = () => {
           }}
         >
           <TouchableOpacity
-            onPress={() => navigation.navigate("ProfileSetting6")}
+            onPress={() => {
+              Alert.alert("Pick Image", "Open camera of gallery", [
+                {
+                  text: "Camera",
+                  onPress: () => openCamera(),
+                },
+                {
+                  text: "Gallery",
+                  onPress: () => openGalley(),
+                },
+                {
+                  text: "Cancel",
+                  onPress: () => {},
+                },
+              ]);
+            }}
             style={{
               alignItems: "center",
               borderColor: "grey",
@@ -101,8 +168,8 @@ const ProfileTrainingScreen = () => {
               width: getWidth(20),
             }}
           >
-              <Image
-              source={{ uri: user.profilePhoto }}
+            <Image
+              source={{ uri: userData.profilePhoto }}
               style={{
                 width: getWidth(30),
                 height: getWidth(30),
@@ -110,16 +177,26 @@ const ProfileTrainingScreen = () => {
                 resizeMode: "cover",
               }}
             />
+            {data.isLoading
+               && (
+                <View
+                  style={{
+                    position: "absolute",
+                    padding: moderateScale(5),
+                    borderRadius: 100,
+                    backgroundColor: "#000",
+                  }}
+                >
+                  <ActivityIndicator color={"#ffff"} size={"small"} />
+                </View>
+              )}
           </TouchableOpacity>
         </View>
 
-        <Text style={textStyles.mediumText}>{user.name}</Text>
+        <Text style={textStyles.mediumText}>{userData.name}</Text>
 
-        <Text style={styles.titleText}>Personal bests</Text>
-        <TouchableOpacity
-          style={{ ...styles.shadowContainer }}
-          onPress={() => navigation.navigate("HistoryAndProgress")}
-        >
+        <Text style={styles.titleText}>Lifetime statistic</Text>
+        <TouchableOpacity style={{ ...styles.shadowContainer }}>
           <LinearGradient
             style={{
               flex: 1,
@@ -131,11 +208,11 @@ const ProfileTrainingScreen = () => {
             start={{ x: 0, y: 0 }}
             end={{ x: 0.8, y: 0 }}
           >
-            {data.map((item, index) => (
+            {exerciseData.map((item, index) => (
               <View
                 style={{
                   ...styles.rowStyle,
-                  borderBottomWidth: index == data.length - 1 ? 0 : 1,
+                  borderBottomWidth: index == exerciseData.length - 1 ? 0 : 1,
                 }}
                 key={`${index}`}
               >
@@ -147,12 +224,9 @@ const ProfileTrainingScreen = () => {
         </TouchableOpacity>
 
         <Text style={{ ...styles.titleText, marginTop: moderateScale(20) }}>
-          Measurements
+          Daily statitics
         </Text>
-        <TouchableOpacity
-          style={{ ...styles.shadowContainer }}
-          onPress={() => navigation.navigate("HistoryAndProgress")}
-        >
+        <TouchableOpacity style={{ ...styles.shadowContainer }}>
           <LinearGradient
             style={{
               flex: 1,
@@ -199,7 +273,9 @@ const ProfileTrainingScreen = () => {
             />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("ChangePreference2")}
+            onPress={() =>
+              navigation.navigate("ChangePreference2", { isUpdate: true })
+            }
             style={styles.buttonStyle}
           >
             <Text style={styles.buttonText}>Change preferences</Text>
@@ -243,7 +319,12 @@ const ProfileTrainingScreen = () => {
             />
           </TouchableOpacity>
         </View>
-        <Modal animationn={"fade"} style={{margin:0}} transparent={true} isVisible={modalVisible}>
+        <Modal
+          animationn={"fade"}
+          style={{ margin: 0 }}
+          transparent={true}
+          isVisible={modalVisible}
+        >
           <TouchableWithoutFeedback
             onPress={() => setModalVisible(!modalVisible)}
           >
@@ -306,7 +387,9 @@ const ProfileTrainingScreen = () => {
                     }}
                     style={{ ...globalstyles.buttonStyle, width: getWidth(86) }}
                   >
-                    <Text style={globalstyles.buttonText}>Apply changes Now</Text>
+                    <Text style={globalstyles.buttonText}>
+                      Apply changes Now
+                    </Text>
                   </TouchableOpacity>
                   <Text
                     style={{
@@ -327,7 +410,9 @@ const ProfileTrainingScreen = () => {
                     }}
                     style={{ ...globalstyles.buttonStyle, width: getWidth(86) }}
                   >
-                    <Text style={globalstyles.buttonText}>Apply changes next week</Text>
+                    <Text style={globalstyles.buttonText}>
+                      Apply changes next week
+                    </Text>
                   </TouchableOpacity>
                   <Text
                     style={{
@@ -362,7 +447,6 @@ const ProfileTrainingScreen = () => {
                   >
                     Delete changes and go back.
                   </Text>
-
                 </View>
               </LinearGradient>
             </View>

@@ -1,42 +1,75 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
-  Platform,
+  Alert,
+  Image,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
+import HeaderMainScreen from "../Components/HeaderMainScreen";
 import KeyBoardHandle from "../Components/KeyboardHandle";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
-import HeaderMainScreen from "../Components/HeaderMainScreen";
 import { globalstyles } from "../styles/globalestyles";
-
+import ImagePicker from 'react-native-image-crop-picker';
 import { useNavigation } from "@react-navigation/core";
 import LinearGradient from "react-native-linear-gradient";
-import { SvgXml } from "react-native-svg";
-import { backward, preformly } from "../../assets/svg";
 import fonts from "../constants/fonts";
-
+import { useLazyUploadCategoryImageQuery } from "../store/services/categoryApi";
+import { useDispatch } from "react-redux";
+import { addUserWeight } from "../store/actions/userWeightActions";
 const UpdateWeightTraining = () => {
+  const [uploadCategoryImage, data] = useLazyUploadCategoryImageQuery()
+  const dispatch = useDispatch()
   const navigation = useNavigation();
-  var radio_props = [
-    { label: "male", value: 0 },
-    { label: "female", value: 1 },
-    { label: "other", value: 2 },
-  ];
+  const [weight, setWeight] = useState(null);
+  const [image, setImage] = useState(null)
+  useEffect(() => {
+    if(data.isSuccess){
+      console.log(data.data.secure_url);
+      setImage(data.data.secure_url)
+    }
+  },[data])
+  const openCamera = () => {
+    ImagePicker.openCamera({
+      width: 300,
+      height: 400,
+      cropping: true,
+    }).then(image => {
+      //setImage(image);
+      uploadImage(image)
+    }).catch(err => {
+      console.log(err);
+    })
+  }
 
-  const [time, setTime] = useState("");
-  const [age, setAge] = useState("");
-  const [weight, setWeight] = useState("");
-  //   const [selectedIndex, setIndex] = useState(0);
-  //   const [state, setState] = useState(false);
-  //   //   const [passowrd, setPassword] = useState('');
-  //   //   const [show,setShow]=useState(true)
-  //   //    const [show1,setShow1]=useState(true)
-  //   const [confirmPassword, setConfirmPassowrd] = useState('');
-  const [modalVisible, setModalVisible] = useState(false);
+  const openGalley = () => {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true
+    }).then(image => {
+     // setImage(image);
+      uploadImage(image)
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  const uploadImage = (image) => {
+    const formData = new FormData();
+    formData.append('submit', 'submit');
+    const uriPart = image.sourceURL.split('.');
+    const fileExtension = uriPart[uriPart.length - 1];
+    formData.append('file', {
+      uri: image.sourceURL,
+      name: `${fileExtension}`,
+      type: image.mime,
+    });
+    uploadCategoryImage({data:formData})
+  }
   return (
     <>
       <KeyBoardHandle>
@@ -95,19 +128,36 @@ const UpdateWeightTraining = () => {
             <View
               style={{
                 alignItems: "center",
-                borderColor: "red",
+               // borderColor: "red",
                 height: getHeight(33),
                 justifyContent: "flex-end",
+                
                 // borderWidth:1
               }}
             >
+              {image != null && <Image source={{uri:image}} style={{width:getHeight(15),marginBottom:getWidth(2), height:getHeight(15)}} /> }
               <TouchableOpacity
-                onPress={() => setModalVisible(true)}
+                onPress={() => {
+                  Alert.alert("Pick Image", "Open camera of gallery",[
+                    {
+                      text:"Camera",
+                      onPress:() => openCamera()
+                    },
+                    {
+                      text:"Gallery",
+                      onPress:() => openGalley()
+                    },
+                    {
+                      text:"Cancel",
+                      onPress:() => {}
+                    },
+                  ])
+                }}
                 style={globalstyles.buttonStyle}
               >
-                <Text style={globalstyles.buttonText}>Add Pictures</Text>
+                <Text style={globalstyles.buttonText}>{data.isLoading ? "Uploading":"Add Pictures"}</Text>
               </TouchableOpacity>
-              <View style={{ paddingTop: 25, width: getWidth(60) }}>
+              <View style={{ paddingTop: getWidth(2), width: getWidth(80) }}>
                 <Text
                   style={{
                     fontSize: 16,
@@ -123,7 +173,7 @@ const UpdateWeightTraining = () => {
                 </Text>
               </View>
             </View>
-
+          {weight !== null&& image !=null &&
             <View
               style={{
                 alignItems: "center",
@@ -134,12 +184,19 @@ const UpdateWeightTraining = () => {
               }}
             >
               <TouchableOpacity
-                onPress={() => navigation.navigate("WeightProgress")}
+                onPress={() => {
+                  dispatch(addUserWeight({weight:weight, image:image})).then(()=> {
+                    setWeight(null)
+                    setImage(null)
+                    navigation.navigate("WeightProgress")
+                  })
+                }}
+               
                 style={globalstyles.buttonStyle}
               >
                 <Text style={globalstyles.buttonText}>Update</Text>
               </TouchableOpacity>
-            </View>
+            </View> }
           </View>
         </LinearGradient>
       </KeyBoardHandle>

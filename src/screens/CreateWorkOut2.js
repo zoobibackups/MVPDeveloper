@@ -1,30 +1,30 @@
-import { useNavigation } from "@react-navigation/core";
 import React, { useState } from "react";
 import {
+  Alert,
+  Platform,
+  ActivityIndicator,
+  ScrollView,
+  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
   View,
-  Platform,
-  Image,
 } from "react-native";
-import { Search } from "react-native-feather";
 import LinearGradient from "react-native-linear-gradient";
 import { RFValue } from "react-native-responsive-fontsize";
-import HeaderMainScreen from "../Components/HeaderMainScreen";
-import theme from "../constants/theme";
-import { getHeight, getWidth } from "../functions/CommonFunctions";
-import { globalstyles } from "../styles/globalestyles";
 import { moderateScale } from "react-native-size-matters";
-import fonts from "../constants/fonts";
-import { delete_svg } from "../../assets/svg";
 import { SvgXml } from "react-native-svg";
-import { ScrollView } from "react-native";
+import { delete_svg } from "../../assets/svg";
+import HeaderMainScreen from "../Components/HeaderMainScreen";
+import fonts from "../constants/fonts";
+import { getHeight, getWidth } from "../functions/CommonFunctions";
+import { useLazyCreateUserSetsQuery } from "../store/services/userSetsApi";
+import { globalstyles } from "../styles/globalestyles";
 const itemStyles = StyleSheet.create({
   itemMainView: {
     width: getWidth(90),
     borderRadius: 20,
+    marginBottom: moderateScale(20),
     height: getHeight(8),
     shadowColor: "rgba(103, 128, 159)",
     justifyContent: "space-between",
@@ -54,9 +54,9 @@ const itemStyles = StyleSheet.create({
     letterSpacing: 2,
   },
 });
-const RenderItem = ({ checked, setChecked, title, subtitle }) => {
+const RenderItem = ({ title, subtitle, onPress }) => {
   return (
-    <TouchableOpacity onPress={() => setChecked(!checked)}>
+    <View>
       <LinearGradient
         style={itemStyles.itemMainView}
         colors={["#FDFFF4", "#BBC1AD"]}
@@ -67,18 +67,63 @@ const RenderItem = ({ checked, setChecked, title, subtitle }) => {
           <Text style={itemStyles.title}>{title}</Text>
           <Text style={itemStyles.subTitle}>{subtitle}</Text>
         </View>
-        <SvgXml width={getWidth(10)} height={getWidth(5)} xml={delete_svg} />
+        <TouchableOpacity onPress={onPress}>
+          <SvgXml width={getWidth(10)} height={getWidth(5)} xml={delete_svg} />
+        </TouchableOpacity>
       </LinearGradient>
-    </TouchableOpacity>
+    </View>
   );
 };
-const CreateWorkOut2 = () => {
-  const navigation = useNavigation();
-  const [checked, setChecked] = useState(false);
-  const [checked1, setChecked1] = useState(false);
-  const [checked2, setChecked2] = useState(false);
-  const [checked3, setChecked3] = useState(false);
-  const [checked4, setChecked4] = useState(false);
+const CreateWorkOut2 = ({ navigation, route }) => {
+  const [createUserSets, userExerciseSetsData] = useLazyCreateUserSetsQuery();
+  const exerciseData = route.params.item;
+  const [set_name, setSetName] = useState("");
+  const [repetation, setReptation] = useState("");
+  const [numberOfSets, setNumberOfSets] = useState("");
+  const [time, setTime] = useState("");
+  const [sets, setSets] = useState([]);
+  const addsetstouserexercise = () => {
+    if (set_name == "" || set_name.trim().length == 0) {
+      Alert.alert("INVALID DATA", "SET NAME CANNOT BE EMPTY");
+      return;
+    }
+    if (repetation == "" || repetation.trim().length == 0) {
+      Alert.alert("INVALID DATA", "Repition must be greate then Zero");
+      return;
+    }
+    if (numberOfSets == "" || numberOfSets.trim().length == 0) {
+      Alert.alert("INVALID DATA", "Sets must be greate then Zero");
+      return;
+    }
+    if (time == "" || time.trim().length == 0) {
+      Alert.alert("INVALID DATA", "Time must be greate then Zero");
+      return;
+    }
+    createUserSets({
+      data: {
+        usersExercise: exerciseData.id,
+        weight: set_name,
+        repetitions: Number(repetation),
+        sets: Number(numberOfSets),
+        time: Number(time),
+        status: "active",
+      },
+    })
+      .then((response) => {
+        if (response.isSuccess) {
+          Alert.alert("SUCCESS", "SET Added Successfully");
+          setSets([...sets, { ...response.data }]);
+        } else {
+          Alert.alert("ERROR", "Please try again");
+        }
+      })
+      .catch((err) => {
+        Alert.alert("ERROR", "Please try again");
+      });
+  };
+  const deleteExercise = (id) => {
+
+  }
   return (
     <LinearGradient
       style={{
@@ -109,36 +154,57 @@ const CreateWorkOut2 = () => {
         >
           <Text style={globalstyles.inputLabel}>Exercise name:</Text>
 
-          <View style={globalstyles.inputContainer}>
-            <TextInput
-              placeholder="Bench press"
-              placeholderTextColor="#0004"
-              style={globalstyles.textInputStyle}
-            />
-            <Image
-              style={{
-                resizeMode: "contain",
-                borderColor: "red",
-                height: getHeight(5),
-                width: getHeight(5),
-              }}
-              source={require("../../assets/images/down.png")}
-            />
-          </View>
+          <TextInput
+            placeholder="Bench press"
+            value={set_name}
+            onChangeText={(text) => setSetName(text)}
+            placeholderTextColor="#0004"
+            style={globalstyles.textInputWithOutIcon}
+          />
         </View>
         <View
           style={{
             ...globalstyles.inputVerticalContainer,
-            marginTop: getHeight(2),
           }}
         >
           <Text style={globalstyles.inputLabel}>Repetitions</Text>
           <TextInput
             style={globalstyles.textInputWithOutIcon}
-            onChangeText={(text) => setPassword(text)}
             placeholderTextColor="grey"
-            value={""}
+            value={repetation}
+            onChangeText={(text) => setReptation(text)}
             placeholder="3 x 8 - 12 repetitions"
+          />
+        </View>
+
+        <View
+          style={{
+            ...globalstyles.inputVerticalContainer,
+          }}
+        >
+          <Text style={globalstyles.inputLabel}>Sets</Text>
+          <TextInput
+            style={globalstyles.textInputWithOutIcon}
+            placeholderTextColor="grey"
+            value={numberOfSets}
+            onChangeText={(text) => setNumberOfSets(text)}
+            placeholder="Number of sets"
+          />
+        </View>
+
+        <View
+          style={{
+            ...globalstyles.inputVerticalContainer,
+          }}
+        >
+          <Text style={globalstyles.inputLabel}>Time</Text>
+          <TextInput
+            style={globalstyles.textInputWithOutIcon}
+            onChangeText={(text) => setTime(text)}
+            placeholderTextColor="grey"
+            keyboardType={"number-pad"}
+            value={time}
+            placeholder="Time in seconds"
           />
         </View>
 
@@ -152,49 +218,37 @@ const CreateWorkOut2 = () => {
           }}
         >
           <TouchableOpacity
-            onPress={() => navigation.navigate("ProfileTrainingScreen")}
+            disabled={userExerciseSetsData.isLoading}
+            onPress={() => addsetstouserexercise()}
             style={{ ...globalstyles.buttonStyle, width: getWidth(28) }}
           >
-            <Text style={globalstyles.buttonText}>Add</Text>
+            {userExerciseSetsData.isLoading ? (
+              <ActivityIndicator color={"#ffff"} size={"small"} />
+            ) : (
+              <Text style={globalstyles.buttonText}>Add</Text>
+            )}
           </TouchableOpacity>
         </View>
         <View style={styles.innerView}>
-          <RenderItem
-            checked={checked}
-            title={"Lose Weight"}
-            subtitle={"3 x 8-12 repetitions"}
-            setChecked={() => setChecked(!checked)}
-          />
-          <RenderItem
-            checked={checked1}
-            title={"Inclined dumbbells press"}
-            subtitle={"3 x 8-12 repetitions"}
-            setChecked={() => setChecked1(!checked1)}
-          />
-          <RenderItem
-            checked={checked2}
-            title={"Cable flyes"}
-            subtitle={"3 x 8-12 repetitions"}
-            setChecked={() => setChecked2(!checked2)}
-          />
-          <RenderItem
-            checked={checked3}
-            title={"Rope pushdowns"}
-            subtitle={"3 x 8-12 repetitions"}
-            setChecked={() => setChecked3(!checked3)}
-          />
-          <RenderItem
-            checked={checked4}
-            title={"Dips"}
-            subtitle={"3 x 8-12 repetitions"}
-            setChecked={() => setChecked4(!checked4)}
-          />
+          {sets.map((item, index) => {
+            return (
+              <RenderItem
+                key={`${index}`}
+                title={item.weight}
+                subtitle={`${item.time} - ${item.sets} * ${item.repetitions} repetitions`}
+                onPress={() => deleteExercise(item.id)}
+              />
+            );
+          })}
         </View>
         <View
           style={{ ...globalstyles.buttonContianer, marginTop: getHeight(3) }}
         >
           <TouchableOpacity
-            onPress={() => navigation.navigate("ActiveWorkOut1")}
+            onPress={() => navigation.navigate("ActiveWorkOut3", {item:{
+              exerciseData:exerciseData,
+              sets:sets
+            }})}
             style={{ ...globalstyles.buttonStyle, width: getWidth(70) }}
           >
             <Text style={globalstyles.buttonText}>Start your workout</Text>
@@ -209,10 +263,10 @@ export default CreateWorkOut2;
 
 const styles = StyleSheet.create({
   innerView: {
-    height: getHeight(50),
     width: getWidth(97),
     alignItems: "center",
-    justifyContent: "space-evenly",
+    justifyContent: "flex-start",
+    marginTop: moderateScale(10),
     shadowColor: "rgba(103, 128, 159, 0.5)", // Adjust the shadow color as needed
     shadowOffset: { width: 0, height: 5 }, // Adjust the shadow offset as needed
     shadowOpacity: 1, // Adjust the shadow opacity as needed

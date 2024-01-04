@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/core";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
+  Alert,
   Image,
   StyleSheet,
   Text,
@@ -19,11 +20,66 @@ import fonts from "../constants/fonts";
 import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { globalstyles } from "../styles/globalestyles";
-import Modal from "react-native-modal"
+import Modal from "react-native-modal";
+import { useGetRecipiesQuery } from "../store/services/recipesApi";
+import { useDispatch, useSelector } from "react-redux";
+import { setFoodAllData } from "../store/actions/userActions";
+import { useGetUserFoodDataQuery } from "../store/services/userApi";
+import { useLazyGenerateDietScheduleByUserIdQuery, useLazyGetDietScheduleByUserIdQuery } from "../store/services/dietScheduleApi";
+import { saveChatGptresponse } from "../store/actions/chatgptActions";
 const Home2 = () => {
+  const [generateDietScheduleByUserId, userDietData] =
+    useLazyGenerateDietScheduleByUserIdQuery();
+    const [getDietScheduleByUserId, dietData] = useLazyGetDietScheduleByUserIdQuery()
+  const { data, isLoading, isError, isFetching, isSuccess } =
+    useGetRecipiesQuery();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.userReducer);
+  const {
+    data: foodData,
+    isError: foodError,
+    isFetching: foodisFetching,
+    isLoading: foodisLoading,
+    isSuccess: foodisSuccess,
+  } = useGetUserFoodDataQuery({ id: user.id });
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(setFoodAllData(foodData));
+    }
+  }, [foodisSuccess]);
+
+  useEffect(() => {
+    if (userDietData.isSuccess) {
+      getDietScheduleByUserId({id:user.id})
+   
+    }
+    if(userDietData.isError){
+      Alert.alert("ERROR", "THERE IS Some Issue in creating your schedule")
+    }
+  }, [userDietData]);
+
+
+  useEffect(() => {
+    if(dietData.isSuccess){
+      dispatch(saveChatGptresponse(dietData.data))
+      Alert.alert("SUCESS", "YOUR SCHDEULE IS HAS Been generated", [
+        {
+          text: "SHOW",
+          onPress: () => {
+            setfocused(true)
+            setModalVisible(true)
+          },
+        },
+      ]);
+    }
+  },[dietData])
+
+  const { weeklySchedule } = useSelector((state) => state.chatgptReducer);
+
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
-  const [focused, setfocused] = useState(false);
+  const [focused, setfocused] = useState(true);
+  const [prompt, setPrompt] = useState("");
   return (
     <>
       <View style={styles.mainInput}>
@@ -44,7 +100,8 @@ const Home2 = () => {
           <View style={styles.textInputView}>
             <TextInput
               style={styles.textinput}
-              onChangeText={() => setfocused(true)}
+              value={prompt}
+              onChangeText={(txt) => setPrompt(txt)}
               placeholderTextColor="grey"
               placeholder="Type Prompt..."
             />
@@ -73,13 +130,20 @@ const Home2 = () => {
           </View>
           <View style={globalstyles.buttonContianer}>
             <TouchableOpacity
-              onPress={() => setModalVisible(true)}
+              onPress={() => {
+                if(weeklySchedule == null){
+                  generateDietScheduleByUserId({ id: user.id });
+                }else{
+                  setfocused(true)
+                  setModalVisible(true)
+                }
+              }}
               style={styles.button}
             >
               <Text
                 style={{ ...globalstyles.buttonText, fontSize: RFValue(12) }}
               >
-                Create schedule
+                {userDietData.isLoading ? "Please Wait" : "Create Schedule"}
               </Text>
             </TouchableOpacity>
             <Text style={styles.howItWorkText}>How it works</Text>
@@ -90,7 +154,7 @@ const Home2 = () => {
         <Text style={styles.termAndCOnditionText}>TERMS AND CONDITIONS</Text>
         <Modal
           animationType="slide"
-          style={{ justifyContent: "flex-end", margin:0 }}
+          style={{ justifyContent: "flex-end", margin: 0 }}
           transparent={true}
           isVisible={modalVisible}
         >
@@ -115,7 +179,14 @@ const Home2 = () => {
                     to fit your needs.
                   </Text>
                   <TouchableOpacity
-                    onPress={() => {setModalVisible(false), navigation.navigate("Home4")}}
+                    onPress={() => {
+                      setModalVisible(false);
+                      if (focused) {
+                        navigation.navigate("Home5", { item: weeklySchedule, recipies:data });
+                      } else {
+                        navigation.navigate("Home4", { item: data });
+                      }
+                    }}
                     style={styles.button}
                   >
                     <Text style={globalstyles.buttonText}>Check it out</Text>

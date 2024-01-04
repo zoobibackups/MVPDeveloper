@@ -80,7 +80,7 @@ const Profile8 = () => {
           }}
         >
           <TouchableOpacity
-            onPress={() => navigation.navigate("ProfileSetting6")}
+           // onPress={() => navigation.navigate("ProfileSetting6")}
             style={{
               alignItems: "center",
               borderColor: "grey",

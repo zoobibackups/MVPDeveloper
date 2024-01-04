@@ -33,6 +33,7 @@ import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { setUserLogin } from "../store/actions/userActions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
+import BASE_URL from "../store/services/baseUrl";
 const LogIn3 = () => {
   const dispatch = useDispatch();
   const { whichStack, accounttype, user, isLoggedIn } = useSelector(
@@ -60,7 +61,7 @@ const LogIn3 = () => {
       redirect: "follow",
     };
 
-    fetch("https://as-dev.code-freaks.com/mvp/api/auth/sign-in", requestOptions)
+    fetch(`${BASE_URL}/auth/sign-in`, requestOptions)
       .then((response) => {
         if (response.status != 200) {
           setLoading(false);

@@ -444,3 +444,17 @@ export const setTrainingData = (data) => {
     });
   };
 }
+
+
+export const setFoodAllData = (data) => {
+  return (dispatch) => {
+    return new Promise(function (resolve, reject) {
+      dispatch({
+        type: "SET_FOOD_ALL_DATA",
+        payload: data,
+      });
+      resolve();
+    });
+  };
+  
+}

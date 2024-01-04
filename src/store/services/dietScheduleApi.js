@@ -58,6 +58,17 @@ export const dietScheduleApi = createApi({
           method: 'GET',
         };
       },
+      pollingInterval: 9999999,
+      providesTags: ['dietScheduleData'],
+    }),
+    generateDietScheduleByUserId:builder.query({
+      query: args => {
+       const {id} = args
+        return {
+          url: `diet_schedule/generate_diet_schedule_byUserId/${id}`,
+          method: 'GET',
+        };
+      },
       providesTags: ['dietScheduleData'],
     }),
   }),
@@ -70,5 +81,6 @@ export const {
   useGetDietScheduleByUserIdQuery,
   useLazyGetDietScheduleByUserIdQuery,
   useUpdateDietScheduleByIdQuery,
-  useLazyUpdateDietScheduleByIdQuery
+  useLazyUpdateDietScheduleByIdQuery,
+  useLazyGenerateDietScheduleByUserIdQuery
 } = dietScheduleApi;

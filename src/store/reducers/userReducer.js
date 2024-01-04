@@ -101,6 +101,12 @@ const userReducer = (state = initialState, action) => {
         trainingMetaData: action.payload
       }
     }
+    case "SET_FOOD_ALL_DATA":{
+      return{
+        ...state,
+        foodMetaData:action.payload
+      }
+    }
     case SET_TRAIN_WORK_OUT:{
       return{
         ...state,

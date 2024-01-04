@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useNavigation } from "@react-navigation/core";
 import {
@@ -76,16 +76,32 @@ const RenderItem = ({ checked, setChecked, title, subtitle }) => {
     </TouchableOpacity>
   );
 };
-const ActiveWorkOut1 = () => {
-  const [checked, setChecked] = useState(false);
-  const [checked1, setChecked1] = useState(false);
-  const [checked2, setChecked2] = useState(false);
-  const [checked3, setChecked3] = useState(false);
-  const [checked4, setChecked4] = useState(false);
-  
-  const navigation = useNavigation();
-  const [modalVisible, setModalVisible] = useState(false);
+const ActiveWorkOut1 = ({navigation, route}) => {
+  const exerciseData = route.params.item
 
+  const [modalVisible, setModalVisible] = useState(false);
+  const [totalSeconds, setTotalSeconds] = useState(0);
+  const [isActive, setIsActive] = useState(true);
+
+  useEffect(() => {
+    let interval;
+
+    if (isActive) {
+      interval = setInterval(() => {
+        setTotalSeconds(prevSeconds => prevSeconds + 1);
+      }, 1000);
+    } else {
+      clearInterval(interval);
+    }
+
+    return () => clearInterval(interval);
+  }, [isActive]);
+
+  const formattedTime = () => {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  };
   return (
     <LinearGradient
       style={{
@@ -123,39 +139,21 @@ const ActiveWorkOut1 = () => {
               source={require("../../assets/images/clock.png")}
             />
           </View>
-          <Text style={styles.timeText}>00:43</Text>
+          <Text style={styles.timeText}>{formattedTime(totalSeconds)}</Text>
         </View>
         <View style={styles.innerView}>
-          <RenderItem
-            checked={checked}
-            title={"Lose Weight"}
-            subtitle={"3 x 8-12 repetitions"}
-            setChecked={() => setChecked(!checked)}
-          />
-          <RenderItem
-            checked={checked1}
-            title={"Inclined dumbbells press"}
-            subtitle={"3 x 8-12 repetitions"}
-            setChecked={() => setChecked1(!checked1)}
-          />
-          <RenderItem
-            checked={checked2}
-            title={"Cable flyes"}
-            subtitle={"3 x 8-12 repetitions"}
-            setChecked={() => setChecked2(!checked2)}
-          />
-          <RenderItem
-            checked={checked3}
-            title={"Rope pushdowns"}
-            subtitle={"3 x 8-12 repetitions"}
-            setChecked={() => setChecked3(!checked3)}
-          />
-          <RenderItem
-            checked={checked4}
-            title={"Dips"}
-            subtitle={"3 x 8-12 repetitions"}
-            setChecked={() => setChecked4(!checked4)}
-          />
+        {exerciseData.exercises.map((item, index) => (
+                <RenderItem
+                key={`${index}`}
+                checked={checked}
+                title={item.name.substring(0,30)}
+                subtitle={`${item.time} x ${item.sets} - ${item.repetitions} repetitions` }
+                setChecked={() => setChecked(!checked)}
+              />
+              ))}
+         
+         
+          
         </View>
         <View
           style={{ ...globalstyles.buttonContianer, marginTop: getHeight(6) }}
@@ -259,7 +257,7 @@ const ActiveWorkOut1 = () => {
 };
 const styles = StyleSheet.create({
   innerView: {
-    height: getHeight(50),
+    height: getHeight(56),
     width: getWidth(97),
     alignItems: "center",
     justifyContent: "space-evenly",

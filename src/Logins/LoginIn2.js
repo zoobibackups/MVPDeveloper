@@ -20,6 +20,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { moderateScale } from "react-native-size-matters";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserLogin } from "../store/actions/userActions";
+import BASE_URL from "../store/services/baseUrl";
 const LogIn2 = () => {
   const { user } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch()
@@ -29,13 +30,21 @@ const LogIn2 = () => {
 
   const [loading, setLoading] = useState(false);
   const loginUser = () => {
+    if(email.trim().length = 0){
+      Alert.alert("EMAIL ERROR", "Please enter an email")
+      return
+    }
+    if(password.trim().length == 0){
+      Alert.alert("INVALID PASSWORD", "Please enter a valid passsword")
+      return
+    }
     setLoading(true);
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-      emailOrUsername: "engr3.aftabufaq@gmail.com",
-      password: "Tikt0k@1",
+      emailOrUsername: email,
+      password: password,
     });
 
     var requestOptions = {
@@ -45,7 +54,7 @@ const LogIn2 = () => {
       redirect: "follow",
     };
 
-    fetch("https://as-dev.code-freaks.com/mvp/api/auth/sign-in", requestOptions)
+    fetch(`${BASE_URL}/auth/sign-in`, requestOptions)
       .then((response) => {
         if (response.status != 200) {
           setLoading(false);

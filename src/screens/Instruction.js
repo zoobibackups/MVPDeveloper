@@ -7,17 +7,17 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { SvgXml } from "react-native-svg";
 import { noodles, preformly } from "../../assets/svg";
 import fonts from "../constants/fonts";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
+import numberToWord from "../logic/numberToString";
 
-const Instruction = () => {
-  const navigation = useNavigation();
-
+const Instruction = ({ navigation, route }) => {
+  const { customRecipie, instruction } = route.params;
   return (
     <LinearGradient
       style={{
@@ -93,36 +93,29 @@ const Instruction = () => {
             alignItems: "center",
           }}
         >
-          <TouchableOpacity onPress={() => navigation.navigate("Home5")}>
-            <SvgXml
-              width={getHeight(30)}
-              height={getHeight(20)}
-              xml={noodles}
+          <TouchableOpacity >
+            <Image
+              source={{ uri: customRecipie.photo }}
+              style={{
+                borderRadius: 12,
+                width: getHeight(20),
+                height: getHeight(20),
+              }}
             />
           </TouchableOpacity>
 
-          <Text style={styles.CacioEPepe}>CACIO E PEPE</Text>
+          <Text style={styles.CacioEPepe}>{customRecipie.name}</Text>
         </View>
 
         <View style={styles.textBox}>
-          <Text style={styles.stepOne}>Step One:</Text>
-          <Text style={styles.paragraph}>
-            Heat 3 tablespoons olive oil and about a teaspoon of black pepper in
-            a medium skillet over medium-low heat until ingredients are fragrant
-            and pepper is barely starting to sizzle, about 1 minute. Set aside.
-          </Text>
-
-          <Text style={styles.stepOne}>Step Two:</Text>
-          <Text style={styles.paragraph}>
-            Place spaghetti in a large skillet and cover with water. Season with
-            a small pinch of salt, then bring to a boil over high heat, prodding
-            spaghetti occasionally with a fork or wooden spoon to prevent it
-            from clumping. Cook until spaghetti is al dente (typically about 1
-            minute less than the package recommends). Transfer 2 to 3
-            tablespoons of pasta cooking water to the skillet with the olive
-            oil/pepper mixture. Stir in butter. Using tongs, lift spaghetti and
-            transfer it to the oil/butter mixture.
-          </Text>
+          {instruction.map((item, index) => {
+            return (
+              <View>
+                <Text style={styles.stepOne}>Step {numberToWord(index+1)}:</Text>
+                <Text style={styles.paragraph}>{item.title.replaceAll("\"","")}</Text>
+              </View>
+            );
+          })}
         </View>
       </ScrollView>
     </LinearGradient>

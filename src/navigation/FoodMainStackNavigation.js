@@ -7,9 +7,6 @@ import WeightProgress from "../InfoChaging/WeightProgress";
 import ChangeGoalTraining from "../InfoChangeTraining/ChangeGoalTraining";
 import ChangePreferenceTraining from "../InfoChangeTraining/ChangePreferenceTraining";
 import UpdateWeightTraining from "../InfoChangeTraining/UpdateWeightTraining";
-import LogIn1 from "../Logins/LogIn1";
-import LogIn2 from "../Logins/LoginIn2";
-import TrainingLogIn from "../Logins/TrainingLogIn";
 
 import ChangrInfo1 from "../InfoChaging/ChangrInfo1";
 import ChangrInfo2 from "../InfoChaging/ChangrInfo2";
@@ -49,11 +46,6 @@ import Profile8 from "../screens/Profile8";
 import ProfileTrainingScreen from "../screens/ProfileSettingsTrainingScreen";
 import Reciepe1 from "../screens/Reciepe1";
 import StartWorkOut from "../screens/StartWorkOut";
-import StartWorkOutArms from "../screens/StartWorkOutArms";
-import StartWorkOutBack from "../screens/StartWorkOutBack";
-import StartWorkOutChest from "../screens/StartWorkOutChest";
-import StartWorkOutLegs from "../screens/StartWorkOutLegs";
-import StartWorkOutPush from "../screens/StartWorkOutPush";
 import StepCounter from "../screens/StepCounter";
 import TermsAndConditions from "../screens/TermsAndConditions";
 import TimeInKitchen from "../screens/TimeInKitchen";
@@ -65,12 +57,18 @@ import WeightLiftingBox1 from "../screens/WeightLiftingBox1";
 import WhySchedule from "../screens/WhySchedule";
 import WhySchedule2 from "../screens/WhySchedule2";
 import Yoga from "../screens/Yoga";
+import SignUp3 from "../Signups/SignUp3";
+import SignUp6 from "../Signups/SignUp6";
+import SignUp7 from "../Signups/SignUp7";
+import SignUp8 from "../Signups/SignUp8";
+import SignUp9 from "../Signups/SignUp9";
+import SignUp13 from "../Signups/SignUp13";
 const Stack = createNativeStackNavigator();
 
 const FoodMainStackNavigation = () => {
   return (
     <Stack.Navigator
-      initialRouteName={"Home5"}
+      initialRouteName={"Home2"}
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen
@@ -78,6 +76,39 @@ const FoodMainStackNavigation = () => {
         component={Profile8}
         // options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="SignUp3"
+        component={SignUp3}
+        // options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SignUp6"
+        component={SignUp6}
+        // options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SignUp7"
+        component={SignUp7}
+        // options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="SignUp8"
+        component={SignUp8}
+        // options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SignUp9"
+        component={SignUp9}
+        // options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="SignUp13"
+        component={SignUp13}
+        // options={{ headerShown: false }}
+      />
+
       <Stack.Screen
         name="ChangrInfo1"
         component={ChangrInfo1}
@@ -226,36 +257,13 @@ const FoodMainStackNavigation = () => {
         component={AllWorkOuts}
         // options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="StartWorkOutBack"
-        component={StartWorkOutBack}
-        // options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="StartWorkOutChest"
-        component={StartWorkOutChest}
-        // options={{ headerShown: false }}
-      />
+
       <Stack.Screen
         name="WhyScheudle2"
         component={WhySchedule2}
         // options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="StartWorkOutArms"
-        component={StartWorkOutArms}
-        // options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="StartWorkOutLegs"
-        component={StartWorkOutLegs}
-        // options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="StartWorkOutPush"
-        component={StartWorkOutPush}
-        // options={{ headerShown: false }}
-      />
+
       <Stack.Screen
         name="StartWorkOut"
         component={StartWorkOut}
@@ -282,11 +290,7 @@ const FoodMainStackNavigation = () => {
         component={Error1}
         // options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="TrainingLogIn"
-        component={TrainingLogIn}
-        // options={{ headerShown: false }}
-      />
+
       <Stack.Screen
         name="UpdateWeight"
         component={UpdateWeight}
@@ -352,16 +356,6 @@ const FoodMainStackNavigation = () => {
         component={Reciepe1}
         // options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="LogIn1"
-        component={LogIn1}
-        // options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="LogIn2"
-        component={LogIn2}
-        // options={{ headerShown: false }}
-      />
 
       <Stack.Screen
         name="TimeInKitchen"
@@ -391,4 +385,3 @@ const FoodMainStackNavigation = () => {
 };
 
 export default FoodMainStackNavigation;
-

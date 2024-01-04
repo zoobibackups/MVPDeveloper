@@ -15,14 +15,14 @@ import KeyBoardHandle from "../Components/KeyboardHandle";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { globalstyles } from "../styles/globalestyles";
 import { setThingsToAvoid } from "../store/actions/userActions";
-import { useDispatch } from "react-redux";
-const SignUp8 = () => {
+import { useDispatch, useSelector } from "react-redux";
+const SignUp8 = ({navigation, route}) => {
   const dispatch = useDispatch();
-
-  const navigation = useNavigation();
-  const [ingredients, setIngredients] = useState("");
+  const isUpdate = route?.params?.isUpdate;
+  const { user, foodMetaData } = useSelector((state) => state.userReducer);
+  const [ingredients, setIngredients] = useState(foodMetaData.avoidIngredients);
   const [checked, setChecked] = useState(false);
-  const [meal, setMeal] = useState("");
+  const [meal, setMeal] = useState(foodMetaData.avoidMeals);
 
   const validateData = () => {
     if (checked) {
@@ -35,10 +35,10 @@ const SignUp8 = () => {
       ).then(() => {
         navigation.navigate("SignUp9");
       });
-    } else if (ingredients == "") {
+    } else if (ingredients == "" || ingredients ==null) {
       Alert.alert("INGREDIENTS EMPTY", "Please enter some ingredients");
       return;
-    } else if (meal == "") {
+    } else if (meal == "" || meal == null) {
       Alert.alert("Meal/COURSES EMPTY", "Please enter some meal/courses");
     }
     dispatch(
@@ -48,7 +48,12 @@ const SignUp8 = () => {
         checked: checked,
       })
     ).then(() => {
-      navigation.navigate("SignUp9");
+      if(isUpdate){
+        navigation.goBack()
+      }else{
+       
+        navigation.navigate("SignUp9");
+      }
     });
   };
   return (

@@ -1,5 +1,6 @@
 import { useNavigation } from "@react-navigation/core";
-import React, { useState } from "react";
+import moment from "moment";
+import React, { useEffect, useRef, useState } from "react";
 import {
   FlatList,
   Image,
@@ -13,54 +14,26 @@ import {
   View,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
+import Modal from "react-native-modal";
+import Carousel from "react-native-reanimated-carousel";
 import { RFValue } from "react-native-responsive-fontsize";
 import { moderateScale } from "react-native-size-matters";
 import { SvgXml } from "react-native-svg";
-import { backwardBlack, forwardBlack, noodles } from "../../assets/svg";
+import { useSelector } from "react-redux";
+import { backwardBlack, forwardBlack } from "../../assets/svg";
 import RowHeader from "../Components/RowHeader";
 import fonts from "../constants/fonts";
 import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
-import textStyles, { globalstyles } from "../styles/globalestyles";
-import Modal from "react-native-modal";
 import { getWeekData } from "../logic";
-import moment from "moment";
-import { useSelector } from "react-redux";
+import textStyles, { globalstyles } from "../styles/globalestyles";
 const days = getWeekData();
 const currentDate = moment();
-const snacksData = [
-  {
-    id: 1,
-    name: "Snack 1",
-    img: require("../../assets/images/steak1.png"),
-    check: false,
-    numberOfCal: 10,
-  },
-  {
-    id: 1,
-    name: "Snack 2",
-    img: require("../../assets/images/steakLight.png"),
-    check: true,
-    numberOfCal: 20,
-  },
-  {
-    id: 1,
-    name: "Snack 3",
-    img: require("../../assets/images/steak1.png"),
-    check: false,
-    numberOfCal: 40,
-  },
-  {
-    id: 1,
-    name: "Snack 4",
-    img: require("../../assets/images/steak1.png"),
-    check: false,
-    numberOfCal: 32,
-  },
-];
-const renderItem = ({ item, index }) => {
+
+const RenderItem = ({ item, index, onPress }) => {
   return (
-    <View
+    <TouchableOpacity
+      onPress={onPress}
       style={{
         ...ItemStyles.calendarItem,
         backgroundColor: item.isSelected ? theme.blueColor : "#0000",
@@ -70,44 +43,70 @@ const renderItem = ({ item, index }) => {
       <View style={ItemStyles.circleDate}>
         <Text style={ItemStyles.dateText}>{item.date}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
-const renderItemSnacks = ({ item, index }) => (
-  <TouchableOpacity style={{ height: getHeight(23) }}>
-    <Text style={ItemStyles.SnackText}>{item.name}</Text>
-    <View style={ItemStyles.Imgbg}>
-      <Image
-        source={item.img}
-        style={{ resizeMode: "contain", width: getWidth(25) }}
-      />
-      {item.check && (
-        <Image
-          source={require("../../assets/images/check1.png")}
-          style={{
-            resizeMode: "contain",
-            position: "absolute",
-            alignSelf: "center",
-            justifyContent: "center",
-            width: getWidth(20),
-          }}
-        />
-      )}
-    </View>
-    <Text style={ItemStyles.calText}>{item.numberOfCal}</Text>
-    <Text style={ItemStyles.calText}>Calories</Text>
-  </TouchableOpacity>
-);
-const Home5 = () => {
-  const {user }= useSelector(state => state.userReducer)
-  console.log(user);
+
+const Home5 = ({ route }) => {
+  const snapRef = useRef(null);
+  const { user, foodMetaData } = useSelector((state) => state.userReducer);
+  const weeklySchedule = route.params.item;
+  const customRecipie = route.params.recipies.data;
+  const [selectedRecipieIndex , setSelectedRecipieIndex] = useState(null)
   const navigation = useNavigation();
+  const [week_days, setWeekDays] = useState(days);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible1, setModalVisible1] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(false);
-  const [intake, setIntake] = useState("");
-  const [intake1, setIntake1] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [cinnamonBun, setCinnamonBun] = useState("")
+  const [calories, setCalories] = useState("")
+  const [protein, setProtien] = useState("")
+  const [carbohydrates, setCarbohydrates] = useState("")
+  const [seletedDay, setSelectedDay] = useState(
+    week_days.find((item) => item.isSelected)
+  );
+ 
+  const [dailySchedule, setDailySchedule] = useState(null);
+  useEffect(() => {
+    setDailySchedule(weeklySchedule.data[seletedDay.fullName]);
+  }, [seletedDay]);
+
+  const renderItemSnacks = ({ item, index }) => {
+    return (
+      <TouchableOpacity onPress={() => setSelectedRecipieIndex(index)} style={{ height: getHeight(25), margin: 2 }}>
+        <Text numberOfLines={1} style={ItemStyles.SnackText}>
+          {item?.name}
+        </Text>
+        <View style={ItemStyles.Imgbg}>
+          <Image
+            source={{ uri: item?.photo }}
+            style={{
+              resizeMode: "cover",
+              height: getWidth(25),
+              width: getWidth(25),
+              borderRadius: 12,
+            }}
+          />
+          {selectedRecipieIndex == index && (
+            <Image
+              source={require("../../assets/images/check1.png")}
+              style={{
+                resizeMode: "contain",
+                position: "absolute",
+                alignSelf: "center",
+                justifyContent: "center",
+                width: getWidth(20),
+              }}
+            />
+          )}
+        </View>
+        <Text style={ItemStyles.calText}>{item?.calories}</Text>
+        <Text style={ItemStyles.calText}>Calories</Text>
+      </TouchableOpacity>
+    );
+  };
   return (
     <>
       <LinearGradient
@@ -131,16 +130,18 @@ const Home5 = () => {
           />
 
           <View style={styles.profileView}>
-            <TouchableOpacity onPress={() => navigation.navigate("ProfileSetting6")} >
-            <Image
-              source={{uri:user.profilePhoto}}
-              style={{
-                resizeMode:"cover",
-                width: getWidth(25),
-                height: getWidth(25),
-                borderRadius:getWidth(25)
-              }}
-            />
+            <TouchableOpacity
+              onPress={() => navigation.navigate("ProfileSetting6")}
+            >
+              <Image
+                source={{ uri: user.profilePhoto }}
+                style={{
+                  resizeMode: "cover",
+                  width: getWidth(25),
+                  height: getWidth(25),
+                  borderRadius: getWidth(25),
+                }}
+              />
             </TouchableOpacity>
 
             <Text style={styles.nameText}>{user.name}</Text>
@@ -151,11 +152,21 @@ const Home5 = () => {
                 width: getWidth(30),
               }}
             >
-              <Text style={globalstyles.buttonText}>Week {Math.ceil(currentDate.diff(moment(currentDate).startOf('month'), 'days') / 7)}</Text>
+              <Text style={globalstyles.buttonText}>
+                Week{" "}
+                {Math.ceil(
+                  currentDate.diff(
+                    moment(currentDate).startOf("month"),
+                    "days"
+                  ) / 7
+                )}
+              </Text>
             </TouchableOpacity>
           </View>
           <View style={styles.profileView}>
-            <Text style={styles.missionText}>MISSION: EAT MORE HEALTHY</Text>
+            <Text style={styles.missionText}>
+              MISSION: {foodMetaData.finalGoal}
+            </Text>
 
             <View style={styles.calenderOuterView}>
               <LinearGradient
@@ -165,82 +176,103 @@ const Home5 = () => {
                 style={styles.calenderGradientView}
               >
                 <FlatList
-                  data={days}
+                  data={week_days}
                   horizontal={true}
-                  renderItem={renderItem}
+                  renderItem={({ item, index }) => {
+                    return (
+                      <RenderItem
+                        item={item}
+                        index={index}
+                        onPress={() => setSelectedDay(item)}
+                      />
+                    );
+                  }}
                 />
               </LinearGradient>
             </View>
           </View>
 
-          <View style={styles.mealContainer}>
-            <TouchableOpacity>
+          <ScrollView
+            horizontal={true}
+            contentContainerStyle={{
+              justifyContent: "center",
+              alignItems: "center",
+              paddingHorizontal: getWidth(5),
+            }}
+          >
+            <TouchableOpacity
+              onPress={() => {
+                snapRef.current.prev();
+              }}
+            >
               <SvgXml
                 width={getWidth(5)}
                 height={getHeight(5)}
                 xml={backwardBlack}
               />
             </TouchableOpacity>
-
-            <TouchableOpacity style={styles.mealContainerImgAndText}>
-              <Image
-                source={require("../../assets/images/steak1.png")}
-                style={{
-                  resizeMode: "contain",
-                  width: getWidth(20),
-                  height: getWidth(20),
+            {dailySchedule != null && (
+              <Carousel
+                pagingEnabled={true}
+                snapEnabled={true}
+                mode="parallax"
+                ref={snapRef}
+                modeConfig={{
+                  parallaxScrollingScale: 0.9,
+                  parallaxScrollingOffset: 50,
                 }}
+                loop
+                style={{
+                  width: getWidth(80),
+                  paddingHorizontal: getWidth(15),
+                }}
+                width={getWidth(40)}
+                height={getWidth(40)}
+                autoPlay={false}
+                data={dailySchedule}
+                scrollAnimationDuration={1000}
+                onSnapToItem={(index) => setCurrentIndex(index)}
+                renderItem={({ item, index }) => (
+                  <TouchableOpacity
+                    key={`${index}`}
+                    style={{
+                      ...styles.mealContainerImgAndText,
+                    }}
+                  >
+                    <Image
+                      source={{ uri: item.recipe.photo }}
+                      style={{
+                        resizeMode: "cover",
+                        width:
+                          index == currentIndex + 1
+                            ? getWidth(26)
+                            : getWidth(20),
+                        height:
+                          index == currentIndex + 1
+                            ? getWidth(26)
+                            : getWidth(20),
+
+                        borderRadius: 12,
+                      }}
+                    />
+                    <Text style={styles.mealText}>{item.mealName}</Text>
+                  </TouchableOpacity>
+                )}
               />
-              <Text style={styles.mealText}>Meal 1</Text>
-            </TouchableOpacity>
+            )}
+
             <TouchableOpacity
-              style={{
-                ...styles.mealContainerImgAndText,
-                width: getWidth(20) + 4,
-                height: getWidth(30) + 4,
+              onPress={() => {
+                snapRef.current.next();
               }}
             >
-              <View
-                style={{
-                  width: getWidth(20) + 4,
-                  height: getWidth(20) + 4,
-                  borderRadius: 16,
-                  overflow: "hidden",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderWidth: 2,
-                  borderColor: "#1B1561",
-                }}
-              >
-                <SvgXml
-                  xml={noodles}
-                  width={getWidth(20)}
-                  height={getWidth(20)}
-                />
-              </View>
-
-              <Text style={styles.mealText}>Meal 2</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.mealContainerImgAndText}>
-              <Image
-                source={require("../../assets/images/meal3.png")}
-                style={{
-                  resizeMode: "contain",
-                  width: getWidth(20),
-                  height: getWidth(20),
-                }}
-              />
-              <Text style={styles.mealText}>Meal 3</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity>
               <SvgXml
                 width={getWidth(5)}
                 height={getHeight(5)}
                 xml={forwardBlack}
               />
             </TouchableOpacity>
-          </View>
+          </ScrollView>
           <View
             style={{
               borderRadius: 20,
@@ -250,12 +282,7 @@ const Home5 = () => {
               alignItems: "center",
             }}
           >
-            <TouchableOpacity
-              onPress={() => setModalVisible1(true)}
-              style={styles.button}
-            >
-              <Text style={globalstyles.buttonText}>Extra Intake</Text>
-            </TouchableOpacity>
+           
             <TouchableOpacity
               onPress={() => setModalVisible(true)}
               style={styles.button}
@@ -299,7 +326,7 @@ const Home5 = () => {
                 }}
               >
                 <FlatList
-                  data={snacksData}
+                  data={customRecipie}
                   horizontal={true}
                   keyExtractor={(item, index) => JSON.stringify(item)}
                   renderItem={renderItemSnacks}
@@ -309,17 +336,22 @@ const Home5 = () => {
               <TouchableOpacity
                 onPress={() => {
                   setModalVisible(false);
-                  navigation.navigate("Reciepe1");
                 }}
                 style={styles.button}
               >
                 <Text style={globalstyles.buttonText}>Add to menu</Text>
               </TouchableOpacity>
+              <View style={{height:10}} />
+              <TouchableOpacity
+              onPress={() => setModalVisible1(true)}
+              style={styles.button}
+            >
+              <Text style={globalstyles.buttonText}>Extra Intake</Text>
+            </TouchableOpacity>
             </LinearGradient>
           </View>
         </TouchableWithoutFeedback>
-      </Modal>
-      <Modal
+        <Modal
         animationType="slide"
         style={{ margin: 0 }}
         backdropOpacity={0.4}
@@ -347,9 +379,9 @@ const Home5 = () => {
                     borderColor: theme.blueColor,
                     height: moderateScale(55),
                   }}
-                  onChangeText={(text) => setIntake1(text)}
+                  onChangeText={(text) => setCinnamonBun(text)}
                   placeholderTextColor="grey"
-                  value={intake1}
+                  value={cinnamonBun}
                   placeholder="Cinnamon bun..."
                 />
 
@@ -359,9 +391,9 @@ const Home5 = () => {
                     borderColor: theme.blueColor,
                     height: moderateScale(55),
                   }}
-                  onChangeText={(text) => setIntake(text)}
+                  onChangeText={(text) => setCalories(text)}
                   placeholderTextColor="grey"
-                  value={intake}
+                  value={calories}
                   placeholder="Calories..."
                 />
               </View>
@@ -384,66 +416,67 @@ const Home5 = () => {
           </View>
         </TouchableWithoutFeedback>
         <Modal
-        backdropOpacity={0}
-        style={{ margin: 0 }}
-        transparent={true}
-        isVisible={modalVisible2}
-      >
-        <TouchableWithoutFeedback
-          onPress={() => setModalVisible2(!modalVisible2)}
+          backdropOpacity={0}
+          style={{ margin: 0 }}
+          transparent={true}
+          isVisible={modalVisible2}
         >
-          <View style={styles.centeredView}>
-            <LinearGradient
-              style={styles.modalView1}
-              colors={["#FDFFF4", "#BBC1AD"]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 0.8, y: 0 }}
-            >
-              <View style={{ borderColor: "red", paddingTop: 5 }}>
-                <View style={styles.topBar} />
-              </View>
+          <TouchableWithoutFeedback
+            onPress={() => setModalVisible2(!modalVisible2)}
+          >
+            <View style={styles.centeredView}>
+              <LinearGradient
+                style={styles.modalView1}
+                colors={["#FDFFF4", "#BBC1AD"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0.8, y: 0 }}
+              >
+                <View style={{ borderColor: "red", paddingTop: 5 }}>
+                  <View style={styles.topBar} />
+                </View>
 
-              <Text style={styles.extraIntake}>Extra Intake</Text>
+                <Text style={styles.extraIntake}>Extra Intake</Text>
 
-              <View style={styles.textInputBox}>
-                <TextInput
-                  style={{
-                    ...globalstyles.textInputWithOutIcon,
-                    borderColor: theme.blueColor,
-                    height: moderateScale(55),
-                  }}
-                  onChangeText={(text) => setIntake1(text)}
-                  placeholderTextColor="grey"
-                  value={intake1}
-                  placeholder="Protein...."
-                />
+                <View style={styles.textInputBox}>
+                  <TextInput
+                    style={{
+                      ...globalstyles.textInputWithOutIcon,
+                      borderColor: theme.blueColor,
+                      height: moderateScale(55),
+                    }}
+                    onChangeText={(text) => setProtien(text)}
+                    placeholderTextColor="grey"
+                    value={protein}
+                    placeholder="Protein...."
+                  />
 
-                <TextInput
-                  style={{
-                    ...globalstyles.textInputWithOutIcon,
-                    borderColor: theme.blueColor,
-                    height: moderateScale(55),
-                  }}
-                  onChangeText={(text) => setIntake(text)}
-                  placeholderTextColor="grey"
-                  value={intake}
-                  placeholder="Carbohydrates... "
-                />
-              </View>
-              <View style={styles.buttonContianer}>
-                <TouchableOpacity
-                  onPress={() => setModalVisible2(false)}
-                  style={styles.button}
-                >
-                  <Text style={globalstyles.buttonText}>Submit</Text>
-                </TouchableOpacity>
-              </View>
-            </LinearGradient>
-          </View>
-        </TouchableWithoutFeedback>
+                  <TextInput
+                    style={{
+                      ...globalstyles.textInputWithOutIcon,
+                      borderColor: theme.blueColor,
+                      height: moderateScale(55),
+                    }}
+                    onChangeText={(text) => setCarbohydrates(text)}
+                    placeholderTextColor="grey"
+                    value={carbohydrates}
+                    placeholder="Carbohydrates... "
+                  />
+                </View>
+                <View style={styles.buttonContianer}>
+                  <TouchableOpacity
+                    onPress={() => setModalVisible2(false)}
+                    style={styles.button}
+                  >
+                    <Text style={globalstyles.buttonText}>Submit</Text>
+                  </TouchableOpacity>
+                </View>
+              </LinearGradient>
+            </View>
+          </TouchableWithoutFeedback>
+        </Modal>
       </Modal>
       </Modal>
-    
+     
     </>
   );
 };
@@ -519,8 +552,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   mealContainerImgAndText: {
-    width: getWidth(20),
-    height: getWidth(30),
+    width: getWidth(30),
+    height: getWidth(40),
+    // marginHorizontal: getWidth(5),
     justifyContent: "center",
     alignItems: "center",
     overflow: "hidden",
@@ -562,7 +596,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     alignItems: "center",
     shadowColor: "#000",
-    height: getHeight(48),
+    height: getHeight(55),
     width: getWidth(100),
     shadowOffset: {
       width: 0,
@@ -653,14 +687,17 @@ const ItemStyles = StyleSheet.create({
     fontFamily: "AnekBangla-Bold",
     color: "black",
     fontWeight: "600",
-    fontSize: 14,
+    fontSize: 11,
     textAlign: "center",
     letterSpacing: 2,
+    width: getWidth(25),
   },
   Imgbg: {
     height: getWidth(25),
     width: getWidth(30),
     borderRadius: 20,
+    marginTop:moderateScale(5),
+    overflow: "hidden",
     justifyContent: "center",
     alignItems: "center",
   },

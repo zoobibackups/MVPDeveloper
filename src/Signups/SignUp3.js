@@ -18,37 +18,54 @@ import textStyles, { globalstyles } from "../styles/globalestyles";
 import { useDispatch, useSelector } from "react-redux";
 import { setWorkOutTime } from "../store/actions/userActions";
 const elevationValue = Platform.OS === "android" ? 0 : 5;
-const SignUp3 = () => {
+const SignUp3 = ({ navigation, route }) => {
+  const isUpdate = route?.params?.isUpdate;
   const dispatch = useDispatch();
- 
-  const [checked, setChecked] = useState(false);
-  const [checked1, setChecked1] = useState(false);
-  const [checked2, setChecked2] = useState(false);
-  const [checked3, setChecked3] = useState(false);
-  const navigation = useNavigation();
+  const { user, foodMetaData } = useSelector((state) => state.userReducer);
+  const workoutTime = foodMetaData.workout
+  const [checked, setChecked] = useState(workoutTime=="More than 5 times a week"?true:false);
+  const [checked1, setChecked1] = useState(workoutTime=="3 to 5 times a week"?true:false);
+  const [checked2, setChecked2] = useState(workoutTime=="1 to 3 times a week"?true:false);
+  const [checked3, setChecked3] = useState(workoutTime=="I rarely work out or move"?true:false);
   const validateData = () => {
     if (checked || checked1 || checked2 || checked3) {
       if (checked) {
         dispatch(setWorkOutTime({ value: "More than 5 times a week" })).then(
           () => {
-            navigation.navigate("SignUp13");
+            if (isUpdate) {
+              navigation.goBack();
+            } else {
+              navigation.navigate("SignUp13");
+            }
           }
         );
       }
       if (checked1) {
         dispatch(setWorkOutTime({ value: "3 to 5 times a week" })).then(() => {
-          navigation.navigate("SignUp13");
+          if (isUpdate) {
+            navigation.goBack();
+          } else {
+            navigation.navigate("SignUp13");
+          }
         });
       }
       if (checked2) {
         dispatch(setWorkOutTime({ value: "1 to 3 times a week" })).then(() => {
-          navigation.navigate("SignUp13");
+          if (isUpdate) {
+            navigation.goBack();
+          } else {
+            navigation.navigate("SignUp13");
+          }
         });
       }
       if (checked3) {
         dispatch(setWorkOutTime({ value: "I rarely work out or move" })).then(
           () => {
-            navigation.navigate("SignUp13");
+            if (isUpdate) {
+              navigation.goBack();
+            } else {
+              navigation.navigate("SignUp13");
+            }
           }
         );
       }

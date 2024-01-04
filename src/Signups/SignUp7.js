@@ -16,30 +16,32 @@ import CustomHeader from "../Components/CustomHeader";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
 import { setFavoriteCuisines } from "../store/actions/userActions";
-import { useDispatch } from "react-redux";
-const SignUp7 = () => {
+import { useDispatch, useSelector } from "react-redux";
+const SignUp7 = ({navigation, route}) => {
   const dispatch = useDispatch();
-  const [checked, setChecked] = useState(false);
-  const [checked1, setChecked1] = useState(false);
-  const [checked2, setChecked2] = useState(false);
-  const [checked3, setChecked3] = useState(false);
-  const [checked4, setChecked4] = useState(false);
-  const [checked5, setChecked5] = useState(false);
-  const [checked6, setChecked6] = useState(false);
-  const [checked7, setChecked7] = useState(false);
-  const [checked8, setChecked8] = useState(false);
-  const [checked9, setChecked9] = useState(false);
-  const [checked10, setChecked10] = useState(false);
-  const [checked11, setChecked11] = useState(false);
-  const [checked12, setChecked12] = useState(false);
-  const [checked13, setChecked13] = useState(false);
-  const [checked14, setChecked14] = useState(false);
-  const [checked15, setChecked15] = useState(false);
-  const [checked16, setChecked16] = useState(false);
-  const [checked17, setChecked17] = useState(false);
-  const [checked18, setChecked18] = useState(false);
-  const [checked19, setChecked19] = useState(false);
-  const navigation = useNavigation();
+  const isUpdate = route?.params?.isUpdate;
+  const { user, foodMetaData } = useSelector((state) => state.userReducer);
+  const favoriteCuisines = foodMetaData.favoriteCuisines
+  const [checked, setChecked] = useState(favoriteCuisines != null  && favoriteCuisines.includes("Italian") ? true:false);
+  const [checked1, setChecked1] = useState(favoriteCuisines != null  && favoriteCuisines.includes("Chinese") ? true:false);
+  const [checked2, setChecked2] = useState(favoriteCuisines != null  && favoriteCuisines.includes("Mexican") ? true:false);
+  const [checked3, setChecked3] = useState(favoriteCuisines != null  && favoriteCuisines.includes("Japanese") ? true:false);
+  const [checked4, setChecked4] = useState(favoriteCuisines != null  && favoriteCuisines.includes("Indian") ? true:false);
+  const [checked5, setChecked5] = useState(favoriteCuisines != null  && favoriteCuisines.includes("Indian") ? true:false);
+  const [checked6, setChecked6] = useState(favoriteCuisines != null  && favoriteCuisines.includes("French") ? true:false);
+  const [checked7, setChecked7] = useState(favoriteCuisines != null  && favoriteCuisines.includes("Thai") ? true:false);
+  const [checked8, setChecked8] = useState(favoriteCuisines != null  && favoriteCuisines.includes("Greek") ? true:false);
+  const [checked9, setChecked9] = useState(favoriteCuisines != null  && favoriteCuisines.includes("Spanish") ? true:false);
+  const [checked10, setChecked10] = useState(favoriteCuisines != null  && favoriteCuisines.includes("Lebanese") ? true:false);
+  const [checked11, setChecked11] = useState(favoriteCuisines != null  && favoriteCuisines.includes("Vietnamese") ? true:false);
+  const [checked12, setChecked12] = useState(favoriteCuisines != null  && favoriteCuisines.includes("Moroccan") ? true:false);
+  const [checked13, setChecked13] = useState(favoriteCuisines != null  && favoriteCuisines.includes("Ethiopian") ? true:false);
+  const [checked14, setChecked14] = useState(favoriteCuisines != null  && favoriteCuisines.includes("Brazilian") ? true:false);
+  const [checked15, setChecked15] = useState(favoriteCuisines != null  && favoriteCuisines.includes("Turkish") ? true:false);
+  const [checked16, setChecked16] = useState(favoriteCuisines != null  && favoriteCuisines.includes("Russian") ? true:false);
+  const [checked17, setChecked17] = useState(favoriteCuisines != null  && favoriteCuisines.includes("Indonesian") ? true:false);
+  const [checked18, setChecked18] = useState(favoriteCuisines != null  && favoriteCuisines.includes("Jamaican") ? true:false);
+  const [checked19, setChecked19] = useState(favoriteCuisines != null  && favoriteCuisines.includes("Peruvian") ? true:false);
   const validateData = () => {
     var values = "";
     try {
@@ -65,28 +67,7 @@ const SignUp7 = () => {
         checked18 ||
         checked19
       ) {
-        console.log(
-          checked,
-          checked1,
-          checked2,
-          checked3,
-          checked4,
-          checked5,
-          checked6,
-          checked7,
-          checked8,
-          checked9,
-          checked10,
-          checked11,
-          checked12,
-          checked13,
-          checked14,
-          checked15,
-          checked16,
-          checked17,
-          checked18,
-          checked19
-        );
+        
         if (checked) {
           values = values.concat("Italian cuisine", ", ");
         }
@@ -148,7 +129,11 @@ const SignUp7 = () => {
           values = values.concat("Peruvian cuisine", ", ");
         }
         dispatch(setFavoriteCuisines({value:values})).then(() => {
+          if(isUpdate){
+            navigation.goBack()
+          }else{
           navigation.navigate("SignUp8");
+          }
         });
       } else {
         Alert.alert("NO OPTION SELECTED", "Please select an option");

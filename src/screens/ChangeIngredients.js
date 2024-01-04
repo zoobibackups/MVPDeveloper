@@ -20,26 +20,6 @@ import theme from "../constants/theme";
 import { RFValue } from "react-native-responsive-fontsize";
 import fonts from "../constants/fonts";
 import Modal from "react-native-modal"
-const data = [
-  {
-    name: "Olive oil",
-  },
-  {
-    name: "Black pepper",
-  },
-  {
-    name: "Spaghetti",
-  },
-  {
-    name: "Butter",
-  },
-  {
-    name: "Pecorino Romano",
-  },
-  {
-    name: "Heavy Cream",
-  },
-];
 
 const itemStyle = StyleSheet.create({
   row: {
@@ -59,6 +39,8 @@ const itemStyle = StyleSheet.create({
     color: "grey",
     fontWeight: "400",
     fontSize: 16,
+    width:getWidth(45),
+  
     includeFontPadding: false,
   },
   changeButton: {
@@ -78,15 +60,14 @@ const itemStyle = StyleSheet.create({
   },
 });
 
-const ChangeIngredients = () => {
-  const navigation = useNavigation();
-
+const ChangeIngredients = ({navigation, route}) => {
+ const ingredients = route.params.ingredients
   const [modalVisible, setModalVisible] = useState(true);
   const [modalVisible1, setModalVisible1] = useState(false);
   const renderItem = ({ item, index }) => {
     return (
       <View style={itemStyle.row}>
-        <Text style={itemStyle.headingText}>{item.name}</Text>
+        <Text ellipsizeMode="tail"  style={itemStyle.headingText}>{item}</Text>
         <TouchableOpacity
           onPress={() => setModalVisible1(true)}
           style={itemStyle.changeButton}
@@ -108,7 +89,7 @@ const ChangeIngredients = () => {
       start={{ x: 0, y: 0 }}
       end={{ x: 0.8, y: 0 }}
     >
-      <ScrollView>
+      
         <View
           style={{
             alignItems: "center",
@@ -174,7 +155,7 @@ const ChangeIngredients = () => {
               All items:
             </Text>
 
-            <FlatList data={data} renderItem={renderItem} />
+            <FlatList data={ingredients} renderItem={renderItem} />
           </View>
         </View>
         <View
@@ -517,7 +498,7 @@ const ChangeIngredients = () => {
             </View>
           </TouchableWithoutFeedback>
         </Modal>
-      </ScrollView>
+      
     </LinearGradient>
   );
 };

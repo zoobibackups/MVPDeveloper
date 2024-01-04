@@ -19,8 +19,8 @@ import { useSelector } from "react-redux";
 const LogIn1 = () => {
   const { user } = useSelector((state) => state.userReducer);
   
-  const [email, setEmail] = useState(__DEV__ ?user.email:"");
-  const [password, setPassword] = useState(__DEV__?"Tikt0k@1":"");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [show1, setShow1] = useState(true);
   return (
     <KeyBoardHandle>

@@ -1,12 +1,6 @@
 import { useNavigation } from "@react-navigation/core";
 import React, { useState } from "react";
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
-} from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { moderateScale } from "react-native-size-matters";
 import { SvgXml } from "react-native-svg";
@@ -16,8 +10,9 @@ import fonts from "../constants/fonts";
 import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { globalstyles } from "../styles/globalestyles";
-const Home4 = () => {
-  const navigation = useNavigation();
+const Home4 = ({ navigation, route }) => {
+  const recipiesData = route.params.item;
+  const customRecipie = recipiesData.data[0];
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <>
@@ -38,7 +33,15 @@ const Home4 = () => {
             <Text style={styles.generationXText}>Generation X</Text>
           </View>
           <View style={styles.recipeiImg}>
-            <SvgXml width={getWidth(25)} height={getHeight(12)} xml={noodles} />
+            <Image
+              source={{ uri: customRecipie.photo }}
+              style={{
+                width: getWidth(25),
+                height: getHeight(12),
+                resizeMode: "contain",
+                borderRadius: 12,
+              }}
+            />
           </View>
 
           <Text
@@ -55,7 +58,7 @@ const Home4 = () => {
               letterSpacing: 2,
             }}
           >
-            CACIO E PEPE
+            {customRecipie.name}
           </Text>
           <Text
             style={{
@@ -67,11 +70,11 @@ const Home4 = () => {
               marginBottom: moderateScale(10),
             }}
           >
-            370 calories
+            {customRecipie.calories} calories
           </Text>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate("Reciepe1")}
+            onPress={() => navigation.navigate("Reciepe1", {item:customRecipie, data:recipiesData})}
             style={styles.button}
           >
             <Text style={{ ...globalstyles.buttonText, fontWeight: "400" }}>
@@ -138,12 +141,12 @@ const styles = StyleSheet.create({
     letterSpacing: 1.5,
   },
   recipeiImg: {
-    borderRadius: 20,
+    borderRadius: 12,
     width: getWidth(60),
-    height: getHeight(11),
-    paddingTop: 10,
-    paddingLeft: 10,
+    height: getHeight(12),
+   
     alignItems: "center",
+    overflow: "hidden",
   },
   button: {
     borderWidth: 1,

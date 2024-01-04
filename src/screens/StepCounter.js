@@ -16,7 +16,11 @@ import HeaderMainScreen from "../Components/HeaderMainScreen";
 import fonts from "../constants/fonts";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
+
+import * as Progress from "react-native-progress";
 import Modal from "react-native-modal"
+import theme from "../constants/theme";
+import { moderateScale } from "react-native-size-matters";
 const data = [
   {
     icon: brain,
@@ -52,8 +56,9 @@ const data2 = [
     text: "Life span expectancy %",
   },
 ];
-const StepCounter = () => {
-  const navigation = useNavigation();
+const StepCounter = ({navigation, route}) => {
+//  const {stepCount} = route.params.item
+let stepCount  = 8123
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <LinearGradient
@@ -79,7 +84,7 @@ const StepCounter = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <TouchableOpacity
           style={styles.stepsRow}
-          onPress={() => navigation.navigate("StepCounter")}
+          
         >
           <View
             style={{
@@ -89,7 +94,16 @@ const StepCounter = () => {
               alignItems: "center",
             }}
           >
-            <SvgXml width={getWidth(30)} height={getHeight(20)} xml={chart} />
+           <Progress.Circle
+                  size={getWidth(28)}
+                  color={theme.blueColor}
+                  unfilledColor={"gray"}
+                  borderColor={"#0000"}
+                  progress= {parseFloat((stepCount/10000))}
+                  indeterminate={false}
+                  thickness={moderateScale(8)}
+                  borderWidth={moderateScale(1)}
+                />
             <Text
               style={{
                 position: "absolute",
@@ -97,7 +111,7 @@ const StepCounter = () => {
                 fontFamily: fonts.AnekBanglaMedium,
               }}
             >
-              85%
+              {parseInt((stepCount/10000)*100)}%
             </Text>
           </View>
           <View
@@ -149,7 +163,7 @@ const StepCounter = () => {
                     letterSpacing: 2,
                   }}
                 >
-                  6,566
+                  {stepCount}
                 </Text>
               </View>
               <View

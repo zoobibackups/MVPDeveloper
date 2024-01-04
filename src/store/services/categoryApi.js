@@ -52,7 +52,7 @@ export const categoryApi = createApi({
         return {
           url: `/category/upload-category-image`,
           method: 'POST',
-          data:data
+          body:data
         };
       },
       providesTags: ['categoryData'],

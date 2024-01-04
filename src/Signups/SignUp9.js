@@ -16,13 +16,14 @@ import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
 import { RFValue } from "react-native-responsive-fontsize";
 import { setMoreThingsToAvoid } from "../store/actions/userActions";
-import { useDispatch } from "react-redux";
-const SignUp9 = () => {
-  const navigation = useNavigation();
+import { useDispatch, useSelector } from "react-redux";
+const SignUp9 = ({navigation, route}) => {
+  const isUpdate = route?.params?.isUpdate;
+  const { user, foodMetaData } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
-  const [ingredients, setIngredients] = useState("");
+  const [ingredients, setIngredients] = useState(foodMetaData.seeMoreIngredients);
   const [checked, setChecked] = useState(false);
-  const [meal, setMeal] = useState("");
+  const [meal, setMeal] = useState(foodMetaData.seeMoreMeals);
   const validateData = () => {
     if (checked) {
       dispatch(
@@ -34,10 +35,10 @@ const SignUp9 = () => {
       ).then(() => {
         navigation.navigate("MicroNutrientsScreen");
       });
-    } else if (ingredients == "") {
+    } else if (ingredients == "" || ingredients == null) {
       Alert.alert("INGREDIENTS EMPTY", "Please enter some ingredients");
       return;
-    } else if (meal == "") {
+    } else if (meal == "" || meal == null) {
       Alert.alert("Meal/COURSES EMPTY", "Please enter some meal/courses");
     }
     dispatch(
@@ -47,7 +48,11 @@ const SignUp9 = () => {
         checked: checked,
       })
     ).then(() => {
+      if(isUpdate){
+        navigation.goBack()
+      }else{
       navigation.navigate("MicroNutrientsScreen");
+      }
     });
   };
   return (

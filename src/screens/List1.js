@@ -3,7 +3,7 @@ import { Text } from "@rneui/themed";
 import React, { useState } from "react";
 import {
   FlatList,
-  Image,
+  Image,Linking,
   StyleSheet,
   TouchableOpacity,
   TouchableWithoutFeedback,
@@ -21,6 +21,7 @@ import theme from "../constants/theme";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import { globalstyles } from "../styles/globalestyles";
 import Modal from "react-native-modal"
+import { useSelector } from "react-redux";
 const data = [
   {
     name: "Pasta",
@@ -47,16 +48,40 @@ const data = [
     isSelected: false,
   },
 ];
-const List1 = () => {
+const List1 = ({navigation, route}) => {
+  const {user} = useSelector(state => state.userReducer)
+  console.log(user);
+  const {groceryList} = route.params
+  const [ingredientsArray, setIngredients] =  useState(groceryList.map((ingredient, index) => ({
+    item: ingredient,
+    isSelected: true,
+    index:index
+  })))
   const countries = ["Daily", "Weekly"];
   const [checked, setChecked] = useState(false);
-  const [checked1, setChecked1] = useState(false);
-  const [checked2, setChecked2] = useState(false);
-  const [checked3, setChecked3] = useState(false);
-  const [checked4, setChecked4] = useState(false);
-  const [checked5, setChecked5] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const navigation = useNavigation();
+
+  const toggleSelection = (index) => {
+    const updatedIngredients = [...ingredientsArray];
+    updatedIngredients[index].isSelected = !updatedIngredients[index].isSelected;
+    setIngredients(updatedIngredients);
+  };
+  const sendEmail = () => {
+    const ingredientsList = ingredientsArray.map(ingredient => ingredient.item).join('\n');
+    const emailSubject = 'Ingredients List';
+    
+    Linking.openURL(`mailto:${user.email}?subject=${emailSubject}&body=${ingredientsList}`).catch((err) => {
+      console.log(err);
+    })
+  };
+
+  const sendSMS = () => {
+    const ingredientsList = ingredientsArray.map(ingredient => ingredient.item).join('\n');
+    
+    Linking.openURL(`sms:&body=${ingredientsList}`).catch((err) => {
+      console.log(err);
+    })
+  };
   return (
     <LinearGradient
       style={{
@@ -121,7 +146,7 @@ const List1 = () => {
           />
         </View>
         <FlatList
-          data={data}
+          data={ingredientsArray}
           renderItem={({ item, index }) => {
             return (
               <View style={styles.checkBoxRowStyle}>
@@ -133,12 +158,12 @@ const List1 = () => {
                     fontSize: 16,
                   }}
                 >
-                  {item.name}
+                  {item.item}
                 </Text>
                 <CheckboxSquare
                   isChecked={item.isSelected}
                   onPress={() => {
-                    setChecked(!checked);
+                    toggleSelection(index)
                   }}
                 />
               </View>
@@ -201,13 +226,13 @@ const List1 = () => {
                   alignItems: "center",
                 }}
               >
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => sendEmail()} >
                   <View style={styles.ImgSvg}>
                     <SvgXml width={getWidth(20)} xml={mail} />
                   </View>
                   <Text style={styles.ImgSvgText}>Email me</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => sendSMS()} >
                   <View style={styles.ImgSvg}>
                     <SvgXml width={getWidth(20)} xml={message} />
                   </View>

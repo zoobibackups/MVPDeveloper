@@ -15,11 +15,14 @@ import { userExerciseLogs } from "./services/userExerciseLogs";
 import { userSetsApi } from "./services/userSetsApi";
 import { userWorkOut } from "./services/userWorkOut";
 import { userWorkOutLogs } from "./services/userWorkOutLogs";
+import chatgptReducers from "./reducers/chatgptReducers";
+import userWeightReducer from "./reducers/userWeightReducer";
 const persistConfig = {
   key: "root",
   storage: AsyncStorage,
   whitelist: [
     "accounttype",
+    "whichStack",
     "user",
     "accessToken",
     "isLoggedIn",
@@ -28,6 +31,20 @@ const persistConfig = {
   ],
 };
 
+const chatPresist = {
+  key:"chatgpt",
+  storage:AsyncStorage,
+  whitelist:[
+    "weeklySchedule"
+  ]
+}
+
+
+const userWeightReducerPersist = {
+  key:"userWeightReducerPer",
+  storage:AsyncStorage,
+  whitelist:["userWeight"]
+}
 const rootReducer = combineReducers({
   [userApi.reducerPath]: userApi.reducer,
   [scheduleApi.reducerPath]: scheduleApi.reducer,
@@ -42,6 +59,8 @@ const rootReducer = combineReducers({
   [userWorkOut.reducerPath]: userWorkOut.reducer,
   [userWorkOutLogs.reducerPath]: userWorkOutLogs.reducer,
   userReducer: persistReducer(persistConfig, userReducer),
+  chatgptReducer:persistReducer(chatPresist, chatgptReducers),
+  userWeightReducer:persistReducer(userWeightReducerPersist,userWeightReducer)
 });
 
 export const store = configureStore({

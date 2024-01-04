@@ -16,43 +16,70 @@ import CheckboxSquare from "../Components/CheckBoxSquare";
 import CustomHeader from "../Components/CustomHeader";
 import textStyles, { globalstyles } from "../styles/globalestyles";
 import { setDietryPreferences } from "../store/actions/userActions";
-import { useDispatch } from "react-redux";
-const SignUp6 = () => {
+import { useDispatch, useSelector } from "react-redux";
+const SignUp6 = ({ navigation, route }) => {
+  const isUpdate = route?.params?.isUpdate;
   const dispatch = useDispatch();
-  const [checked, setChecked] = useState(false);
-  const [checked1, setChecked1] = useState(false);
-  const [checked2, setChecked2] = useState(false);
-  const [checked3, setChecked3] = useState(false);
+  const { user, foodMetaData } = useSelector((state) => state.userReducer);
+  const dietPrefrence = foodMetaData.dietPrefrence;
+  const [checked, setChecked] = useState(
+    dietPrefrence == "Lazy Keto" ? true : false
+  );
+  const [checked1, setChecked1] = useState(
+    dietPrefrence == "Gluten Free" ? true : false
+  );
+  const [checked2, setChecked2] = useState(
+    dietPrefrence == "Pescatarian" ? true : false
+  );
+  const [checked3, setChecked3] = useState(
+    dietPrefrence == "Vegan" ? true : false
+  );
   const [checked4, setChecked4] = useState(false);
-  const navigation = useNavigation();
+
   const validateData = () => {
     if (checked || checked1 || checked2 || checked3 || checked4) {
       if (checked) {
         dispatch(
           setDietryPreferences({ value: "Lazy Keto", isNeedSchedule: true })
         ).then(() => {
-          navigation.navigate("SignUp7");
+          if (isUpdate) {
+            navigation.goBack();
+          } else {
+            navigation.navigate("SignUp7");
+          }
         });
       }
       if (checked1) {
         dispatch(
           setDietryPreferences({ value: "Gluten Free", isNeedSchedule: true })
         ).then(() => {
-          navigation.navigate("SignUp7");
+          if (isUpdate) {
+            navigation.goBack();
+          } else {
+            navigation.navigate("SignUp7");
+          }
         });
       }
       if (checked2) {
         dispatch(
           setDietryPreferences({ value: "Pescatarian", isNeedSchedule: true })
         ).then(() => {
-          navigation.navigate("SignUp7");
+          if (isUpdate) {
+            navigation.goBack();
+          } else {
+            navigation.navigate("SignUp7");
+          }
         });
       }
       if (checked3) {
         dispatch(
           setDietryPreferences({ value: "Vegan", isNeedSchedule: true })
         ).then(() => {
-          navigation.navigate("SignUp7");
+          if (isUpdate) {
+            navigation.goBack();
+          } else {
+            navigation.navigate("SignUp7");
+          }
         });
       }
       if (checked4) {
@@ -88,7 +115,14 @@ const SignUp6 = () => {
       />
 
       <View style={styles.optionsContainer}>
-        <TouchableOpacity onPress={() => setChecked(!checked)}>
+        <TouchableOpacity
+          onPress={() => {
+            setChecked(!checked);
+            setChecked1(false);
+            setChecked2(false);
+            setChecked3(false);
+          }}
+        >
           <LinearGradient
             colors={["#FDFFF4", "#BBC1AD"]}
             start={{ x: 0, y: 0 }}
@@ -100,11 +134,21 @@ const SignUp6 = () => {
               isChecked={checked}
               onPress={() => {
                 setChecked(!checked);
+                setChecked1(false);
+                setChecked2(false);
+                setChecked3(false);
               }}
             />
           </LinearGradient>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setChecked1(!checked1)}>
+        <TouchableOpacity
+          onPress={() => {
+            setChecked(false);
+            setChecked1(!checked1);
+            setChecked2(false);
+            setChecked3(false);
+          }}
+        >
           <LinearGradient
             colors={["#FDFFF4", "#BBC1AD"]}
             start={{ x: 0, y: 0 }}
@@ -115,13 +159,23 @@ const SignUp6 = () => {
             <Checkbox
               isChecked={checked1}
               onPress={() => {
+                setChecked(false);
                 setChecked1(!checked1);
+                setChecked2(false);
+                setChecked3(false);
               }}
             />
           </LinearGradient>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => setChecked2(!checked2)}>
+        <TouchableOpacity
+          onPress={() => {
+            setChecked(false);
+            setChecked1(false);
+            setChecked2(!checked2);
+            setChecked3(false);
+          }}
+        >
           <LinearGradient
             colors={["#FDFFF4", "#BBC1AD"]}
             start={{ x: 0, y: 0 }}
@@ -132,13 +186,23 @@ const SignUp6 = () => {
             <Checkbox
               isChecked={checked2}
               onPress={() => {
+                setChecked(false);
+                setChecked1(false);
                 setChecked2(!checked2);
+                setChecked3(false);
               }}
             />
           </LinearGradient>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => setChecked3(!checked3)}>
+        <TouchableOpacity
+          onPress={() => {
+            setChecked(false);
+            setChecked1(false);
+            setChecked2(false);
+            setChecked3(!checked3);
+          }}
+        >
           <LinearGradient
             colors={["#FDFFF4", "#BBC1AD"]}
             start={{ x: 0, y: 0 }}
@@ -149,6 +213,9 @@ const SignUp6 = () => {
             <Checkbox
               isChecked={checked3}
               onPress={() => {
+                setChecked(false);
+                setChecked1(false);
+                setChecked2(false);
                 setChecked3(!checked3);
               }}
             />

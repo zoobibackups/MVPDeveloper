@@ -22,79 +22,21 @@ import RowHeader from "../Components/RowHeader";
 import fonts from "../constants/fonts";
 import { getHeight, getWidth } from "../functions/CommonFunctions";
 import textStyles, { globalstyles } from "../styles/globalestyles";
-const Reciepe1 = () => {
+import moment from "moment";
+const Reciepe1 = ({ navigation, route }) => {
+  const today = moment(); // Get today's date
+  const dayName = today.format("dddd");
+  const recipiesData = route.params.data.data;
+  const [customRecipie, setCustomRecipeData] = useState(route.params.item);
   const [modalVisible, setModalVisible] = useState(false);
   const [instruction, setInstruction] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [focused, setfocused] = useState(false);
   const [focused1, setfocused1] = useState(false);
   const [focused2, setfocused2] = useState(false);
   const [focused3, setfocused3] = useState(false);
   const [focused4, setfocused4] = useState(false);
-  const DATA = [
-    {
-      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-      title: "4 tablespoons (60ml) extra-virgin olive oil, divided ",
-    },
-    {
-      id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-      title: "1 teaspoon coarsely ground black pepper, to taste ",
-    },
-    {
-      id: "58694a0f-3da1-471f-bd96-145571e29d72",
-      title: "Kosher salt, to taste",
-    },
-    {
-      id: "4",
-      title: "1/2 pound (225g) spaghetti",
-    },
-    {
-      id: "5",
-      title: "2 tablespoons (30g) unsalted butter",
-    },
-    {
-      id: "6",
-      title: "2 ounces Pecorino Romano cheese",
-    },
-  ];
-  const DATA2 = [
-    {
-      id: "31.29 g",
-      title: "Kolhydrater",
-    },
-    {
-      id: "19 g",
-      title: "Kostfiber ",
-    },
-    {
-      id: "1.14 g",
-      title: "Socker",
-    },
-    {
-      id: "6.81 g",
-      title: "Fett",
-    },
-    {
-      id: "2.71 g",
-      title: "Mättat",
-    },
-    {
-      id: "6.3 g",
-      title: "Fleromättat",
-    },
-    {
-      id: "3.01 g",
-      title: "Enkelomättat",
-    },
-    {
-      id: "9.47 g",
-      title: "Protein",
-    },
-    {
-      id: "326 g",
-      title: "Natrium ",
-    },
-  ];
-  const navigation = useNavigation();
+  
 
   const renderInstruction = () => {
     return (
@@ -111,7 +53,9 @@ const Reciepe1 = () => {
         >
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("Instruction"), setInstruction(false);
+              navigation.navigate("Instruction",{ customRecipie:customRecipie, instruction:customRecipie.instructions.map((step) => {
+                return {"title": step };
+              })}), setInstruction(false);
             }}
             style={{
               borderWidth: 1,
@@ -122,7 +66,6 @@ const Reciepe1 = () => {
               backgroundColor: "#1B1561",
               justifyContent: "center",
               alignItems: "center",
-             
             }}
           >
             <Text
@@ -130,7 +73,7 @@ const Reciepe1 = () => {
                 color: "white",
                 fontSize: 16,
                 fontFamily: fonts.AnekBanglaMedium,
-                letterSpacing:1.5,
+                letterSpacing: 1.5,
                 fontWeight: "400",
               }}
             >
@@ -141,6 +84,25 @@ const Reciepe1 = () => {
       </TouchableOpacity>
     );
   };
+
+  const getFontSize = (text) => {
+    const textLength = text.length;
+    const maxWidth = getWidth(80) * 0.8; // Adjust this value as needed
+
+    // Calculate an initial fontSize that fits within maxWidth
+    let fontSize = 20; // Default font size
+
+    while (fontSize > 12) {
+      const textWidth = textLength * fontSize * 0.6; // Approximation for text width
+      if (textWidth < maxWidth) {
+        break;
+      }
+      fontSize -= 1;
+    }
+
+    return fontSize;
+  };
+
   return (
     <>
       <LinearGradient
@@ -154,7 +116,7 @@ const Reciepe1 = () => {
         start={{ x: 0, y: 0 }}
         end={{ x: 0.8, y: 0 }}
       >
-        <ScrollView bounces={false} showsVerticalScrollIndicator={false} >
+        <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
           <RowHeader
             onPress={() => navigation.goBack()}
             title={"RECIPE OVERVIEW"}
@@ -168,7 +130,7 @@ const Reciepe1 = () => {
               letterSpacing: 2.0,
             }}
           >
-            Tuesday
+            {dayName}
           </Text>
           <View
             style={{
@@ -190,7 +152,14 @@ const Reciepe1 = () => {
                 flexDirection: "row",
               }}
             >
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  if (currentIndex > 0) {
+                    setCurrentIndex((currentIndex) => currentIndex - 1);
+                    setCustomRecipeData(recipiesData[currentIndex - 1])
+                  }
+                }}
+              >
                 <SvgXml
                   width={getWidth(7)}
                   height={getHeight(5)}
@@ -202,18 +171,25 @@ const Reciepe1 = () => {
               ) : (
                 <TouchableOpacity onPress={() => setInstruction(true)}>
                   <Image
-                    source={require("../../assets/images/noodles.png")}
+                    source={{ uri: customRecipie?.photo }}
                     style={{
                       resizeMode: "contain",
+                      borderRadius: 12,
                       width: getHeight(20),
                       height: getHeight(20),
                     }}
                   />
-                  
                 </TouchableOpacity>
               )}
 
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  if (currentIndex < recipiesData.length-1) {
+                    setCurrentIndex((currentIndex) => currentIndex + 1);
+                    setCustomRecipeData(recipiesData[currentIndex + 1])
+                  }
+                }}
+              >
                 <SvgXml
                   width={getWidth(7)}
                   height={getHeight(5)}
@@ -221,7 +197,7 @@ const Reciepe1 = () => {
                 />
               </TouchableOpacity>
             </View>
-            <Text style={styles.missionText}>CACIO E PEPE</Text>
+            <Text style={{...styles.missionText, fontSize:getFontSize(customRecipie.name)}} numberOfLines={1} >{customRecipie?.name}</Text>
             <Text
               style={{
                 fontFamily: fonts.AnekBanglaRegular,
@@ -233,7 +209,7 @@ const Reciepe1 = () => {
                 textAlign: "center",
               }}
             >
-              370 calories
+              {customRecipie.calories} calories
             </Text>
           </View>
           <View
@@ -245,7 +221,7 @@ const Reciepe1 = () => {
             }}
           >
             <TouchableOpacity
-              onPress={() => navigation.navigate("List1")}
+              onPress={() => navigation.navigate("List1", {groceryList:customRecipie.groceryList})}
               style={styles.button}
             >
               <Text
@@ -294,7 +270,7 @@ const Reciepe1 = () => {
               </Text>
 
               <TouchableOpacity
-                onPress={() => navigation.navigate("ChangeIngredients")}
+                onPress={() => navigation.navigate("ChangeIngredients",{ingredients:customRecipie.groceryList})}
                 style={{
                   ...styles.button,
                   width: getWidth(50),
@@ -314,7 +290,9 @@ const Reciepe1 = () => {
             </View>
 
             <FlatList
-              data={DATA}
+              data={customRecipie.instructions.map((step) => {
+                return {"title": step };
+              })}
               style={{
                 width: getWidth(80),
                 marginTop: 10,
@@ -330,7 +308,7 @@ const Reciepe1 = () => {
                     letterSpacing: 1.4,
                   }}
                 >
-                  {`\u2022  ${item.title}`}
+                  {`\u2022  ${item.title.replaceAll("\"","")}`}
                 </Text>
               )}
             />
@@ -349,7 +327,10 @@ const Reciepe1 = () => {
             </Text>
 
             <FlatList
-              data={DATA2}
+              data={customRecipie.nutritions.map(item => {
+                const [key, value] = item.split(': '); // Split each string into key-value pairs
+                return { key, value };
+              })}
               renderItem={({ item }) => (
                 <View style={{ flexDirection: "row" }}>
                   <Text
@@ -362,7 +343,7 @@ const Reciepe1 = () => {
                       letterSpacing: 2,
                     }}
                   >
-                    {`\u2022 ${item.title}`}
+                    {`\u2022 ${item.key}`}
                   </Text>
                   <Text
                     style={{
@@ -374,7 +355,7 @@ const Reciepe1 = () => {
                       letterSpacing: 2,
                     }}
                   >
-                    {`${item.id}`}
+                    {`${item.value}`}
                   </Text>
                 </View>
               )}
@@ -383,7 +364,12 @@ const Reciepe1 = () => {
         </ScrollView>
       </LinearGradient>
 
-      <Modal animationType="slide" style={{margin:0}} transparent={true} isVisible={modalVisible}>
+      <Modal
+        animationType="slide"
+        style={{ margin: 0 }}
+        transparent={true}
+        isVisible={modalVisible}
+      >
         <TouchableWithoutFeedback
           onPress={() => setModalVisible(!modalVisible)}
         >
@@ -586,6 +572,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.AnekBanglaMedium,
     color: "black",
     fontWeight: "500",
+    width:getWidth(80),
     fontSize: 20,
     marginTop: moderateScale(10),
     textAlign: "center",

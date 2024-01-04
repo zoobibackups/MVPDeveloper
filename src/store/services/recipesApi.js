@@ -18,58 +18,60 @@ export const recipesApi = createApi({
   baseQuery: baseQueryWithToken,
   tagTypes: ['recipesData'],
   endpoints: builder => ({
-    getSchedule: builder.query({
+    getRecipies: builder.query({
       query: args => { 
         return {
-          url: `schedule`,
+          url: `recipes`,
+          method: 'GET',
+
+        };
+      },
+      staleTime: Infinity,
+      providesTags: ['recipesData'],
+    }),
+    getRecipiesById: builder.query({
+      query: args => {
+       const {id}  =args
+        return {
+          url: `recipes/${id}`,
           method: 'GET',
 
         };
       },
       providesTags: ['recipesData'],
     }),
-    getScheduleById: builder.query({
-      query: args => {
-       const {id}  =args
-        return {
-          url: `schedule/${id}`,
-          method: 'GET',
-
-        };
-      },
-      providesTags: ['scheduleData'],
-    }),
-    createSchedule:builder.query({
+    createRecipies:builder.query({
       query: args => {
        const {data}  =args
         return {
-          url: `schedule`,
+          url: `recipes`,
           method: 'POST',
-          data:data
+          body:data
 
         };
       },
-      providesTags: ['scheduleData'],
+      providesTags: ['recipesData'],
     }),
-    getScheduleByUserId:builder.query({
+    updateRecipies:builder.query({
       query: args => {
-       const {id}  =args
+       const {data,id}  =args
         return {
-          url: `schedule/scheduleByUserId/${id}`,
-          method: 'GET',
+          url: `recipes/${id}`,
+          method: 'PATCH',
+          body:data
         };
       },
-      providesTags: ['scheduleData'],
+      providesTags: ['recipesData'],
     }),
   }),
 });
 export const {
-  useGetScheduleQuery,
-  useLazyGetScheduleQuery,
-  useCreateScheduleQuery,
-  useLazyCreateScheduleQuery,
-  useGetScheduleByIdQuery,
-  useLazyGetScheduleByIdQuery,
-  useGetScheduleByUserIdQuery,
-  useLazyGetScheduleByUserIdQuery
+  useCreateRecipiesQuery,
+  useLazyCreateRecipiesQuery,
+  useGetRecipiesByIdQuery,
+  useLazyGetRecipiesByIdQuery,
+  useUpdateRecipiesQuery,
+  useLazyGetRecipiesQuery,
+  useGetRecipiesQuery,
+  useLazyUpdateRecipiesQuery
 } = recipesApi;

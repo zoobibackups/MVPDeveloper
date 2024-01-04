@@ -1,4 +1,3 @@
-import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import ChangeGoal from "../InfoChaging/ChangeGoal";
@@ -8,9 +7,6 @@ import WeightProgress from "../InfoChaging/WeightProgress";
 import ChangeGoalTraining from "../InfoChangeTraining/ChangeGoalTraining";
 import ChangePreferenceTraining from "../InfoChangeTraining/ChangePreferenceTraining";
 import UpdateWeightTraining from "../InfoChangeTraining/UpdateWeightTraining";
-import LogIn1 from "../Logins/LogIn1";
-import LogIn2 from "../Logins/LoginIn2";
-import TrainingLogIn from "../Logins/TrainingLogIn";
 
 import ChangrInfo1 from "../InfoChaging/ChangrInfo1";
 import ChangrInfo2 from "../InfoChaging/ChangrInfo2";
@@ -39,7 +35,6 @@ import Home2 from "../screens/Home2";
 import Home4 from "../screens/Home4";
 import Home5 from "../screens/Home5";
 import Instruction from "../screens/Instruction";
-import LandingPage from "../screens/LandingPage";
 import List1 from "../screens/List1";
 import Meditation from "../screens/Meditation";
 import MicroNutrientsScreen from "../screens/MicroNutrientsScreen";
@@ -51,11 +46,10 @@ import Profile8 from "../screens/Profile8";
 import ProfileTrainingScreen from "../screens/ProfileSettingsTrainingScreen";
 import Reciepe1 from "../screens/Reciepe1";
 import StartWorkOut from "../screens/StartWorkOut";
-import StartWorkOutArms from "../screens/StartWorkOutArms";
-import StartWorkOutBack from "../screens/StartWorkOutBack";
-import StartWorkOutChest from "../screens/StartWorkOutChest";
-import StartWorkOutLegs from "../screens/StartWorkOutLegs";
-import StartWorkOutPush from "../screens/StartWorkOutPush";
+
+import SignUp18T from "../Signups/SignUp18T";
+import CommingSoon from "../screens/CommingSoon";
+import CustomWorkOut from "../screens/CustomWorkOut";
 import StepCounter from "../screens/StepCounter";
 import TermsAndConditions from "../screens/TermsAndConditions";
 import TimeInKitchen from "../screens/TimeInKitchen";
@@ -67,9 +61,6 @@ import WeightLiftingBox1 from "../screens/WeightLiftingBox1";
 import WhySchedule from "../screens/WhySchedule";
 import WhySchedule2 from "../screens/WhySchedule2";
 import Yoga from "../screens/Yoga";
-import CommingSoon from "../screens/CommingSoon";
-import CustomWorkOut from "../screens/CustomWorkOut";
-import SignUp18T from "../Signups/SignUp18T";
 const Stack = createNativeStackNavigator();
 
 const TrainingMainStackNavigation = () => {
@@ -238,36 +229,13 @@ const TrainingMainStackNavigation = () => {
         component={AllWorkOuts}
         // options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="StartWorkOutBack"
-        component={StartWorkOutBack}
-        // options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="StartWorkOutChest"
-        component={StartWorkOutChest}
-        // options={{ headerShown: false }}
-      />
+     
       <Stack.Screen
         name="WhyScheudle2"
         component={WhySchedule2}
         // options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="StartWorkOutArms"
-        component={StartWorkOutArms}
-        // options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="StartWorkOutLegs"
-        component={StartWorkOutLegs}
-        // options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="StartWorkOutPush"
-        component={StartWorkOutPush}
-        // options={{ headerShown: false }}
-      />
+      
       <Stack.Screen
         name="StartWorkOut"
         component={StartWorkOut}
@@ -294,11 +262,7 @@ const TrainingMainStackNavigation = () => {
         component={Error1}
         // options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="TrainingLogIn"
-        component={TrainingLogIn}
-        // options={{ headerShown: false }}
-      />
+    
       <Stack.Screen
         name="UpdateWeight"
         component={UpdateWeight}
@@ -364,16 +328,7 @@ const TrainingMainStackNavigation = () => {
         component={Reciepe1}
         // options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="LogIn1"
-        component={LogIn1}
-        // options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="LogIn2"
-        component={LogIn2}
-        // options={{ headerShown: false }}
-      />
+    
 
       <Stack.Screen
         name="TimeInKitchen"
